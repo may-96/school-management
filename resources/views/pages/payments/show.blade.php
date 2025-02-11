@@ -55,7 +55,7 @@
                                             <div class="d-flex align-items-center mb-2">
                                                 <img src="img/s.jpg" class="img-fluid rounded-3" alt="images"
                                                     style="height:3em; width:3em"; />
-                                                <span class="badge bg-light-secondary rounded-pill ms-2">Paid</span>
+                                                <span class="badge bg-light-secondary rounded-pill ms-2">Unpaid</span>
                                             </div>
                                             <p class="mb-0">INV - 000457</p>
                                         </div>

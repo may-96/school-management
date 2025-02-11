@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 
 // mainpage
-Route::get("/school/dashboard", [DashboardController::class, "show"])->name("school.dashboard");
+Route::get("/", [DashboardController::class, "show"])->name("school.dashboard");
 
 // teachers
 Route::get("teacher/create", [TeacherController::class, "create"])->name("teacher.create");
@@ -17,6 +17,7 @@ Route::get("teacher/index", [TeacherController::class, "index"])->name("teacher.
 // students
 Route::get("student/create", [StudentController::class, "create"])->name("student.create");
 Route::get("student/index", [StudentController::class, "index"])->name("student.index");
+Route::get("student/profile", [StudentController::class, "show"])->name("student.profile");
 
 // payments
 Route::get("payments/dashboard", [PaymentController::class, "dashboard"])->name("payment.dashboard");

@@ -45,10 +45,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" placeholder="Enter email" />
+                                        <label class="form-label">Date of Birth</label>
+                                        <input type="date" class="form-control" />
                                     </div>
                                 </div>
+                               
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Registration Date</label>
@@ -57,32 +58,52 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">ID Number</label>
-                                        <input type="password" class="form-control" placeholder="Enter ID number" />
+                                        <label class="form-label">Admission No</label>
+                                        <input type="number" class="form-control" placeholder="Enter ID number" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Course</label>
+                                        <label class="form-label">Roll No</label>
+                                        <input type="number" class="form-control" placeholder="Enter roll no" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Subjects</label>
                                         <select class="form-select">
-                                            <option>Course</option>
-                                            <option>Course 1</option>
-                                            <option>Course 2</option>
+                                            <option>Select</option>
+                                            <option>Physics</option>
+                                            <option>Chemistry</option>
+                                            <option>Math</option>
                                         </select>
                                     </div>
                                 </div>
+                             
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Mobile Number</label>
-                                        <input type="number" class="form-control" placeholder="Enter Mobile number" />
+                                        <label class="form-label">Class</label>
+                                        <input type="class" class="form-control" placeholder="Enter Class" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Gender</label>
-                                        <select class="form-select">
-                                            <option>Female</option>
+                                        <select class="form-select" aria-placeholder="Select">
+                                            <option>Select</option>
                                             <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Status</label>
+                                        <select class="form-select" aria-placeholder="Select">
+                                            <option>Select</option>
+                                            <option>Active</option>
+                                            <option>Inactive</option>
                                         </select>
                                     </div>
                                 </div>
@@ -101,24 +122,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" />
+                                        <label class="form-label">Primary Mobile Number</label>
+                                        <input type="email" class="form-control" placeholder="Enter Primary Mobile Number" />
                                     </div>
                                 </div>
+                       
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Blood Group</label>
-                                        <input type="text" class="form-control" placeholder="Enter blood group" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
                                         <label class="form-label">Address</label>
-                                        <textarea class="form-control" rows="2" placeholder="Enter address"></textarea>
+                                        <textarea class="form-control" rows="1" placeholder="Enter address"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
+                                        <label class="form-label">Student Profile</label>
                                         <input class="form-control" type="file" />
                                     </div>
                                 </div>

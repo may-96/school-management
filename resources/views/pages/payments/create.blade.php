@@ -21,6 +21,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -69,34 +70,104 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th><span class="text-danger">*</span>Name</th>
-                                                    <th><span class="text-danger">*</span>Roll No</th>
-                                                    <th><span class="text-danger">*</span>Description</th>
-                                                    <th><span class="text-danger">*</span>Amount</th>
+                                                    <th><span class="text-danger">*</span>Subjects</th>
+                                                    <th>Fees</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                {{-- <tr>
                                                     <td>1</td>
-                                                    <td><input type="text" class="form-control" placeholder="Name" />
-                                                    </td>
-                                                    <td><input type="number" class="form-control"
-                                                            placeholder="Student Roll No" /></td>
-                                                    <td><input type="text" class="form-control"
-                                                            placeholder="Description" /></td>
-                                                    <td><input type="number" class="form-control" placeholder="Amount" />
-                                                    </td>
+                                                    <td><input type="text" class="form-control" placeholder="Subjects"
+                                                            value="Math" /></td>
+                                                    <td><input type="number" class="form-control" placeholder="Fees"
+                                                            value="275.00" /></td>
                                                     <td class="text-center">
                                                         <a href="#"
                                                             class="avtar avtar-s btn-link-danger btn-pc-default"><i
                                                                 class="ti ti-trash f-20"></i></a>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td><input type="text" class="form-control" placeholder="Subjects"
+                                                            value="Physics" /></td>
+                                                    <td><input type="number" class="form-control" placeholder="Fees"
+                                                            value="81.99" /></td>
+                                                    <td class="text-center">
+                                                        <a href="#"
+                                                            class="avtar avtar-s btn-link-danger btn-pc-default"><i
+                                                                class="ti ti-trash f-20"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td><input type="text" class="form-control" placeholder="Subjects"
+                                                            value="Chemistry" /></td>
+                                                    <td><input type="number" class="form-control" placeholder="Fees"
+                                                            value="85.00" /></td>
+                                                    <td class="text-center">
+                                                        <a href="#"
+                                                            class="avtar avtar-s btn-link-danger btn-pc-default"><i
+                                                                class="ti ti-trash f-20"></i></a>
+                                                    </td>
+                                                </tr> --}}
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="text-start">
+                                        <hr class="mb-4 mt-0 border-secondary border-opacity-50" />
+                                        <button class="btn btn-light-primary d-flex align-items-center gap-2"><i
+                                                class="ti ti-plus"></i> Add new item</button>
+                                    </div>
                                 </div>
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        // Button ko select karo
+                                        let addButton = document.querySelector(".btn-light-primary");
+                                
+                                        addButton.addEventListener("click", function () {
+                                            let tableBody = document.querySelector("tbody");
+                                
+                                            // New row ka HTML
+                                            let newRow = document.createElement("tr");
+                                            newRow.innerHTML = `
+                                                <td>#</td>
+                                                <td><input type="text" class="form-control" placeholder="Subjects" /></td>
+                                                <td><input type="number" class="form-control" placeholder="Fees" /></td>
+                                                <td class="text-center">
+                                                    <a href="#" class="avtar avtar-s btn-link-danger btn-pc-default remove-item">
+                                                        <i class="ti ti-trash f-20"></i>
+                                                    </a>
+                                                </td>
+                                            `;
+                                
+                                            // Row add karo table me
+                                            tableBody.appendChild(newRow);
+                                
+                                            // Row numbers ko update karne ka function call karo
+                                            updateRowNumbers();
+                                        });
+                                
+                                        // Delete button ka event listener add karna (event delegation use kiya gaya hai)
+                                        document.querySelector("tbody").addEventListener("click", function (e) {
+                                            if (e.target.closest(".remove-item")) {
+                                                e.preventDefault();
+                                                e.target.closest("tr").remove();
+                                                updateRowNumbers();
+                                            }
+                                        });
+                                
+                                        // Row numbers ko update karne ka function
+                                        function updateRowNumbers() {
+                                            let rows = document.querySelectorAll("tbody tr");
+                                            rows.forEach((row, index) => {
+                                                row.querySelector("td:first-child").textContent = index + 1;
+                                            });
+                                        }
+                                    });
+                                </script>
+                                
                                 <div class="col-12">
                                     <div class="invoice-total ms-auto">
                                         <div class="row">

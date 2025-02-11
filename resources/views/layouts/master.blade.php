@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/material.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link" />
-    {{-- <script src="{{ asset('assets/js/tech-stack.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/tech-stack.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
 </head>
 
@@ -40,7 +40,7 @@
     @yield('content')
 
 
-
+    {{-- js files --}}
     <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>
@@ -51,10 +51,9 @@
     <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/widgets/course-report-bar-chart.js') }}"></script>
     <script src="{{ asset('assets/js/widgets/student-states-chart.js') }}"></script>
-    <script src="{{ asset(path: 'assets/js/widgets/invoice-chart.js') }}"></script>
-    
-
-
+    <script src="{{ asset('assets/js/widgets/invoice-chart.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/plugins/simple-datatables.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/admin/invoice-list.js') }}"></script> --}}
 </body>
 
 </html>

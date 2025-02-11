@@ -73,24 +73,43 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th><span class="text-danger">*</span>Roll No</th>
-                                                    <th><span class="text-danger">*</span>Name</th>
-                                                    <th><span class="text-danger">*</span>Description</th>
-                                                    <th>Price</th>
+                                                    <th><span class="text-danger">*</span>Subjects</th>
+                                                    <th>Fees</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
-                                                    <td><input type="number" class="form-control" placeholder="Roll No"
-                                                            value="34" /></td>
-                                                    <td><input type="text" class="form-control" placeholder="Name"
-                                                            value="Musa Khan" /></td>
-                                                    <td><input type="text" class="form-control" placeholder="Description"
-                                                            value="Topper Student" /></td>
-                                                    <td><input type="number" class="form-control" placeholder="Price"
+                                                    <td><input type="text" class="form-control" placeholder="Subjects"
+                                                            value="Math" /></td>
+                                                    <td><input type="number" class="form-control" placeholder="Fees"
                                                             value="275.00" /></td>
+                                                    <td class="text-center">
+                                                        <a href="#"
+                                                            class="avtar avtar-s btn-link-danger btn-pc-default"><i
+                                                                class="ti ti-trash f-20"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                            
+                                                    <td>2</td>
+                                                    <td><input type="text" class="form-control" placeholder="Subjects"
+                                                            value="Physics" /></td>
+                                                    <td><input type="number" class="form-control" placeholder="Fees"
+                                                            value="81.99" /></td>
+                                                    <td class="text-center">
+                                                        <a href="#"
+                                                            class="avtar avtar-s btn-link-danger btn-pc-default"><i
+                                                                class="ti ti-trash f-20"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td><input type="text" class="form-control" placeholder="Subjects"
+                                                            value="Chemistry" /></td>
+                                                    <td><input type="number" class="form-control" placeholder="Fees"
+                                                            value="85.00" /></td>
                                                     <td class="text-center">
                                                         <a href="#"
                                                             class="avtar avtar-s btn-link-danger btn-pc-default"><i
@@ -99,6 +118,11 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="text-start">
+                                        <hr class="mb-4 mt-0 border-secondary border-opacity-50" />
+                                        <button class="btn btn-light-primary d-flex align-items-center gap-2"><i
+                                                class="ti ti-plus"></i> Add new item</button>
                                     </div>
                                 </div>
                                 <div class="col-12">

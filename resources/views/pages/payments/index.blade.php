@@ -208,11 +208,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">Mickie Melmoth</span>
+                                                                        class="text-truncate w-100">Saqib Din</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -250,8 +250,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -284,12 +283,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Liana Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -326,7 +324,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -364,8 +362,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -398,12 +395,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Shelba Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -440,7 +436,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -478,8 +474,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -512,12 +507,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Airi Satuo</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -574,8 +568,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -608,12 +601,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Airi Satuo</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -650,7 +642,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -688,10 +680,10 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
+                                                        
                                                     </td>
                                                     <td>7/6/2022</td>
                                                     <td>credit card</td>
@@ -722,12 +714,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Shelba Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -764,7 +755,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -802,7 +793,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -840,8 +831,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -874,12 +864,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Shelba Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -936,7 +925,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -974,8 +963,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1008,12 +996,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Airi Satuo</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1050,7 +1037,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -1088,8 +1075,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1122,12 +1108,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Shelba Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1164,7 +1149,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -1202,8 +1187,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1236,12 +1220,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Shelba Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1298,8 +1281,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1332,12 +1314,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Shelba Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1374,7 +1355,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -1412,8 +1393,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1446,12 +1426,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Airi Satuo</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1488,7 +1467,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -1526,7 +1505,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">mmsht23@gmail.com</span></a>
+                                                                            class="text-truncate w-100">0316-8336096</span></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -1564,8 +1543,7 @@
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1598,12 +1576,11 @@
                                                             </div>
                                                             <div class="col">
                                                                 <h6 class="mb-1"><span
-                                                                        class="text-truncate w-100">tass23@gmail.com</span>
+                                                                        class="text-truncate w-100">Liana Thews</span>
                                                                 </h6>
                                                                 <p class="f-12 mb-0"><a href="#!"
                                                                         class="text-muted"><span
-                                                                            class="text-truncate w-100">Shelba
-                                                                            Thews</span></a></p>
+                                                                            class="text-truncate w-100">0316-8336096</span></a></p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -1636,4 +1613,15 @@
             </div>
         </div>
     </div>
+
+    <script type="module">
+        import {
+            DataTable
+        } from '../assets/js/plugins/module.js';
+        window.dt = new DataTable('#pc-dt-simple-1');
+        window.dt = new DataTable('#pc-dt-simple-2');
+        window.dt = new DataTable('#pc-dt-simple-3');
+        window.dt = new DataTable('#pc-dt-simple-4');
+   </script>
+
 @endsection
