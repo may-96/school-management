@@ -96,7 +96,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                              </div>
                                 <div class="col-12">
                                     <div class="invoice-total ms-auto">
                                         <div class="row">
