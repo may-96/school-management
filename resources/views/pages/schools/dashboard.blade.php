@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">New Students</p>
+                                    <p class="mb-1">Total Teachers</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">400+</h4>
                                         <span class="text-success fw-medium">30.6%</span>
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">Total Course</p>
+                                    <p class="mb-1">Total Students</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">520+</h4>
                                         <span class="text-warning fw-medium">30.6%</span>
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">New Visitor</p>
+                                    <p class="mb-1">Paid Vouchers</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">800+</h4>
                                         <span class="text-success fw-medium">30.6%</span>
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">Fees Collection</p>
+                                    <p class="mb-1">Unpaid Vouchers</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">1,065</h4>
                                         <span class="text-danger fw-medium">30.6%</span>

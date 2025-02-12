@@ -35,9 +35,9 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('teacher.index') }}" class="pc-link">
                         <span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-status-up"></use>
-                            </svg>
+                              <svg class="pc-icon">
+                                <use xlink:href="#custom-user"></use>
+                              </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Teachers">Teachers</span>
                         {{-- <span class="pc-badge">2</span> --}}
@@ -47,8 +47,8 @@
                     <a href="{{ route('student.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
-                                <use xlink:href="#custom-status-up"></use>
-                            </svg>
+                                <use xlink:href="#custom-layer"></use>
+                              </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Students">Students</span>
                         {{-- <span class="pc-badge">2</span> --}}
@@ -93,8 +93,8 @@
                     <a href="#!" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
-                                <use xlink:href="#custom-bill"></use>
-                            </svg>
+                                <use xlink:href="#custom-dollar-square"></use>
+                              </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Student Fees">Student Fees</span><span class="pc-arrow"><i
                                 data-feather="chevron-right"></i></span></a>
