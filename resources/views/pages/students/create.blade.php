@@ -68,7 +68,7 @@
                                         <input type="number" class="form-control" placeholder="Enter roll no" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Subjects</label>
                                         <select class="form-select">
@@ -78,12 +78,23 @@
                                             <option>Math</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                              
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Class</label>
                                         <input type="class" class="form-control" placeholder="Enter Class" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Section</label>
+                                        <select class="form-select" aria-placeholder="Select">
+                                            <option>Select</option>
+                                            <option>Green</option>
+                                            <option>Blue</option>
+                                            <option>Yellow</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

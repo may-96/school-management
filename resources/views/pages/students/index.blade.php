@@ -678,14 +678,14 @@
                                 </div>
                                 <div class="mb-3 row me-0">
                                     <label class="col-lg-4 col-form-label">Fees
-                                        Type : <small class="text-muted d-block">Enter
-                                            your Fees Type</small></label>
+                                        Group : <small class="text-muted d-block">Enter
+                                            your Fees Group</small></label>
                                     <div class="col-lg-8">
                                         <select class="form-select" id="exampleFormControlSelect1">
                                             <option>Please Select</option>
-                                            <option>Tuition Fees</option>
                                             <option>Admission Fees</option>
-                                            <option>Subjects Fees</option>
+                                            <option>Tuition Fees</option>
+                                            <option>Monthly Fees</option>
                                         </select>
                                     </div>
                                 </div>
@@ -703,7 +703,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 row me-0">
-                                    <label class="col-lg-4 col-form-label">Amount
+                                    <label class="col-lg-4 col-form-label"> Amount
                                         :<small class="text-muted d-block">Enter
                                             Amount</small></label>
                                     <div class="col-lg-8">

@@ -53,11 +53,13 @@
                                     <div class="row align-items-center g-3">
                                         <div class="col-sm-6">
                                             <div class="d-flex align-items-center mb-2">
-                                                <img src="img/s.jpg" class="img-fluid rounded-3" alt="images"
+                                                <img src="../assets/images/user/avatar-5.jpg" class="img-fluid rounded-3" alt="images"
                                                     style="height:3em; width:3em"; />
-                                                <span class="badge bg-light-secondary rounded-pill ms-2">Unpaid</span>
+                                                <span class="badge bg-light-success rounded-pill ms-2">Paid</span>
                                             </div>
-                                            <p class="mb-0">INV - 000457</p>
+                                            <p class="mb-1">INV ID - 0004572334</p>
+                                            <p class="f-w-600 mb-1 text-start">Student Name : <span class="f-w-600 mb-1 text-end">Saqib Din</span></p>
+                                            <p class="f-w-600 mb-1 text-start">Admission Fees : <span class="f-w-600 mb-1 text-end">5000 Pkr</span></p>
                                         </div>
                                         <div class="col-sm-6 text-sm-end">
                                             <h6>Due Date <span class="text-muted f-w-400">10/8/2023</span></h6>
@@ -71,21 +73,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Roll No</th>
-                                                    <th>Name</th>
-                                                    <th>Description</th>
-                                                    <th class="text-end">Price</th>
-                                                    <th class="text-end">Total Amount</th>
+                                                    <th>Subjects</th>
+                                                    <th class="text-end">Fees</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
-                                                    <td>2</td>
-                                                    <td>Musa Khan</td>
-                                                    <td>Topper</td>
-                                                    <td class="text-end">$80.00</td>
-                                                    <td class="text-end">$160.00</td>
+                                                    <td>Math</td>
+                                                    <td class="text-end">3000 Pkr</td>
                                                 </tr>
 
                                             </tbody>
@@ -103,14 +99,14 @@
                                                 <p class="text-muted mb-1 text-start">Discount :</p>
                                             </div>
                                             <div class="col-6">
-                                                <p class="mb-1 text-end text-success">$10.00</p>
+                                                <p class="mb-1 text-end text-success">100 Pkr</p>
                                             </div>
 
                                             <div class="col-6">
                                                 <p class="f-w-600 mb-1 text-start">Grand Total :</p>
                                             </div>
                                             <div class="col-6">
-                                                <p class="f-w-600 mb-1 text-end">$150.00</p>
+                                                <p class="f-w-600 mb-1 text-end">7900 Pkr</p>
                                             </div>
                                         </div>
                                     </div>

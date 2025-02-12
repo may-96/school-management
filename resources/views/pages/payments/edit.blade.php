@@ -58,7 +58,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-6 col-xl-3">
                                     <div class="mb-3 mb-0">
                                         <label class="form-label">Due Date</label>

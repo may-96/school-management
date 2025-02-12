@@ -1,14 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 
+// landing page
+Route::get('/', function () {
+    return view('welcome');
+    });
+
+// auth
+Route::get("auth/forget", [AuthController::class, "forget"])->name("auth.forget");
+Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
+Route::get("auth/register", [AuthController::class, "register"])->name("auth.register");
+Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
+
 // mainpage
-Route::get("/", [DashboardController::class, "show"])->name("school.dashboard");
+Route::get("dashboard", [DashboardController::class, "show"])->name("school.dashboard");
 
 // teachers
 Route::get("teacher/create", [TeacherController::class, "create"])->name("teacher.create");
@@ -28,3 +40,4 @@ Route::get("payments/index", [PaymentController::class, "index"])->name("payment
 
 // Profile-User
 Route::get("profile/user", [ProfileController::class, "user"])->name("profile.user");
+
