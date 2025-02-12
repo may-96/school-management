@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Primary Mobile Number</label>
+                                        <label class="form-label">Secondary Mobile Number</label>
                                         <input type="email" class="form-control" placeholder="Enter Primary Mobile Number" />
                                     </div>
                                 </div>

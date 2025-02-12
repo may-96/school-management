@@ -53,7 +53,7 @@
                                         <input type="date" class="form-control" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
                                         <input type="password" class="form-control" placeholder="Enter Password" />
@@ -64,7 +64,7 @@
                                         <label class="form-label">Confirm Password</label>
                                         <input type="password" class="form-control" placeholder="Enter confirm password" />
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Mobile Number</label>
@@ -80,7 +80,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Designation</label>
                                         <input type="text" class="form-control" placeholder="Designation" />
@@ -95,7 +95,7 @@
                                             <option>Department 2</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Date of Birth</label>

@@ -1,4 +1,5 @@
-@extends('layouts.master')
+ 
+ @extends('layouts.master')
 
 @section('content')
     <div class="pc-container">
@@ -116,6 +117,7 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                             
                                         </table>
                                     </div>
                                     <div class="text-start">
@@ -160,4 +162,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection 

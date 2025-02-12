@@ -40,4 +40,3 @@ Route::get("payments/index", [PaymentController::class, "index"])->name("payment
 
 // Profile-User
 Route::get("profile/user", [ProfileController::class, "user"])->name("profile.user");
-

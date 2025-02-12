@@ -41,9 +41,9 @@
                                 <table class="table table-hover" id="pc-dt-simple">
                                     <thead>
                                         <tr>
+                                            <th>Name</th>
                                             <th>Admission NO</th>
                                             <th>Roll No</th>
-                                            <th>Name</th>
                                             <th>Class</th>
                                             <th>Section</th>
                                             <th>Gender</th>
@@ -55,8 +55,6 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>12</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -65,12 +63,14 @@
                                                                 class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Saqib Din</h6>
+                                                        <h6 class="mb-0">saqib Din</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                     </a>
                                                 </div>
                                             </td>
+                                            <td>AD987244565</td>
+                                            <td>12</td>
                                             <td>10th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -95,8 +95,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD987244565</td>
-                                            <td>23</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -104,11 +102,13 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
+                                                        <h6 class="mb-0">umar</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD987244565</td>
+                                            <td>23</td>
                                             <td>9th</td>
                                             <td>Blue</td>
                                             <td>Male</td>
@@ -134,8 +134,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98723465</td>
-                                            <td>34</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -143,11 +141,13 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
+                                                        <h6 class="mb-0">Dilawar</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98723465</td>
+                                            <td>34</td>
                                             <td>5th</td>
                                             <td>Yellow</td>
                                             <td>Female</td>
@@ -170,8 +170,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98722365</td>
-                                            <td>23</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -179,11 +177,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
+                                                        <h6 class="mb-0">Zain</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98722365</td>
+                                            <td>23</td>
+                                            
                                             <td>6th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -206,8 +207,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>56</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -215,11 +214,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Airi Satou</h6>
+                                                        <h6 class="mb-0">Irfan</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365 </td>
+                                            <td>56</td>
+                                            
                                             <td>8th</td>
                                             <td>Blue</td>
                                             <td>Male</td>
@@ -242,8 +244,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>56</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -251,11 +251,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
+                                                        <h6 class="mb-0">Arshad</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>56</td>
+                                           
                                             <td>9th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -277,21 +280,21 @@
                                                         class="ph-duotone ph-plus-circle"></i>Add Fees</button>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr><td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img src="../assets/images/user/avatar-7.jpg" alt="user image"
+                                                        class="img-radius wid-40" />
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="mb-0">Mubashir</h6>
+                                                    <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                </div>
+                                            </div>
+                                        </td>
                                             <td>AD98724365</td>
                                             <td>78</td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-7.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                            
                                             <td>10th</td>
                                             <td>Blue</td>
                                             <td>Male</td>
@@ -313,21 +316,21 @@
                                                         class="ph-duotone ph-plus-circle"></i>Add Fees</button>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr><td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img src="../assets/images/user/avatar-8.jpg" alt="user image"
+                                                        class="img-radius wid-40" />
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="mb-0">Javed</h6>
+                                                    <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                </div>
+                                            </div>
+                                        </td>
                                             <td>AD98724365</td>
                                             <td>66</td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-8.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                            
                                             <td>7th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -350,8 +353,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>67</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -359,11 +360,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
+                                                        <h6 class="mb-0">Khan</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>67</td>
+                                           
                                             <td>4th</td>
                                             <td>Yellow</td>
                                             <td>Male</td>
@@ -386,8 +390,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>87</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -395,11 +397,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Airi Satou</h6>
+                                                        <h6 class="mb-0">Malang jan</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365n</td>
+                                            <td>87</td>
+                                            
                                             <td>8th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -422,8 +427,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>34</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -431,11 +434,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
+                                                        <h6 class="mb-0">Shahmer</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>34</td>
+                                           
                                             <td>2nd</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -458,8 +464,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>67</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -467,11 +471,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
+                                                        <h6 class="mb-0">Bilal</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>67</td>
+                                            
                                             <td>10th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -494,8 +501,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>67</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -503,11 +508,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
+                                                        <h6 class="mb-0">Ahmed</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>67</td>
+                                           
                                             <td>6th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -530,8 +538,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>78</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -539,11 +545,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Airi Satou</h6>
+                                                        <h6 class="mb-0">Jamal</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>78</td>
+                                          
                                             <td>9th</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -566,8 +575,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>78</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -575,11 +582,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
+                                                        <h6 class="mb-0">Banana khan</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>78</td>
+                                            
                                             <td>3rd</td>
                                             <td>Green</td>
                                             <td>Male</td>
@@ -602,8 +612,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>AD98724365</td>
-                                            <td>87</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -611,11 +619,14 @@
                                                             class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
+                                                        <h6 class="mb-0">muheeb</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td>AD98724365</td>
+                                            <td>87</td>
+                                            
                                             <td>4th</td>
                                             <td>Blue</td>
                                             <td>Male</td>
