@@ -65,7 +65,7 @@
                     <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
                         <a href="{{ route('profile.user') }}" class="dropdown-item">
                             <i class="ti ti-user"></i>
-                            <span>Profile</span>
+                            <span>User</span>
                         </a>
                         <a href="login.php" class="dropdown-item">
                             <i class="ti ti-power"></i>
