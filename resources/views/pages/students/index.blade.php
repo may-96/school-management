@@ -728,6 +728,7 @@
                                     <div class="col-lg-8">
                                         <input type="date" class="form-control" />
                                     </div>
+                                    
                                 </div>
                                 <div class="text-end btn-page mb-0 mt-4 me-0">
                                     <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal"
