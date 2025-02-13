@@ -116,6 +116,16 @@
                         </li>
                     </ul>
                 </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('student.profile') }}" class="pc-link">
+                        <span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-user-square"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext" data-i18n="Profile">Profile</span><span class="pc-arrow"></span>
+                    </a>
+                </li>
                 <li class="pc-item pc-caption">
                     <label data-i18n="Admin Panel">Admin Panel</label>
                     <svg class="pc-icon">
@@ -129,7 +139,7 @@
                                 <use xlink:href="#custom-user-square"></use>
                             </svg>
                         </span>
-                        <span class="pc-mtext" data-i18n="Profile">Profile</span><span class="pc-arrow"></span>
+                        <span class="pc-mtext" data-i18n="User">User</span><span class="pc-arrow"></span>
                     </a>
                 </li>
             </ul>

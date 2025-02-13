@@ -56,6 +56,7 @@
             {{-- <div class="col my-1">
               <a href="#"><img src="../assets/images/logo-dark.svg" alt="img" /></a>
             </div>
+            
             <div class="col-auto my-1">
               <h5 class="m-0 text-muted f-w-500">Step <b class="h5" id="auth-active-slide">1</b> to 5</h5>
             </div> --}}

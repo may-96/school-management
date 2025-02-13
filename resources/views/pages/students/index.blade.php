@@ -41,20 +41,28 @@
                                 <table class="table table-hover" id="pc-dt-simple">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Select</th>
+                                            <th>Name / Roll No</th>
                                             <th>Admission NO</th>
-                                            <th>Roll No</th>
-                                            <th>Class</th>
-                                            <th>Section</th>
+                                            <th>Class / Section</th>
+                                            <th>Parents</th>
                                             <th>Gender</th>
                                             <th>Status</th>
                                             <th>Admission Date</th>
                                             <th>Action</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
@@ -63,16 +71,29 @@
                                                                 class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">saqib Din</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                        <h6 class="mb-0">Saqib Din</h6>
+                                                        <small class="text-truncate w-100 text-muted">12</small>
                                                     </div>
                                                     </a>
                                                 </div>
                                             </td>
                                             <td>AD987244565</td>
-                                            <td>12</td>
-                                            <td>10th</td>
-                                            <td>Green</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">10th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Green</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Taj Muhammad Khan</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>Male</td>
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
@@ -97,23 +118,49 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-2.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-2.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">umar</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                        <h6 class="mb-0">Umar Ilyas</h6>
+                                                        <small class="text-truncate w-100 text-muted">16</small>
                                                     </div>
+                                                    </a>
                                                 </div>
                                             </td>
                                             <td>AD987244565</td>
-                                            <td>23</td>
-                                            <td>9th</td>
-                                            <td>Blue</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">10th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Blue</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Muhammad Ilyas</h6>
+                                                        <small class="text-truncate w-100 text-muted">0340-1902251</small>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td>Male</td>
-                                            <td><span class="badge bg-light-danger">Inactive</span></td>
-                                            <td>2023/12/24</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
                                             <td>
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
@@ -130,39 +177,66 @@
                                                     class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
                                                     data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
                                                         class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-4.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-danger">Inactive</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-3.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Dilawar</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>AD98723465</td>
-                                            <td>34</td>
-                                            <td>5th</td>
-                                            <td>Yellow</td>
-                                            <td>Female</td>
-                                            <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2022/09/19</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
                                                 <button
                                                     class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
                                                     data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
@@ -172,241 +246,46 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-4.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Zain</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98722365</td>
-                                            <td>23</td>
-                                            
-                                            <td>6th</td>
-                                            <td>Green</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-5.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-5.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Irfan</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
                                                     </div>
+                                                    </a>
                                                 </div>
                                             </td>
-                                            <td>AD98724365 </td>
-                                            <td>56</td>
-                                            
-                                            <td>8th</td>
-                                            <td>Blue</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2023/09/12</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
+                                            <td>AD987244565</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-6.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Arshad</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>56</td>
-                                           
-                                            <td>9th</td>
-                                            <td>Green</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2023/12/24</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr><td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img src="../assets/images/user/avatar-7.jpg" alt="user image"
-                                                        class="img-radius wid-40" />
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h6 class="mb-0">Mubashir</h6>
-                                                    <small class="text-truncate w-100 text-muted">0316-8336096</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                            <td>AD98724365</td>
-                                            <td>78</td>
-                                            
-                                            <td>10th</td>
-                                            <td>Blue</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2022/09/19</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr><td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img src="../assets/images/user/avatar-8.jpg" alt="user image"
-                                                        class="img-radius wid-40" />
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h6 class="mb-0">Javed</h6>
-                                                    <small class="text-truncate w-100 text-muted">0316-8336096</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                            <td>AD98724365</td>
-                                            <td>66</td>
-                                            
-                                            <td>7th</td>
-                                            <td>Green</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-danger">Inactive</span></td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-9.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Khan</h6>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>67</td>
-                                           
-                                            <td>4th</td>
-                                            <td>Yellow</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-danger">Inactive</span></td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-10.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Malang jan</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>AD98724365n</td>
-                                            <td>87</td>
-                                            
-                                            <td>8th</td>
-                                            <td>Green</td>
                                             <td>Male</td>
                                             <td><span class="badge bg-light-danger">Inactive</span></td>
                                             <td>2023/09/12</td>
@@ -414,12 +293,14 @@
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-trash f-20"></i>
                                                 </a>
+
                                                 <button
                                                     class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
                                                     data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
@@ -429,132 +310,46 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-2.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Shahmer</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>34</td>
-                                           
-                                            <td>2nd</td>
-                                            <td>Green</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-danger">Inactive</span></td>
-                                            <td>2023/12/24</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-3.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-6.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bilal</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
                                                     </div>
+                                                    </a>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>67</td>
-                                            
-                                            <td>10th</td>
-                                            <td>Green</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-danger">Inactive</span></td>
-                                            <td>2022/09/19</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
+                                            <td>AD987244565</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-4.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ahmed</h6>
-                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>67</td>
-                                           
-                                            <td>6th</td>
-                                            <td>Green</td>
-                                            <td>Male</td>
-                                            <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-5.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Jamal</h6>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>78</td>
-                                          
-                                            <td>9th</td>
-                                            <td>Green</td>
                                             <td>Male</td>
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
@@ -562,12 +357,14 @@
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-trash f-20"></i>
                                                 </a>
+
                                                 <button
                                                     class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
                                                     data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
@@ -577,34 +374,61 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-6.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-7.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Banana khan</h6>
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>78</td>
-                                            
-                                            <td>3rd</td>
-                                            <td>Green</td>
                                             <td>Male</td>
                                             <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2023/12/24</td>
+                                            <td>2023/09/12</td>
                                             <td>
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-trash f-20"></i>
                                                 </a>
+
                                                 <button
                                                     class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
                                                     data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
@@ -614,34 +438,637 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-7.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-8.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">muheeb</h6>
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
                                                         <small class="text-truncate w-100 text-muted">0316-8336096</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>AD98724365</td>
-                                            <td>87</td>
-                                            
-                                            <td>4th</td>
-                                            <td>Blue</td>
                                             <td>Male</td>
                                             <td><span class="badge bg-light-success">Active</span></td>
-                                            <td>2022/09/19</td>
+                                            <td>2023/09/12</td>
                                             <td>
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
-                                                <a href="student-add.php" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
                                                 <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-trash f-20"></i>
                                                 </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
+                                                <button
+                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
+                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+                                                        <input class="form-check-input" type="checkbox" />
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <a href="{{ route('student.profile') }}">
+                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
+                                                                class="img-radius wid-40" />
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">Artisan UI</h6>
+                                                        <small class="text-truncate w-100 text-muted">45</small>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>AD987244565</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">8th</h6>
+                                                        <small class="text-truncate w-100 text-muted">Yellow</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">Jackie Shen</h6>
+                                                        <small class="text-truncate w-100 text-muted">0316-8336096</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Male</td>
+                                            <td><span class="badge bg-light-success">Active</span></td>
+                                            <td>2023/09/12</td>
+                                            <td>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-eye f-20"></i>
+                                                </a>
+                                                <a href="{{ route('student.create') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-edit f-20"></i>
+                                                </a>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                    <i class="ti ti-trash f-20"></i>
+                                                </a>
+
                                                 <button
                                                     class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
                                                     data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
@@ -748,5 +1175,31 @@
             DataTable
         } from '../assets/js/plugins/module.js';
         window.dt = new DataTable('#pc-dt-simple');
+        document.querySelector('.bs-pass-para').addEventListener('click', function () {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire('Deleted!', 'Your file has been deleted.', 'success');
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
+        }
+      });
+  });
     </script>
 @endsection
