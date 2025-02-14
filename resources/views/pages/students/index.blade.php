@@ -29,6 +29,9 @@
                         <div class="card-header">
                             <div class="d-sm-flex align-items-center justify-content-between">
                                 <h5 class="mb-3 mb-sm-0">Student list</h5>
+                                <button class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2"
+                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
+                                        class="ph-duotone ph-plus-circle"></i>Create Fee Voucher</button>
                                 <div>
                                     <a href="{{ route('payment.create') }}" class="btn btn-outline-secondary me-2">Student
                                         Fees</a>
@@ -58,8 +61,10 @@
                                                 <div class="d-flex align-items-center">
                                                     <div class="form-check form-check-inline m-0 pc-icon-checkbox">
                                                         <input class="form-check-input" type="checkbox" />
-                                                        <i class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
-                                                        <i class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                                                        <i
+                                                            class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                                                        <i
+                                                            class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
                                                     </div>
                                                 </div>
                                             </td>
@@ -98,21 +103,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                        class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -162,21 +162,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -226,21 +221,16 @@
                                             <td><span class="badge bg-light-danger">Inactive</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -290,21 +280,16 @@
                                             <td><span class="badge bg-light-danger">Inactive</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -354,21 +339,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -418,21 +398,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -482,21 +457,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -546,21 +516,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -610,21 +575,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -674,21 +634,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -738,21 +693,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -802,21 +752,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -866,21 +811,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -930,21 +870,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -994,21 +929,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1058,21 +988,16 @@
                                             <td><span class="badge bg-light-success">Active</span></td>
                                             <td>2023/09/12</td>
                                             <td>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
+                                                <a href="{{ route('student.profile') }}"
+                                                    class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-eye f-20"></i>
                                                 </a>
                                                 <a href="{{ route('student.create') }}"
                                                     class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
                                                 </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-trash f-20"></i>
-                                                </a>
-
-                                                <button
-                                                    class="btn btn-sm btn-light-secondary d-flex align-items-center gap-2 mt-1"
-                                                    data-bs-toggle="modal" data-bs-target="#address-edit_add-modal"><i
-                                                        class="ph-duotone ph-plus-circle"></i>Add Fees</button>
+                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
+                                                    class="ti ti-trash f-20"></i></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1174,31 +1099,5 @@
             DataTable
         } from '../assets/js/plugins/module.js';
         window.dt = new DataTable('#pc-dt-simple');
-        document.querySelector('.bs-pass-para').addEventListener('click', function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    });
-    swalWithBootstrapButtons
-      .fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire('Deleted!', 'Your file has been deleted.', 'success');
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
-        }
-      });
-  });
     </script>
 @endsection

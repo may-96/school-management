@@ -8,7 +8,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('payment.dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Student Fees</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Create</li>
                             </ul>
@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row g-3">
-                             
+
                                 <div class="col-sm-6 col-xl-3">
                                     <div class="mb-3 mb-0">
                                         <label class="form-label">Invoice id</label>
@@ -64,7 +64,7 @@
                                         <input type="datetime-local" class="form-control" value="2022-02-06T11:42:13.510" />
                                     </div>
                                 </div>
-                               
+
                                 {{-- <div class="col-sm-6 col-xl-3">
                                     <div class="mb-3 mb-0">
                                         <label class="form-label">Status</label>
@@ -76,7 +76,7 @@
                                         </select>
                                     </div>
                                 </div> --}}
-                                
+
 
                                 <div class="col-12">
                                     <h5>Detail</h5>
@@ -85,13 +85,13 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th><span class="text-danger">*</span>Subject</th>
+                                                    <th><span class="text-danger">*</span>Fees Type</th>
                                                     <th><span class="text-danger">*</span>Fees</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                      
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -113,7 +113,14 @@
                                             let newRow = document.createElement("tr");
                                             newRow.innerHTML = `
                                                 <td>#</td>
-                                                <td><input type="text" class="form-control" placeholder="Subjects" /></td>
+                                                <td>
+                                                    <select class="form-select" id="exampleFormControlSelect1">
+                                                    <option>Please Select</option>
+                                                    <option selected>Admission Fees</option>
+                                                    <option>Monthly Fees</option>
+                                                    <option>Tuition Fees</option>
+                                                    </select>
+                                                </td>
                                                 <td><input type="number" class="form-control" placeholder="Fees" /></td>
                                                 <td class="text-center">
                                                     <a href="#" class="avtar avtar-s btn-link-danger btn-pc-default remove-item">

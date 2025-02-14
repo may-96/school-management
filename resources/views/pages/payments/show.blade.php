@@ -8,7 +8,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('payment.dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Student Fees</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Detail</li>
                             </ul>

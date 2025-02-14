@@ -99,8 +99,7 @@
                         <span class="pc-mtext" data-i18n="Student Fees">Student Fees</span><span class="pc-arrow"><i
                                 data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{ route('payment.dashboard') }}"
-                                data-i18n="Finance">Finance</a></li>
+                        
                         <li class="pc-item"><a class="pc-link" href="{{ route('payment.create') }}"
                                 data-i18n="Add Fees">Add
                                 Fees</a></li>

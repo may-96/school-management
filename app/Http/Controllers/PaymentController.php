@@ -6,11 +6,7 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function dashboard()
-    {
 
-        return view("pages.payments.dashboard", );
-    }
     public function create()
     {
         return view("pages.payments.create");

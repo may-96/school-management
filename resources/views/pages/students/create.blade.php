@@ -83,7 +83,25 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Class</label>
-                                        <input type="class" class="form-control" placeholder="Enter Class" />
+                                        <select class="form-select" aria-placeholder="Select">
+                                            <option>Select</option>
+                                            <option>K.G</option>
+                                            <option>Montesori</option>
+                                            <option>Nursery</option>
+                                            <option>Prep</option>
+                                            <option>1st</option>
+                                            <option>2nd</option>
+                                            <option>3rd</option>
+                                            <option>4th</option>
+                                            <option>5th</option>
+                                            <option>6th</option>
+                                            <option>7th</option>
+                                            <option>8th</option>
+                                            <option>9th</option>
+                                            <option>10th</option>
+                                            <option>1st Year</option>
+                                            <option>2nd Year</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -94,6 +112,10 @@
                                             <option>Green</option>
                                             <option>Blue</option>
                                             <option>Yellow</option>
+                                            <option>Pink</option>
+                                            <option>A</option>
+                                            <option>B</option>
+                                            <option>C</option>
                                         </select>
                                     </div>
                                 </div>

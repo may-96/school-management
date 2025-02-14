@@ -32,7 +32,6 @@ Route::get("student/index", [StudentController::class, "index"])->name("student.
 Route::get("student/profile", [StudentController::class, "show"])->name("student.profile");
 
 // payments
-Route::get("payments/dashboard", [PaymentController::class, "dashboard"])->name("payment.dashboard");
 Route::get("payments/create", [PaymentController::class, "create"])->name("payment.create");
 Route::get("payments/show", [PaymentController::class, "show"])->name("payment.show");
 Route::get("payments/edit", [PaymentController::class, "edit"])->name("payment.edit");
