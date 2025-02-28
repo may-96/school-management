@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller
 {
 
-    public function create()
-    {
-        return view("pages.payments.create");
-    }
+    // public function create()
+    // {
+    //     return view("pages.payments.create");
+    // }
     public function show()
     {
 
@@ -19,11 +19,17 @@ class PaymentController extends Controller
     public function edit()
     {
         return view("pages.payments.edit");
-    }
-    public function index()
-    {
 
-        return view("pages.payments.index", );
+    }
+    public function list()
+    {
+        return view("pages.payments.list");
+
+    }
+    public function voucher()
+    {
+        return view("pages.payments.voucher");
+
     }
 
 }

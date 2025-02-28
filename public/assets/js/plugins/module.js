@@ -3600,7 +3600,7 @@ const st = {
         labels: {
             placeholder: "Search...",
             searchTitle: "Search within table",
-            perPage: "entries per page",
+            perPage: "",
             pageTitle: "Page {page}",
             noRows: "No entries found",
             noResults: "No results match your search query",

@@ -8,23 +8,21 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('student.index') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('teacher.create') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Student</li>
+                                <li class="breadcrumb-item" aria-current="page">Teacher</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
                                 <h2 class="mb-0">
-                                    Student Add
+                                    Teacher Edit
                                 </h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -47,48 +45,44 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" placeholder="Enter email" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
                                         <label class="form-label">Date of Birth</label>
                                         <input type="date" class="form-control" />
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Registration Date</label>
+                                        <label class="form-label">Joining Date</label>
                                         <input type="date" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Admission No</label>
-                                        <input type="number" class="form-control" placeholder="Enter ID number" />
+                                        <label class="form-label">Mobile Number</label>
+                                        <input type="number" class="form-control" placeholder="Enter Mobile number" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Roll No</label>
-                                        <input type="number" class="form-control" placeholder="Enter roll no" />
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Subjects</label>
+                                        <label class="form-label">Gender</label>
                                         <select class="form-select">
-                                            <option>Select</option>
-                                            <option>Physics</option>
-                                            <option>Chemistry</option>
-                                            <option>Math</option>
+                                            <option>Female</option>
+                                            <option>Male</option>
                                         </select>
                                     </div>
-                                </div> --}}
-
+                                </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Class</label>
-                                        <select class="form-select" aria-placeholder="Select">
+                                        <select class="form-select">
                                             <option>Select</option>
-                                            <option>K.G</option>
                                             <option>Montesori</option>
+                                            <option>K.G</option>
                                             <option>Nursery</option>
                                             <option>Prep</option>
                                             <option>1st</option>
@@ -101,70 +95,30 @@
                                             <option>8th</option>
                                             <option>9th</option>
                                             <option>10th</option>
-                                            <option>1st Year</option>
-                                            <option>2nd Year</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Section</label>
-                                        <input type="text" class="form-control" placeholder="Enter Section" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Gender</label>
-                                        <select class="form-select" aria-placeholder="Select">
-                                            <option>Select</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
+                                        <label class="form-label">Department</label>
+                                        <select class="form-select">
+                                            <option>Developer</option>
+                                            <option>Javascript Developer</option>
+                                            <option>Frontend Developer</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Status</label>
-                                        <select class="form-select" aria-placeholder="Select">
-                                            <option>Select</option>
-                                            <option>Active</option>
-                                            <option>Inactive</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Parents Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter parents name" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Parents Mobile Number</label>
-                                        <input type="number" class="form-control"
-                                            placeholder="Enter parents mobile number" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Secondary Mobile Number</label>
-                                        <input type="email" class="form-control"
-                                            placeholder="Enter Primary Mobile Number" />
                                     </div>
                                 </div>
 
-
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Student Profile</label>
-                                        <input class="form-control" type="file" />
+                                        <label class="form-label">Education</label>
+                                        <input type="text" class="form-control" placeholder="Education" />
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Address</label>
-                                        <textarea class="form-control" rows="2" placeholder="Enter address"></textarea>
+                                        <label class="form-label">Teacher Profile</label>
+                                        <input class="form-control" type="file" />
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-end">

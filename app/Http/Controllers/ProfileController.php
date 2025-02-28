@@ -8,6 +8,10 @@ class ProfileController extends Controller
 {
     public function user()
     {
-        return view("pages.profile.user");
+        return view("pages.admin.user");
+    }
+    public function profile()
+    {
+        return view("pages.admin.users");
     }
 }

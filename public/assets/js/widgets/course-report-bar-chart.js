@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
       colors: ['#4680ff', '#ffa21d'],
       series: [
         {
-          name: 'Overall Growth',
+          name: 'Teachers',
           data: [200, 90, 135, 114, 120, 145, 180, 90, 135, 114, 120, 145]
         },
         {
-          name: 'Monthly',
+          name: 'Students',
           data: [120, 45, 78, 150, 168, 99, 120, 45, 78, 150, 168, 99]
         }
       ],

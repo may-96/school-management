@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link" />
     <script src="{{ asset('assets/js/tech-stack.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
-
     <link rel="stylesheet" type="text/css" href="{{ asset(path: 'assets/css/plugins/animate.min.css') }}" />
 </head>
 
@@ -40,9 +39,11 @@
         </div>
     </div>
 
-    @if (!in_array(Route::currentRouteName(), ['auth.forget', 'auth.login', 'auth.reset', 'auth.register']))
-        @include('components.topbar')
+    @if (!in_array(Route::currentRouteName(), ['auth.forget', 'auth.login', 'auth.reset', 'auth.register', 'landing.home']))
+        
         @include('components.sidebar')
+        @include('components.topbar')
+
     @endif
 
     {{-- sidebar --}}

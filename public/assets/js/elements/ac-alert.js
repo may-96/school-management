@@ -1,160 +1,184 @@
 "use strict";
 (function () {
-    // document.querySelector('.bs-message').addEventListener('click', function () {
-    //   Swal.fire('Any fool can use a computer');
-    // });
 
-    // document.querySelector('.bs-tit-txt').addEventListener('click', function () {
-    //   Swal.fire('The Internet?', 'That thing is still around?', 'question');
-    // });
+//   document.querySelector('.bs-message').addEventListener('click', function () {
+//       Swal.fire('Any fool can use a computer');
+//     });
 
-    // document.querySelector('.bs-error-icon').addEventListener('click', function () {
-    //   Swal.fire({
-    //     icon: 'error',
-    //     title: 'Oops...',
-    //     text: 'Something went wrong!',
-    //     footer: '<a href>Why do I have this issue?</a>'
-    //   });
-    // });
+//     document.querySelector('.bs-tit-txt').addEventListener('click', function () {
+//       Swal.fire('The Internet?', 'That thing is still around?', 'question');
+//     });
 
-    // document.querySelector('.bs-long-content').addEventListener('click', function () {
-    //   Swal.fire({
-    //     imageUrl: 'https://placeholder.pics/svg/300x1500',
-    //     imageHeight: 1500,
-    //     imageAlt: 'A tall image'
-    //   });
-    // });
+//     document.querySelector('.bs-error-icon').addEventListener('click', function () {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Oops...',
+//         text: 'Something went wrong!',
+//         footer: '<a href>Why do I have this issue?</a>'
+//       });
+//     });
 
-    // document.querySelector('.bs-cust-html').addEventListener('click', function () {
-    //   Swal.fire({
-    //     title: '<strong>HTML <u>example</u></strong>',
-    //     icon: 'info',
-    //     html: 'You can use <b>bold text</b>, ' + '<a href="//sweetalert2.github.io">links</a> ' + 'and other HTML tags',
-    //     showCloseButton: true,
-    //     showCancelButton: true,
-    //     focusConfirm: false,
-    //     confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
-    //     confirmButtonAriaLabel: 'Thumbs up, great!',
-    //     cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
-    //     cancelButtonAriaLabel: 'Thumbs down'
-    //   });
-    // });
+//     document.querySelector('.bs-long-content').addEventListener('click', function () {
+//       Swal.fire({
+//         imageUrl: 'https://placeholder.pics/svg/300x1500',
+//         imageHeight: 1500,
+//         imageAlt: 'A tall image'
+//       });
+//     });
 
-    // document.querySelector('.bs-tre-button').addEventListener('click', function () {
-    //   Swal.fire({
-    //     title: 'Do you want to save the changes?',
-    //     showDenyButton: true,
-    //     showCancelButton: true,
-    //     confirmButtonText: `Save`,
-    //     denyButtonText: `Don't save`
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       Swal.fire('Saved!', '', 'success');
-    //     } else if (result.isDenied) {
-    //       Swal.fire('Changes are not saved', '', 'info');
-    //     }
-    //   });
-    // });
+//     document.querySelector('.bs-cust-html').addEventListener('click', function () {
+//       Swal.fire({
+//         title: '<strong>HTML <u>example</u></strong>',
+//         icon: 'info',
+//         html: 'You can use <b>bold text</b>, ' + '<a href="//sweetalert2.github.io">links</a> ' + 'and other HTML tags',
+//         showCloseButton: true,
+//         showCancelButton: true,
+//         focusConfirm: false,
+//         confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+//         confirmButtonAriaLabel: 'Thumbs up, great!',
+//         cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
+//         cancelButtonAriaLabel: 'Thumbs down'
+//       });
+//     });
 
-    // document.querySelector('.bs-cust-position').addEventListener('click', function () {
-    //   Swal.fire({
-    //     position: 'top-end',
-    //     icon: 'success',
-    //     title: 'Your work has been saved',
-    //     showConfirmButton: false,
-    //     timer: 1500
-    //   });
-    // });
+//     document.querySelector('.bs-tre-button').addEventListener('click', function () {
+//       Swal.fire({
+//         title: 'Do you want to save the changes?',
+//         showDenyButton: true,
+//         showCancelButton: true,
+//         confirmButtonText: `Save`,
+//         denyButtonText: `Don't save`
+//       }).then((result) => {
+//         if (result.isConfirmed) {
+//           Swal.fire('Saved!', '', 'success');
+//         } else if (result.isDenied) {
+//           Swal.fire('Changes are not saved', '', 'info');
+//         }
+//       });
+//     });
 
-    // document.querySelector('.bs-cust-anim').addEventListener('click', function () {
-    //   Swal.fire({
-    //     title: 'Custom animation with Animate.css',
-    //     showClass: {
-    //       popup: 'animate__animated animate__fadeInDown'
-    //     },
-    //     hideClass: {
-    //       popup: 'animate__animated animate__fadeOutUp'
-    //     }
-    //   });
-    // });
+//     document.querySelector('.bs-cust-position').addEventListener('click', function () {
+//       Swal.fire({
+//         position: 'top-end',
+//         icon: 'success',
+//         title: 'Your work has been saved',
+//         showConfirmButton: false,
+//         timer: 1500
+//       });
+//     });
 
-    // document .querySelector(".bs-pass-para")
-    //     .addEventListener("click", function () {
-    //         const swalWithBootstrapButtons = Swal.mixin({
-    //             customClass: {
-    //                 confirmButton: "btn btn-success",
-    //                 cancelButton: "btn btn-danger",
-    //             },
-    //             buttonsStyling: false,
-    //         });
-    //         swalWithBootstrapButtons
-    //             .fire({
-    //                 title: "Are you sure?",
-    //                 text: "You won't be able to revert this!",
-    //                 icon: "warning",
-    //                 showCancelButton: true,
-    //                 confirmButtonText: "Yes, delete it!",
-    //                 cancelButtonText: "No, cancel!",
-    //                 reverseButtons: true,
-    //             })
-    //             .then((result) => {
-    //                 if (result.isConfirmed) {
-    //                     swalWithBootstrapButtons.fire(
-    //                         "Deleted!",
-    //                         "Your file has been deleted.",
-    //                         "success"
-    //                     );
-    //                 } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //                     swalWithBootstrapButtons.fire(
-    //                         "Cancelled",
-    //                         "Your imaginary file is safe :)",
-    //                         "error"
-    //                     );
-    //                 }
-    //             });
-    //     });
+//     document.querySelector('.bs-cust-anim').addEventListener('click', function () {
+//       Swal.fire({
+//         title: 'Custom animation with Animate.css',
+//         showClass: {
+//           popup: 'animate__animated animate__fadeInDown'
+//         },
+//         hideClass: {
+//           popup: 'animate__animated animate__fadeOutUp'
+//         }
+//       });
+//     });
 
+//     document .querySelector(".bs-pass-para1")
+//         .addEventListener("click", function () {
+//             const swalWithBootstrapButtons = Swal.mixin({
+//                 customClass: {
+//                     confirmButton: "btn btn-success",
+//                     cancelButton: "btn btn-danger",
+//                 },
+//                 buttonsStyling: false,
+//             });
+//             swalWithBootstrapButtons
+//                 .fire({
+//                     title: "Are you sure?",
+//                     text: "You won't be able to revert this!",
+//                     icon: "warning",
+//                     showCancelButton: true,
+//                     confirmButtonText: "Yes, delete it!",
+//                     cancelButtonText: "No, cancel!",
+//                     reverseButtons: true,
+//                 })
+//                 .then((result) => {
+//                     if (result.isConfirmed) {
+//                         swalWithBootstrapButtons.fire(
+//                             "Deleted!",
+//                             "Your file has been deleted.",
+//                             "success"
+//                         );
+//                     } else if (result.dismiss === Swal.DismissReason.cancel) {
+//                         swalWithBootstrapButtons.fire(
+//                             "Cancelled",
+//                             "Your imaginary file is safe :)",
+//                             "error"
+//                         );
+//                     }
+//                 });
+//         });
+
+
+    // delete model 
+  
     document.addEventListener("click", function (event) {
-        if (event.target.closest(".bs-pass-para")) {
-            event.preventDefault();
-
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: "btn btn-success",
-                    cancelButton: "btn btn-danger",
+        let clickedElement = event.target.closest(".bs-pass-para");
+        if (!clickedElement) return;
+    
+        event.preventDefault();
+    
+        // Find the closest modal in which the button was clicked
+        let modal = clickedElement.closest(".modal");
+    
+        if (modal) {
+            let bsModal = bootstrap.Modal.getInstance(modal) || new bootstrap.Modal(modal);
+            bsModal.hide();
+    
+            // Wait until the modal is fully hidden before showing Swal
+            modal.addEventListener(
+                "hidden.bs.modal",
+                function () {
+                    showSwalConfirmation();
                 },
-                buttonsStyling: false,
-            });
-
-            swalWithBootstrapButtons
-                .fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
-                    reverseButtons: true,
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        swalWithBootstrapButtons.fire(
-                            "Deleted!",
-                            "Your details has been deleted.",
-                            "success"
-                        );
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        swalWithBootstrapButtons.fire(
-                            "Cancelled",
-                            "Your imaginary details is safe :)",
-                            "error"
-                        );
-                    }
-                });
+                { once: true }
+            );
+        } else {
+            console.error("Modal not found for clicked element:", clickedElement);
+            showSwalConfirmation(); // If no modal found, still show Swal
         }
     });
+    
+    function showSwalConfirmation() {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger",
+            },
+            buttonsStyling: false,
+        });
+    
+        swalWithBootstrapButtons
+            .fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true,
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    console.log("Deleted Successfully!");
+                } else {
+                    console.log("Cancelled");
+                }
+            });
+    }
+    
+    
+    
+    
+    
 
-    // document.querySelector('.bs-cust-img').addEventListener('click', function () {
+ // document.querySelector('.bs-cust-img').addEventListener('click', function () {
     //   Swal.fire({
     //     title: 'Sweet!',
     //     text: 'Modal with a custom image.',

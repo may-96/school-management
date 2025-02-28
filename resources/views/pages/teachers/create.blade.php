@@ -10,12 +10,14 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('teacher.create') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Teacher Add</li>
+                                <li class="breadcrumb-item" aria-current="page">Teacher</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h2 class="mb-0">Teacher Add</h2>
+                                <h2 class="mb-0">
+                                    Teacher Add
+                                </h2>
                             </div>
                         </div>
                     </div>
@@ -49,22 +51,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Joining Date</label>
+                                        <label class="form-label">Date of Birth</label>
                                         <input type="date" class="form-control" />
-                                    </div>
-                                </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" placeholder="Enter Password" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" placeholder="Enter confirm password" />
+                                        <label class="form-label">Joining Date</label>
+                                        <input type="date" class="form-control" />
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Mobile Number</label>
@@ -80,28 +76,39 @@
                                         </select>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
+                                <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Designation</label>
-                                        <input type="text" class="form-control" placeholder="Designation" />
+                                        <label class="form-label">Class</label>
+                                        <select class="form-select">
+                                            <option>Select</option>
+                                            <option>Montesori</option>
+                                            <option>K.G</option>
+                                            <option>Nursery</option>
+                                            <option>Prep</option>
+                                            <option>1st</option>
+                                            <option>2nd</option>
+                                            <option>3rd</option>
+                                            <option>4th</option>
+                                            <option>5th</option>
+                                            <option>6th</option>
+                                            <option>7th</option>
+                                            <option>8th</option>
+                                            <option>9th</option>
+                                            <option>10th</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Department</label>
                                         <select class="form-select">
-                                            <option>Department</option>
-                                            <option>Department 1</option>
-                                            <option>Department 2</option>
+                                            <option>Developer</option>
+                                            <option>Javascript Developer</option>
+                                            <option>Frontend Developer</option>
                                         </select>
                                     </div>
-                                </div> --}}
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" />
-                                    </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Education</label>
