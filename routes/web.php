@@ -1,14 +1,27 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 // landing page
 Route::get("/", [LandingController::class, "home"])->name("landing.home");
@@ -20,7 +33,7 @@ Route::get("auth/register", [AuthController::class, "register"])->name("auth.reg
 Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
 
 // mainpage
-Route::get("dashboard", [DashboardController::class, "show"])->name("school.dashboard");
+Route::get("dashboard", [DashboardController::class, "show"])->name("dashboard");
 
 // teachers
 Route::get("teacher/create", [TeacherController::class, "create"])->name("teacher.create");
@@ -46,3 +59,5 @@ Route::get("payments/voucher", [PaymentController::class, "voucher"])->name("pay
 Route::get("admin/user", [ProfileController::class, "user"])->name("admin.user");
 Route::get("admin/users", [ProfileController::class, "profile"])->name("admin.users");
 
+
+require __DIR__.'/auth.php';

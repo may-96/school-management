@@ -6,23 +6,6 @@
       <div class="auth-form">
         <div class="card my-5">
           <div class="card-body">
-            {{-- <div class="text-center">
-              <a href="#"><img src="../assets/images/logo-dark.svg" alt="img" /></a>
-              <div class="d-grid my-3">
-                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                  <img src="../assets/images/authentication/facebook.svg" alt="img" /> <span> Sign Up with Facebook</span>
-                </button>
-                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                  <img src="../assets/images/authentication/twitter.svg" alt="img" /> <span> Sign Up with Twitter</span>
-                </button>
-                <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                  <img src="../assets/images/authentication/google.svg" alt="img" /> <span> Sign Up with Google</span>
-                </button>
-              </div>
-            </div>
-            <div class="saprator my-3">
-              <span>OR</span>
-            </div> --}}
             <h4 class="text-center f-w-500 mb-3">Sign up with your work email.</h4>
             <div class="row">
               <div class="col-sm-6">

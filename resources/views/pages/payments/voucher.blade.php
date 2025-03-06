@@ -26,7 +26,6 @@
             <!-- [ breadcrumb ] end -->
 
 
-            <!-- [ Main Content ] start -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -100,7 +99,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -117,15 +115,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-danger">Cancelled</span>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -148,7 +142,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -167,15 +160,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-info">Unpaid</span></td>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -198,7 +187,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -217,15 +205,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-danger">Cancelled</span>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -248,7 +232,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -266,15 +249,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-success">Paid</span></td>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -297,7 +276,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -316,15 +294,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-danger">Cancelled</span>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -347,7 +321,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -366,15 +339,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-info">Unpaid</span></td>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -397,7 +366,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -415,15 +383,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-danger">Cancelled</span>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -446,7 +410,6 @@
                                                 </tr>
                                                 <tr>
                                                     <td>398745687</td>
-                                                    {{-- <td>RN-001</td> --}}
                                                     <td>
                                                         <div class="row align-items-center">
                                                             <div class="col-auto pe-0">
@@ -464,15 +427,11 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- <td>cash</td> --}}
                                                     <td>7/11/2022</td>
                                                     <td>3000 Pkr</td>
                                                     <td><span class="badge bg-light-success">Paid</span></td>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -502,11 +461,8 @@
                     </div>
                 </div>
             </div>
-            <!-- [ Main Content ] end -->
         </div>
     </div>
-
-    <!-- [ Main Content ] end -->
 
     {{-- student add payment model --}}
 
