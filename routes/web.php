@@ -29,8 +29,9 @@ Route::get("/", [LandingController::class, "home"])->name("landing.home");
 // auth
 Route::get("auth/forget", [AuthController::class, "forget"])->name("auth.forget");
 Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
-Route::get("auth/register", [AuthController::class, "register"])->name("auth.register");
+Route::get("auth/register", [AuthController::class, "registers"])->name("auth.register");
 Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
+Route::get("auth/reset", [AuthController::class, "create"])->name("auth.reset");
 
 // mainpage
 Route::get("dashboard", [DashboardController::class, "show"])->name("dashboard");
@@ -48,7 +49,6 @@ Route::get("student/index", [StudentController::class, "index"])->name("student.
 Route::get("student/profile", [StudentController::class, "show"])->name("student.profile");
 
 // payments
-// Route::get("payments/create", [PaymentController::class, "create"])->name("payment.create");
 Route::get("payments/edit", [PaymentController::class, "edit"])->name("payment.edit");
 Route::get("payments/show", [PaymentController::class, "show"])->name("payment.show");
 Route::get("payments/list", [PaymentController::class, "list"])->name("payment.list");
