@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <a href="{{ route('school.dashboard') }}"><img src="../assets/images/user/saqib.jpg" 
+                            <a href="{{ route('dashboard') }}"><img src="../assets/images/user/saqib.jpg" 
                                     alt="user" class="user-avtar wid-50 rounded-circle" />
                                 </a>
                         </div>
@@ -21,7 +21,7 @@
                     <label data-i18n="Navigation">Navigation</label>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('school.dashboard') }}" class="pc-link">
+                    <a href="{{ route('dashboard') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-status-up"></use>
@@ -71,16 +71,22 @@
                         <span class="pc-mtext" data-i18n="Vouchers">Vouchers</span><span class="pc-arrow"></span>
                     </a>
                 </li>
-                <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('admin.users') }}" class="pc-link">
-                        <span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-user-square"></use>
-                            </svg>
-                        </span>
-                        <span class="pc-mtext" data-i18n="Users">Users</span><span class="pc-arrow"></span>
-                    </a>
-                </li>
+                @auth
+                    @if (auth()->user()->role == "admin")
+                    <li class="pc-item pc-hasmenu">
+                        <a href="{{ route('admin.users') }}" class="pc-link">
+                            <span class="pc-micon">
+                                <svg class="pc-icon">
+                                    <use xlink:href="#custom-user-square"></use>
+                                </svg>
+                            </span>
+                            <span class="pc-mtext" data-i18n="Users">Users</span><span class="pc-arrow"></span>
+                        </a>
+                    </li>
+                    @endif
+                @endauth
+                
+                
             </ul>
         </div>
     </div>

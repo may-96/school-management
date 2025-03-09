@@ -49,17 +49,12 @@
                                                     </div>
                                                     <div class="col justify-content-center">
                                                         <h5 class="mb-0">Saqib Din</h5>
-                                                        {{-- <p class="text-muted f-12 mb-0">din.97legend@gmail.com</p> --}}
                                                     </div>
                                                 </div>
                                             </td>
                                             <td><span class="badge bg-primary">Owner</span></td>
                                             <td class="text-end"><span class="badge bg-success">Joined</span></td>
                                             <td class="text-end">
-                                                {{-- <a data-bs-toggle="modal" data-bs-target="#veiw-user-modal"
-                                                    href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a> --}}
                                                 <a data-bs-toggle="modal" data-bs-target="#edit-user-modal"
                                                     href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
@@ -78,17 +73,12 @@
                                                     </div>
                                                     <div class="col justify-content-center">
                                                         <h5 class="mb-0">Saqib Din</h5>
-                                                        {{-- <p class="text-muted f-12 mb-0">heba@gmail.com</p> --}}
                                                     </div>
                                                 </div>
                                             </td>
                                             <td><span class="badge bg-light-info">Manager</span></td>
                                             <td class="text-end"><span class="badge bg-light-success">Invited</span></td>
                                             <td class="text-end">
-                                                {{-- <a data-bs-toggle="modal" data-bs-target="#veiw-user-modal"
-                                                    href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a> --}}
                                                 <a data-bs-toggle="modal" data-bs-target="#edit-user-modal"
                                                     href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>
@@ -107,17 +97,12 @@
                                                     </div>
                                                     <div class="col justify-content-center">
                                                         <h5 class="mb-0">Saqib Din</h5>
-                                                        {{-- <p class="text-muted f-12 mb-0">heba@gmail.com</p> --}}
                                                     </div>
                                                 </div>
                                             </td>
                                             <td><span class="badge bg-light-warning">Staff</span></td>
                                             <td class="text-end"><span class="badge bg-success">Joined</span></td>
                                             <td class="text-end">
-                                                {{-- <a data-bs-toggle="modal" data-bs-target="#veiw-user-modal"
-                                                    href="#" class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a> --}}
                                                 <a data-bs-toggle="modal" data-bs-target="#edit-user-modal"
                                                     href="#" class="avtar avtar-xs btn-link-secondary">
                                                     <i class="ti ti-edit f-20"></i>

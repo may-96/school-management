@@ -70,18 +70,6 @@
                                         <input type="number" class="form-control" placeholder="Enter roll no" />
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Subjects</label>
-                                        <select class="form-select">
-                                            <option>Select</option>
-                                            <option>Physics</option>
-                                            <option>Chemistry</option>
-                                            <option>Math</option>
-                                        </select>
-                                    </div>
-                                </div> --}}
-
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Class</label>
@@ -153,8 +141,6 @@
                                             placeholder="Enter Primary Mobile Number" />
                                     </div>
                                 </div>
-
-
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">Student Profile</label>

@@ -33,11 +33,6 @@
                         <div class="card-header">
                             <div class="d-sm-flex align-items-center justify-content-between">
                                 <h5 class="mb-3 mb-sm-0">Payments list</h5>
-
-                                {{-- <div>
-                            <a href="{{ route('payment.create') }}" class="btn btn-outline-secondary me-2">Student
-                                Fees</a>
-                        </div> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -100,31 +95,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1" href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-edit-payment_modal" href="#"
                                                                     class="avtar avtar-xs btn-link-secondary"><i
@@ -139,31 +113,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1" href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-edit-payment_modal" href="#"
                                                                     class="avtar avtar-xs btn-link-secondary"><i
@@ -178,31 +131,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1" href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-edit-payment_modal" href="#"
                                                                     class="avtar avtar-xs btn-link-secondary"><i
@@ -217,32 +149,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-edit-payment_modal"
                                                                     href="#"
@@ -258,32 +168,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a
                                                                     href="{{ route('payment.edit') }}"
                                                                     class="avtar avtar-xs btn-link-secondary"><i
@@ -298,32 +186,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-edit-payment_modal"
                                                                     href="#"
@@ -339,32 +205,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-edit-payment_modal"
                                                                     href="#"
@@ -380,32 +224,10 @@
                                                     <td>4567547765</td>
                                                     <td>RN-001</td>
                                                     <td>7/11/2022</td>
-                                                    {{-- <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-5.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
-                                                            </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td> --}}
                                                     <td>Easypaisa</td>
                                                     <td>3000 Pkr</td>
-                                                    {{-- <td><span class="badge bg-light-success">Paid</span></td> --}}
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal1"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-edit-payment_modal"
                                                                     href="#"
@@ -426,7 +248,6 @@
                     </div>
                 </div>
             </div>
-            <!-- [ Main Content ] end -->
         </div>
     </div>
 

@@ -15,12 +15,12 @@ class AuthController extends Controller
 
         return view("pages.auth.login", );
     }
-    public function register()
+    public function registers()
     {
 
         return view("pages.auth.register", );
     }
-    public function reset()
+    public function create()
     {
         return view("pages.auth.reset");
     }
