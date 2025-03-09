@@ -10,6 +10,10 @@ class StudentController extends Controller
     {
         return view("pages.students.create");
     }
+    public function edit()
+    {
+        return view("pages.students.edit");
+    }
     public function index()
     {
         return view("pages.students.index", );

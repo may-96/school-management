@@ -51,7 +51,8 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="avtar bg-light-primary">
-                                        <i class="ti ti-users f-24"></i>
+                                        <i class="ti ti-user f-24"></i>
+
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -71,7 +72,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="avtar bg-light-warning">
-                                        <i class="ti ti-notebook f-24"></i>
+                                        <i class="ti ti-users f-24"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -91,7 +92,8 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="avtar bg-light-success">
-                                        <i class="ti ti-eye f-24"></i>
+                                        <i class="ti ti-currency-dollar f-24"></i>
+
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -136,7 +138,7 @@
                             <p class="d-inline-flex align-items-center text-success gap-1 mb-0"> <i
                                     class="ti ti-arrow-narrow-up"></i>
                                 2.1% </p>
-                            <p class="text-muted mb-1">1-12 Dec, 2023</p>
+                            <p class="text-muted mb-1">1-30 Dec, 2024</p>
                             <div id="course-report-bar-chart"></div>
                         </div>
                     </div>
@@ -158,9 +160,9 @@
                                                     20.3%
                                                 </p>
                                             </div>
-                                            <h5 class="mb-2 mt-3">£5678.09</h5>
+                                            <h5 class="mb-2 mt-3">$5678.09</h5>
                                             <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">3</h5>
+                                                <h5 class="mb-0">122</h5>
                                                 <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
                                             </div>
                                         </div>
@@ -178,9 +180,9 @@
                                                     -8.73%
                                                 </p>
                                             </div>
-                                            <h5 class="mb-2 mt-3">£5678.09</h5>
+                                            <h5 class="mb-2 mt-3">$5678.09</h5>
                                             <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">5</h5>
+                                                <h5 class="mb-0">125</h5>
                                                 <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
                                             </div>
                                         </div>
@@ -198,9 +200,9 @@
                                                     10.73%
                                                 </p>
                                             </div>
-                                            <h5 class="mb-2 mt-3">£5678.09</h5>
+                                            <h5 class="mb-2 mt-3">$5678.09</h5>
                                             <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">20</h5>
+                                                <h5 class="mb-0">70</h5>
                                                 <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
                                             </div>
                                         </div>
@@ -218,9 +220,9 @@
                                                     -4.73%
                                                 </p>
                                             </div>
-                                            <h5 class="mb-2 mt-3">£5678.09</h5>
+                                            <h5 class="mb-2 mt-3">$5678.09</h5>
                                             <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">5</h5>
+                                                <h5 class="mb-0">55</h5>
                                                 <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
                                             </div>
                                         </div>

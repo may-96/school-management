@@ -63,11 +63,11 @@
                         </svg>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
-                        <a href="{{ route('profile.user') }}" class="dropdown-item">
+                        <a href="{{ route('admin.user') }}" class="dropdown-item">
                             <i class="ti ti-user"></i>
                             <span>User</span>
                         </a>
-                        <a href="login.php" class="dropdown-item">
+                        <a href="{{ route('auth.login') }}" class="dropdown-item">
                             <i class="ti ti-power"></i>
                             <span>Logout</span>
                         </a>

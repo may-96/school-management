@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link" />
     <script src="{{ asset('assets/js/tech-stack.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset(path: 'assets/css/plugins/animate.min.css') }}" />
 </head>
 
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
@@ -38,9 +39,11 @@
         </div>
     </div>
 
-    @if (!in_array(Route::currentRouteName(), ['auth.forget', 'auth.login', 'auth.reset', 'auth.register']))
-        @include('components.topbar')
+    @if (!in_array(Route::currentRouteName(), ['auth.forget', 'auth.login', 'auth.reset', 'auth.register', 'landing.home']))
+        
         @include('components.sidebar')
+        @include('components.topbar')
+
     @endif
 
     {{-- sidebar --}}
@@ -61,14 +64,11 @@
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('assets/js/elements/ac-alert.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/widgets/course-report-bar-chart.js') }}"></script>
-    <script src="{{ asset('assets/js/widgets/student-states-chart.js') }}"></script>
     <script src="{{ asset('assets/js/widgets/invoice-chart.js') }}"></script>
-    <script src="{{ asset(path: 'assets/js/plugins/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ asset(path: 'assets/js/elements/ac-alert.js') }}"></script>
-    {{-- <script src="{{ asset('assets/js/plugins/simple-datatables.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/js/admin/invoice-list.js') }}"></script> --}}
 
 
 
