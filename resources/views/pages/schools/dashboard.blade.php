@@ -1,4 +1,4 @@
-@extends('layouts.master')
+{{-- @extends('layouts.master')
 
 @section('content')
     <div class="pc-container">
@@ -236,4 +236,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}

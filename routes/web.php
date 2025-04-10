@@ -2,11 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-
-Route::get('/', function () {
-    return view('welcome');
-=======
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -18,9 +13,9 @@ use App\Http\Controllers\PaymentController;
 //     return view('welcome');
 // });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,11 +27,11 @@ Route::middleware('auth')->group(function () {
 Route::get("/", [LandingController::class, "home"])->name("landing.home");
 
 // auth
-// Route::get("auth/forget", [AuthController::class, "forget"])->name("auth.forget");
-// Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
-// Route::get("auth/register", [AuthController::class, "registers"])->name("auth.register");
-// Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
-// Route::get("auth/reset", [AuthController::class, "create"])->name("auth.reset");
+Route::get("auth/forget", [AuthController::class, "forget"])->name("auth.forget");
+Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
+Route::get("auth/register", [AuthController::class, "registers"])->name("auth.register");
+Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
+Route::get("auth/reset", [AuthController::class, "create"])->name("auth.reset");
 
 // mainpage
 
@@ -65,5 +60,4 @@ Route::get("admin/user", [ProfileController::class, "user"])->name("admin.user")
 Route::get("admin/users", [ProfileController::class, "profile"])->name("admin.users");
 
 
->>>>>>> 68df1cf14773ce639ce5cafc4ce5cafb112b316c
 require __DIR__.'/auth.php';
