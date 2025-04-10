@@ -21,20 +21,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get("dashboard", [DashboardController::class, "show"])->name("dashboard");
 });
 
 // landing page
 Route::get("/", [LandingController::class, "home"])->name("landing.home");
 
 // auth
-Route::get("auth/forget", [AuthController::class, "forget"])->name("auth.forget");
-Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
-Route::get("auth/register", [AuthController::class, "registers"])->name("auth.register");
-Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
-Route::get("auth/reset", [AuthController::class, "create"])->name("auth.reset");
+// Route::get("auth/forget", [AuthController::class, "forget"])->name("auth.forget");
+// Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
+// Route::get("auth/register", [AuthController::class, "registers"])->name("auth.register");
+// Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
+// Route::get("auth/reset", [AuthController::class, "create"])->name("auth.reset");
 
 // mainpage
-Route::get("dashboard", [DashboardController::class, "show"])->name("dashboard");
+
 
 // teachers
 Route::get("teacher/create", [TeacherController::class, "create"])->name("teacher.create");

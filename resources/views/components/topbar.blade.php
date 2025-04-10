@@ -67,10 +67,13 @@
                             <i class="ti ti-user"></i>
                             <span>User</span>
                         </a>
-                        <a href="{{ route('auth.login') }}" class="dropdown-item">
-                            <i class="ti ti-power"></i>
-                            <span>Logout</span>
-                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item" style="background: none; border: none; width: 100%; text-align: left;">
+                                <i class="ti ti-power"></i>
+                                <span>Logout</span>
+                            </button>
+                        </form>
                     </div>
                 </li>
             </ul>

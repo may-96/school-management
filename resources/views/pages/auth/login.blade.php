@@ -31,7 +31,7 @@
                         <label class="form-check-label text-muted" for="remember_me">Remember me?</label>
                     </div>
                     <h6 class="text-secondary f-w-400 mb-0">
-                        <a href="{{ route('auth.forget') }}"> Forgot Password? </a>
+                        <a href="{{ route('password.request') }}"> Forgot Password? </a>
                     </h6>
                 </div>
 

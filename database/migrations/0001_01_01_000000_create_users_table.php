@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status')->default('inactive')->comment('active, inactive');
-            $table->string('role')->default('member');  
+            $table->string('role')->default('member')->comment('admin, member');  
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
