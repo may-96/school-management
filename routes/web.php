@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
+
+Route::get('/', function () {
+    return view('welcome');
+=======
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -21,7 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get("dashboard", [DashboardController::class, "show"])->name("dashboard");
 });
 
 // landing page
@@ -61,4 +65,5 @@ Route::get("admin/user", [ProfileController::class, "user"])->name("admin.user")
 Route::get("admin/users", [ProfileController::class, "profile"])->name("admin.users");
 
 
+>>>>>>> 68df1cf14773ce639ce5cafc4ce5cafb112b316c
 require __DIR__.'/auth.php';

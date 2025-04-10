@@ -1077,6 +1077,7 @@
                                     <div class="col-lg-8">
                                         <input type="date" class="form-control" />
                                     </div>
+                                    
                                 </div>
                                 <div class="mb-3 row me-0">
                                     <label class="col-lg-4 col-form-label"> Refrence No
