@@ -27,11 +27,10 @@ Route::middleware('auth')->group(function () {
 Route::get("/", [LandingController::class, "home"])->name("landing.home");
 
 // auth
-Route::get("auth/forget", [AuthController::class, "forget"])->name("auth.forget");
+Route::get("auth/forgot", [AuthController::class, "create"])->name("auth.forgot");
 Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
 Route::get("auth/register", [AuthController::class, "registers"])->name("auth.register");
 Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
-Route::get("auth/reset", [AuthController::class, "create"])->name("auth.reset");
 
 // mainpage
 

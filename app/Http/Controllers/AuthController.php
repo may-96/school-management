@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function forget()
+    public function create()
     {
-        return view("pages.auth.forget");
+        return view("pages.auth.forgot");
     }
     public function login()
     {
@@ -20,7 +20,7 @@ class AuthController extends Controller
 
         return view("pages.auth.register", );
     }
-    public function create()
+    public function reset()
     {
         return view("pages.auth.reset");
     }

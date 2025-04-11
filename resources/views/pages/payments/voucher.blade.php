@@ -74,9 +74,6 @@
                                                     <td><span class="badge bg-light-success">Paid</span></td>
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
-                                                            {{-- <li class="list-inline-item"
-                                    ><a href="{{ route('payment.show') }}" class="avtar avtar-xs btn-link-secondary"><i class="ti ti-eye f-20"></i></a
-                                  ></li> --}}
                                                             <li class="list-inline-item"><a data-bs-toggle="modal"
                                                                     data-bs-target="#student-add-payment_modal"
                                                                     href="#"
@@ -708,4 +705,5 @@
         window.dt = new DataTable('#pc-dt-simple-3');
         window.dt = new DataTable('#pc-dt-simple-4');
     </script>
+    
 @endsection

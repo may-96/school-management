@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <title>School Management System</title>
     <meta charset="utf-8" />
@@ -11,10 +10,8 @@
     <meta name="keywords"
         content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
     <meta name="author" content="Phoenixcoded" />
-
     {{-- Icon School Management System --}}
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon" />
-
     {{-- [CSS Files] --}}
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/inter/inter.css') }}" id="main-font-link" />
@@ -28,7 +25,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset(path: 'assets/css/plugins/animate.min.css') }}" />
 </head>
-
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
     data-pc-theme_contrast="" data-pc-theme="light">
 
@@ -46,15 +42,8 @@
 
     @endif
 
-    {{-- sidebar --}}
-    {{-- @include('components.sidebar') --}}
-
-    {{-- topbar --}}
-    {{-- @include('components.topbar') --}}
-
     {{-- main contents --}}
     @yield('content')
-
 
     {{-- js files --}}
     <script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
@@ -70,8 +59,5 @@
     <script src="{{ asset('assets/js/widgets/course-report-bar-chart.js') }}"></script>
     <script src="{{ asset('assets/js/widgets/invoice-chart.js') }}"></script>
 
-
-
 </body>
-
 </html>
