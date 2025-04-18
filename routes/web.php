@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+// use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PaymentController;
@@ -23,14 +23,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 // landing page
 Route::get("/", [LandingController::class, "home"])->name("landing.home");
 
-// auth
-Route::get("auth/forgot", [AuthController::class, "create"])->name("auth.forgot");
-Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
-Route::get("auth/register", [AuthController::class, "registers"])->name("auth.register");
-Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset");
+// Auth Routes
+// Route::get("auth/forgot", [AuthController::class, "forgot"])->name("auth.forgot-password");
+// Route::get("auth/login", [AuthController::class, "login"])->name("auth.login");
+// Route::get("auth/register", [AuthController::class, "register"])->name("auth.register");
+// Route::get("auth/reset", [AuthController::class, "reset"])->name("auth.reset-password");
+
+
 
 // mainpage
 

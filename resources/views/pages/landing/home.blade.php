@@ -16,8 +16,8 @@
                   <h3 class="text-center mb-3">Welcome to the School</h3>
                   <p class="mb-4">Login or Sign Up</p>
                   <div class="d-grid my-3">
-                    <a href="{{ route('auth.login') }}" class="btn mt-2 btn-light-primary bg-light text-muted"><span> Login</span></a>
-                    <a href="{{ route('auth.register') }}" class="btn mt-2 btn-light-primary bg-light text-muted"><span> Sign Up</span></a>
+                    <a href="{{ route('login') }}" class="btn mt-2 btn-light-primary bg-light text-muted"><span> Login</span></a>
+                    <a href="{{ route('register') }}" class="btn mt-2 btn-light-primary bg-light text-muted"><span> Sign Up</span></a>
                   </div>
                 </div>
               </div>

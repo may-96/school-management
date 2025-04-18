@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    @if (!in_array(Route::currentRouteName(), ['auth.forget', 'auth.login', 'auth.reset', 'auth.register', 'landing.home']))
+    @if (!in_array(Route::currentRouteName(), ['password.request', 'login', 'password.reset', 'register', 'landing.home']))
         
         @include('components.sidebar')
         @include('components.topbar')
