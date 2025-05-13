@@ -8,7 +8,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Student Fees</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Detail</li>
                             </ul>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="d-print-none card mb-3">
@@ -84,7 +84,6 @@
                                                     <td>Tuition Fees</td>
                                                     <td class="text-end">3000 Pkr</td>
                                                 </tr>
-
                                             </tbody>
                                         </table>
                                     </div>

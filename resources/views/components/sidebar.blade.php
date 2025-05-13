@@ -5,13 +5,25 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <a href="{{ route('dashboard') }}"><img src="../assets/images/user/saqib.jpg" 
-                                    alt="user" class="user-avtar wid-50 rounded-circle" />
-                                </a>
+                            <a href="{{ route('dashboard') }}">
+                                @if (Auth::user()->profile_photo_path)
+                                    <img src="{{ Auth::user()->profile_photo_path ? asset('storage/' . Auth::user()->profile_photo_path) : asset('assets/images/user/default.jpg') }}"
+                                        alt="user" class="user-avtar rounded-circle"
+                                        style="width: 50px; height: 50px;" />
+                                @else
+                                    <img src="{{ asset('assets/images/user/avatar-1.jpg') }}" alt="user"
+                                        class="user-avtar rounded-circle" style="width: 50px; height: 50px;" />
+                                @endif
+                            </a>
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0" data-i18n="Saqib Din">Saqib Din</h6>
-                            <small data-i18n="Administrator">Administrator</small>
+                            <h6 class="mb-0">
+                                {{ Auth::user()->name ?? (Auth::user()->first_name . ' ' . Auth::user()->last_name ?? 'No name') }}
+                            </h6>
+
+                            <small data-i18n="{{ Auth::user()->role }}">
+                                {{ ucfirst(Auth::user()->role) }}
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -34,9 +46,9 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('teacher.index') }}" class="pc-link">
                         <span class="pc-micon">
-                              <svg class="pc-icon">
+                            <svg class="pc-icon">
                                 <use xlink:href="#custom-user"></use>
-                              </svg>
+                            </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Teachers">Teachers</span>
                     </a>
@@ -46,7 +58,7 @@
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-user-add"></use>
-                              </svg>
+                            </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Students">Students</span>
                     </a>
@@ -56,7 +68,7 @@
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-dollar-square"></use>
-                              </svg>
+                            </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Payments">Payments</span><span class="pc-arrow"></span>
                     </a>
@@ -66,27 +78,25 @@
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-keyboard"></use>
-                              </svg>
+                            </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Vouchers">Vouchers</span><span class="pc-arrow"></span>
                     </a>
                 </li>
                 @auth
-                    @if (auth()->user()->role == "admin")
-                    <li class="pc-item pc-hasmenu">
-                        <a href="{{ route('admin.users') }}" class="pc-link">
-                            <span class="pc-micon">
-                                <svg class="pc-icon">
-                                    <use xlink:href="#custom-user-square"></use>
-                                </svg>
-                            </span>
-                            <span class="pc-mtext" data-i18n="Users">Users</span><span class="pc-arrow"></span>
-                        </a>
-                    </li>
+                    @if (auth()->user()->role == 'admin')
+                        <li class="pc-item pc-hasmenu">
+                            <a href="{{ route('admin.users') }}" class="pc-link">
+                                <span class="pc-micon">
+                                    <svg class="pc-icon">
+                                        <use xlink:href="#custom-user-square"></use>
+                                    </svg>
+                                </span>
+                                <span class="pc-mtext" data-i18n="Users">Users</span><span class="pc-arrow"></span>
+                            </a>
+                        </li>
                     @endif
                 @endauth
-                
-                
             </ul>
         </div>
     </div>

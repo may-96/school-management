@@ -8,9 +8,9 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('teacher.index') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Teacher List</li>
+                                <li class="breadcrumb-item" aria-current="page">Teacher</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
@@ -21,6 +21,29 @@
                     </div>
                 </div>
             </div>
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        let alert = document.getElementById('success-alert');
+                        if (alert) {
+                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                            bsAlert.close();
+                        }
+                    }, 3000);
+                </script>
+
+                @php
+                    // Clear the session manually after showing it once
+                    session()->forget('success');
+                @endphp
+            @endif
+
+
 
             <div class="row">
                 <div class="col-12">
@@ -35,7 +58,13 @@
                         </div>
                         <div class="card-body pt-3">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="pc-dt-simple">
+
+                                {{-- Yajra DataTable --}}
+
+                                {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
+
+
+                                {{-- <table class="table table-hover" id="pc-dt-simple">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -47,599 +76,66 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <a href="{{ route('teacher.profile') }}">
-                                                            <img src="../assets/images/user/avatar-1.jpg" alt="user image"
-                                                                class="img-radius wid-40" />
+                                        @foreach ($teachers as $teacher)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0">
+                                                            <a href="{{ route('teacher.show', $teacher->id) }}">
+                                                                @if ($teacher->profile_image)
+                                                                    <img src="{{ asset('storage/teachers/' . $teacher->profile_image) }}"
+                                                                        alt="img" class="img-fluid rounded-circle"
+                                                                        style="height:40px; width:40px;" />
+                                                                @else
+                                                                    <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
+                                                                        alt="img" class="img-fluid rounded-circle"
+                                                                        style="height:40px; width:40px;" />
+                                                                @endif
+                                                            </a>
+                                                        </div>
+                                                        <div class="flex-grow-1 ms-3">
+                                                            <h6 class="mb-0">{{ $teacher->first_name }}
+                                                                {{ $teacher->last_name }}</h6>
+                                                            <small
+                                                                class="text-truncate w-100 text-muted">{{ $teacher->email }}</small>
+                                                        </div>
                                                     </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Airi Satou</h6>
+                                                </td>
+                                                <td>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $teacher->department }}</h6>
                                                         <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
+                                                            class="text-truncate w-100 text-muted">{{ $teacher->class }}</small>
                                                     </div>
+                                                </td>
+                                                <td>{{ $teacher->education }}</td>
+                                                <td>{{ $teacher->mobile_number }}</td>
+                                                <td>{{ $teacher->joining_date }}</td>
+                                                <td>
+                                                    <a href="{{ route('teacher.show', $teacher->id) }}"
+                                                        class="avtar avtar-xs btn-link-secondary">
+                                                        <i class="ti ti-eye f-20"></i>
                                                     </a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/09/12</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.edit') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-2.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/12/24</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-3.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/09/19</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-4.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-5.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Airi Satou</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/09/12</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-6.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/12/24</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-7.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/09/19</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-8.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-9.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-10.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Airi Satou</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/09/12</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-2.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/12/24</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-3.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/09/19</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-4.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Brielle Williamson</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/08/22</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-5.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Airi Satou</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/09/12</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-6.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Ashton Cox</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.COM., M.COM.</td>
-                                            <td>0316 8336096</td>
-                                            <td>2023/12/24</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="../assets/images/user/avatar-7.jpg" alt="user image"
-                                                            class="img-radius wid-40" />
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        <h6 class="mb-0">Bradley Greer</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">din.97legend@gmail.com</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">
-                                                    <h6 class="mb-0">Developer</h6>
-                                                    <small class="text-truncate w-100 text-muted">10th</small>
-                                                </div>
-                                            </td>
-                                            <td>B.A, B.C.A</td>
-                                            <td>0316 8336096</td>
-                                            <td>2022/09/19</td>
-                                            <td>
-                                                <a href="{{ route('teacher.profile') }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-eye f-20"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.create', ['mode' => 'edit']) }}"
-                                                    class="avtar avtar-xs btn-link-secondary">
-                                                    <i class="ti ti-edit f-20"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                        class="ti ti-trash f-20"></i></a>
-                                            </td>
-                                        </tr>
+                                                    <a href="{{ route('teacher.edit', $teacher->id) }}"
+                                                        class="avtar avtar-xs btn-link-secondary">
+                                                        <i class="ti ti-edit f-20"></i>
+                                                    </a>
+                                                    <form id="delete-form-{{ $teacher->id }}"
+                                                        action="{{ route('teacher.destroy', $teacher->id) }}"
+                                                        method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                                                        data-id="{{ $teacher->id }}">
+                                                        <i class="ti ti-trash f-20"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
-                                </table>
+                                </table> --}}
+
                             </div>
                         </div>
                     </div>
@@ -648,11 +144,16 @@
         </div>
     </div>
 
-    <script type="module">
+    {{-- <script type="module">
         import {
             DataTable
         } from '../assets/js/plugins/module.js';
         window.dt = new DataTable('#pc-dt-simple');
-    </script>
+    </script> --}}
 
+
+    @push('scripts')
+        {!! $dataTable->scripts() !!}
+    @endpush
+    
 @endsection

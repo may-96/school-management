@@ -26,6 +26,8 @@
         </div>
         <div class="ms-auto">
             <ul class="list-unstyled">
+
+                {{-- Dark mode and light mode  --}}
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">

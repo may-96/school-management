@@ -8,7 +8,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('student.index') }}">Home</a></li>
+                               <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Student</li>
                             </ul>
@@ -31,133 +31,123 @@
                         <div class="card-header">
                             <h5 class="mb-0">Basic Information</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        <form action="{{ route('student.update', $student->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name" />
+                                        <input type="text" class="form-control" name="first_name" value="{{ $student->first_name }}" placeholder="Enter first name" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Last Name -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter last name" />
+                                        <input type="text" class="form-control" name="last_name" value="{{ $student->last_name }}" placeholder="Enter last name" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Date of Birth -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" />
+                                        <input type="date" class="form-control" name="dob" value="{{ $student->dob }}" required>
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Registration Date -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Registration Date</label>
-                                        <input type="date" class="form-control" />
+                                        <input type="date" class="form-control" name="registration_date" value="{{ $student->registration_date }}" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Admission No -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Admission No</label>
-                                        <input type="number" class="form-control" placeholder="Enter ID number" />
+                                        <input type="text" class="form-control" name="admission_no" value="{{ $student->admission_no }}" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Roll No -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Roll No</label>
-                                        <input type="number" class="form-control" placeholder="Enter roll no" />
+                                        <input type="text" class="form-control" name="roll_no" value="{{ $student->roll_no }}" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Class -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Class</label>
-                                        <select class="form-select" aria-placeholder="Select">
-                                            <option>Select</option>
-                                            <option>K.G</option>
-                                            <option>Montesori</option>
-                                            <option>Nursery</option>
-                                            <option>Prep</option>
-                                            <option>1st</option>
-                                            <option>2nd</option>
-                                            <option>3rd</option>
-                                            <option>4th</option>
-                                            <option>5th</option>
-                                            <option>6th</option>
-                                            <option>7th</option>
-                                            <option>8th</option>
-                                            <option>9th</option>
-                                            <option>10th</option>
-                                            <option>1st Year</option>
-                                            <option>2nd Year</option>
+                                        <select class="form-select" name="class" required>
+                                            <option disabled>Select</option>
+                                            @foreach(['K.G','Montesori','Nursery','Prep','1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','1st Year','2nd Year'] as $class)
+                                                <option value="{{ $class }}" {{ $student->class == $class ? 'selected' : '' }}>{{ $class }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Section -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Section</label>
-                                        <input type="text" class="form-control" placeholder="Enter Section" />
+                                        <input type="text" class="form-control" name="section" value="{{ $student->section }}" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Gender -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Gender</label>
-                                        <select class="form-select" aria-placeholder="Select">
-                                            <option>Select</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
+                                        <select class="form-select" name="gender" required>
+                                            <option disabled>Select</option>
+                                            @foreach(['Male','Female','Other'] as $gender)
+                                                <option value="{{ $gender }}" {{ $student->gender == $gender ? 'selected' : '' }}>{{ $gender }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Status -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
-                                        <select class="form-select" aria-placeholder="Select">
-                                            <option>Select</option>
-                                            <option>Active</option>
-                                            <option>Inactive</option>
+                                        <select class="form-select" name="status" required>
+                                            <option disabled>Select</option>
+                                            <option value="Active" {{ $student->status == 'Active' ? 'selected' : '' }}>Active</option>
+                                            <option value="Inactive" {{ $student->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Parent Name -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Parents Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter parents name" />
+                                        <input type="text" class="form-control" name="parents_name" value="{{ $student->parents_name }}" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Parent Mobile -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Parents Mobile Number</label>
-                                        <input type="number" class="form-control"
-                                            placeholder="Enter parents mobile number" />
+                                        <input type="number" class="form-control" name="parents_mobile" value="{{ $student->parents_mobile }}" required>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Secondary Mobile -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Secondary Mobile Number</label>
-                                        <input type="email" class="form-control"
-                                            placeholder="Enter Primary Mobile Number" />
+                                        <input type="number" class="form-control" name="secondary_mobile" value="{{ $student->secondary_mobile }}">
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        
+                                    <!-- Profile Photo -->
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Student Profile</label>
-                                        <input class="form-control" type="file" />
+                                        <input class="form-control" type="file" name="profile_photo" accept="image/*">
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
+                        
+                                    <!-- Address -->
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">Address</label>
-                                        <textarea class="form-control" rows="2" placeholder="Enter address"></textarea>
+                                        <textarea class="form-control" name="address" rows="2" required>{{ $student->address }}</textarea>
                                     </div>
-                                </div>
-                                <div class="col-md-12 text-end">
-                                    <button class="btn btn-primary">Submit</button>
+                        
+                                    <!-- Submit Button -->
+                                    <div class="col-md-12 text-end">
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+                        
                     </div>
                 </div>
             </div>

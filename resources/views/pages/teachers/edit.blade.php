@@ -8,10 +8,11 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('teacher.create') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Teacher</li>
                             </ul>
+
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
@@ -23,112 +24,125 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="mb-0">Basic Information</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name" />
+                        <form method="POST" action="{{ route('teacher.update', $teacher->id) }}" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" name="first_name" class="form-control"
+                                                placeholder="Enter first name" value="{{ $teacher->first_name }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter last name" />
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" name="last_name" class="form-control"
+                                                placeholder="Enter last name" value="{{ $teacher->last_name }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" placeholder="Enter email" />
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="Enter email" value="{{ $teacher->email }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" />
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Date of Birth</label>
+                                            <input type="date" name="date_of_birth" class="form-control"
+                                                value="{{ $teacher->date_of_birth }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Joining Date</label>
-                                        <input type="date" class="form-control" />
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Joining Date</label>
+                                            <input type="date" name="joining_date" class="form-control"
+                                                value="{{ $teacher->joining_date }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Mobile Number</label>
-                                        <input type="number" class="form-control" placeholder="Enter Mobile number" />
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Mobile Number</label>
+                                            <input type="number" name="mobile_number" class="form-control"
+                                                placeholder="Enter Mobile number" value="{{ $teacher->mobile_number }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Gender</label>
-                                        <select class="form-select">
-                                            <option>Female</option>
-                                            <option>Male</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <select name="gender" class="form-select">
+                                                <option>Select</option>
+                                                <option {{ $teacher->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                                                <option {{ $teacher->gender == 'Female' ? 'selected' : '' }}>Female
+                                                </option>
+                                                {{-- <option {{ $teacher->gender == 'Other' ? 'selected' : '' }}>Other</option> --}}
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Class</label>
-                                        <select class="form-select">
-                                            <option>Select</option>
-                                            <option>Montesori</option>
-                                            <option>K.G</option>
-                                            <option>Nursery</option>
-                                            <option>Prep</option>
-                                            <option>1st</option>
-                                            <option>2nd</option>
-                                            <option>3rd</option>
-                                            <option>4th</option>
-                                            <option>5th</option>
-                                            <option>6th</option>
-                                            <option>7th</option>
-                                            <option>8th</option>
-                                            <option>9th</option>
-                                            <option>10th</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Class</label>
+                                            <select name="class" class="form-select">
+                                                <option>Select</option>
+                                                @foreach (['Montesori', 'K.G', 'Nursery', 'Prep', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] as $class)
+                                                    <option {{ $teacher->class == $class ? 'selected' : '' }}>
+                                                        {{ $class }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Department</label>
-                                        <select class="form-select">
-                                            <option>Developer</option>
-                                            <option>Javascript Developer</option>
-                                            <option>Frontend Developer</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Department</label>
+                                            <select name="department" class="form-select">
+                                                <option {{ $teacher->department == 'Developer' ? 'selected' : '' }}>
+                                                    Developer</option>
+                                                <option
+                                                    {{ $teacher->department == 'Javascript Developer' ? 'selected' : '' }}>
+                                                    Javascript Developer</option>
+                                                <option
+                                                    {{ $teacher->department == 'Frontend Developer' ? 'selected' : '' }}>
+                                                    Frontend Developer</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Education</label>
-                                        <input type="text" class="form-control" placeholder="Education" />
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Education</label>
+                                            <input type="text" name="education" class="form-control"
+                                                placeholder="Education" value="{{ $teacher->education }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Teacher Profile</label>
-                                        <input class="form-control" type="file" />
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Teacher Profile</label>
+                                            <input type="file" name="profile_photo" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 text-end">
-                                    <button class="btn btn-primary">Submit</button>
+                                    @error('profile_photo')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                    <div class="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

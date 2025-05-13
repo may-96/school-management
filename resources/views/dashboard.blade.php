@@ -21,6 +21,25 @@
                     </div>
                 </div>
             </div>
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-4 mx-4" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const alert = document.querySelector('.alert-dismissible');
+                        if (alert) {
+                            setTimeout(() => {
+                                const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                                bsAlert.close();
+                            }, 2000);
+                        }
+                    });
+                </script>
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="card welcome-banner bg-blue-800">
@@ -38,7 +57,7 @@
                                 <div class="col-sm-6 text-center">
                                     <div class="img-welcome-banner">
                                         <img src="../assets/images/widget/welcome-banner.png" alt="img"
-                                            class="img-fluid" />
+                                            class="img-fluid" style="height:auto;" />
                                     </div>
                                 </div>
                             </div>
@@ -58,10 +77,11 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Total Teachers</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">400+</h4>
-                                        <span class="text-success fw-medium">30.6%</span>
+                                        <h4 class="mb-0">{{ $totalTeachers }}</h4>
+                                        {{-- <span class="text-success fw-medium">30.6%</span> optional percentage --}}
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -78,10 +98,11 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Total Students</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">520+</h4>
-                                        <span class="text-warning fw-medium">30.6%</span>
+                                        <h4 class="mb-0">{{ $totalStudents }}</h4>
+                                        {{-- <span class="text-primary fw-medium">12.4%</span> optional --}}
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

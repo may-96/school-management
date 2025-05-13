@@ -8,13 +8,13 @@
                     <div class="card-body">
                         <h4 class="text-center f-w-500 mb-3">Sign up with your work email.</h4>
 
-                        <!-- Register Form -->
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required />
+                                        <input type="text" class="form-control" name="first_name"
+                                            placeholder="First Name" value="{{ old('first_name') }}" required />
                                         @error('first_name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -23,14 +23,15 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required />
+                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name"
+                                            value="{{ old('last_name') }}" required />
                                         @error('last_name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
 
                                     </div>
                                 </div>
-                             
+
                             </div>
 
                             <div class="mb-3">
@@ -58,17 +59,18 @@
                             </div>
 
                             <div class="d-flex mt-1 justify-content-between">
-                    <div class="form-check">
-                        <input class="form-check-input input-primary" type="checkbox" id="terms" name="terms" required />
-                        <label class="form-check-label text-muted" for="terms">I agree to all the Terms & Conditions</label>
-                    </div>
-                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input input-primary" type="checkbox" id="terms"
+                                        name="terms" required />
+                                    <label class="form-check-label text-muted" for="terms">I agree to all the Terms &
+                                        Conditions</label>
+                                </div>
+                            </div>
 
                             <div class="d-grid mt-4">
                                 <button type="submit" class="btn btn-primary">Sign up</button>
                             </div>
                         </form>
-                        <!-- End Register Form -->
 
                         <div class="d-flex justify-content-between align-items-end mt-4">
                             <h6 class="f-w-500 mb-0">Already have an Account?</h6>

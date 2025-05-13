@@ -124,28 +124,8 @@
     
         event.preventDefault();
     
-        // Find the closest modal in which the button was clicked
-        let modal = clickedElement.closest(".modal");
+        let teacherId = clickedElement.getAttribute("data-id");
     
-        if (modal) {
-            let bsModal = bootstrap.Modal.getInstance(modal) || new bootstrap.Modal(modal);
-            bsModal.hide();
-    
-            // Wait until the modal is fully hidden before showing Swal
-            modal.addEventListener(
-                "hidden.bs.modal",
-                function () {
-                    showSwalConfirmation();
-                },
-                { once: true }
-            );
-        } else {
-            console.error("Modal not found for clicked element:", clickedElement);
-            showSwalConfirmation(); // If no modal found, still show Swal
-        }
-    });
-    
-    function showSwalConfirmation() {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "btn btn-success",
@@ -154,27 +134,26 @@
             buttonsStyling: false,
         });
     
-        swalWithBootstrapButtons
-            .fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: true,
-            })
-            .then((result) => {
-                if (result.isConfirmed) {
-                    console.log("Deleted Successfully!");
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit the form
+                const form = document.getElementById("delete-form-" + teacherId);
+                if (form) {
+                    form.submit();
                 } else {
-                    console.log("Cancelled");
+                    console.error("Delete form not found for ID:", teacherId);
                 }
-            });
-    }
-    
-    
-    
+            }
+        });
+    });
     
     
 

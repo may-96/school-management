@@ -10,7 +10,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('payment.list') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Payment</a></li>
                                 <li class="breadcrumb-item" aria-current="page">List</li>
                             </ul>
@@ -152,7 +152,7 @@
                                                     <td class="text-end">
                                                         <ul class="list-inline mb-0">
                                                             <li class="list-inline-item"><a
-                                                                    href="{{ route('payment.edit') }}"
+                                                                    href="#"
                                                                     class="avtar avtar-xs btn-link-secondary"><i
                                                                         class="ti ti-edit f-20"></i></a></li>
                                                             <li class="list-inline-item"> <a href="#"

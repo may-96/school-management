@@ -8,9 +8,9 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('student.profile') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0)">Teachers</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Teacher Profile</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Teacher</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
@@ -47,14 +47,13 @@
                                         <div class="card-body">
                                             <div class="col-sm-12 text-start mb-3">
                                                 <div class="user-upload wid-75">
-                                                    <img src="../assets/images/user/avatar-1.jpg" alt="img"
-                                                        class="img-fluid" />
-                                                    <label for="uplfile" class="img-avtar-upload">
-                                                        <i class="ti ti-camera f-24 mb-1"></i>
-                                                        <span>Upload</span>
-                                                    </label>
-                                                    <input type="file" id="uplfile" class="d-none" />
-
+                                                    @if ($teacher->profile_image)
+                                                        <img src="{{ asset('storage/teachers/' . $teacher->profile_image) }}"
+                                                            alt="img" class="img-fluid" />
+                                                    @else
+                                                        <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
+                                                            alt="img" class="img-fluid" />
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -62,12 +61,12 @@
                                                 <li class="list-group-item px-0 pt-0">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <p class="mb-1 text-muted">Full Name</p>
-                                                            <p class="mb-0">Saqib Din</p>
+                                                            <p class="mb-1 text-muted">First Name</p>
+                                                            <p class="mb-0">{{ $teacher->first_name }}</p>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <p class="mb-1 text-muted">Father Name</p>
-                                                            <p class="mb-0">Muhammad Khan</p>
+                                                            <p class="mb-1 text-muted">Last Name</p>
+                                                            <p class="mb-0"> {{ $teacher->last_name }}</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -75,55 +74,53 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Joining Date</p>
-                                                            <p class="mb-0">07-03-2003</p>
+                                                            <p class="mb-0">
+                                                                {{ $teacher->joining_date ?? 'Not Available' }}</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Date of Birth</p>
-                                                            <p class="mb-0">07-03-2003</p>
+                                                            <p class="mb-0">
+                                                                {{ $teacher->date_of_birth ?? 'Not Available' }}</p>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item px-0">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <p class="mb-1 text-muted">Department / Class</p>
-                                                            <p class="mb-0">Laravel Developer / 12th</p>
+                                                            <p class="mb-1 text-muted">Department</p>
+                                                            <p class="mb-0">{{ $teacher->department }}</p>
                                                         </div>
+                                                        <div class="col-md-6">
+                                                            <p class="mb-1 text-muted">Class</p>
+                                                            <p class="mb-0">{{ $teacher->class ?? 'Not Available' }}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item px-0">
+                                                    <div class="row">
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Educations</p>
-                                                            <p class="mb-0">Bachelor In Science</p>
+                                                            <p class="mb-0">{{ $teacher->education ?? 'Not Available' }}
+                                                            </p>
                                                         </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item px-0">
-                                                    <div class="row">
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Email</p>
-                                                            <p class="mb-0">din.97legend@gmail.com</p>
+                                                            <p class="mb-0">{{ $teacher->email }}</p>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <p class="mb-1 text-muted">Phone</p>
-                                                            <p class="mb-0">0316-8336096</p>
-                                                        </div>
-
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item px-0">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Gender</p>
-                                                            <p class="mb-0">Male</p>
+                                                            <p class="mb-0">{{ $teacher->gender }}</p>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <p class="mb-1 text-muted">Status</p>
-                                                            <p class="mb-0"><span
-                                                                    class="badge bg-light-success">Active</span></p>
+                                                            <p class="mb-1 text-muted">Phone</p>
+                                                            <p class="mb-0">
+                                                                {{ $teacher->mobile_number ?? 'Not Available' }}</p>
                                                         </div>
                                                     </div>
-                                                </li>
-                                                <li class="list-group-item px-0 pb-0">
-                                                    <p class="mb-1 text-muted">Address</p>
-                                                    <p class="mb-0">Street 110-B Kalians Bag, Dewan, M.P. New York</p>
                                                 </li>
                                             </ul>
                                         </div>

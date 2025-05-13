@@ -8,7 +8,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('student.index') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Student</li>
                             </ul>
@@ -24,6 +24,16 @@
                 </div>
             </div>
 
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <ul class="mb-0 mt-1 ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close mt-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
 
             <div class="row">
                 <div class="col-12">
@@ -31,49 +41,41 @@
                         <div class="card-header">
                             <h5 class="mb-0">Basic Information</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                        <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter first name" />
+                                        <input type="text" name="first_name" class="form-control"
+                                            placeholder="Enter first name" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter last name" />
+                                        <input type="text" name="last_name" class="form-control"
+                                            placeholder="Enter last name" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" />
+                                        <input type="date" name="dob" class="form-control" />
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Registration Date</label>
-                                        <input type="date" class="form-control" />
+                                        <input type="date" name="registration_date" class="form-control" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Admission No</label>
-                                        <input type="number" class="form-control" placeholder="Enter ID number" />
+                                        <input type="number" name="admission_no" class="form-control"
+                                            placeholder="Enter ID number" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Roll No</label>
-                                        <input type="number" class="form-control" placeholder="Enter roll no" />
+                                        <input type="number" name="roll_no" class="form-control"
+                                            placeholder="Enter roll no" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Class</label>
-                                        <select class="form-select" aria-placeholder="Select">
+                                        <select name="class" class="form-select">
                                             <option>Select</option>
                                             <option>K.G</option>
                                             <option>Montesori</option>
@@ -93,73 +95,57 @@
                                             <option>2nd Year</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Section</label>
-                                        <input type="text" class="form-control" placeholder="Enter Section" />
+                                        <input type="text" name="section" class="form-control"
+                                            placeholder="Enter Section" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Gender</label>
-                                        <select class="form-select" aria-placeholder="Select">
+                                        <select name="gender" class="form-select">
                                             <option>Select</option>
                                             <option>Male</option>
                                             <option>Female</option>
                                             <option>Other</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
-                                        <select class="form-select" aria-placeholder="Select">
+                                        <select name="status" class="form-select">
                                             <option>Select</option>
                                             <option>Active</option>
                                             <option>Inactive</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Parents Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter parents name" />
+                                        <input type="text" name="parents_name" class="form-control"
+                                            placeholder="Enter parents name" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Parents Mobile Number</label>
-                                        <input type="number" class="form-control"
+                                        <input type="number" name="parents_mobile" class="form-control"
                                             placeholder="Enter parents mobile number" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Secondary Mobile Number</label>
-                                        <input type="email" class="form-control"
-                                            placeholder="Enter Primary Mobile Number" />
+                                        <input type="text" name="secondary_mobile" class="form-control"
+                                            placeholder="Enter Secondary Mobile Number" />
                                     </div>
-                                </div>
-
-
-                                <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Student Profile</label>
-                                        <input class="form-control" type="file" />
+                                        <input type="file" name="profile_photo" class="form-control" />
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <label class="form-label">Address</label>
-                                        <textarea class="form-control" rows="2" placeholder="Enter address"></textarea>
+                                        <textarea name="address" class="form-control" rows="2" placeholder="Enter address"></textarea>
                                     </div>
-                                </div>
-                                <div class="col-md-12 text-end">
-                                    <button class="btn btn-primary">Submit</button>
+                                    <div class="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

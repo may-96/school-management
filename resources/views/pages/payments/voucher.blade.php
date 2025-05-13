@@ -10,7 +10,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('payment.voucher') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">All Vouchers</a></li>
                                 <li class="breadcrumb-item" aria-current="page">List</li>
                             </ul>
@@ -51,50 +51,82 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>398745687</td>
-                                                    <td>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-auto pe-0">
-                                                                <img src="../assets/images/user/avatar-1.jpg"
-                                                                    alt="user-image" class="wid-40 hei-40 rounded-circle" />
+                                                @foreach ($payments as $payment)
+                                                    <tr>
+                                                        <td>{{ $payment->invoice_id }}</td>
+                                                        <td>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-auto pe-0">
+                                                                    @if ($payment->student->profile_image)
+                                                                        <img src="{{ asset('storage/students/' . $payment->student->profile_image) }}"
+                                                                            alt="user-image"
+                                                                            class="wid-40 hei-40 rounded-circle" />
+                                                                    @else
+                                                                        <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
+                                                                            alt="user-image"
+                                                                            class="wid-40 hei-40 rounded-circle" />
+                                                                    @endif
+                                                                </div>
+                                                                <div class="col">
+                                                                    <h6 class="mb-1">
+                                                                        <span
+                                                                            class="text-truncate w-100">{{ $payment->student->first_name }}
+                                                                            {{ $payment->student->last_name }}</span>
+                                                                    </h6>
+                                                                    <p class="f-12 mb-0">
+                                                                        <a href="#!" class="text-muted">
+                                                                            <span
+                                                                                class="text-truncate w-100">{{ $payment->student->parents_mobile }}</span>
+                                                                        </a>
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div class="col">
-                                                                <h6 class="mb-1"><span class="text-truncate w-100">Saqib
-                                                                        Din</span></h6>
-                                                                <p class="f-12 mb-0"><a href="#!"
-                                                                        class="text-muted"><span
-                                                                            class="text-truncate w-100">0316-8336096</span></a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>7/11/2022</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td><span class="badge bg-light-success">Paid</span></td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-add-payment_modal"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-plus f-20"></i></a></li>
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-voucher-slip_model"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-eye f-20"></i></a></li>
-                                                            <li class="list-inline-item"><a
-                                                                    href="{{ route('payment.edit') }}"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
+                                                        </td>
+                                                        <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y') }}
+                                                        </td>
+                                                        <td>{{ $payment->amount }} Pkr</td>
+                                                        <td>
+                                                            <span class="badge bg-light-success">Paid</span>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <ul class="list-inline mb-0">
+                                                                <li class="list-inline-item">
+                                                                    <a data-bs-toggle="modal"
+                                                                        data-bs-target="#student-add-payment_modal"
+                                                                        href="#"
+                                                                        class="avtar avtar-xs btn-link-secondary">
+                                                                        <i class="ti ti-plus f-20"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-inline-item">
+                                                                    <a data-bs-toggle="modal"
+                                                                        data-bs-target="#student-voucher-slip_model"
+                                                                        href="#"
+                                                                        class="avtar avtar-xs btn-link-secondary">
+                                                                        <i class="ti ti-eye f-20"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-inline-item">
+                                                                    <a href="{{ route('payment.edit', $payment->id) }}"
+                                                                        class="avtar avtar-xs btn-link-secondary">
+                                                                        <i class="ti ti-edit f-20"></i>
+                                                                    </a>
+                                                                </li>
+                                                                {{-- <li class="list-inline-item">
+                                                                <form action="{{ route('payment.destroy', $payment->id) }}" method="POST" style="display:inline;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="avtar avtar-xs btn-link-secondary" onclick="return confirm('Are you sure you want to delete this payment?')">
+                                                                        <i class="ti ti-trash f-20"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </li> --}}
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                                {{-- <tr>
                                                     <td>398745687</td>
                                                     <td>
                                                         <div class="row align-items-center">
@@ -448,7 +480,7 @@
                                                                         class="ti ti-trash f-20"></i></a></li>
                                                         </ul>
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -705,5 +737,4 @@
         window.dt = new DataTable('#pc-dt-simple-3');
         window.dt = new DataTable('#pc-dt-simple-4');
     </script>
-    
 @endsection
