@@ -31,16 +31,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('student', StudentController::class);
 
     // Vouchers 
-    Route::post('/students/vouchers', [VoucherController::class, 'store'])->name('students.vouchers.store');
+    Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
+    Route::get('/voucher/create/{studentId}', [VoucherController::class, 'create'])->name('voucher.create');
+    Route::post('/students/{student}/vouchers/store', [VoucherController::class, 'store'])->name('students.vouchers.store');
+    Route::get('/vouchers/{student}', [VoucherController::class, 'show'])->name('voucher.show');
+
+    Route::get('/voucher/{id}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
+    Route::put('/voucher/{id}', [VoucherController::class, 'update'])->name('voucher.update');
+    Route::delete('/voucher/{id}', [VoucherController::class, 'destroy'])->name('voucher.destroy');
 
 
     // Payments
-    // Route::post('/students/{student}/payments', [PaymentController::class, 'store'])->name('students.payments.store');
-    Route::get('payments/create', [PaymentController::class, 'create'])->name('payment.create');
-    Route::get('payments/edit', [PaymentController::class, 'edit'])->name('payment.edit');
-    Route::get('payments/show', [PaymentController::class, 'show'])->name('payment.show');
-    Route::get('payments/list', [PaymentController::class, 'list'])->name('payment.list');
-    Route::get('payments/voucher', [PaymentController::class, 'allvouchers'])->name('payment.voucher');
+
+    Route::post('/payments', [PaymentController::class, 'store'])->name('vouchers.payment.store');
+
+    Route::get('payments/index', [PaymentController::class, 'index'])->name('payment.index');
+
+    Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->name('payment.destroy');
+
 
     // Admin / Social Profile - User (ProfileController)
     Route::get('admin/user', [ProfileController::class, 'user'])->name('admin.user');
@@ -51,7 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Admin User Management (UserController)
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
     Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
-    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    // Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 

@@ -8,19 +8,20 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Teacher</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/teacher') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0)">Teachers</a></li>
+                                <li class="breadcrumb-item" aria-current="page">List</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h2 class="mb-0">Teacher List</h2>
+                                <h2 class="mb-0">Teachers List</h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                     {{ session('success') }}
@@ -56,13 +57,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body pt-3">
+                        <div class="card-body p-4">
                             <div class="table-responsive">
 
                                 {{-- Yajra DataTable --}}
 
                                 {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
-
 
                                 {{-- <table class="table table-hover" id="pc-dt-simple">
                                     <thead>
@@ -155,5 +155,4 @@
     @push('scripts')
         {!! $dataTable->scripts() !!}
     @endpush
-    
 @endsection

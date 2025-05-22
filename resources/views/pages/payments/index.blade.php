@@ -10,7 +10,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/payments/index') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Payment</a></li>
                                 <li class="breadcrumb-item" aria-current="page">List</li>
                             </ul>
@@ -24,7 +24,27 @@
                 </div>
             </div>
             <!-- [ breadcrumb ] end -->
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
 
+                <script>
+                    setTimeout(function() {
+                        let alert = document.getElementById('success-alert');
+                        if (alert) {
+                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                            bsAlert.close();
+                        }
+                    }, 3000);
+                </script>
+
+                @php
+                    // Clear the session manually after showing it once
+                    session()->forget('success');
+                @endphp
+            @endif
 
             <!-- [ Main Content ] start -->
             <div class="row">
@@ -40,186 +60,10 @@
                                 <div class="tab-pane fade show active" id="analytics-tab-1-pane" role="tabpanel"
                                     aria-labelledby="analytics-tab-1" tabindex="0">
                                     <div class="table-responsive">
-                                        <table class="table table-hover" id="pc-dt-simple-1">
-                                            <thead>
-                                                <tr>
-                                                    <th>Invoice Id</th>
-                                                    <th>Refrence No</th>
-                                                    <th>Payment Date</th>
-                                                    <th>Payment Method</th>
-                                                    <th>Amount</th>
-                                                    <th class="text-end">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal" href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal" href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal" href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal" href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4567547765</td>
-                                                    <td>RN-001</td>
-                                                    <td>7/11/2022</td>
-                                                    <td>Easypaisa</td>
-                                                    <td>3000 Pkr</td>
-                                                    <td class="text-end">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                    data-bs-target="#student-edit-payment_modal"
-                                                                    href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary"><i
-                                                                        class="ti ti-edit f-20"></i></a></li>
-                                                            <li class="list-inline-item"> <a href="#"
-                                                                    class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                        class="ti ti-trash f-20"></i></a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+
+
+                                        {!! $dataTable->table(['class' => 'table table-hover', 'id' => 'payments-table']) !!}
+
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +76,7 @@
 
     <!-- [ Main Content ] end -->
 
-    {{--student edit fees model  --}}
+    {{-- student edit fees model  --}}
 
     <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -317,7 +161,7 @@
         </div>
     </div>
 
-    <script type="module">
+    {{-- <script type="module">
         import {
             DataTable
         } from '../assets/js/plugins/module.js';
@@ -325,6 +169,8 @@
         window.dt = new DataTable('#pc-dt-simple-2');
         window.dt = new DataTable('#pc-dt-simple-3');
         window.dt = new DataTable('#pc-dt-simple-4');
-    </script>
-    
+    </script> --}}
 @endsection
+@push('scripts')
+    {!! $dataTable->scripts() !!}
+@endpush

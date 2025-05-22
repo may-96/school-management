@@ -2,37 +2,126 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\VoucherDataTable;
 use App\Models\Voucher;
+use App\Models\VoucherItem;
 use Illuminate\Http\Request;
 
 class VoucherController extends Controller
 {
+
+    public function index(VoucherDataTable $dataTable)
+    {
+        return $dataTable->render('pages.vouchers.index');
+    }
+
+
+    public function create($studentId)
+    {
+        $student = \App\Models\Student::findOrFail($studentId);
+
+        $invoiceId = 'INV-' . now()->format('YmdHis');
+        $referenceNo = 'REF-' . rand(10000, 99999);
+
+        return view('pages.vouchers.create', compact('student', 'invoiceId', 'referenceNo'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'student_ids'     => 'required|array',
-            'payment_method'  => 'required|string',
-            'amount'          => 'required|numeric',
-            'payment_date'    => 'required|date',
-            'notes'           => 'nullable|string',
+            'student_id'     => 'required|exists:students,id',
+            'invoice_id'     => 'required|unique:vouchers',
+            'reference_no'   => 'required',
+            'payment_method' => 'required',
+            'status'         => 'required',
+            'payment_date'   => 'required|date',
+            'fee_type'       => 'required|array|min:1',
+            'fee_amount'     => 'required|array|min:1',
+            'fee_type.*'     => 'required|string',
+            'fee_amount.*'   => 'required|numeric|min:0',
         ]);
 
-        foreach ($request->student_ids as $studentId) {
-            $invoiceId = 'INV-' . strtoupper(uniqid());
-            $referenceNo = 'REF-' . strtoupper(uniqid());
+        $totalAmount = array_sum($request->fee_amount);
 
-            Voucher::create([
-                'student_id'     => $studentId,
-                'invoice_id'     => $invoiceId,
-                'reference_no'   => $referenceNo,
-                'payment_method' => $request->payment_method,
-                'amount'         => $request->amount,
-                'payment_date'   => $request->payment_date,
-                'notes'          => $request->notes,
+        $voucher = Voucher::create([
+            'student_id'     => $request->student_id,
+            'invoice_id'     => $request->invoice_id,
+            'reference_no'   => $request->reference_no,
+            'payment_method' => $request->payment_method,
+            'status'         => $request->status,
+            'amount'         => $totalAmount,
+            'notes'          => $request->notes,
+            'payment_date'   => $request->payment_date,
+        ]);
+
+        foreach ($request->fee_type as $index => $type) {
+            VoucherItem::create([
+                'voucher_id' => $voucher->id,
+                'fee_type'   => $type,
+                'fee_amount' => $request->fee_amount[$index],
             ]);
         }
 
-        session()->flash('success', 'Voucher added successfully!');
-        return response()->json(['message' => 'Voucher added successfully!']);
+        return redirect()->route('voucher.index', $voucher->id)->with('success', 'Voucher created successfully!');
+    }
+
+    public function show($id)
+    {
+        $voucher = Voucher::with('student', 'voucherItems')->findOrFail($id);
+        return view('pages.vouchers.show', compact('voucher'));
+    }
+
+    public function edit($id)
+    {
+        $voucher = Voucher::with('student', 'voucherItems')->findOrFail($id);
+        return view('pages.vouchers.edit', compact('voucher'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        //  dd($request->all());
+
+        $voucher = Voucher::findOrFail($id);
+
+        $request->validate([
+            'payment_method' => 'required',
+            'status'         => 'required',
+            'payment_date'   => 'required|date',
+            'fee_type'       => 'required|array|min:1',
+            'fee_amount'     => 'required|array|min:1',
+            'fee_type.*'     => 'required|string',
+            'fee_amount.*'   => 'required|numeric|min:0',
+        ]);
+
+        $voucher->update([
+            'payment_method' => $request->payment_method,
+            'status'         => $request->status,
+            'payment_date'   => $request->payment_date,
+            'notes'          => $request->notes,
+            'amount'         => array_sum($request->fee_amount),
+        ]);
+
+        VoucherItem::where('voucher_id', $voucher->id)->delete();
+
+        foreach ($request->fee_type as $index => $type) {
+            VoucherItem::create([
+                'voucher_id' => $voucher->id,
+                'fee_type'   => $type,
+                'fee_amount' => $request->fee_amount[$index],
+            ]);
+        }
+
+        return redirect()->route('voucher.show', $voucher->id)->with('success', 'Voucher updated successfully!');
+    }
+
+
+
+    public function destroy($id)
+    {
+        $voucher = Voucher::findOrFail($id);
+        $voucher->delete();
+
+        return redirect()->back()->with('success', 'Payment deleted successfully.');
     }
 }

@@ -9,8 +9,8 @@
                          <div class="col-md-12">
                              <ul class="breadcrumb">
                                  <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Users</a></li>
-                                 <li class="breadcrumb-item" aria-current="page">Student Profile</li>
+                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Student</a></li>
+                                 <li class="breadcrumb-item" aria-current="page">Profile & Voucher List</li>
                              </ul>
                          </div>
                          <div class="col-md-12">
@@ -210,8 +210,25 @@
                                                                          <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y') }}
                                                                          </td>
                                                                          <td>{{ $payment->amount }} Pkr</td>
-                                                                         <td><span
-                                                                                 class="badge bg-light-success">Paid</span>
+                                                                         <td colspan="1">
+                                                                             @php
+                                                                                 $status = strtolower($payment->status);
+                                                                             @endphp
+
+                                                                             @if ($status === 'paid')
+                                                                                 <span
+                                                                                     class="badge bg-light-success">Paid</span>
+                                                                             @elseif ($status === 'unpaid')
+                                                                                 <span
+                                                                                     class="badge bg-light-danger">Unpaid</span>
+                                                                             @elseif ($status === 'partial paid')
+                                                                                 <span
+                                                                                     class="badge bg-light-warning">Partial
+                                                                                     Paid</span>
+                                                                             @else
+                                                                                 <span
+                                                                                     class="badge bg-light-secondary">Unknown</span>
+                                                                             @endif
                                                                          </td>
                                                                          <td class="text-end">
                                                                              <ul class="list-inline mb-0">
@@ -232,7 +249,7 @@
                                                                                      </a>
                                                                                  </li>
                                                                                  <li class="list-inline-item">
-                                                                                     <a href="{{ route('payment.edit') }}"
+                                                                                     <a href="{{ route('voucher.edit', $payment->id) }}"
                                                                                          class="avtar avtar-xs btn-link-secondary">
                                                                                          <i class="ti ti-edit f-20"></i>
                                                                                      </a>
@@ -266,7 +283,7 @@
 
      {{-- student add payment model --}}
 
-     <div class="modal fade" id="student-add-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+     {{-- <div class="modal fade" id="student-add-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
              <div class="modal-content">
                  <div class="modal-header justify-content-between">
@@ -283,12 +300,12 @@
                      <div class="collapse multi-collapse show">
                          <div class="row">
                              <div class="col-12">
-                                 {{-- <div class="mb-3 row me-0">
+                                 <div class="mb-3 row me-0">
                                      <label class="col-lg-4 col-form-label">INVOICE ID : </label>
                                      <div class="col-lg-8 d-flex align-items-center">
                                          <span class="text-muted d-block">8943769870</span>
                                      </div>
-                                 </div> --}}
+                                 </div>
 
                                  <div class="mb-3 row me-0">
                                      <label class="col-lg-4 col-form-label">Payment
@@ -320,14 +337,14 @@
                                          <input type="date" class="form-control" />
                                      </div>
                                  </div>
-                                 {{-- <div class="mb-3 row me-0">
+                                 <div class="mb-3 row me-0">
                                      <label class="col-lg-4 col-form-label"> Refrence No
                                          :<small class="text-muted d-block">Enter
                                              Refrence No</small></label>
                                      <div class="col-lg-8">
                                          <input type="text" class="form-control" />
                                      </div>
-                                 </div> --}}
+                                 </div>
                                  <div class="mb-3 row me-0">
                                      <label class="col-lg-4 col-form-label">Notes
                                          :<small class="text-muted d-block">Enter
@@ -347,7 +364,7 @@
                  </div>
              </div>
          </div>
-     </div>
+     </div> --}}
 
      {{-- student edit payment model --}}
 

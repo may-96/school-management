@@ -3,13 +3,13 @@
 namespace App\DataTables;
 
 use App\Models\Teacher;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
+// use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+// use Yajra\DataTables\EloquentDataTable;
+// use Yajra\DataTables\Html\Builder as HtmlBuilder;
+// use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
+// use Yajra\DataTables\Html\Editor\Editor;
+// use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class TeacherDataTable extends DataTable
@@ -18,6 +18,19 @@ class TeacherDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->filterColumn('name', function ($query, $keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('first_name', 'like', "%{$keyword}%")
+                        ->orWhere('last_name', 'like', "%{$keyword}%")
+                        ->orWhere('email', 'like', "%{$keyword}%");
+                });
+            })
+            ->filterColumn('department_class', function ($query, $keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('department', 'like', "%{$keyword}%")
+                        ->orWhere('class', 'like', "%{$keyword}%");
+                });
+            })
             ->addColumn('name', function ($teacher) {
                 $image = $teacher->profile_image
                     ? asset('storage/teachers/' . $teacher->profile_image)
@@ -80,12 +93,28 @@ class TeacherDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('name')->title('Name')->exportable(false)->printable(false)->addClass('text-left'),
-            Column::computed('department_class')->title('Departments / Class')->exportable(false)->printable(false),
+            Column::computed('name')
+                ->title('Name')
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(true)
+                ->addClass('text-left'),
+
+            Column::computed('department_class')
+                ->title('Departments / Class')
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(true),
+
             Column::make('education'),
             Column::make('mobile_number')->title('Mobile'),
             Column::make('joining_date'),
-            Column::computed('action')->exportable(false)->printable(false)->width(120)->addClass('text-center'),
+
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(120)
+                ->addClass('text-center'),
         ];
     }
 
@@ -94,4 +123,3 @@ class TeacherDataTable extends DataTable
         return 'Teachers_' . date('YmdHis');
     }
 }
-

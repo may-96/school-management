@@ -8,13 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <meta name="description"
         content="Able Pro is trending dashboard template made using Bootstrap 5 design framework. Able Pro is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies." />
     <meta name="keywords"
         content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
     <meta name="author" content="Phoenixcoded" />
+
     {{-- Icon School Management System --}}
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon" />
+
     {{-- [CSS Files] --}}
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/fonts/inter/inter.css') }}" id="main-font-link" />
@@ -37,7 +40,7 @@
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
     data-pc-theme_contrast="" data-pc-theme="light">
 
-    {{-- loader --}}
+    {{-- Page loader --}}
     <div class="loader-bg">
         <div class="loader-track">
             <div class="loader-fill"></div>
@@ -61,6 +64,7 @@
     <script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/icon/custom-font.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+
     {{-- Dark mode and light mode --}}
     <script src="{{ asset('assets/js/theme.js') }}"></script>
 

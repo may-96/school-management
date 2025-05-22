@@ -21,6 +21,29 @@
                     </div>
                 </div>
             </div>
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        let alert = document.getElementById('success-alert');
+                        if (alert) {
+                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                            bsAlert.close();
+                        }
+                    }, 3000);
+                </script>
+
+                @php
+                    // Clear the session manually after showing it once
+                    session()->forget('success');
+                @endphp
+            @endif
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -83,25 +106,44 @@
                                                 </td>
                                                 <td class="text-end">
                                                     {{-- Edit --}}
-                                                    <a data-bs-toggle="modal"
+                                                    {{-- <a data-bs-toggle="modal"
                                                         data-bs-target="#edit-user-modal-{{ $user->id }}" href="#"
                                                         class="avtar avtar-xs btn-link-secondary">
                                                         <i class="ti ti-edit f-20"></i>
-                                                    </a>
+                                                    </a> --}}
                                                     {{-- Delete --}}
-                                                    <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
+                                                    <form id="delete-form-{{ $user->id }}" method="POST"
+                                                        action="{{ route('admin.users.destroy', $user->id) }}"
                                                         class="d-inline">
-                                                        @csrf @method('DELETE')
-                                                        <button
-                                                            class="avtar avtar-xs btn-link-secondary bs-pass-para border-0 bg-transparent">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="#"
+                                                            class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                                                            data-id="{{ $user->id }}">
                                                             <i class="ti ti-trash f-20"></i>
-                                                        </button>
+                                                        </a>
                                                     </form>
+
+                                                    <script>
+                                                        document.querySelectorAll('.bs-pass-para').forEach(btn => {
+                                                            btn.addEventListener('click', function(e) {
+                                                                e.preventDefault();
+                                                                const userId = this.dataset.id;
+                                                                const form = document.getElementById('delete-form-' + userId);
+                                                                if (form) {
+                                                                    form.submit();
+                                                                } else {
+                                                                    console.error('Delete form not found for ID:', userId);
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+
                                                 </td>
                                             </tr>
 
                                             {{-- Edit Modal per user --}}
-                                            <div class="modal fade" id="edit-user-modal-{{ $user->id }}"
+                                            {{-- <div class="modal fade" id="edit-user-modal-{{ $user->id }}"
                                                 tabindex="-1">
                                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                                     <div class="modal-content">
@@ -115,7 +157,6 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    {{-- First Name --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" name="first_name"
@@ -123,7 +164,6 @@
                                                                             value="{{ explode(' ', $user->name)[0] }}"
                                                                             required>
                                                                     </div>
-                                                                    {{-- Last Name --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Last Name</label>
                                                                         <input type="text" name="last_name"
@@ -131,7 +171,6 @@
                                                                             value="{{ explode(' ', $user->name)[1] ?? '' }}"
                                                                             required>
                                                                     </div>
-                                                                    {{-- Role --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Role</label>
                                                                         <select name="role" class="form-select" required>
@@ -143,7 +182,6 @@
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
-                                                                    {{-- Status --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Status</label>
                                                                         <select name="status" class="form-select" required>
@@ -155,14 +193,12 @@
                                                                                 Inactive</option>
                                                                         </select>
                                                                     </div>
-                                                                    {{-- Email --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Email</label>
                                                                         <input type="email" name="email"
                                                                             class="form-control"
                                                                             value="{{ $user->email }}" required>
                                                                     </div>
-                                                                    {{-- Password (optional) --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Password</label>
                                                                         <input type="password" name="password"
@@ -176,7 +212,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -272,6 +308,7 @@
                                 <div class="col-sm-6 mb-3">
                                     <label class="form-label">Status</label>
                                     <select name="status" class="form-select" required>
+                                        <option value="select">Select</option>
                                         <option value="active">Active</option>
                                         <option value="inactive">Inactive</option>
                                     </select>

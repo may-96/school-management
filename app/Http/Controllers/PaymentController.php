@@ -2,35 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Voucher;
+use App\Models\Payment;
+use Illuminate\Http\Request;
+use App\DataTables\PaymentDataTable;
 
 class PaymentController extends Controller
 
 {
 
-    public function create()
+    public function index(PaymentDataTable $dataTable)
     {
-        return view('pages.payments.create');
+        return $dataTable->render('pages.payments.index');
     }
 
-    public function show()
+
+
+    public function store(Request $request)
     {
-        return view("pages.payments.show",);
+        $request->validate([
+            'invoice_id' => 'required',
+            'reference_number' => 'required',
+            'voucher_id' => 'required|exists:vouchers,id',
+            'payment_method' => 'required',
+            'amount' => 'required|numeric',
+            'payment_date' => 'required|date',
+            'notes' => 'nullable|string',
+        ]);
+
+        $payment = Payment::create([
+            'voucher_id'       => $request->voucher_id,
+            'invoice_id'       => $request->invoice_id,
+            'reference_number' => $request->reference_number,
+            'payment_method'   => $request->payment_method,
+            'amount'           => $request->amount,
+            'payment_date'     => $request->payment_date,
+            'notes'            => $request->notes,
+        ]);
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Payment added successfully!']);
+        }
+
+        return redirect()->route('payment.index')->with('success', 'Payment added successfully!');
     }
 
-    public function edit()
-    {
-        return view("pages.payments.edit");
-    }
 
-    public function list()
+    public function destroy($id)
     {
-        return view("pages.payments.index");
-    }
+        $payment = Payment::findOrFail($id);
+        $payment->delete();
 
-    public function allVouchers()
-    {
-        $payments = Voucher::with('student')->get();
-        return view('pages.payments.voucher', compact('payments'));
+        return redirect()->back()->with('success', 'Payment deleted successfully!');
     }
 }

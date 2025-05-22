@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\DataTables\StudentDataTable;
 // use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
-    // Show the student form
     public function create()
     {
         return view('pages.students.create');
     }
 
-    // Store student data
     public function store(Request $request)
     {
         $request->validate([
@@ -22,20 +21,19 @@ class StudentController extends Controller
             'last_name' => 'required|string|max:255',
             'dob' => 'required|date',
             'registration_date' => 'required|date',
-            'admission_no' => 'required|string|max:255',
-            'roll_no' => 'required|string|max:255',
-            'class' => 'required|string',
-            'section' => 'required|string',
-            'gender' => 'required|string',
-            'status' => 'required|string',
-            'parents_name' => 'required|string',
-            'parents_mobile' => 'required|numeric',
+            'admission_no' => 'nullable|string|max:255',
+            'roll_no' => 'nullable|string|max:255',
+            'class' => 'nullable|string',
+            'section' => 'nullable|string',
+            'gender' => 'nullable|string',
+            'status' => 'nullable|string',
+            'parents_name' => 'nullable|string',
+            'parents_mobile' => 'nullable|numeric',
             'secondary_mobile' => 'nullable|numeric',
-            'profile_photo' => 'required|mimes:jpg,jpeg,png|max:2048',
-            'address' => 'required|string',
+            'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'address' => 'nullable|string',
         ]);
 
-        // Handle file upload
         $fileName = null;
         if ($request->hasFile('profile_photo')) {
             $fileName = $this->uploadProfilePhoto($request->file('profile_photo'));
@@ -44,20 +42,17 @@ class StudentController extends Controller
         $data = $request->except('profile_photo');
         $data['profile_image'] = $fileName;
 
-        // Save the student data
         Student::create($data);
 
-        return redirect()->route('student.index')->with('success', 'Student registered successfully!');
+        return redirect()->route('student.index')->with('success', 'Student added successfully!');
     }
 
-    // Show the student edit form
     public function edit($id)
     {
         $student = Student::findOrFail($id);
         return view('pages.students.edit', compact('student'));
     }
 
-    // Update student data
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -65,17 +60,17 @@ class StudentController extends Controller
             'last_name' => 'required|string|max:255',
             'dob' => 'required|date',
             'registration_date' => 'required|date',
-            'admission_no' => 'required|string|max:255',
-            'roll_no' => 'required|string|max:255',
-            'class' => 'required|string',
-            'section' => 'required|string',
-            'gender' => 'required|string',
-            'status' => 'required|string',
-            'parents_name' => 'required|string',
-            'parents_mobile' => 'required|numeric',
+            'admission_no' => 'nullable|string|max:255',
+            'roll_no' => 'nullable|string|max:255',
+            'class' => 'nullable|string',
+            'section' => 'nullable|string',
+            'gender' => 'nullable|string',
+            'status' => 'nullable|string',
+            'parents_name' => 'nullable|string',
+            'parents_mobile' => 'nullable|numeric',
             'secondary_mobile' => 'nullable|numeric',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'address' => 'required|string',
+            'address' => 'nullable|string',
         ]);
 
         $student = Student::findOrFail($id);
@@ -90,7 +85,6 @@ class StudentController extends Controller
             $imagePath = $student->profile_image;
         }
 
-        // Update the student data
         $student->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -112,14 +106,11 @@ class StudentController extends Controller
         return redirect()->route('student.index')->with('success', 'Student updated successfully!');
     }
 
-    // List all students
-    public function index()
+    public function index(StudentDataTable $dataTable)
     {
-        $students = Student::latest()->get();
-        return view('pages.students.index', compact('students'));
+        return $dataTable->render('pages.students.index');
     }
 
-    // Delete student data
     public function destroy($id)
     {
         $student = Student::findOrFail($id);
@@ -133,15 +124,13 @@ class StudentController extends Controller
         return redirect()->back()->with('success', 'Student deleted successfully!');
     }
 
-    // Show student information
     public function show($id)
     {
-        $student = Student::with('payments')->findOrFail($id); 
+        $student = Student::with('payments')->findOrFail($id);
         return view('pages.students.show', compact('student'));
     }
-    
 
-    // Function to upload profile photo
+
     private function uploadProfilePhoto($file)
     {
         $fileName = time() . '_' . $file->getClientOriginalName();
