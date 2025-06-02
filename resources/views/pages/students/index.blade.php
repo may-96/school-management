@@ -40,7 +40,6 @@
                 </script>
 
                 @php
-                    // Clear the session manually after showing it once
                     session()->forget('success');
                 @endphp
             @endif
@@ -151,11 +150,8 @@
         // });
     </script>
 
-
-
+    @push('scripts')
+        {!! $dataTable->scripts() !!}
+    @endpush
 
 @endsection
-
-@push('scripts')
-    {!! $dataTable->scripts() !!}
-@endpush

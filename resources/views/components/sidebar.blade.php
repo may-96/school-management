@@ -40,7 +40,16 @@
                             </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Dashboard">Dashboard</span>
-                        <span class="pc-badge">2</span>
+                        @php
+                            $totalAll =
+                                ($totalTeachers ?? 0) + ($totalStudents ?? 0) + ($totalPaid ?? 0);
+                            $displayTotal = $totalAll >= 99 ? '99+' : $totalAll;
+                        @endphp
+
+                        <span class="pc-badge">{{ $displayTotal }}</span>
+
+
+
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">

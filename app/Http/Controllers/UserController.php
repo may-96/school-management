@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-// use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
+
 {
     public function index()
     {
@@ -73,6 +73,6 @@ class UserController extends Controller
     {
         Log::info("Trying to delete user: " . $user->id);
         $user->delete();
-        return back()->with('success', 'User deleted successfully!');
+        return redirect()->back()->with('success', 'User deleted successfully!');
     }
 }

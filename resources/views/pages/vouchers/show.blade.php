@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-
+            {{-- Success Alert --}}
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                     {{ session('success') }}
@@ -43,7 +43,6 @@
                     session()->forget('success');
                 @endphp
             @endif
-
 
             <div class="row">
                 <div class="col-sm-12">
@@ -163,7 +162,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

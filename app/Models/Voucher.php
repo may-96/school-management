@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\VoucherItem;
 
 class Voucher extends Model
+
 {
     use HasFactory;
 

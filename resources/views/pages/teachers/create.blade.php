@@ -24,6 +24,7 @@
                 </div>
             </div>
 
+            {{-- Error Alert --}}
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                     <ul class="mb-0 mt-1 ps-3">
@@ -106,7 +107,7 @@
                                                 <option>Select</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                                {{-- <option value="Other">Other</option> --}}
+                                                <option value="Other">Other</option>
                                             </select>
                                         </div>
                                     </div>
@@ -131,6 +132,8 @@
                                                 <option>8th</option>
                                                 <option>9th</option>
                                                 <option>10th</option>
+                                                <option>11th</option>
+                                                <option>12th</option>
                                             </select>
                                         </div>
                                     </div>
@@ -179,22 +182,22 @@
             </div>
         </div>
     </div>
+
+    {{-- input date click event --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = document.querySelectorAll("input, select, textarea");
+
+            inputs.forEach(input => {
+                input.addEventListener("click", function() {
+                    this.focus();
+
+                    if (this.type === "date") {
+                        this.showPicker?.();
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection
- <script>
-     document.addEventListener("DOMContentLoaded", function() {
-         // Saare input fields select karo
-         const inputs = document.querySelectorAll("input, select, textarea");
-
-         // Har ek input pe click event lagao
-         inputs.forEach(input => {
-             input.addEventListener("click", function() {
-                 this.focus();
-
-                 // Agar input date type ka hai, to open the picker
-                 if (this.type === "date") {
-                     this.showPicker?.(); // Modern browsers
-                 }
-             });
-         });
-     });
- </script>

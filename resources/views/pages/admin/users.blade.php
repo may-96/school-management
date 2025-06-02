@@ -22,6 +22,7 @@
                 </div>
             </div>
 
+            {{-- Success Alert --}}
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                     {{ session('success') }}
@@ -39,9 +40,19 @@
                 </script>
 
                 @php
-                    // Clear the session manually after showing it once
                     session()->forget('success');
                 @endphp
+            @endif
+
+            {{-- Error Alert --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
 
             <div class="row">
@@ -123,22 +134,6 @@
                                                             <i class="ti ti-trash f-20"></i>
                                                         </a>
                                                     </form>
-
-                                                    <script>
-                                                        document.querySelectorAll('.bs-pass-para').forEach(btn => {
-                                                            btn.addEventListener('click', function(e) {
-                                                                e.preventDefault();
-                                                                const userId = this.dataset.id;
-                                                                const form = document.getElementById('delete-form-' + userId);
-                                                                if (form) {
-                                                                    form.submit();
-                                                                } else {
-                                                                    console.error('Delete form not found for ID:', userId);
-                                                                }
-                                                            });
-                                                        });
-                                                    </script>
-
                                                 </td>
                                             </tr>
 
@@ -418,4 +413,5 @@
             </div>
         </div>
     </div> --}}
+
 @endsection

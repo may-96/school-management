@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('invoice_id')->unique();
             $table->string('reference_no')->nullable();
             $table->string('payment_method')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->default('unpaid');
             $table->decimal('amount', 10, 2);
             $table->text('notes')->nullable();
             $table->date('payment_date');

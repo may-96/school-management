@@ -22,6 +22,7 @@
                  </div>
              </div>
 
+             {{-- Error Alert --}}
              @if ($errors->any())
                  <div class="alert alert-danger">
                      <ul class="mb-0">
@@ -36,10 +37,9 @@
                  <div class="col-sm-12">
                      <div class="card">
                          <div class="card-body">
-                             <form id="voucher-form" method="POST" action="{{ route('students.vouchers.store', $student->id) }}">
-
+                             <form id="voucher-form" method="POST"
+                                 action="{{ route('students.vouchers.store', $student->id) }}">
                                  @csrf
-
                                  <!-- Hidden Fields -->
                                  <input type="hidden" name="student_id" value="{{ $student->id ?? '' }}">
                                  <input type="hidden" name="invoice_id" value="{{ $invoiceId ?? '' }}">
@@ -60,7 +60,7 @@
                                          </select>
                                      </div>
 
-                                     <div class="col-sm-6 col-xl-3">
+                                     {{-- <div class="col-sm-6 col-xl-3">
                                          <label class="form-label">Status</label>
                                          <select class="form-select" name="status" required>
                                              <option value="">Please Select</option>
@@ -68,9 +68,9 @@
                                              <option>Unpaid</option>
                                              <option>Partial Paid</option>
                                          </select>
-                                     </div>
+                                     </div> --}}
 
-                                     <div class="col-sm-6 col-xl-3">
+                                     <div class="col-sm-6 col-xl-6">
                                          <label class="form-label">Notes</label>
                                          <textarea name="notes" class="form-control" rows="1"></textarea>
                                      </div>
@@ -200,29 +200,28 @@
                                      </div>
                                  </div>
                              </form>
-
                          </div>
                      </div>
                  </div>
              </div>
          </div>
      </div>
- @endsection
- <script>
-     document.addEventListener("DOMContentLoaded", function() {
-         // Saare input fields select karo
-         const inputs = document.querySelectorAll("input, select, textarea");
 
-         // Har ek input pe click event lagao
-         inputs.forEach(input => {
-             input.addEventListener("click", function() {
-                 this.focus();
+     {{-- input date click event  --}}
+     <script>
+         document.addEventListener("DOMContentLoaded", function() {
+             const inputs = document.querySelectorAll("input, select, textarea");
 
-                 // Agar input date type ka hai, to open the picker
-                 if (this.type === "date") {
-                     this.showPicker?.(); // Modern browsers
-                 }
+             inputs.forEach(input => {
+                 input.addEventListener("click", function() {
+                     this.focus();
+
+                     if (this.type === "date") {
+                         this.showPicker?.();
+                     }
+                 });
              });
          });
-     });
- </script>
+     </script>
+
+ @endsection

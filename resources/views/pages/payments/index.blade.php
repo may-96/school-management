@@ -24,6 +24,8 @@
                 </div>
             </div>
             <!-- [ breadcrumb ] end -->
+
+            {{-- Success Alert --}}
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                     {{ session('success') }}
@@ -41,12 +43,21 @@
                 </script>
 
                 @php
-                    // Clear the session manually after showing it once
                     session()->forget('success');
                 @endphp
             @endif
 
-            <!-- [ Main Content ] start -->
+            {{-- Error Alert --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -61,7 +72,6 @@
                                     aria-labelledby="analytics-tab-1" tabindex="0">
                                     <div class="table-responsive">
 
-
                                         {!! $dataTable->table(['class' => 'table table-hover', 'id' => 'payments-table']) !!}
 
                                     </div>
@@ -73,8 +83,6 @@
             </div>
         </div>
     </div>
-
-    <!-- [ Main Content ] end -->
 
     {{-- student edit fees model  --}}
 
@@ -170,7 +178,9 @@
         window.dt = new DataTable('#pc-dt-simple-3');
         window.dt = new DataTable('#pc-dt-simple-4');
     </script> --}}
+
+    @push('scripts')
+        {!! $dataTable->scripts() !!}
+    @endpush
+
 @endsection
-@push('scripts')
-    {!! $dataTable->scripts() !!}
-@endpush

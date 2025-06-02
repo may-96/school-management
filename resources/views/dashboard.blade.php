@@ -21,23 +21,27 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Success Alert --}}
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show mt-4 mx-4" role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                     {{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 
                 <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const alert = document.querySelector('.alert-dismissible');
+                    setTimeout(function() {
+                        let alert = document.getElementById('success-alert');
                         if (alert) {
-                            setTimeout(() => {
-                                const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                                bsAlert.close();
-                            }, 2000);
+                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                            bsAlert.close();
                         }
-                    });
+                    }, 3000);
                 </script>
+
+                @php
+                    session()->forget('success');
+                @endphp
             @endif
 
             <div class="row">
@@ -120,8 +124,8 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Paid Vouchers</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">800+</h4>
-                                        <span class="text-success fw-medium">30.6%</span>
+                                        <h4 class="mb-0">{{ $totalPaid }}</h4>
+                                        {{-- <span class="text-success fw-medium">30.6%</span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +144,7 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Unpaid Vouchers</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">1,065</h4>
+                                        {{-- <h4 class="mb-0">{{ $totalUnpaid }}</h4> --}}
                                         <span class="text-danger fw-medium">30.6%</span>
                                     </div>
                                 </div>

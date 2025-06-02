@@ -12,7 +12,6 @@
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Teacher</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Edit</li>
                             </ul>
-
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
@@ -24,14 +23,27 @@
                     </div>
                 </div>
             </div>
-            
+
+            {{-- Error Alert --}}
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <ul class="mb-0 mt-1 ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close mt-1" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="mb-0">Basic Information</h5>
                         </div>
-                        <form method="POST" action="{{ route('teacher.update', $teacher->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('teacher.update', $teacher->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -142,25 +154,24 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
+    {{-- input date click event --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = document.querySelectorAll("input, select, textarea");
+
+            inputs.forEach(input => {
+                input.addEventListener("click", function() {
+                    this.focus();
+
+                    if (this.type === "date") {
+                        this.showPicker?.();
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection
- <script>
-     document.addEventListener("DOMContentLoaded", function() {
-         // Saare input fields select karo
-         const inputs = document.querySelectorAll("input, select, textarea");
-
-         // Har ek input pe click event lagao
-         inputs.forEach(input => {
-             input.addEventListener("click", function() {
-                 this.focus();
-
-                 // Agar input date type ka hai, to open the picker
-                 if (this.type === "date") {
-                     this.showPicker?.(); // Modern browsers
-                 }
-             });
-         });
-     });
- </script>

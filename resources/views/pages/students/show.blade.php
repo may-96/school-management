@@ -1,4 +1,5 @@
  @extends('layouts.master')
+ @php use Yajra\DataTables\Html\Builder; @endphp
 
  @section('content')
      <div class="pc-container">
@@ -36,7 +37,7 @@
                                  <li class="nav-item">
                                      <a class="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2"
                                          role="tab" aria-selected="true">
-                                         <i class="ti ti-file-text me-2"></i>Voucher List
+                                         <i class="ti ti-file-text me-2"></i>Vouchers List
                                      </a>
                                  </li>
                              </ul>
@@ -142,10 +143,8 @@
                                                  </li>
                                              </ul>
                                          </div>
-
                                      </div>
                                  </div>
-
                              </div>
                          </div>
 
@@ -163,7 +162,10 @@
                                                  <div class="tab-pane fade show active" id="analytics-tab-1-pane"
                                                      role="tabpanel" aria-labelledby="analytics-tab-1" tabindex="0">
                                                      <div class="table-responsive">
-                                                         <table class="table table-hover" id="pc-dt-simple-1">
+
+                                                         {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
+
+                                                         {{-- <table class="table table-hover" id="pc-dt-simple-1">
                                                              <thead>
                                                                  <tr>
                                                                      <th>Invoice Id</th>
@@ -242,7 +244,7 @@
                                                                                  </li>
                                                                                  <li class="list-inline-item">
                                                                                      <a data-bs-toggle="modal"
-                                                                                         data-bs-target="#student-voucher-slip_model"
+                                                                                         data-bs-target="#student-payment-slip_model"
                                                                                          href="#"
                                                                                          class="avtar avtar-xs btn-link-secondary">
                                                                                          <i class="ti ti-eye f-20"></i>
@@ -255,8 +257,18 @@
                                                                                      </a>
                                                                                  </li>
                                                                                  <li class="list-inline-item">
+                                                                                     <form
+                                                                                         id="delete-form-{{ $payment->id }}"
+                                                                                         action="{{ route('voucher.destroy', $payment->id) }}"
+                                                                                         method="POST"
+                                                                                         style="display: none;">
+                                                                                         @csrf
+                                                                                         @method('DELETE')
+                                                                                     </form>
+
                                                                                      <a href="#"
-                                                                                         class="avtar avtar-xs btn-link-secondary bs-pass-para">
+                                                                                         class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                                                                                         data-id="{{ $payment->id }}">
                                                                                          <i class="ti ti-trash f-20"></i>
                                                                                      </a>
                                                                                  </li>
@@ -265,7 +277,7 @@
                                                                      </tr>
                                                                  @endforeach
                                                              </tbody>
-                                                         </table>
+                                                         </table> --}}
                                                      </div>
                                                  </div>
                                              </div>
@@ -279,7 +291,6 @@
              </div>
          </div>
      </div>
-
 
      {{-- student add payment model --}}
 
@@ -368,7 +379,7 @@
 
      {{-- student edit payment model --}}
 
-     <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1"
+     {{-- <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1"
          aria-hidden="true">
          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
              <div class="modal-content">
@@ -450,75 +461,9 @@
                  </div>
              </div>
          </div>
-     </div>
+     </div> --}}
 
-     {{-- student voucher slip model --}}
-     <div class="modal fade" id="student-voucher-slip_model" data-bs-keyboard="false" tabindex="-1"
-         aria-hidden="true">
-         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-             <div class="modal-content">
-                 <div class="modal-header justify-content-between">
-                     <div class="collapse multi-collapse show">
-                         <h5 class="mb-0">Student Voucher Slip</h5>
-                     </div>
-                     <div class="d-flex align-items-center justify-content-end">
-                         <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal" title="Close">
-                             <i class="ti ti-x f-20"></i>
-                         </a>
-                     </div>
-                 </div>
-                 <div class="modal-body">
-                     <div class="collapse multi-collapse show">
-                         <div class="row">
-                             <div class="col-12">
-                                 <div class="table-responsive">
-                                     <table class="table table-hover mb-0">
-                                         <thead>
-                                             <tr>
-                                                 <th>Invoice Id</th>
-                                                 <th>Refrence No</th>
-                                                 <th>Payment Method</th>
-                                                 <th>Payment Date</th>
-                                                 <th>Amount</th>
-                                                 <th class="text-end">Actions</th>
-                                             </tr>
-                                         </thead>
-                                         <tbody>
-                                             <tr>
-                                                 <td>34659087</td>
-                                                 <td>RN-001</td>
-                                                 <td>Easypaisa</td>
-                                                 <td>07-03-2003</td>
-                                                 <td>3000 Pkr</td>
-                                                 <td class="text-end">
-                                                     <ul class="list-inline mb-0">
-                                                         <li class="list-inline-item"><a data-bs-toggle="modal"
-                                                                 data-bs-target="#student-edit-payment_modal"
-                                                                 href="#"
-                                                                 class="avtar avtar-xs btn-link-secondary"><i
-                                                                     class="ti ti-edit f-20"></i></a></li>
-                                                         <li class="list-inline-item"> <a href="#"
-                                                                 class="avtar avtar-xs btn-link-secondary bs-pass-para"><i
-                                                                     class="ti ti-trash f-20"></i></a></li>
-                                                     </ul>
-                                                 </td>
-                                             </tr>
-
-                                         </tbody>
-                                     </table>
-                                 </div>
-                                 <div class="text-start">
-                                     <hr class="mb-2 mt-1 border-secondary border-opacity-50" />
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
-
-     <script type="module">
+     {{-- <script type="module">
          import {
              DataTable
          } from '../assets/js/plugins/module.js';
@@ -526,5 +471,12 @@
          window.dt = new DataTable('#pc-dt-simple-2');
          window.dt = new DataTable('#pc-dt-simple-3');
          window.dt = new DataTable('#pc-dt-simple-4');
-     </script>
+     </script> --}}
+
+     @push('scripts')
+         {!! $dataTable->scripts() !!}
+     @endpush
+
+     @stack('scripts')
+
  @endsection

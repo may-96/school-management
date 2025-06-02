@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
- 
+
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('department');
             $table->string('class')->nullable();
             $table->string('education')->nullable();
-            $table->string('profile_image')->nullable(); 
+            $table->string('profile_image')->nullable();
             $table->timestamps();
         });
     }
-    
+
     public function down(): void
     {
         Schema::dropIfExists('teachers');

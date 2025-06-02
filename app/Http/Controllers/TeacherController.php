@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\DataTables\TeacherDataTable;
-// use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
+
 {
     public function create()
     {

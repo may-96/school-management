@@ -40,10 +40,12 @@
                         <div class="tab-pane show active" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
                             <div class="row">
                                 <div class="col-lg-8 col-xxl-12">
+                                    
                                     <div class="card">
                                         <div class="card-header">
                                             <h5>Personal Details</h5>
                                         </div>
+
                                         <div class="card-body">
                                             <div class="col-sm-12 text-start mb-3">
                                                 <div class="user-upload wid-75">

@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\DataTables\StudentDataTable;
-// use Illuminate\Support\Facades\Storage;
+use App\DataTables\StudentVoucherPaymentDataTable;
 
 class StudentController extends Controller
+
 {
     public function create()
     {
@@ -124,12 +125,11 @@ class StudentController extends Controller
         return redirect()->back()->with('success', 'Student deleted successfully!');
     }
 
-    public function show($id)
+    public function show(StudentVoucherPaymentDataTable $dataTable, $id)
     {
-        $student = Student::with('payments')->findOrFail($id);
-        return view('pages.students.show', compact('student'));
+        $student = Student::findOrFail($id);
+        return $dataTable->setStudentId($id)->render('pages.students.show', compact('student'));
     }
-
 
     private function uploadProfilePhoto($file)
     {

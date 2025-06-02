@@ -13,7 +13,7 @@ use App\Http\Controllers\VoucherController;
 // Public Route
 Route::get('/', [LandingController::class, 'home'])->name('landing.home');
 
-// Routes for authenticated and verified users
+// authenticated and verified users
 Route::middleware(['auth', 'verified'])->group(function () {
 
     // Dashboard
@@ -35,20 +35,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/voucher/create/{studentId}', [VoucherController::class, 'create'])->name('voucher.create');
     Route::post('/students/{student}/vouchers/store', [VoucherController::class, 'store'])->name('students.vouchers.store');
     Route::get('/vouchers/{student}', [VoucherController::class, 'show'])->name('voucher.show');
-
     Route::get('/voucher/{id}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
     Route::put('/voucher/{id}', [VoucherController::class, 'update'])->name('voucher.update');
     Route::delete('/voucher/{id}', [VoucherController::class, 'destroy'])->name('voucher.destroy');
 
-
     // Payments
-
     Route::post('/payments', [PaymentController::class, 'store'])->name('vouchers.payment.store');
 
     Route::get('payments/index', [PaymentController::class, 'index'])->name('payment.index');
-
     Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->name('payment.destroy');
 
+    Route::get('/payments/data', [PaymentController::class, 'ajaxData'])->name('payment.data');
 
     // Admin / Social Profile - User (ProfileController)
     Route::get('admin/user', [ProfileController::class, 'user'])->name('admin.user');
@@ -63,5 +60,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
-// Auth scaffolding
 require __DIR__ . '/auth.php';

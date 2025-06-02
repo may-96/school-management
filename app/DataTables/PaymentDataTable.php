@@ -11,6 +11,7 @@ use App\Models\Payment;
 // use Yajra\DataTables\Html\Editor\Editor;
 // use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Carbon;
 
 class PaymentDataTable extends DataTable
 {
@@ -39,7 +40,7 @@ class PaymentDataTable extends DataTable
     ';
             })
 
-            ->rawColumns(['action']) 
+            ->rawColumns(['action'])
             ->editColumn('amount', function ($payment) {
                 return number_format($payment->amount) . ' Pkr';
             })
@@ -56,7 +57,7 @@ class PaymentDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('payment-table') 
+            ->setTableId('payment-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(0)
@@ -74,8 +75,8 @@ class PaymentDataTable extends DataTable
         return [
             ['data' => 'invoice_id', 'name' => 'invoice_id', 'title' => 'Invoice Id'],
             ['data' => 'reference_number', 'name' => 'reference_number', 'title' => 'Reference No'],
-            ['data' => 'payment_date', 'name' => 'payment_date', 'title' => 'Payment Date'],
             ['data' => 'payment_method', 'name' => 'payment_method', 'title' => 'Payment Method'],
+            ['data' => 'payment_date', 'name' => 'payment_date', 'title' => 'Payment Date'],
             ['data' => 'amount', 'name' => 'amount', 'title' => 'Amount'],
             ['data' => 'action', 'name' => 'action', 'title' => 'Actions', 'orderable' => false, 'searchable' => false, 'exportable' => false, 'printable' => false],
         ];

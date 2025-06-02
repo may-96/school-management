@@ -6,6 +6,7 @@ use App\DataTables\VoucherDataTable;
 use App\Models\Voucher;
 use App\Models\VoucherItem;
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class VoucherController extends Controller
 {
@@ -18,7 +19,7 @@ class VoucherController extends Controller
 
     public function create($studentId)
     {
-        $student = \App\Models\Student::findOrFail($studentId);
+        $student = Student::findOrFail($studentId);
 
         $invoiceId = 'INV-' . now()->format('YmdHis');
         $referenceNo = 'REF-' . rand(10000, 99999);
@@ -33,7 +34,6 @@ class VoucherController extends Controller
             'invoice_id'     => 'required|unique:vouchers',
             'reference_no'   => 'required',
             'payment_method' => 'required',
-            'status'         => 'required',
             'payment_date'   => 'required|date',
             'fee_type'       => 'required|array|min:1',
             'fee_amount'     => 'required|array|min:1',
@@ -48,7 +48,7 @@ class VoucherController extends Controller
             'invoice_id'     => $request->invoice_id,
             'reference_no'   => $request->reference_no,
             'payment_method' => $request->payment_method,
-            'status'         => $request->status,
+            'status'         => 'unpaid',
             'amount'         => $totalAmount,
             'notes'          => $request->notes,
             'payment_date'   => $request->payment_date,
@@ -64,6 +64,7 @@ class VoucherController extends Controller
 
         return redirect()->route('voucher.index', $voucher->id)->with('success', 'Voucher created successfully!');
     }
+
 
     public function show($id)
     {
@@ -124,4 +125,5 @@ class VoucherController extends Controller
 
         return redirect()->back()->with('success', 'Payment deleted successfully.');
     }
+    
 }

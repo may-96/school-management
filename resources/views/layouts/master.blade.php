@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <meta name="description"
         content="Able Pro is trending dashboard template made using Bootstrap 5 design framework. Able Pro is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies." />
     <meta name="keywords"
@@ -33,7 +33,6 @@
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-
 
 </head>
 
@@ -66,7 +65,7 @@
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
     {{-- Dark mode and light mode --}}
-    <script src="{{ asset('assets/js/theme.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/theme.js') }}"></script> --}}
 
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
@@ -75,16 +74,12 @@
     <script src="{{ asset('assets/js/widgets/course-report-bar-chart.js') }}"></script>
     <script src="{{ asset('assets/js/widgets/invoice-chart.js') }}"></script>
 
-
-
     <!-- jQuery + DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     @stack('scripts') {{-- this will load yajra datatable script --}}
-
-
 
 </body>
 

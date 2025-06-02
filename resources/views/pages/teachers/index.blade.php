@@ -22,6 +22,7 @@
                 </div>
             </div>
 
+            {{-- Success Alert --}}
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
                     {{ session('success') }}
@@ -39,12 +40,20 @@
                 </script>
 
                 @php
-                    // Clear the session manually after showing it once
                     session()->forget('success');
                 @endphp
             @endif
 
-
+            {{-- Error Alert --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <div class="row">
                 <div class="col-12">
@@ -151,8 +160,8 @@
         window.dt = new DataTable('#pc-dt-simple');
     </script> --}}
 
-
     @push('scripts')
         {!! $dataTable->scripts() !!}
     @endpush
+
 @endsection

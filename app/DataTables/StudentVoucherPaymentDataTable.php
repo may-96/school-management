@@ -3,13 +3,21 @@
 namespace App\DataTables;
 
 use App\Models\Voucher;
+use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Services\DataTable;
-use Carbon\Carbon;
 
-class VoucherDataTable extends DataTable
+class StudentVoucherPaymentDataTable extends DataTable
 {
+    protected $student_id;
+
+    public function setStudentId($student_id)
+    {
+        $this->student_id = $student_id;
+        return $this;
+    }
+
     public function dataTable($query)
     {
         return datatables()
@@ -54,8 +62,6 @@ class VoucherDataTable extends DataTable
                     default => '<span class="badge bg-light-secondary">Unknown</span>',
                 };
             })
-            ->rawColumns(['status'])
-
             ->addColumn('actions', function ($payment) {
                 return '
                     <ul class="list-inline mb-0 text-end">
@@ -71,20 +77,9 @@ class VoucherDataTable extends DataTable
                             </a>
                         </li>
                         <li class="list-inline-item">
-<a href="#"
-   class="avtar avtar-xs btn-link-secondary view-payment-slip"
-   data-bs-toggle="modal"
-   data-bs-target="#student-payment-slip_model"
-   data-voucher-id="{{ $voucher->id }}"
-   data-student-id="{{ $voucher->student_id }}">
-   <i class="ti ti-eye f-20"></i>
-</a>
-
-
-
-
-
-
+                            <a data-bs-toggle="modal" data-bs-target="#student-payment-slip_model" href="#" class="avtar avtar-xs btn-link-secondary">
+                                <i class="ti ti-eye f-20"></i>
+                            </a>
                         </li>
                         <li class="list-inline-item">
                             <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
@@ -107,7 +102,9 @@ class VoucherDataTable extends DataTable
 
     public function query(): QueryBuilder
     {
-        return Voucher::with('student')->select('vouchers.*');
+        return Voucher::with('student')
+            ->select('vouchers.*')
+            ->where('student_id', $this->student_id); // 👈 Filter by selected student
     }
 
     public function html(): HtmlBuilder

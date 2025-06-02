@@ -22,6 +22,39 @@
                 </div>
             </div>
 
+            {{-- Success Alert --}}
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        let alert = document.getElementById('success-alert');
+                        if (alert) {
+                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                            bsAlert.close();
+                        }
+                    }, 3000);
+                </script>
+
+                @php
+                    session()->forget('success');
+                @endphp
+            @endif
+
+            {{-- Error Alert --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -113,14 +146,7 @@
                                                 <h5>Personal Information</h5>
                                             </div>
                                             <div class="card-body">
-                                                @if (session('success'))
-                                                    <div class="alert alert-success alert-dismissible fade show"
-                                                        role="alert" id="success-alert">
-                                                        {{ session('success') }}
-                                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                @endif
+
                                                 <div class="row">
                                                     <div class="col-sm-12 text-center mb-3">
                                                         <div class="user-upload wid-75">
@@ -134,7 +160,6 @@
                                                                         src="{{ asset('assets/images/user/avatar-1.jpg') }}"
                                                                         alt="Profile Photo" class="img-fluid" />
                                                                 @endif
-                                                                <!-- Upload Label -->
                                                                 <label for="profile_photo" class="img-avtar-upload">
                                                                     <i class="ti ti-camera f-24 mb-1"></i>
                                                                     <span>Upload</span>
@@ -211,17 +236,6 @@
                                                 <h5>Change Password</h5>
                                             </div>
                                             <div class="card-body">
-                                                <!-- Display errors -->
-                                                @if ($errors->any())
-                                                    <div class="alert alert-danger">
-                                                        <ul class="m-0">
-                                                            {{-- Loop through each error and display it --}}
-                                                            @foreach ($errors->all() as $error)
-                                                                <li>{{ $error }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                @endif
 
                                                 <div class="row d-flex justify-content-center">
                                                     <div class="col-sm-10">

@@ -12,7 +12,7 @@
                         <i class="ti ti-menu-2"></i>
                     </a>
                 </li>
-                <li class="pc-h-item d-none d-md-inline-flex">
+                {{-- <li class="pc-h-item d-none d-md-inline-flex">
                     <form class="form-search">
                         <i class="search-icon">
                             <svg class="pc-icon">
@@ -21,14 +21,14 @@
                         </i>
                         <input type="search" class="form-control" placeholder="Ctrl + K" />
                     </form>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <div class="ms-auto">
             <ul class="list-unstyled">
 
                 {{-- Dark mode and light mode  --}}
-                <li class="dropdown pc-h-item">
+                {{-- <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
                         <svg class="pc-icon">
@@ -55,7 +55,7 @@
                             <span>Default</span>
                         </a>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
@@ -71,12 +71,12 @@
                         </a>
                         <form method="POST" action="{{ route('logout') }}" id="logout-form">
                             @csrf
-                            <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a href="#" class="dropdown-item"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="ti ti-power"></i>
                                 <span>Logout</span>
                             </a>
                         </form>
-                        
                     </div>
                 </li>
             </ul>
