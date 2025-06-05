@@ -206,20 +206,12 @@
                                 <div class="col-12">
 
                                     <!-- DISPLAY SECTION -->
-                                    <div class="mb-3 row me-0">
+                                    <div class="mb-3 row me-0" style="display:none;">
                                         <label class="col-lg-4 col-form-label">INVOICE ID :</label>
                                         <div class="col-lg-8 d-flex align-items-center">
                                             <span class="text-muted d-block" id="invoiceIdDisplay">--</span>
                                             <input type="hidden" name="invoice_id" id="invoiceIdInput">
                                             <input type="hidden" name="voucher_id" id="voucherIdInput">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3 row me-0">
-                                        <label class="col-lg-4 col-form-label">REFERENCE NO :</label>
-                                        <div class="col-lg-8 d-flex align-items-center">
-                                            <span class="text-muted d-block" id="referenceNumberDisplay">--</span>
-                                            <input type="hidden" name="reference_number" id="referenceNumberInput">
                                         </div>
                                     </div>
 
@@ -257,6 +249,15 @@
                                         </label>
                                         <div class="col-lg-8">
                                             <input type="date" class="form-control" name="payment_date" required />
+                                        </div>
+                                    </div>
+
+                                    <!-- REFERENCE NUMBER -->
+                                    <div class="mb-3 row me-0">
+                                        <label class="col-lg-4 col-form-label">Refrence No :</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="reference_number" id="referenceNumberInput"
+                                                class="form-control" placeholder="Enter reference number">
                                         </div>
                                     </div>
 

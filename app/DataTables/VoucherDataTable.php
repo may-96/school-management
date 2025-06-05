@@ -70,22 +70,17 @@ class VoucherDataTable extends DataTable
                                <i class="ti ti-plus f-20"></i>
                             </a>
                         </li>
-                        <li class="list-inline-item">
-<a href="#"
-   class="avtar avtar-xs btn-link-secondary view-payment-slip"
-   data-bs-toggle="modal"
-   data-bs-target="#student-payment-slip_model"
-   data-voucher-id="{{ $voucher->id }}"
-   data-student-id="{{ $voucher->student_id }}">
-   <i class="ti ti-eye f-20"></i>
-</a>
+                       <li class="list-inline-item">
+    <a href="#"
+       class="avtar avtar-xs btn-link-secondary view-payment-slip"
+       data-bs-toggle="modal"
+       data-bs-target="#student-payment-slip_model"
+       data-voucher-id="' . e($payment->id) . '"
+       data-student-id="' . e($payment->student_id) . '">
+       <i class="ti ti-eye f-20"></i>
+    </a>
+</li>
 
-
-
-
-
-
-                        </li>
                         <li class="list-inline-item">
                             <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
                                 <i class="ti ti-edit f-20"></i>
@@ -122,7 +117,7 @@ class VoucherDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['data' => 'invoice_id', 'title' => 'Invoice Id'],
+            ['data' => 'invoice_id', 'title' => 'Voucher Id'],
             ['data' => 'student_name', 'title' => 'Student Name'],
             ['data' => 'payment_date', 'title' => 'Due Date'],
             ['data' => 'amount', 'title' => 'Amount'],

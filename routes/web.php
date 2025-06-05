@@ -41,6 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Payments
     Route::post('/payments', [PaymentController::class, 'store'])->name('vouchers.payment.store');
+    Route::put('/payments/{id}', [PaymentController::class, 'update'])->name('payment.update');
+    Route::get('/payments/{id}/data', [PaymentController::class, 'getPayment']);
+
+
 
     Route::get('payments/index', [PaymentController::class, 'index'])->name('payment.index');
     Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->name('payment.destroy');
@@ -56,7 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Admin User Management (UserController)
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
     Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
-    // Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 

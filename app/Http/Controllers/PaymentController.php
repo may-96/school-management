@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 use App\DataTables\PaymentDataTable;
 use App\Models\Voucher;
 
-use Yajra\DataTables\Facades\DataTables;
-
 class PaymentController extends Controller
 
 {
 
     public function index(PaymentDataTable $dataTable)
     {
+
         return $dataTable->render('pages.payments.index');
     }
 
@@ -28,16 +27,16 @@ class PaymentController extends Controller
         $request->validate([
             'voucher_id' => 'required|exists:vouchers,id',
             'reference_number' => 'required',
-            'payment_method' => 'required',
-            'amount' => 'required|numeric',
-            'payment_date' => 'required|date',
-            'notes' => 'nullable|string',
+            'payment_method'   => 'required',
+            'amount'           => 'required|numeric',
+            'payment_date'     => 'required|date',
+            'notes'            => 'nullable|string',
         ]);
 
-        // Generate unique invoice_id for payment
+        // Generate unique invoice ID (auto)
         $invoiceId = $this->generateUniquePaymentInvoiceId();
 
-        // Create the payment
+        // Create payment
         $payment = Payment::create([
             'voucher_id'       => $request->voucher_id,
             'invoice_id'       => $invoiceId,
@@ -48,7 +47,7 @@ class PaymentController extends Controller
             'notes'            => $request->notes,
         ]);
 
-        // Update voucher status
+        // ✅ After payment is created, update the voucher status to "paid"
         $voucher = Voucher::find($request->voucher_id);
         if ($voucher) {
             $voucher->status = 'paid';
@@ -57,6 +56,8 @@ class PaymentController extends Controller
 
         return redirect()->route('payment.index')->with('success', 'Payment added successfully!');
     }
+
+
 
     private function generateUniquePaymentInvoiceId()
     {
@@ -67,6 +68,39 @@ class PaymentController extends Controller
         return $invoiceId;
     }
 
+
+    public function getPayment($id)
+    {
+        $payment = Payment::findOrFail($id);
+        return response()->json($payment);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'reference_number' => 'required|string',
+            'payment_method'   => 'required|string',
+            'amount'           => 'required|numeric',
+            'payment_date'     => 'required|date',
+            'notes'            => 'nullable|string',
+        ]);
+
+        $payment = Payment::findOrFail($id);
+
+        $payment->update([
+            'reference_number' => $request->reference_number,
+            'payment_method'   => $request->payment_method,
+            'amount'           => $request->amount,
+            'payment_date'     => $request->payment_date,
+            'notes'            => $request->notes,
+        ]);
+
+        return redirect()->route('payment.index')->with('success', 'Payment updated successfully!');
+    }
+
+
+
     public function show($id, PaymentDataTable $dataTable)
     {
         $voucher = Voucher::with(['student', 'voucherItems'])->findOrFail($id);
@@ -74,7 +108,7 @@ class PaymentController extends Controller
         return $dataTable->render('pages.vouchers.show', compact('voucher'));
     }
 
-    
+
     public function destroy($id)
     {
         $payment = Payment::findOrFail($id);
@@ -92,6 +126,6 @@ class PaymentController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Payment deleted and voucher updated!');
+        return redirect()->back()->with('success', 'Payment deleted and Voucher Status is Unpaid!');
     }
 }

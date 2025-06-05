@@ -22,9 +22,9 @@ class VoucherController extends Controller
         $student = Student::findOrFail($studentId);
 
         $invoiceId = 'INV-' . now()->format('YmdHis');
-        $referenceNo = 'REF-' . rand(10000, 99999);
+        // $referenceNo = 'REF-' . rand(10000, 99999);
 
-        return view('pages.vouchers.create', compact('student', 'invoiceId', 'referenceNo'));
+        return view('pages.vouchers.create', compact('student', 'invoiceId'));
     }
 
     public function store(Request $request)
@@ -32,7 +32,7 @@ class VoucherController extends Controller
         $request->validate([
             'student_id'     => 'required|exists:students,id',
             'invoice_id'     => 'required|unique:vouchers',
-            'reference_no'   => 'required',
+            // 'reference_no'   => 'required',
             'payment_method' => 'required',
             'payment_date'   => 'required|date',
             'fee_type'       => 'required|array|min:1',
@@ -46,7 +46,7 @@ class VoucherController extends Controller
         $voucher = Voucher::create([
             'student_id'     => $request->student_id,
             'invoice_id'     => $request->invoice_id,
-            'reference_no'   => $request->reference_no,
+            // 'reference_no'   => $request->reference_no,
             'payment_method' => $request->payment_method,
             'status'         => 'unpaid',
             'amount'         => $totalAmount,
@@ -123,7 +123,7 @@ class VoucherController extends Controller
         $voucher = Voucher::findOrFail($id);
         $voucher->delete();
 
-        return redirect()->back()->with('success', 'Payment deleted successfully.');
+        return redirect()->back()->with('success', 'Voucher deleted successfully.');
     }
     
 }

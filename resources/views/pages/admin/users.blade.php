@@ -68,6 +68,7 @@
                                     <thead>
                                         <tr>
                                             <th>Users</th>
+                                            <th>Contacts</th>
                                             <th>ROLE</th>
                                             <th class="text-end">STATUS</th>
                                             <th class="text-end">ACTIONS</th>
@@ -93,6 +94,16 @@
                                                             <h5 class="mb-0">
                                                                 {{ old('first_name', $user->first_name . ' ' . $user->last_name) }}
                                                             </h5>
+                                                            <small
+                                                                class="text-truncate w-100 text-muted">{{ $user->email }}</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <span
+                                                                class="text-truncate w-100 text-muted">{{ $user->phone ?? 'N/A' }}</span>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -117,28 +128,35 @@
                                                 </td>
                                                 <td class="text-end">
                                                     {{-- Edit --}}
-                                                    {{-- <a data-bs-toggle="modal"
-                                                        data-bs-target="#edit-user-modal-{{ $user->id }}" href="#"
-                                                        class="avtar avtar-xs btn-link-secondary">
-                                                        <i class="ti ti-edit f-20"></i>
-                                                    </a> --}}
+                                                    @if ($user->role !== 'admin')
+                                                        <a data-bs-toggle="modal"
+                                                            data-bs-target="#edit-user-modal-{{ $user->id }}"
+                                                            href="#" class="avtar avtar-xs btn-link-secondary">
+                                                            <i class="ti ti-edit f-20"></i>
+                                                        </a>
+                                                    @endif
+
                                                     {{-- Delete --}}
                                                     <form id="delete-form-{{ $user->id }}" method="POST"
                                                         action="{{ route('admin.users.destroy', $user->id) }}"
                                                         class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <a href="#"
-                                                            class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                                                            data-id="{{ $user->id }}">
-                                                            <i class="ti ti-trash f-20"></i>
-                                                        </a>
+
+                                                        @if ($user->role !== 'admin')
+                                                            <a href="#"
+                                                                class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                                                                data-id="{{ $user->id }}">
+                                                                <i class="ti ti-trash f-20"></i>
+                                                            </a>
+                                                        @endif
                                                     </form>
+
                                                 </td>
                                             </tr>
 
                                             {{-- Edit Modal per user --}}
-                                            {{-- <div class="modal fade" id="edit-user-modal-{{ $user->id }}"
+                                            <div class="modal fade" id="edit-user-modal-{{ $user->id }}"
                                                 tabindex="-1">
                                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                                     <div class="modal-content">
@@ -156,30 +174,26 @@
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" name="first_name"
                                                                             class="form-control"
-                                                                            value="{{ explode(' ', $user->name)[0] }}"
+                                                                            value="{{ explode(' ', $user->first_name)[0] }}"
                                                                             required>
                                                                     </div>
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Last Name</label>
                                                                         <input type="text" name="last_name"
                                                                             class="form-control"
-                                                                            value="{{ explode(' ', $user->name)[1] ?? '' }}"
+                                                                            value="{{ explode(' ', $user->last_name)[0] ?? '' }}"
                                                                             required>
                                                                     </div>
                                                                     <div class="col-sm-6 mb-3">
-                                                                        <label class="form-label">Role</label>
-                                                                        <select name="role" class="form-select" required>
-                                                                            @foreach (['admin', 'member'] as $role)
-                                                                                <option value="{{ $role }}"
-                                                                                    {{ $user->role === $role ? 'selected' : '' }}>
-                                                                                    {{ ucfirst($role) }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
+                                                                        <label class="form-label">Contact Phone</label>
+                                                                        <input type="text" name="phone"
+                                                                            class="form-control"
+                                                                            value="{{ old('phone', $user->phone) }}" />
                                                                     </div>
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Status</label>
-                                                                        <select name="status" class="form-select" required>
+                                                                        <select name="status" class="form-select"
+                                                                            required>
                                                                             <option value="active"
                                                                                 {{ $user->status === 'active' ? 'selected' : '' }}>
                                                                                 Active</option>
@@ -207,7 +221,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -292,12 +306,8 @@
                                 </div>
                                 {{-- Role --}}
                                 <div class="col-sm-6 mb-3">
-                                    <label class="form-label">Role</label>
-                                    <select name="role" class="form-select" required>
-                                        @foreach (['admin', 'member'] as $role)
-                                            <option value="{{ $role }}">{{ ucfirst($role) }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" name="phone" class="form-control" required>
                                 </div>
                                 {{-- Status --}}
                                 <div class="col-sm-6 mb-3">

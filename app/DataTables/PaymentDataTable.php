@@ -21,24 +21,37 @@ class PaymentDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function ($payment) {
                 return '
-        <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-                <a data-bs-toggle="modal" data-bs-target="#student-edit-payment_modal" href="#" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-edit f-20"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <form id="delete-form-' . $payment->id . '" action="' . route('payment.destroy', $payment->id) . '" method="POST" style="display: none;">
-            ' . csrf_field() . method_field('DELETE') . '
-        </form>
-        <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"
-           data-id="' . $payment->id . '" data-bs-toggle="modal" data-bs-target="#delete-confirmation-modal">
-            <i class="ti ti-trash f-20"></i>
-        </a>
-            </li>
-        </ul>
+    <ul class="list-inline mb-0">
+        <li class="list-inline-item">
+          <a href="#"
+   class="avtar avtar-xs btn-link-secondary edit-payment-btn"
+   data-id="' . $payment->id . '"
+   data-invoice_id="' . $payment->invoice_id . '"
+   data-reference_number="' . $payment->reference_number . '"
+   data-payment_method="' . $payment->payment_method . '"
+   data-amount="' . $payment->amount . '"
+   data-payment_date="' . $payment->payment_date . '"
+   data-notes="' . htmlspecialchars($payment->notes) . '"
+   data-bs-toggle="modal" data-bs-target="#student-edit-payment_modal">
+    <i class="ti ti-edit f-20"></i>
+</a>
+        </li>
+        <li class="list-inline-item">
+            <form id="delete-form-' . $payment->id . '" action="' . route('payment.destroy', $payment->id) . '" method="POST" style="display: none;">
+                ' . csrf_field() . method_field('DELETE') . '
+            </form>
+            <a href="#"
+                class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                data-id="' . $payment->id . '"
+                data-bs-toggle="modal"
+                data-bs-target="#delete-confirmation-modal">
+                <i class="ti ti-trash f-20"></i>
+            </a>
+        </li>
+    </ul>
     ';
             })
+
 
             ->rawColumns(['action'])
             ->editColumn('amount', function ($payment) {
@@ -49,10 +62,25 @@ class PaymentDataTable extends DataTable
             });
     }
 
-    public function query(Payment $model)
+    public function query()
     {
-        return $model->newQuery();
+        $query = Payment::query();
+
+        // Filter by voucher_id if sent via request
+        if ($voucherId = request('voucher_id')) {
+            $query->where('voucher_id', $voucherId);
+        }
+
+        // Optional: Filter by student_id if needed, assuming relation through voucher -> student
+        if ($studentId = request('student_id')) {
+            $query->whereHas('voucher', function ($q) use ($studentId) {
+                $q->where('student_id', $studentId);
+            });
+        }
+
+        return $query;
     }
+
 
     public function html()
     {

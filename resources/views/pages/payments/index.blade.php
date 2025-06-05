@@ -86,88 +86,106 @@
 
     {{-- student edit fees model  --}}
 
+    <!-- Modal -->
     <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header justify-content-between">
-                    <div class="collapse multi-collapse show">
+            <form id="edit-payment-form" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="payment_id" id="edit_payment_id">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-between">
                         <h4 class="mb-0">Edit Payment</h4>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-end">
                         <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal" title="Close">
                             <i class="ti ti-x f-20"></i>
                         </a>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <div class="collapse multi-collapse show">
+                    <div class="modal-body">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="mb-3 row me-0">
-                                    <label class="col-lg-4 col-form-label">INVOICE ID : </label>
-                                    <div class="col-lg-8 d-flex align-items-center">
-                                        <span class="text-muted d-block">8943769870</span>
-                                    </div>
+                            <!-- Invoice ID (readonly) -->
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label">INVOICE ID:</label>
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <span class="text-muted" id="edit_invoice_id"></span>
                                 </div>
+                            </div>
 
-                                <div class="mb-3 row me-0">
-                                    <label class="col-lg-4 col-form-label">Payment
-                                        Method : <small class="text-muted d-block">Enter
-                                            your Payment Method</small></label>
-                                    <div class="col-lg-8">
-                                        <select class="form-select" id="exampleFormControlSelect1">
-                                            <option>Please Select</option>
-                                            <option>cheque</option>
-                                            <option>cash</option>
-                                            <option>credit card</option>
-                                            <option>online transfer</option>
-                                        </select>
-                                    </div>
+                            {{-- <!-- Reference No (readonly) -->
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label">Reference No:</label>
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <span class="text-muted" id="edit_reference_number"></span>
                                 </div>
-                                <div class="mb-3 row me-0">
-                                    <label class="col-lg-4 col-form-label"> Amount
-                                        :<small class="text-muted d-block">Enter
-                                            Amount</small></label>
-                                    <div class="col-lg-8">
-                                        <input type="number" class="form-control" />
-                                    </div>
+                            </div> --}}
+
+                            <!-- Payment Method -->
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label">Payment Method:</label>
+                                <div class="col-lg-8">
+                                    <select class="form-select" name="payment_method" id="edit_payment_method" required>
+                                        <option value="">Please Select</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="cheque">Cheque</option>
+                                        <option value="credit card">Credit Card</option>
+                                        <option value="online transfer">Online Transfer</option>
+                                    </select>
                                 </div>
-                                <div class="mb-3 row me-0">
-                                    <label class="col-lg-4 col-form-label">Payment
-                                        Date:<small class="text-muted d-block">Enter the
-                                            Payment Date</small></label>
-                                    <div class="col-lg-8">
-                                        <input type="date" class="form-control" />
-                                    </div>
+                            </div>
+
+                            <!-- Amount -->
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label">Amount:</label>
+                                <div class="col-lg-8">
+                                    <input type="number" name="amount" id="edit_amount" class="form-control" required>
                                 </div>
-                                <div class="mb-3 row me-0">
-                                    <label class="col-lg-4 col-form-label"> Refrence No
-                                        :<small class="text-muted d-block">Enter
-                                            Refrence No</small></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" />
-                                    </div>
+                            </div>
+
+                            <!-- Reference No -->
+                            <div class="mb-3 row me-0">
+                                <label class="col-lg-4 col-form-label">Refrence No :</label>
+                                <div class="col-lg-8">
+                                    <input type="text" id="edit_reference_number" name="reference_number"
+                                        class="form-control" placeholder="Enter reference number">
                                 </div>
-                                <div class="mb-3 row me-0">
-                                    <label class="col-lg-4 col-form-label">Notes
-                                        :<small class="text-muted d-block">Enter
-                                            Notes</small></label>
-                                    <div class="col-lg-8">
-                                        <textarea class="form-control" rows="2" placeholder="Enter address"></textarea>
-                                    </div>
+                            </div>
+
+
+
+                            <!-- Payment Date -->
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label">Payment Date:</label>
+                                <div class="col-lg-8">
+                                    <input type="date" name="payment_date" id="edit_payment_date" class="form-control"
+                                        required>
                                 </div>
-                                <div class="text-end btn-page mb-0 mt-4 me-0">
-                                    <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal"
-                                        data-bs-toggle="tooltip">Cancel</button>
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+
+
+
+                            <!-- Notes -->
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label">Notes:</label>
+                                <div class="col-lg-8">
+                                    <textarea name="notes" id="edit_notes" class="form-control" rows="2"></textarea>
                                 </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="text-end mt-4">
+                                <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+
+
+
+
 
     {{-- <script type="module">
         import {
@@ -181,6 +199,27 @@
 
     @push('scripts')
         {!! $dataTable->scripts() !!}
+        <script>
+            $(document).on('click', '.edit-payment-btn', function(e) {
+                e.preventDefault();
+
+                const id = $(this).data('id');
+
+                $('#edit_payment_id').val(id);
+                $('#edit_invoice_id').text($(this).data('invoice_id'));
+                $('#edit_payment_method').val($(this).data('payment_method'));
+                $('#edit_amount').val($(this).data('amount'));
+                $('#edit_payment_date').val($(this).data('payment_date'));
+                $('#edit_reference_number').val($(this).data('reference_number'));
+                $('#edit_notes').val($(this).data('notes'));
+
+                $('#edit-payment-form').attr('action', '/payments/' + id);
+            });
+        </script>
     @endpush
+
+
+
+
 
 @endsection

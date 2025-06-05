@@ -24,14 +24,14 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        View::composer('*', function ($view) {
-            $totalTeachers = Teacher::count();
-            $totalStudents = Student::count();
+        // View::composer('*', function ($view) {
+        //     $totalTeachers = Teacher::count();
+        //     $totalStudents = Student::count();
 
-            $totalPaid = Payment::count();  
-            $totalUnpaid = Payment::count();               
+        //     $totalPaid = Payment::count();  
+        //     $totalUnpaid = Payment::count();               
 
-            $view->with(compact('totalTeachers', 'totalStudents', 'totalPaid', 'totalUnpaid'));
-        });
+        //     $view->with(compact('totalTeachers', 'totalStudents', 'totalPaid', 'totalUnpaid'));
+        // });
     }
 }

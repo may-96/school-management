@@ -7,22 +7,23 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Add unique constraint to invoice_id column.
+     * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->unique('invoice_id');
+            $table->string('invoice_id')->unique()->after('id');
         });
     }
 
+
     /**
-     * Remove the unique constraint.
+     * Reverse the migrations.
      */
     public function down(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->dropUnique(['invoice_id']);
+            //
         });
     }
 };

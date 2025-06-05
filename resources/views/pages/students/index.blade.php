@@ -95,63 +95,46 @@
                 button.href = `/voucher/create/${studentId}`;
                 button.style.visibility = "visible";
             } else if (checkedBoxes.length > 1) {
-                button.href = "#"; // Optional bulk route
+                const ids = checkedBoxes.map(function() {
+                    return $(this).data('student-id');
+                }).get().join(',');
+                button.href = `/voucher/create?ids=${ids}`;
                 button.style.visibility = "visible";
             } else {
                 button.href = "#";
                 button.style.visibility = "hidden";
             }
         }
-
-        // function updateIcons() {
-        //     $('.student-checkbox').each(function() {
-        //         const container = $(this).closest('.pc-icon-checkbox');
-        //         const checked = $(this).prop('checked');
-        //         container.find('.pc-icon-check').toggle(checked);
-        //         container.find('.pc-icon-uncheck').toggle(!checked);
-        //     });
-
-        //     const bulkCheckbox = $('#bulk-checkbox');
-        //     const container = bulkCheckbox.closest('.pc-icon-checkbox');
-        //     const checked = bulkCheckbox.prop('checked');
-        //     container.find('.pc-icon-check').toggle(checked);
-        //     container.find('.pc-icon-uncheck').toggle(!checked);
-        // }
-
-        // $(document).ready(function() {
-        //     // When DataTable redraws (pagination, search, etc.)
-        //     $('#student-table').on('draw.dt', function() {
-        //         updateIcons();
-        //         handleButtonState();
-        //     });
-
-        //     // Bulk checkbox click
-        //     $(document).on('change', '#bulk-checkbox', function() {
-        //         const isChecked = $(this).is(':checked');
-
-        //         // Only checkboxes on current page
-        //         $('#student-table tbody .student-checkbox').each(function() {
-        //             $(this).prop('checked', isChecked);
-        //         });
-
-        //         updateIcons();
-        //         handleButtonState();
-        //     });
-
-        //     // Individual checkbox change
-        //     $(document).on('change', '.student-checkbox', function() {
-        //         updateIcons();
-        //         handleButtonState();
-        //     });
-
-        //     // Initial run
-        //     updateIcons();
-        //     handleButtonState();
-        // });
     </script>
 
     @push('scripts')
         {!! $dataTable->scripts() !!}
+
+        <script>
+            $('#student-table').on('draw.dt', function() {
+                bindCheckboxEvents();
+            });
+
+            function bindCheckboxEvents() {
+                $('#bulk-checkbox').off('change').on('change', function() {
+                    const isChecked = $(this).is(':checked');
+                    $('.student-checkbox').prop('checked', isChecked);
+                    handleButtonState();
+                });
+
+                $('.student-checkbox').off('change').on('change', function() {
+                    handleButtonState();
+
+                    const all = $('.student-checkbox').length;
+                    const checked = $('.student-checkbox:checked').length;
+                    $('#bulk-checkbox').prop('checked', all === checked);
+                });
+            }
+
+            $(document).ready(function() {
+                bindCheckboxEvents();
+            });
+        </script>
     @endpush
 
 @endsection
