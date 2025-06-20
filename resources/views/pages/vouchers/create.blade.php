@@ -40,7 +40,7 @@
                              <form id="voucher-form" method="POST"
                                  action="{{ route('students.vouchers.store', $student->id) }}">
                                  @csrf
-                                 <!-- Hidden Fields -->
+                                 {{-- Hidden Fields --}}
                                  <input type="hidden" name="student_id" value="{{ $student->id ?? '' }}">
                                  <input type="hidden" name="invoice_id" value="{{ $invoiceId ?? '' }}">
                                  <input type="hidden" name="reference_no" value="{{ $referenceNo ?? '' }}">
@@ -59,16 +59,6 @@
                                              <option>Bank Transfer</option>
                                          </select>
                                      </div>
-
-                                     {{-- <div class="col-sm-6 col-xl-3">
-                                         <label class="form-label">Status</label>
-                                         <select class="form-select" name="status" required>
-                                             <option value="">Please Select</option>
-                                             <option>Paid</option>
-                                             <option>Unpaid</option>
-                                             <option>Partial Paid</option>
-                                         </select>
-                                     </div> --}}
 
                                      <div class="col-sm-6 col-xl-6">
                                          <label class="form-label">Notes</label>

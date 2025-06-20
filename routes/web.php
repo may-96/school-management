@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\SchoolController;
 
 // Public Route
 Route::get('/', [LandingController::class, 'home'])->name('landing.home');
@@ -18,6 +19,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+
+    // Add this route for storing school settings
+
+    Route::get('/appsetting', [SchoolController::class, 'create'])->name('appsetting');
+    Route::post('/appsetting', [SchoolController::class, 'store'])->name('schools.store');
+
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,8 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Vouchers 
     Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
-    Route::get('/voucher/create/{studentId}', [VoucherController::class, 'create'])->name('voucher.create');
-    Route::post('/students/{student}/vouchers/store', [VoucherController::class, 'store'])->name('students.vouchers.store');
+    Route::get('/voucher/create', [VoucherController::class, 'create'])->name('voucher.create');
+    Route::post('/vouchers/store', [VoucherController::class, 'store'])->name('students.vouchers.store');
     Route::get('/vouchers/{student}', [VoucherController::class, 'show'])->name('voucher.show');
     Route::get('/voucher/{id}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
     Route::put('/voucher/{id}', [VoucherController::class, 'update'])->name('voucher.update');

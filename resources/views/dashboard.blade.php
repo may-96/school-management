@@ -51,11 +51,19 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="p-4">
-                                        <h2 class="text-white">Govt High Secondary School No 1</h2>
+                                        {{-- <h2 class="text-white">Govt High Secondary School No 1</h2>
                                         <p class="text-white">The Brand new User Interface with power of Bootstrap
                                             Components. Explore the
                                             Endless possibilities with Able
-                                            Pro.</p>
+                                            Pro.</p> --}}
+                                        @if ($school)
+                                            <h2 class="text-white">{{ $school->name }}</h2>
+                                            <p class="text-white">{{ $school->description }}</p>
+                                        @else
+                                            <h2 class="text-white">School Name Not Set</h2>
+                                            <p class="text-white">Please configure your school settings.</p>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="col-sm-6 text-center">

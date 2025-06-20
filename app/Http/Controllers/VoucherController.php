@@ -17,14 +17,13 @@ class VoucherController extends Controller
     }
 
 
-    public function create($studentId)
+    public function create()
     {
-        $student = Student::findOrFail($studentId);
 
         $invoiceId = 'INV-' . now()->format('YmdHis');
         // $referenceNo = 'REF-' . rand(10000, 99999);
 
-        return view('pages.vouchers.create', compact('student', 'invoiceId'));
+        return view('pages.vouchers.create', compact('invoiceId'));
     }
 
     public function store(Request $request)

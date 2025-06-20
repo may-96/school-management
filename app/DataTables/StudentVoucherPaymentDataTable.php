@@ -55,12 +55,16 @@ class StudentVoucherPaymentDataTable extends DataTable
             ->addColumn('payment_date', fn($payment) => Carbon::parse($payment->payment_date)->format('d/m/Y'))
             ->addColumn('amount', fn($payment) => $payment->amount . ' Pkr')
             ->addColumn('status', function ($voucher) {
-                return match (strtolower($voucher->status)) {
-                    'paid' => '<span class="badge bg-light-success">Paid</span>',
-                    'unpaid' => '<span class="badge bg-light-danger">Unpaid</span>',
-                    'partial paid' => '<span class="badge bg-light-warning">Partial Paid</span>',
-                    default => '<span class="badge bg-light-secondary">Unknown</span>',
-                };
+                $totalAmount = $voucher->amount;           // total due
+                $paidAmount = $voucher->payments->sum('amount'); // assuming there's a `payments` relationship
+
+                if ($paidAmount >= $totalAmount) {
+                    return '<span class="badge bg-light-success">Paid</span>';
+                } elseif ($paidAmount > 0 && $paidAmount < $totalAmount) {
+                    return '<span class="badge bg-light-warning">Partial Paid</span>';
+                } else {
+                    return '<span class="badge bg-light-danger">Unpaid</span>';
+                }
             })
             ->addColumn('actions', function ($payment) {
                 return '
@@ -104,7 +108,7 @@ class StudentVoucherPaymentDataTable extends DataTable
     {
         return Voucher::with('student')
             ->select('vouchers.*')
-            ->where('student_id', $this->student_id); // 👈 Filter by selected student
+            ->where('student_id', $this->student_id);
     }
 
     public function html(): HtmlBuilder

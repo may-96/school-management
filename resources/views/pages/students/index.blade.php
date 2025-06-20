@@ -89,16 +89,16 @@
         function handleButtonState() {
             const button = document.getElementById("idBtnSub");
             const checkedBoxes = $('.student-checkbox:checked');
-
+            const selectedStudentIds = checkedBoxes.map(function() {
+                return $(this).data('student-id');
+            }).get();
+            localStorage.setItem('selectedStudentIds', JSON.stringify(selectedStudentIds));
             if (checkedBoxes.length === 1) {
-                const studentId = checkedBoxes.first().data('student-id');
-                button.href = `/voucher/create/${studentId}`;
+                button.href = `/voucher/create`;
                 button.style.visibility = "visible";
             } else if (checkedBoxes.length > 1) {
-                const ids = checkedBoxes.map(function() {
-                    return $(this).data('student-id');
-                }).get().join(',');
-                button.href = `/voucher/create?ids=${ids}`;
+                
+                button.href = `/voucher/create`;
                 button.style.visibility = "visible";
             } else {
                 button.href = "#";

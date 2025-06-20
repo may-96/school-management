@@ -4,7 +4,6 @@
     <div class="pc-container">
         <div class="pc-content">
 
-            <!-- [ breadcrumb ] start -->
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
@@ -23,7 +22,6 @@
                     </div>
                 </div>
             </div>
-            <!-- [ breadcrumb ] end -->
 
             {{-- Success Alert --}}
             @if (session('success'))
@@ -205,7 +203,7 @@
                             <div class="row">
                                 <div class="col-12">
 
-                                    <!-- DISPLAY SECTION -->
+                                    {{-- DISPLAY SECTION --}}
                                     <div class="mb-3 row me-0" style="display:none;">
                                         <label class="col-lg-4 col-form-label">INVOICE ID :</label>
                                         <div class="col-lg-8 d-flex align-items-center">
@@ -216,7 +214,7 @@
                                     </div>
 
 
-                                    <!-- PAYMENT METHOD -->
+                                    {{-- PAYMENT METHOD --}}
                                     <div class="mb-3 row me-0">
                                         <label class="col-lg-4 col-form-label">Payment Method:
                                             <small class="text-muted d-block">Enter your Payment Method</small>
@@ -232,7 +230,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- AMOUNT -->
+                                    {{-- AMOUNT --}}
                                     <div class="mb-3 row me-0">
                                         <label class="col-lg-4 col-form-label">Amount:
                                             <small class="text-muted d-block">Enter Amount</small>

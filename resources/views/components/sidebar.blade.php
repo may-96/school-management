@@ -102,6 +102,16 @@
                         </li>
                     @endif
                 @endauth
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('appsetting') }}" class="pc-link">
+                        <span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-setting-2"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext" data-i18n="Application">App Settings</span><span class="pc-arrow"></span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
