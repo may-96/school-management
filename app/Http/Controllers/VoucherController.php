@@ -21,7 +21,6 @@ class VoucherController extends Controller
     {
 
         $invoiceId = 'INV-' . now()->format('YmdHis');
-        // $referenceNo = 'REF-' . rand(10000, 99999);
 
         return view('pages.vouchers.create', compact('invoiceId'));
     }
@@ -31,7 +30,6 @@ class VoucherController extends Controller
         $request->validate([
             'student_id'     => 'required|exists:students,id',
             'invoice_id'     => 'required|unique:vouchers',
-            // 'reference_no'   => 'required',
             'payment_method' => 'required',
             'payment_date'   => 'required|date',
             'fee_type'       => 'required|array|min:1',
@@ -45,7 +43,6 @@ class VoucherController extends Controller
         $voucher = Voucher::create([
             'student_id'     => $request->student_id,
             'invoice_id'     => $request->invoice_id,
-            // 'reference_no'   => $request->reference_no,
             'payment_method' => $request->payment_method,
             'status'         => 'unpaid',
             'amount'         => $totalAmount,

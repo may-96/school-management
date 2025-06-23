@@ -163,9 +163,9 @@
                                                      role="tabpanel" aria-labelledby="analytics-tab-1" tabindex="0">
                                                      <div class="table-responsive">
 
-                                                         {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
+                                                         {{-- {!! $dataTable->table(['class' => 'table table-hover'], true) !!} --}}
 
-                                                         {{-- <table class="table table-hover" id="pc-dt-simple-1">
+                                                         <table class="table table-hover" id="pc-dt-simple-1">
                                                              <thead>
                                                                  <tr>
                                                                      <th>Invoice Id</th>
@@ -277,7 +277,7 @@
                                                                      </tr>
                                                                  @endforeach
                                                              </tbody>
-                                                         </table> --}}
+                                                         </table>
                                                      </div>
                                                  </div>
                                              </div>
@@ -463,7 +463,7 @@
          </div>
      </div> --}}
 
-     {{-- <script type="module">
+     <script type="module">
          import {
              DataTable
          } from '../assets/js/plugins/module.js';
@@ -471,12 +471,12 @@
          window.dt = new DataTable('#pc-dt-simple-2');
          window.dt = new DataTable('#pc-dt-simple-3');
          window.dt = new DataTable('#pc-dt-simple-4');
-     </script> --}}
+     </script>
 
-     @push('scripts')
+     {{-- @push('scripts')
          {!! $dataTable->scripts() !!}
-     @endpush
+     @endpush --}}
 
-     @stack('scripts')
+     {{-- @stack('scripts') --}}
 
  @endsection

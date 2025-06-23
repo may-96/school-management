@@ -43,7 +43,6 @@
                                  {{-- Hidden Fields --}}
                                  <input type="hidden" name="student_id" value="{{ $student->id ?? '' }}">
                                  <input type="hidden" name="invoice_id" value="{{ $invoiceId ?? '' }}">
-                                 <input type="hidden" name="reference_no" value="{{ $referenceNo ?? '' }}">
 
                                  <input type="hidden" name="amount" value="0.00">
 

@@ -38,14 +38,16 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-floating mb-0">
                                             <input type="text" class="form-control" id="schoolName" name="name"
-                                                placeholder="Enter school name">
+                                                placeholder="Enter school name"
+                                                value="{{ old('name', $school->name ?? '') }}">
                                             <label for="schoolName">School Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-floating mb-0">
                                             <input type="text" class="form-control" id="description" name="description"
-                                                placeholder="Enter description">
+                                                placeholder="Enter description"
+                                                value="{{ old('description', $school->description ?? '') }}">
                                             <label for="description">Description</label>
                                         </div>
                                     </div>
@@ -54,6 +56,7 @@
                                     </div>
                                 </div>
                             </form>
+
 
                         </div>
                     </div>
