@@ -45,7 +45,14 @@ class VoucherDataTable extends DataTable
                 ';
             })
             ->addColumn('payment_date', fn($payment) => Carbon::parse($payment->payment_date)->format('d/m/Y'))
-            ->addColumn('amount', fn($payment) => $payment->amount . ' Pkr')
+            ->addColumn('amount', function ($voucher) {
+                $paid = $voucher->payments()->sum('amount');
+                $total = $voucher->amount;
+                $remaining = $total - $paid;
+
+                return number_format($remaining, 2) . ' Pkr';
+
+            })
             ->addColumn('status', function ($voucher) {
                 return match (strtolower($voucher->status)) {
                     'paid' => '<span class="badge bg-light-success">Paid</span>',
@@ -61,25 +68,26 @@ class VoucherDataTable extends DataTable
                     <ul class="list-inline mb-0 text-end">
                         <li class="list-inline-item">
                             <a href="#"
-                               class="avtar avtar-xs btn-link-secondary open-payment-modal"
-                               data-bs-toggle="modal"
-                               data-bs-target="#student-add-payment_modal"
-                               data-invoice-id="' . e($payment->invoice_id) . '"
-                               data-reference-number="' . e($payment->reference_no) . '"
-                               data-voucher-id="' . e($payment->id) . '">
-                               <i class="ti ti-plus f-20"></i>
+                                class="avtar avtar-xs btn-link-secondary open-payment-modal"
+                                data-bs-toggle="modal"
+                                data-bs-target="#student-add-payment_modal"
+                                data-invoice-id="' . e($payment->invoice_id) . '"
+                                data-reference-number="' . e($payment->reference_no) . '"
+                                data-voucher-id="' . e($payment->id) . '"
+                                data-voucher-amount="' . e($payment->amount - $payment->payments()->sum('amount')) . '">
+                                <i class="ti ti-plus f-20"></i>
                             </a>
                         </li>
                        <li class="list-inline-item">
-    <a href="#"
-       class="avtar avtar-xs btn-link-secondary view-payment-slip"
-       data-bs-toggle="modal"
-       data-bs-target="#student-payment-slip_model"
-       data-voucher-id="' . e($payment->id) . '"
-       data-student-id="' . e($payment->student_id) . '">
-       <i class="ti ti-eye f-20"></i>
-    </a>
-</li>
+                            <a href="#"
+                            class="avtar avtar-xs btn-link-secondary view-payment-slip"
+                            data-bs-toggle="modal"
+                            data-bs-target="#student-payment-slip_model"
+                            data-voucher-id="' . e($payment->id) . '"
+                            data-student-id="' . e($payment->student_id) . '">
+                            <i class="ti ti-eye f-20"></i>
+                            </a>
+                        </li>
 
                         <li class="list-inline-item">
                             <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
@@ -97,7 +105,7 @@ class VoucherDataTable extends DataTable
                     </ul>
                 ';
             })
-            ->rawColumns(['student_name', 'status', 'actions']);
+            ->rawColumns(['student_name', 'status', 'actions', 'amount']);
     }
 
     public function query(): QueryBuilder

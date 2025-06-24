@@ -31,7 +31,7 @@
                 </div>
 
                 <script>
-                    setTimeout(function() {
+                    setTimeout(function () {
                         let alert = document.getElementById('success-alert');
                         if (alert) {
                             let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
@@ -69,110 +69,6 @@
 
                                 {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
 
-                                {{-- <table class="table table-hover" id="pc-dt-simple-1">
-                                            <thead>
-                                                <tr>
-                                                    <th>Invoice Id</th>
-                                                    <th>Student Name</th>
-                                                    <th>Due Date</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                    <th class="text-end">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($payments as $payment)
-                                                    <tr>
-                                                        <td>{{ $payment->invoice_id }}</td>
-                                                        <td>
-                                                            <div class="row align-items-center">
-                                                                <div class="col-auto pe-0">
-                                                                    @if ($payment->student->profile_image)
-                                                                        <img src="{{ asset('storage/students/' . $payment->student->profile_image) }}"
-                                                                            alt="user-image"
-                                                                            class="wid-40 hei-40 rounded-circle" />
-                                                                    @else
-                                                                        <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
-                                                                            alt="user-image"
-                                                                            class="wid-40 hei-40 rounded-circle" />
-                                                                    @endif
-                                                                </div>
-                                                                <div class="col">
-                                                                    <h6 class="mb-1">
-                                                                        <span
-                                                                            class="text-truncate w-100">{{ $payment->student->first_name }}
-                                                                            {{ $payment->student->last_name }}</span>
-                                                                    </h6>
-                                                                    <p class="f-12 mb-0">
-                                                                        <a href="#!" class="text-muted">
-                                                                            <span
-                                                                                class="text-truncate w-100">{{ $payment->student->parents_mobile }}</span>
-                                                                        </a>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y') }}
-                                                        </td>
-                                                        <td>{{ $payment->amount }} Pkr</td>
-                                                        <td colspan="1">
-                                                            @php
-                                                                $status = strtolower($payment->status);
-                                                            @endphp
-
-                                                            @if ($status === 'paid')
-                                                                <span class="badge bg-light-success">Paid</span>
-                                                            @elseif ($status === 'unpaid')
-                                                                <span class="badge bg-light-danger">Unpaid</span>
-                                                            @elseif ($status === 'partial paid')
-                                                                <span class="badge bg-light-warning">Partial Paid</span>
-                                                            @else
-                                                                <span class="badge bg-light-secondary">Unknown</span>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-end">
-                                                            <ul class="list-inline mb-0">
-                                                                <li class="list-inline-item">
-                                                                    <a data-bs-toggle="modal"
-                                                                        data-bs-target="#student-add-payment_modal"
-                                                                        href="#"
-                                                                        class="avtar avtar-xs btn-link-secondary">
-                                                                        <i class="ti ti-plus f-20"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="list-inline-item">
-                                                                    <a data-bs-toggle="modal"
-                                                                        data-bs-target="#student-voucher-slip_model"
-                                                                        href="#"
-                                                                        class="avtar avtar-xs btn-link-secondary">
-                                                                        <i class="ti ti-eye f-20"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="list-inline-item">
-                                                                    <a href="{{ route('voucher.edit', $payment->id) }}"
-                                                                        class="avtar avtar-xs btn-link-secondary">
-                                                                        <i class="ti ti-edit f-20"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="list-inline-item">
-                                                                    <form id="delete-form-{{ $payment->id }}"
-                                                                        action="{{ route('voucher.destroy', $payment->id) }}"
-                                                                        method="POST" style="display: none;">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                    </form>
-                                                                    <a href="#"
-                                                                        class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                                                                        data-id="{{ $payment->id }}">
-                                                                        <i class="ti ti-trash f-20"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                    </table> --}}
                             </div>
                         </div>
                     </div>
@@ -231,14 +127,17 @@
                                     </div>
 
                                     {{-- AMOUNT --}}
+                                    <!-- Voucher Amount Editable -->
                                     <div class="mb-3 row me-0">
-                                        <label class="col-lg-4 col-form-label">Amount:
-                                            <small class="text-muted d-block">Enter Amount</small>
-                                        </label>
+                                        <label class="col-lg-4 col-form-label">Voucher Amount:</label>
                                         <div class="col-lg-8">
-                                            <input type="number" class="form-control" name="amount" required />
+                                            <input type="number" step="0.01" id="voucherAmountDisplay" class="form-control"
+                                                name="amount">
+                                            <input type="hidden" id="voucherAmountOriginal">
                                         </div>
                                     </div>
+
+
 
                                     <!-- PAYMENT DATE -->
                                     <div class="mb-3 row me-0">
@@ -265,7 +164,8 @@
                                             <small class="text-muted d-block">Enter Notes</small>
                                         </label>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" rows="2" name="notes" placeholder="Enter notes"></textarea>
+                                            <textarea class="form-control" rows="2" name="notes"
+                                                placeholder="Enter notes"></textarea>
                                         </div>
                                     </div>
 
@@ -329,79 +229,70 @@
         </div>
     </div>
 
-    {{-- <script type="module">
-        import {
-            DataTable
-        } from '../assets/js/plugins/module.js';
-        window.dt = new DataTable('#pc-dt-simple-1');
-        window.dt = new DataTable('#pc-dt-simple-2');
-        window.dt = new DataTable('#pc-dt-simple-3');
-        window.dt = new DataTable('#pc-dt-simple-4');
-    </script> --}}
-
-
     @push('scripts')
         <script>
-            $(document).ready(function() {
-                $(document).on('click', '.open-payment-modal', function() {
-                    let invoiceId = $(this).data('invoice-id');
-                    let referenceNumber = $(this).data('reference-number');
-                    let voucherId = $(this).data('voucher-id');
+            $(document).on('click', '.open-payment-modal', function () {
+                let invoiceId = $(this).data('invoice-id');
+                let referenceNumber = $(this).data('reference-number');
+                let voucherId = $(this).data('voucher-id');
+                let voucherAmount = parseFloat($(this).data('voucher-amount'));
 
-                    // Display
-                    $('#invoiceIdDisplay').text(invoiceId);
-                    $('#referenceNumberDisplay').text(referenceNumber);
+                $('#invoiceIdDisplay').text(invoiceId);
+                $('#referenceNumberDisplay').text(referenceNumber);
+                $('#invoiceIdInput').val(invoiceId);
+                $('#referenceNumberInput').val(referenceNumber);
+                $('#voucherIdInput').val(voucherId);
 
-                    // Hidden inputs
-                    $('#invoiceIdInput').val(invoiceId);
-                    $('#referenceNumberInput').val(referenceNumber);
-                    $('#voucherIdInput').val(voucherId);
-                });
+                $('#voucherAmountDisplay').val(voucherAmount.toFixed(2));
+                $('#voucherAmountOriginal').val(voucherAmount.toFixed(2));
             });
+
 
 
             let studentId = null;
             let voucherId = null;
 
-            $(document).on('click', '.view-payment-slip', function() {
+            $(document).on('click', '.view-payment-slip', function () {
                 studentId = $(this).data('student-id');
                 voucherId = $(this).data('voucher-id');
             });
-            $('#student-payment-slip_model').on('hidden.bs.modal', function() {
+            $('#student-payment-slip_model').on('hidden.bs.modal', function () {
                 $('#payment-slip-table').DataTable().clear().destroy();
             });
 
 
-            $('#student-payment-slip_model').on('shown.bs.modal', function() {
+            $('#student-payment-slip_model').on('shown.bs.modal', function () {
                 $('#payment-slip-table').DataTable({
                     processing: true,
                     serverSide: true,
                     destroy: true,
                     ajax: {
                         url: "{{ route('payment.data') }}",
-                        data: function(d) {
+                        data: function (d) {
                             d.student_id = studentId;
                             d.voucher_id = voucherId;
                         }
                     },
                     columns: [{
-                            data: 'invoice_id'
-                        },
-                        {
-                            data: 'reference_number'
-                        },
-                        {
-                            data: 'payment_method'
-                        },
-                        {
-                            data: 'payment_date'
-                        },
-                        {
-                            data: 'amount'
-                        }
+                        data: 'invoice_id'
+                    },
+                    {
+                        data: 'reference_number'
+                    },
+                    {
+                        data: 'payment_method'
+                    },
+                    {
+                        data: 'payment_date'
+                    },
+                    {
+                        data: 'amount'
+                    }
                     ]
                 });
             });
+
+
         </script>
     @endpush
 
@@ -411,11 +302,11 @@
 
     {{-- input date click event --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const inputs = document.querySelectorAll("input, select, textarea");
 
             inputs.forEach(input => {
-                input.addEventListener("click", function() {
+                input.addEventListener("click", function () {
                     this.focus();
 
                     if (this.type === "date") {

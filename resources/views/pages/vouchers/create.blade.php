@@ -1,216 +1,245 @@
- @extends('layouts.master')
+@extends('layouts.master')
 
- @section('content')
-     <div class="pc-container">
-         <div class="pc-content">
-             <div class="page-header">
-                 <div class="page-block">
-                     <div class="row align-items-center">
-                         <div class="col-md-12">
-                             <ul class="breadcrumb">
-                                 <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Voucher</a></li>
-                                 <li class="breadcrumb-item" aria-current="page">Create</li>
-                             </ul>
-                         </div>
-                         <div class="col-md-12">
-                             <div class="page-header-title">
-                                 <h2 class="mb-0">Create</h2>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
+@section('content')
+    <div class="pc-container">
+        <div class="pc-content">
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0)">Voucher</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Create</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h2 class="mb-0">Create</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-             {{-- Error Alert --}}
-             @if ($errors->any())
-                 <div class="alert alert-danger">
-                     <ul class="mb-0">
-                         @foreach ($errors->all() as $error)
-                             <li>{{ $error }}</li>
-                         @endforeach
-                     </ul>
-                 </div>
-             @endif
+            {{-- Error Alert --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-             <div class="row">
-                 <div class="col-sm-12">
-                     <div class="card">
-                         <div class="card-body">
-                             <form id="voucher-form" method="POST"
-                                 action="{{ route('students.vouchers.store', $student->id) }}">
-                                 @csrf
-                                 {{-- Hidden Fields --}}
-                                 <input type="hidden" name="student_id" value="{{ $student->id ?? '' }}">
-                                 <input type="hidden" name="invoice_id" value="{{ $invoiceId ?? '' }}">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="studentForm" action="{{ route('students.vouchers.store', ['student' => $student ? $student->id : null]) }}"
+                                method="POST">
+                                @csrf
+                                {{-- Hidden Fields --}}
+                                <input type="hidden" name="student_ids" id="student_ids_input">
 
-                                 <input type="hidden" name="amount" value="0.00">
+                                <input type="hidden" name="invoice_id" value="{{ $invoiceId ?? '' }}">
 
-                                 <div class="row g-3">
-                                     <div class="col-sm-6 col-xl-3">
-                                         <label class="form-label">Payment Method</label>
-                                         <select class="form-select" name="payment_method" required>
-                                             <option value="">Please Select</option>
-                                             <option>Cheque</option>
-                                             <option>Cash</option>
-                                             <option>Credit Card</option>
-                                             <option>Easypaisa</option>
-                                             <option>Bank Transfer</option>
-                                         </select>
-                                     </div>
+                                <input type="hidden" name="amount" value="0.00">
 
-                                     <div class="col-sm-6 col-xl-6">
-                                         <label class="form-label">Notes</label>
-                                         <textarea name="notes" class="form-control" rows="1"></textarea>
-                                     </div>
+                                <div class="row g-3">
+                                    <div class="col-sm-6 col-xl-3">
+                                        <label class="form-label">Payment Method</label>
+                                        <select class="form-select" name="payment_method" required>
+                                            <option value="">Please Select</option>
+                                            <option>Cheque</option>
+                                            <option>Cash</option>
+                                            <option>Credit Card</option>
+                                            <option>Easypaisa</option>
+                                            <option>Bank Transfer</option>
+                                        </select>
+                                    </div>
 
-                                     <div class="col-sm-6 col-xl-3">
-                                         <label class="form-label">Due Date</label>
-                                         <input type="date" name="payment_date" class="form-control" required />
-                                     </div>
+                                    <div class="col-sm-6 col-xl-6">
+                                        <label class="form-label">Notes</label>
+                                        <textarea name="notes" class="form-control" rows="1"></textarea>
+                                    </div>
 
-                                     <!-- Fee Details -->
-                                     <div class="col-12">
-                                         <h5>Fee Details</h5>
-                                         <div class="table-responsive">
-                                             <table class="table table-hover mb-0">
-                                                 <thead>
-                                                     <tr>
-                                                         <th>#</th>
-                                                         <th>Fee Type</th>
-                                                         <th>Amount</th>
-                                                         <th class="text-center">Action</th>
-                                                     </tr>
-                                                 </thead>
-                                                 <tbody>
-                                                     <!-- Dynamic rows added with JavaScript -->
-                                                     <script>
-                                                         document.addEventListener("DOMContentLoaded", function() {
-                                                             const tableBody = document.querySelector("tbody");
-                                                             const addItemBtn = document.getElementById("add-item-btn");
-                                                             const grandTotalEl = document.getElementById("grand-total");
-                                                             const amountInput = document.querySelector('input[name="amount"]');
+                                    <div class="col-sm-6 col-xl-3">
+                                        <label class="form-label">Due Date</label>
+                                        <input type="date" name="payment_date" class="form-control" required />
+                                    </div>
 
-                                                             function updateRowNumbers() {
-                                                                 tableBody.querySelectorAll("tr").forEach((row, i) => {
-                                                                     row.querySelector("td:first-child").textContent = i + 1;
-                                                                 });
-                                                             }
+                                    <!-- Fee Details -->
+                                    <div class="col-12">
+                                        <h5>Fee Details</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Fee Type</th>
+                                                        <th>Amount</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Dynamic rows added with JavaScript -->
+                                                    <script>
+                                                        document.addEventListener("DOMContentLoaded", function () {
+                                                            const tableBody = document.querySelector("tbody");
+                                                            const addItemBtn = document.getElementById("add-item-btn");
+                                                            const grandTotalEl = document.getElementById("grand-total");
+                                                            const amountInput = document.querySelector('input[name="amount"]');
 
-                                                             function calculateTotal() {
-                                                                 let total = 0;
-                                                                 document.querySelectorAll(".fee-input").forEach(input => {
-                                                                     let val = parseFloat(input.value);
-                                                                     if (!isNaN(val)) total += val;
-                                                                 });
-                                                                 grandTotalEl.textContent = `Pkr ${total.toFixed(2)}`;
-                                                                 amountInput.value = total.toFixed(2);
-                                                             }
+                                                            function updateRowNumbers() {
+                                                                tableBody.querySelectorAll("tr").forEach((row, i) => {
+                                                                    row.querySelector("td:first-child").textContent = i + 1;
+                                                                });
+                                                            }
 
-                                                             function attachListeners() {
-                                                                 document.querySelectorAll(".fee-input").forEach(input => {
-                                                                     input.addEventListener("input", calculateTotal);
-                                                                 });
-                                                             }
+                                                            function calculateTotal() {
+                                                                let total = 0;
+                                                                document.querySelectorAll(".fee-input").forEach(input => {
+                                                                    let val = parseFloat(input.value);
+                                                                    if (!isNaN(val)) total += val;
+                                                                });
+                                                                grandTotalEl.textContent = `Pkr ${total.toFixed(2)}`;
+                                                                amountInput.value = total.toFixed(2);
+                                                            }
 
-                                                             addItemBtn.addEventListener("click", function() {
-                                                                 const row = document.createElement("tr");
-                                                                 row.innerHTML = `
-                <td>#</td>
-                <td>
-                    <select name="fee_type[]" class="form-select" required>
-                        <option value="">Please Select</option>
-                        <option>Admission Fees</option>
-                        <option>Monthly Fees</option>
-                        <option>Tuition Fees</option>
-                        <option>Lab Fees</option>
-                        <option>Application Fees</option>
-                        <option>Examination Fees</option>
-                        <option>Registration Fees</option>
-                        <option>Accomodation Fees</option>
-                        <option>Library Fees</option>
-                    </select>
-                </td>
-                <td>
-                    <input type="number" name="fee_amount[]" class="form-control fee-input" required />
-                </td>
-                <td class="text-center">
-                    <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item"><i class="ti ti-trash f-20"></i></a>
-                </td>
-            `;
-                                                                 tableBody.appendChild(row);
-                                                                 updateRowNumbers();
-                                                                 attachListeners();
-                                                             });
+                                                            function attachListeners() {
+                                                                document.querySelectorAll(".fee-input").forEach(input => {
+                                                                    input.addEventListener("input", calculateTotal);
+                                                                });
+                                                            }
 
-                                                             tableBody.addEventListener("click", function(e) {
-                                                                 if (e.target.closest(".remove-item")) {
-                                                                     e.preventDefault();
-                                                                     e.target.closest("tr").remove();
-                                                                     updateRowNumbers();
-                                                                     calculateTotal();
-                                                                 }
-                                                             });
-                                                         });
-                                                     </script>
-                                                 </tbody>
-                                             </table>
-                                         </div>
+                                                            addItemBtn.addEventListener("click", function () {
+                                                                const row = document.createElement("tr");
+                                                                row.innerHTML = `
+                                                                                            <td>#</td>
+                                                                                            <td>
+                                                                                                <select name="fee_type[]" class="form-select" required>
+                                                                                                    <option value="">Please Select</option>
+                                                                                                    <option>Admission Fees</option>
+                                                                                                    <option>Monthly Fees</option>
+                                                                                                    <option>Tuition Fees</option>
+                                                                                                    <option>Lab Fees</option>
+                                                                                                    <option>Application Fees</option>
+                                                                                                    <option>Examination Fees</option>
+                                                                                                    <option>Registration Fees</option>
+                                                                                                    <option>Accomodation Fees</option>
+                                                                                                    <option>Library Fees</option>
+                                                                                                </select>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <input type="number" name="fee_amount[]" class="form-control fee-input" required />
+                                                                                            </td>
+                                                                                            <td class="text-center">
+                                                                                                <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item"><i class="ti ti-trash f-20"></i></a>
+                                                                                            </td>
+                                                                                        `;
+                                                                tableBody.appendChild(row);
+                                                                updateRowNumbers();
+                                                                attachListeners();
+                                                            });
 
-                                         <div class="text-start">
-                                             <hr class="mb-4 mt-0 border-secondary border-opacity-50" />
-                                             <button type="button" class="btn btn-light-primary" id="add-item-btn">
-                                                 <i class="ti ti-plus"></i> Add new item
-                                             </button>
-                                         </div>
-                                     </div>
+                                                            tableBody.addEventListener("click", function (e) {
+                                                                if (e.target.closest(".remove-item")) {
+                                                                    e.preventDefault();
+                                                                    e.target.closest("tr").remove();
+                                                                    updateRowNumbers();
+                                                                    calculateTotal();
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                     <!-- Grand Total -->
-                                     <div class="col-12">
-                                         <div class="invoice-total ms-auto">
-                                             <div class="row">
-                                                 <div class="col-6">
-                                                     <p class="f-w-600 mb-1 text-start">Grand Total:</p>
-                                                 </div>
-                                                 <div class="col-6">
-                                                     <p class="f-w-600 mb-1 text-end" id="grand-total">Pkr 0.00</p>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </div>
+                                        <div class="text-start">
+                                            <hr class="mb-4 mt-0 border-secondary border-opacity-50" />
+                                            <button type="button" class="btn btn-light-primary" id="add-item-btn">
+                                                <i class="ti ti-plus"></i> Add new item
+                                            </button>
+                                        </div>
+                                    </div>
 
-                                     <!-- Submit -->
-                                     <div class="col-12">
-                                         <div class="row justify-content-end g-3">
-                                             <div class="col-sm-auto">
-                                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </form>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
+                                    <!-- Grand Total -->
+                                    <div class="col-12">
+                                        <div class="invoice-total ms-auto">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p class="f-w-600 mb-1 text-start">Grand Total:</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p class="f-w-600 mb-1 text-end" id="grand-total">Pkr 0.00</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-     {{-- input date click event  --}}
-     <script>
-         document.addEventListener("DOMContentLoaded", function() {
-             const inputs = document.querySelectorAll("input, select, textarea");
+                                    <!-- Submit -->
+                                    <div class="col-12">
+                                        <div class="row justify-content-end g-3">
+                                            <div class="col-sm-auto">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-             inputs.forEach(input => {
-                 input.addEventListener("click", function() {
-                     this.focus();
+    {{-- input date click event --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll("input, select, textarea");
 
-                     if (this.type === "date") {
-                         this.showPicker?.();
-                     }
-                 });
-             });
-         });
-     </script>
+            inputs.forEach(input => {
+                input.addEventListener("click", function () {
+                    this.focus();
 
- @endsection
+                    if (this.type === "date") {
+                        this.showPicker?.();
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("voucher-form");
+
+            form.addEventListener("submit", function (e) {
+                const existingInputs = form.querySelectorAll("input[name='student_ids[]']");
+                if (existingInputs.length === 0) {
+                    // Only inject if not already present
+                    const selectedIds = JSON.parse(localStorage.getItem("selectedStudentIds") || "[]");
+
+                    selectedIds.forEach(function (id) {
+                        const input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = "student_ids[]";
+                        input.value = id;
+                        form.appendChild(input);
+                    });
+                }
+            });
+        });
+
+        document.getElementById('studentForm').addEventListener('submit', function (e) {
+            var studentIds = localStorage.getItem('selectedStudentIds');
+
+            document.getElementById('student_ids_input').value = studentIds;
+        });
+    </script>
+
+@endsection
+
