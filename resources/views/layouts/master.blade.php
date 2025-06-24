@@ -72,8 +72,11 @@
     <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('assets/js/elements/ac-alert.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/js/widgets/course-report-bar-chart.js') }}"></script>
-    <script src="{{ asset('assets/js/widgets/invoice-chart.js') }}"></script>
+
+    @if (Route::currentRouteName() === 'dashboard')
+        <script src="{{ asset('assets/js/widgets/course-report-bar-chart.js') }}"></script>
+        <script src="{{ asset('assets/js/widgets/invoice-chart.js') }}"></script>
+    @endif
 
     <!-- jQuery + DataTables JS -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
