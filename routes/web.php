@@ -20,6 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/chart-data/course-report', [DashboardController::class, 'getCourseReportChartData']);
+    Route::get('/chart-data/invoices', [DashboardController::class, 'getInvoiceChartData']);
+
 
 
 

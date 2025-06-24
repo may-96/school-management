@@ -221,7 +221,6 @@
                                                                  });
                                                              </script>
                                                          @endpush
-
                                                      </div>
                                                  </div>
                                              </div>
@@ -237,99 +236,120 @@
      </div>
 
      {{-- student add payment model --}}
-
-     {{-- <div class="modal fade" id="student-add-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+     <div class="modal fade" id="student-add-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
              <div class="modal-content">
-                 <div class="modal-header justify-content-between">
-                     <div class="collapse multi-collapse show">
-                         <h4 class="mb-0">Add Payment</h4>
+                 <form id="paymentForm" action="{{ route('vouchers.payment.store') }}" method="POST">
+                     @csrf
+                     <div class="modal-header justify-content-between">
+                         <div class="collapse multi-collapse show">
+                             <h4 class="mb-0">Add Payment</h4>
+                         </div>
+                         <div class="d-flex align-items-center justify-content-end">
+                             <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal"
+                                 title="Close">
+                                 <i class="ti ti-x f-20"></i>
+                             </a>
+                         </div>
                      </div>
-                     <div class="d-flex align-items-center justify-content-end">
-                         <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal" title="Close">
-                             <i class="ti ti-x f-20"></i>
-                         </a>
-                     </div>
-                 </div>
-                 <div class="modal-body">
-                     <div class="collapse multi-collapse show">
-                         <div class="row">
-                             <div class="col-12">
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">INVOICE ID : </label>
-                                     <div class="col-lg-8 d-flex align-items-center">
-                                         <span class="text-muted d-block">8943769870</span>
-                                     </div>
-                                 </div>
+                     <div class="modal-body">
+                         <div class="collapse multi-collapse show">
+                             <div class="row">
+                                 <div class="col-12">
 
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">Payment
-                                         Method : <small class="text-muted d-block">Enter
-                                             your Payment Method</small></label>
-                                     <div class="col-lg-8">
-                                         <select class="form-select" id="exampleFormControlSelect1">
-                                             <option>Please Select</option>
-                                             <option>cheque</option>
-                                             <option>cash</option>
-                                             <option>credit card</option>
-                                             <option>online transfer</option>
-                                         </select>
+                                     {{-- DISPLAY SECTION --}}
+                                     <div class="mb-3 row me-0" style="display:none;">
+                                         <label class="col-lg-4 col-form-label">INVOICE ID :</label>
+                                         <div class="col-lg-8 d-flex align-items-center">
+                                             <span class="text-muted d-block" id="invoiceIdDisplay">--</span>
+                                             <input type="hidden" name="invoice_id" id="invoiceIdInput">
+                                             <input type="hidden" name="voucher_id" id="voucherIdInput">
+                                         </div>
                                      </div>
-                                 </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label"> Amount
-                                         :<small class="text-muted d-block">Enter
-                                             Amount</small></label>
-                                     <div class="col-lg-8">
-                                         <input type="number" class="form-control" />
+
+
+                                     {{-- PAYMENT METHOD --}}
+                                     <div class="mb-3 row me-0">
+                                         <label class="col-lg-4 col-form-label">Payment Method:
+                                             <small class="text-muted d-block">Enter your Payment Method</small>
+                                         </label>
+                                         <div class="col-lg-8">
+                                             <select class="form-select" name="payment_method" required>
+                                                 <option value="">Please Select</option>
+                                                 <option value="cheque">Cheque</option>
+                                                 <option value="cash">Cash</option>
+                                                 <option value="credit card">Credit Card</option>
+                                                 <option value="online transfer">Online Transfer</option>
+                                             </select>
+                                         </div>
                                      </div>
-                                 </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">Payment
-                                         Date:<small class="text-muted d-block">Enter the
-                                             Payment Date</small></label>
-                                     <div class="col-lg-8">
-                                         <input type="date" class="form-control" />
+
+                                     {{-- AMOUNT --}}
+                                     <!-- Voucher Amount Editable -->
+                                     <div class="mb-3 row me-0">
+                                         <label class="col-lg-4 col-form-label">Voucher Amount:</label>
+                                         <div class="col-lg-8">
+                                             <input type="number" step="0.01" id="voucherAmountDisplay"
+                                                 class="form-control" name="amount">
+                                             <input type="hidden" id="voucherAmountOriginal">
+                                         </div>
                                      </div>
-                                 </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label"> Refrence No
-                                         :<small class="text-muted d-block">Enter
-                                             Refrence No</small></label>
-                                     <div class="col-lg-8">
-                                         <input type="text" class="form-control" />
+
+
+
+                                     <!-- PAYMENT DATE -->
+                                     <div class="mb-3 row me-0">
+                                         <label class="col-lg-4 col-form-label">Payment Date:
+                                             <small class="text-muted d-block">Enter the Payment Date</small>
+                                         </label>
+                                         <div class="col-lg-8">
+                                             <input type="date" class="form-control" name="payment_date" required />
+                                         </div>
                                      </div>
-                                 </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">Notes
-                                         :<small class="text-muted d-block">Enter
-                                             Notes</small></label>
-                                     <div class="col-lg-8">
-                                         <textarea class="form-control" rows="2" placeholder="Enter address"></textarea>
+
+                                     <!-- REFERENCE NUMBER -->
+                                     <div class="mb-3 row me-0">
+                                         <label class="col-lg-4 col-form-label">Refrence No :</label>
+                                         <div class="col-lg-8">
+                                             <input type="text" name="reference_number" id="referenceNumberInput"
+                                                 class="form-control" placeholder="Enter reference number">
+                                         </div>
                                      </div>
-                                 </div>
-                                 <div class="text-end btn-page mb-0 mt-4 me-0">
-                                     <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal"
-                                         data-bs-toggle="tooltip">Cancel</button>
-                                     <button class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+
+                                     <!-- NOTES -->
+                                     <div class="mb-3 row me-0">
+                                         <label class="col-lg-4 col-form-label">Notes:
+                                             <small class="text-muted d-block">Enter Notes</small>
+                                         </label>
+                                         <div class="col-lg-8">
+                                             <textarea class="form-control" rows="2" name="notes" placeholder="Enter notes"></textarea>
+                                         </div>
+                                     </div>
+
+                                     <!-- ACTION BUTTONS -->
+                                     <div class="text-end btn-page mb-0 mt-4 me-0">
+                                         <button type="button" class="btn btn-outline-secondary"
+                                             data-bs-dismiss="modal">Cancel</button>
+                                         <button type="submit" class="btn btn-primary">Submit</button>
+                                     </div>
+
                                  </div>
                              </div>
                          </div>
                      </div>
-                 </div>
+                 </form>
              </div>
          </div>
-     </div> --}}
+     </div>
 
-     {{-- student edit payment model --}}
-
-     {{-- <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1"
+     {{-- student Payment slip model --}}
+     <div class="modal fade" id="student-payment-slip_model" data-bs-keyboard="false" tabindex="-1"
          aria-hidden="true">
          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
              <div class="modal-content">
                  <div class="modal-header justify-content-between">
                      <div class="collapse multi-collapse show">
-                         <h4 class="mb-0">Edit Payment</h4>
+                         <h5 class="mb-0">Student Payment Slip</h5>
                      </div>
                      <div class="d-flex align-items-center justify-content-end">
                          <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal" title="Close">
@@ -341,63 +361,23 @@
                      <div class="collapse multi-collapse show">
                          <div class="row">
                              <div class="col-12">
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">INVOICE ID : </label>
-                                     <div class="col-lg-8 d-flex align-items-center">
-                                         <span class="text-muted d-block">8943769870</span>
-                                     </div>
-                                 </div>
+                                 <div class="table-responsive">
+                                     <table id="payment-slip-table" class="table table-hover mb-0">
+                                         <thead>
+                                             <tr>
+                                                 <th>Invoice Id</th>
+                                                 <th>Reference No</th>
+                                                 <th>Payment Method</th>
+                                                 <th>Payment Date</th>
+                                                 <th>Amount</th>
+                                             </tr>
+                                         </thead>
+                                         <tbody></tbody> <!-- DataTables will fill this -->
+                                     </table>
 
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">Payment
-                                         Method : <small class="text-muted d-block">Enter
-                                             your Payment Method</small></label>
-                                     <div class="col-lg-8">
-                                         <select class="form-select" id="exampleFormControlSelect1">
-                                             <option>Please Select</option>
-                                             <option>cheque</option>
-                                             <option>cash</option>
-                                             <option>credit card</option>
-                                             <option>online transfer</option>
-                                         </select>
-                                     </div>
                                  </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label"> Amount
-                                         :<small class="text-muted d-block">Enter
-                                             Amount</small></label>
-                                     <div class="col-lg-8">
-                                         <input type="number" class="form-control" />
-                                     </div>
-                                 </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">Payment
-                                         Date:<small class="text-muted d-block">Enter the
-                                             Payment Date</small></label>
-                                     <div class="col-lg-8">
-                                         <input type="date" class="form-control" />
-                                     </div>
-                                 </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label"> Refrence No
-                                         :<small class="text-muted d-block">Enter
-                                             Refrence No</small></label>
-                                     <div class="col-lg-8">
-                                         <input type="text" class="form-control" />
-                                     </div>
-                                 </div>
-                                 <div class="mb-3 row me-0">
-                                     <label class="col-lg-4 col-form-label">Notes
-                                         :<small class="text-muted d-block">Enter
-                                             Notes</small></label>
-                                     <div class="col-lg-8">
-                                         <textarea class="form-control" rows="2" placeholder="Enter address"></textarea>
-                                     </div>
-                                 </div>
-                                 <div class="text-end btn-page mb-0 mt-4 me-0">
-                                     <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal"
-                                         data-bs-toggle="tooltip">Cancel</button>
-                                     <button class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                                 <div class="text-start">
+                                     <hr class="mb-2 mt-1 border-secondary border-opacity-50" />
                                  </div>
                              </div>
                          </div>
@@ -405,21 +385,81 @@
                  </div>
              </div>
          </div>
-     </div> --}}
+     </div>
 
-     {{-- <script type="module">
-         import {
-             DataTable
-         } from '../assets/js/plugins/module.js';
-         window.dt = new DataTable('#pc-dt-simple-1');
-         window.dt = new DataTable('#pc-dt-simple-2');
-         window.dt = new DataTable('#pc-dt-simple-3');
-         window.dt = new DataTable('#pc-dt-simple-4');
-     </script> --}}
+     @push('scripts')
+         <script>
+             $(document).ready(function() {
+                 $(document).on('click', '.open-payment-modal', function() {
+                     let invoiceId = $(this).data('invoice-id');
+                     let referenceNumber = $(this).data('reference-number');
+                     let voucherId = $(this).data('voucher-id');
+                     let voucherAmount = parseFloat($(this).data('voucher-amount'));
 
-     {{-- @push('scripts')
-         {!! $dataTable->scripts() !!}
-     @endpush --}}
+                     $('#invoiceIdDisplay').text(invoiceId);
+                     $('#referenceNumberDisplay').text(referenceNumber);
+                     $('#invoiceIdInput').val(invoiceId);
+                     $('#referenceNumberInput').val(referenceNumber);
+                     $('#voucherIdInput').val(voucherId);
 
-     {{-- @stack('scripts') --}}
+                     $('#voucherAmountDisplay').val(voucherAmount.toFixed(2));
+                     $('#voucherAmountOriginal').val(voucherAmount.toFixed(2));
+                 });
+
+                 $('#voucherAmountDisplay').on('input', function() {
+                     let original = parseFloat($('#voucherAmountOriginal').val());
+                     let current = parseFloat($(this).val());
+
+                     if (current > original) {
+                         $(this).val(original.toFixed(2));
+                     }
+                 });
+             });
+
+
+
+             let studentId = null;
+             let voucherId = null;
+
+             $(document).on('click', '.view-payment-slip', function() {
+                 studentId = $(this).data('student-id');
+                 voucherId = $(this).data('voucher-id');
+             });
+             $('#student-payment-slip_model').on('hidden.bs.modal', function() {
+                 $('#payment-slip-table').DataTable().clear().destroy();
+             });
+
+
+             $('#student-payment-slip_model').on('shown.bs.modal', function() {
+                 $('#payment-slip-table').DataTable({
+                     processing: true,
+                     serverSide: true,
+                     destroy: true,
+                     ajax: {
+                         url: "{{ route('payment.data') }}",
+                         data: function(d) {
+                             d.student_id = studentId;
+                             d.voucher_id = voucherId;
+                         }
+                     },
+                     columns: [{
+                             data: 'invoice_id'
+                         },
+                         {
+                             data: 'reference_number'
+                         },
+                         {
+                             data: 'payment_method'
+                         },
+                         {
+                             data: 'payment_date'
+                         },
+                         {
+                             data: 'amount'
+                         }
+                     ]
+                 });
+             });
+         </script>
+     @endpush
  @endsection

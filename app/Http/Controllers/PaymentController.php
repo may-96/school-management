@@ -35,7 +35,6 @@ class PaymentController extends Controller
 
         $voucher = Voucher::findOrFail($request->voucher_id);
 
-        // Prevent increasing voucher amount
         if ($request->filled('voucher_amount')) {
             $newAmount = floatval($request->voucher_amount);
             if ($newAmount < $voucher->amount) {
@@ -44,16 +43,13 @@ class PaymentController extends Controller
             }
         }
 
-        // Recalculate remaining
         $paid = $voucher->payments()->sum('amount');
         $remaining = $voucher->amount - $paid;
 
-        // Prevent overpayment
         if ($request->amount > $remaining) {
             return back()->withErrors(['amount' => 'Payment exceeds remaining voucher amount.']);
         }
 
-        // Create payment
         $invoiceId = $this->generateUniquePaymentInvoiceId();
 
         Payment::create([
@@ -66,10 +62,8 @@ class PaymentController extends Controller
             'notes'            => $request->notes,
         ]);
 
-        // Recalculate total paid
         $totalPaid = $voucher->payments()->sum('amount');
 
-        // Update status
         if ($totalPaid >= $voucher->amount) {
             $voucher->status = 'paid';
         } elseif ($totalPaid > 0) {
@@ -150,6 +144,6 @@ class PaymentController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Payment deleted and Voucher Status is Unpaid!');
+        return redirect()->back()->with('success', 'Payment deleted and Voucher Status is Updated!');
     }
 }

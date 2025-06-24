@@ -186,18 +186,10 @@
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
                                                 <h6 class="mb-0">Total</h6>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-1">
-                                                    {{-- <svg class="pc-icon text-warning wid-15 hei-15">
-                                                        <use xlink:href="#custom-arrow-down"></use>
-                                                    </svg>
-                                                    20.3% --}}
-                                                </p>
+                                             
                                             </div>
-                                            <h5 class="mb-2 mt-3">$5678.09</h5>
-                                            <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">122</h5>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
-                                            </div>
+                                            <h5 class="mb-2 mt-3">{{ $totalVouchers }}</h5>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -206,18 +198,10 @@
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
                                                 <h6 class="mb-0">Paid</h6>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-1">
-                                                    {{-- <svg class="pc-icon text-danger wid-15 hei-15">
-                                                        <use xlink:href="#custom-arrow-down"></use>
-                                                    </svg>
-                                                    -8.73% --}}
-                                                </p>
+                                            
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalPaid }}</h5>
-                                            <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">125</h5>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -226,18 +210,10 @@
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
                                                 <h6 class="mb-0">Partial Paid</h6>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-1">
-                                                    <svg class="pc-icon text-primary wid-15 hei-15">
-                                                        <use xlink:href="#custom-arrow-down"></use>
-                                                    </svg>
-                                                    -4.73%
-                                                </p>
+                                             
                                             </div>
-                                            <h5 class="mb-2 mt-3">$5678.09</h5>
-                                            <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">55</h5>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
-                                            </div>
+                                            <h5 class="mb-2 mt-3">{{ $totalPartialPaid }}</h5>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -254,10 +230,10 @@
                                                 </p>
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalUnpaid }}</h5>
-                                            <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0">70</h5>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-2">invoices</p>
-                                            </div>
+                                            {{-- <div class="d-flex align-items-center gap-1">
+                                                <h5 class="mb-0"></h5>
+                                                <p class="mb-0 text-muted d-flex align-items-center gap-2"></p>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

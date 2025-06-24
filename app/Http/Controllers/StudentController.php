@@ -189,57 +189,57 @@ class StudentController extends Controller
                 $editButton = '';
                 $deleteButton = '';
 
-                // Show Add button only if not fully paid
-                if ($status === 'unpaid' || $status === 'partial paid') {
+                if (in_array($status, ['unpaid', 'partial paid'])) {
                     $addButton = '
             <li class="list-inline-item">
-                <a data-bs-toggle="modal"
+                <a href="#"
+                    class="avtar avtar-xs btn-link-secondary open-payment-modal"
+                    data-bs-toggle="modal"
                     data-bs-target="#student-add-payment_modal"
-                    href="#" class="avtar avtar-xs btn-link-secondary">
+                    data-invoice-id="' . e($payment->invoice_id) . '"
+                    data-reference-number="' . e($payment->reference_no) . '"
+                    data-voucher-id="' . e($payment->id) . '"
+                    data-voucher-amount="' . e($payment->amount - $payment->payments()->sum('amount')) . '">
                     <i class="ti ti-plus f-20"></i>
                 </a>
             </li>';
-                }
 
-                // Show Edit for unpaid and partial paid
-                if ($status === 'unpaid' || $status === 'partial paid') {
                     $editButton = '
             <li class="list-inline-item">
-                <a href="' . route('voucher.edit', $payment->id) . '"
-                    class="avtar avtar-xs btn-link-secondary">
+                <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
                     <i class="ti ti-edit f-20"></i>
                 </a>
             </li>';
                 }
 
-                // Show Delete only for unpaid
                 if ($status === 'unpaid') {
                     $deleteButton = '
             <li class="list-inline-item">
-                <form id="delete-form-' . $payment->id . '"
-                    action="' . route('voucher.destroy', $payment->id) . '"
-                    method="POST" style="display: none;">
+                <form id="delete-form-' . $payment->id . '" action="' . route('voucher.destroy', $payment->id) . '" method="POST" style="display: none;">
                     ' . csrf_field() . method_field('DELETE') . '
                 </form>
-                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                    data-id="' . $payment->id . '">
+                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $payment->id . '">
                     <i class="ti ti-trash f-20"></i>
                 </a>
             </li>';
                 }
 
                 return '
-        <ul class="list-inline mb-0 text-end">
-            ' . $addButton . '
+        <ul class="list-inline mb-0 text-end">'
+                    . $addButton . '
             <li class="list-inline-item">
-                <a data-bs-toggle="modal"
-                    data-bs-target="#student-payment-slip_model"
-                    href="#" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-eye f-20"></i>
+                <a href="#"
+                   class="avtar avtar-xs btn-link-secondary view-payment-slip"
+                   data-bs-toggle="modal"
+                   data-bs-target="#student-payment-slip_model"
+                   data-voucher-id="' . e($payment->id) . '"
+                   data-student-id="' . e($payment->student_id) . '">
+                   <i class="ti ti-eye f-20"></i>
                 </a>
-            </li>
-            ' . $editButton . $deleteButton . '
-        </ul>';
+            </li>'
+                    . $editButton .
+                    $deleteButton .
+                    '</ul>';
             })
 
 

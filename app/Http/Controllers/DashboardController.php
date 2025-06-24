@@ -17,12 +17,29 @@ class DashboardController extends Controller
     {
         $totalTeachers = Teacher::count();
         $totalStudents = Student::count();
-        $totalPaid = Payment::count();
+
+        // Count vouchers by each status
+        $totalPaid = Voucher::where('status', 'paid')->count();
+        $totalPartialPaid = Voucher::where('status', 'partial paid')->count();
         $totalUnpaid = Voucher::where('status', 'unpaid')->count();
+
+        // Combined total of all vouchers
+        $totalVouchers = $totalPaid + $totalPartialPaid + $totalUnpaid;
+
         $school = School::latest()->first();
 
-        return view('dashboard', compact('totalTeachers', 'totalStudents', 'totalPaid', 'school', 'totalUnpaid'));
+        return view('dashboard', compact(
+            'totalTeachers',
+            'totalStudents',
+            'totalPaid',
+            'totalPartialPaid',
+            'totalUnpaid',
+            'totalVouchers',
+            'school'
+        ));
     }
+
+
 
 
     public function getCourseReportChartData()
@@ -53,6 +70,34 @@ class DashboardController extends Controller
             'months'       => $months,
             'teacher_data' => $teacherData,
             'student_data' => $studentData,
+        ]);
+    }
+
+
+    public function getInvoiceChartData()
+    {
+        $months = collect(range(1, 12))->map(function ($m) {
+            return Carbon::create()->month($m)->format('M');
+        });
+
+        $paid = [];
+        $partial = [];
+        $unpaid = [];
+        $total = [];
+
+        foreach (range(1, 12) as $m) {
+            $paid[] = Voucher::whereMonth('created_at', $m)->where('status', 'paid')->count();
+            $partial[] = Voucher::whereMonth('created_at', $m)->where('status', 'partial paid')->count();
+            $unpaid[] = Voucher::whereMonth('created_at', $m)->where('status', 'unpaid')->count();
+            $total[] = Voucher::whereMonth('created_at', $m)->count();
+        }
+
+        return response()->json([
+            'months' => $months,
+            'paid' => $paid,
+            'partial' => $partial,
+            'unpaid' => $unpaid,
+            'total' => $total
         ]);
     }
 }
