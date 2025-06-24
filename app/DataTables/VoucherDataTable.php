@@ -51,7 +51,6 @@ class VoucherDataTable extends DataTable
                 $remaining = $total - $paid;
 
                 return number_format($remaining, 2) . ' Pkr';
-
             })
             ->addColumn('status', function ($voucher) {
                 return match (strtolower($voucher->status)) {
@@ -67,14 +66,15 @@ class VoucherDataTable extends DataTable
                 return '
                     <ul class="list-inline mb-0 text-end">
                         <li class="list-inline-item">
-                            <a href="#"
-                               class="avtar avtar-xs btn-link-secondary open-payment-modal"
-                               data-bs-toggle="modal"
-                               data-bs-target="#student-add-payment_modal"
-                               data-invoice-id="' . e($payment->invoice_id) . '"
-                               data-reference-number="' . e($payment->reference_no) . '"
-                               data-voucher-id="' . e($payment->id) . '">
-                               <i class="ti ti-plus f-20"></i>
+                          <a href="#"
+                                class="avtar avtar-xs btn-link-secondary open-payment-modal"
+                                data-bs-toggle="modal"
+                                data-bs-target="#student-add-payment_modal"
+                                data-invoice-id="' . e($payment->invoice_id) . '"
+                                data-reference-number="' . e($payment->reference_no) . '"
+                                data-voucher-id="' . e($payment->id) . '"
+                                data-voucher-amount="' . e($payment->amount - $payment->payments()->sum('amount')) . '">
+                                <i class="ti ti-plus f-20"></i>
                             </a>
                         </li>
                        <li class="list-inline-item">

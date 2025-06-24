@@ -24,17 +24,18 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'voucher_id' => 'required|exists:vouchers,id',
-            'reference_number' => 'required',
-            'payment_method' => 'required',
-            'amount' => 'required|numeric|min:1',
-            'payment_date' => 'required|date',
-            'notes' => 'nullable|string',
-            'voucher_amount' => 'nullable|numeric|min:0',
+            'voucher_id'        => 'required|exists:vouchers,id',
+            'reference_number'  => 'required',
+            'payment_method'    => 'required',
+            'amount'            => 'required|numeric|min:1',
+            'payment_date'      => 'required|date',
+            'notes'             => 'nullable|string',
+            'voucher_amount'    => 'nullable|numeric|min:0',
         ]);
 
         $voucher = Voucher::findOrFail($request->voucher_id);
 
+        // Prevent increasing voucher amount
         if ($request->filled('voucher_amount')) {
             $newAmount = floatval($request->voucher_amount);
             if ($newAmount < $voucher->amount) {
@@ -43,20 +44,32 @@ class PaymentController extends Controller
             }
         }
 
+        // Recalculate remaining
+        $paid = $voucher->payments()->sum('amount');
+        $remaining = $voucher->amount - $paid;
+
+        // Prevent overpayment
+        if ($request->amount > $remaining) {
+            return back()->withErrors(['amount' => 'Payment exceeds remaining voucher amount.']);
+        }
+
+        // Create payment
         $invoiceId = $this->generateUniquePaymentInvoiceId();
 
         Payment::create([
-            'voucher_id' => $voucher->id,
-            'invoice_id' => $invoiceId,
+            'voucher_id'       => $voucher->id,
+            'invoice_id'       => $invoiceId,
             'reference_number' => $request->reference_number,
-            'payment_method' => $request->payment_method,
-            'amount' => $request->amount,
-            'payment_date' => $request->payment_date,
-            'notes' => $request->notes,
+            'payment_method'   => $request->payment_method,
+            'amount'           => $request->amount,
+            'payment_date'     => $request->payment_date,
+            'notes'            => $request->notes,
         ]);
 
+        // Recalculate total paid
         $totalPaid = $voucher->payments()->sum('amount');
 
+        // Update status
         if ($totalPaid >= $voucher->amount) {
             $voucher->status = 'paid';
         } elseif ($totalPaid > 0) {

@@ -231,20 +231,31 @@
 
     @push('scripts')
         <script>
-            $(document).on('click', '.open-payment-modal', function () {
-                let invoiceId = $(this).data('invoice-id');
-                let referenceNumber = $(this).data('reference-number');
-                let voucherId = $(this).data('voucher-id');
-                let voucherAmount = parseFloat($(this).data('voucher-amount'));
+         $(document).ready(function () {
+                $(document).on('click', '.open-payment-modal', function () {
+                    let invoiceId = $(this).data('invoice-id');
+                    let referenceNumber = $(this).data('reference-number');
+                    let voucherId = $(this).data('voucher-id');
+                    let voucherAmount = parseFloat($(this).data('voucher-amount'));
 
-                $('#invoiceIdDisplay').text(invoiceId);
-                $('#referenceNumberDisplay').text(referenceNumber);
-                $('#invoiceIdInput').val(invoiceId);
-                $('#referenceNumberInput').val(referenceNumber);
-                $('#voucherIdInput').val(voucherId);
+                    $('#invoiceIdDisplay').text(invoiceId);
+                    $('#referenceNumberDisplay').text(referenceNumber);
+                    $('#invoiceIdInput').val(invoiceId);
+                    $('#referenceNumberInput').val(referenceNumber);
+                    $('#voucherIdInput').val(voucherId);
 
-                $('#voucherAmountDisplay').val(voucherAmount.toFixed(2));
-                $('#voucherAmountOriginal').val(voucherAmount.toFixed(2));
+                    $('#voucherAmountDisplay').val(voucherAmount.toFixed(2));
+                    $('#voucherAmountOriginal').val(voucherAmount.toFixed(2));
+                });
+
+                $('#voucherAmountDisplay').on('input', function () {
+                    let original = parseFloat($('#voucherAmountOriginal').val());
+                    let current = parseFloat($(this).val());
+
+                    if (current > original) {
+                        $(this).val(original.toFixed(2));
+                    }
+                });
             });
 
 

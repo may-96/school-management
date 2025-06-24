@@ -6,7 +6,7 @@ use App\DataTables\VoucherDataTable;
 use App\Models\Voucher;
 use App\Models\VoucherItem;
 use Illuminate\Http\Request;
-
+use App\Models\Student;
 
 class VoucherController extends Controller
 {
