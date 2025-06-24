@@ -26,38 +26,30 @@
                         </svg>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
-                        <a href="#!" class="dropdown-item" onclick="setTheme('dark')">
+                        <a href="#!" class="dropdown-item"
+                            onclick="localStorage.setItem('theme', 'dark'); layout_change('dark')">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-moon"></use>
                             </svg>
                             <span>Dark</span>
                         </a>
-                        <a href="#!" class="dropdown-item" onclick="setTheme('light')">
+                        <a href="#!" class="dropdown-item"
+                            onclick="localStorage.setItem('theme', 'light'); layout_change('light')">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-sun-1"></use>
                             </svg>
                             <span>Light</span>
                         </a>
-                        <a href="#!" class="dropdown-item" onclick="setThemeDefault()">
+                        <a href="#!" class="dropdown-item"
+                            onclick="localStorage.removeItem('theme'); layout_change_default()">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-setting-2"></use>
                             </svg>
                             <span>Default</span>
                         </a>
+
                     </div>
                 </li>
-
-                <script>
-                    function setTheme(mode) {
-                        localStorage.setItem('theme', mode);
-                        layout_change(mode);
-                    }
-
-                    function setThemeDefault() {
-                        localStorage.removeItem('theme');
-                        layout_change_default();
-                    }
-                </script>
 
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"

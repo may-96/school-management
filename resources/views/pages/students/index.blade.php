@@ -108,6 +108,10 @@
         }
     </script>
 
+    <script>
+        localStorage.removeItem('selectedStudentIds');
+    </script>
+
     @push('scripts')
         {!! $dataTable->scripts() !!}
 
