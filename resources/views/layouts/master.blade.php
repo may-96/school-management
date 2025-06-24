@@ -37,7 +37,8 @@
 </head>
 
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
-    data-pc-theme_contrast="" data-pc-theme="light">
+    data-pc-theme_contrast="">
+
 
     {{-- Page loader --}}
     <div class="loader-bg">
@@ -65,7 +66,7 @@
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
     {{-- Dark mode and light mode --}}
-    {{-- <script src="{{ asset('assets/js/theme.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/theme.js') }}"></script>
 
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>

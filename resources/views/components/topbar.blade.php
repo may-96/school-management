@@ -12,23 +12,13 @@
                         <i class="ti ti-menu-2"></i>
                     </a>
                 </li>
-                {{-- <li class="pc-h-item d-none d-md-inline-flex">
-                    <form class="form-search">
-                        <i class="search-icon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-search-normal-1"></use>
-                            </svg>
-                        </i>
-                        <input type="search" class="form-control" placeholder="Ctrl + K" />
-                    </form>
-                </li> --}}
             </ul>
         </div>
         <div class="ms-auto">
             <ul class="list-unstyled">
 
                 {{-- Dark mode and light mode  --}}
-                {{-- <li class="dropdown pc-h-item">
+                <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
                         <svg class="pc-icon">
@@ -36,26 +26,38 @@
                         </svg>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
-                        <a href="#!" class="dropdown-item" onclick="layout_change('dark')">
+                        <a href="#!" class="dropdown-item" onclick="setTheme('dark')">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-moon"></use>
                             </svg>
                             <span>Dark</span>
                         </a>
-                        <a href="#!" class="dropdown-item" onclick="layout_change('light')">
+                        <a href="#!" class="dropdown-item" onclick="setTheme('light')">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-sun-1"></use>
                             </svg>
                             <span>Light</span>
                         </a>
-                        <a href="#!" class="dropdown-item" onclick="layout_change_default()">
+                        <a href="#!" class="dropdown-item" onclick="setThemeDefault()">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-setting-2"></use>
                             </svg>
                             <span>Default</span>
                         </a>
                     </div>
-                </li> --}}
+                </li>
+                <script>
+                    function setTheme(mode) {
+                        localStorage.setItem('theme', mode);
+                        layout_change(mode);
+                    }
+
+                    function setThemeDefault() {
+                        localStorage.removeItem('theme');
+                        layout_change_default();
+                    }
+                </script>
+
 
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
