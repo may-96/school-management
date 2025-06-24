@@ -55,8 +55,8 @@ class StudentVoucherPaymentDataTable extends DataTable
             ->addColumn('payment_date', fn($payment) => Carbon::parse($payment->payment_date)->format('d/m/Y'))
             ->addColumn('amount', fn($payment) => $payment->amount . ' Pkr')
             ->addColumn('status', function ($voucher) {
-                $totalAmount = $voucher->amount;           // total due
-                $paidAmount = $voucher->payments->sum('amount'); // assuming there's a `payments` relationship
+                $totalAmount = $voucher->amount;          
+                $paidAmount = $voucher->payments->sum('amount'); 
 
                 if ($paidAmount >= $totalAmount) {
                     return '<span class="badge bg-light-success">Paid</span>';

@@ -19,6 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/chart-data/course-report', [DashboardController::class, 'getCourseReportChartData']);
 
 
 
@@ -38,6 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Students
     Route::resource('student', StudentController::class);
+    Route::get('/student/{id}/payments/data', [StudentController::class, 'paymentData'])->name('student.payments.data');
+
 
     // Vouchers 
     Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');

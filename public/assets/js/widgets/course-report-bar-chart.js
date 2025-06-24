@@ -1,69 +1,88 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', function () {
   setTimeout(function () {
-    var course_report_bar_chart_options = {
-      chart: {
-        type: 'bar',
-        height: 210,
-        toolbar: {
-          show: false
-        }
-      },
-      plotOptions: {
-        bar: {
-          columnWidth: '60%',
-          borderRadius: 3
-        }
-      },
-      stroke: {
-        show: true,
-        width: 3,
-        colors: ['transparent']
-      },
-      dataLabels: {
-        enabled: false
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        show: true,
-        fontFamily: `'Public Sans', sans-serif`,
-        offsetX: 10,
-        offsetY: 10,
-        labels: {
-          useSeriesColors: false
-        },
-        markers: {
-          width: 10,
-          height: 10,
-          radius: '50%',
-          offsexX: 2,
-          offsexY: 2
-        },
-        itemMargin: {
-          horizontal: 15,
-          vertical: 5
-        }
-      },
-      colors: ['#4680ff', '#ffa21d'],
-      series: [
-        {
-          name: 'Teachers',
-          data: [200, 90, 135, 114, 120, 145, 180, 90, 135, 114, 120, 145]
-        },
-        {
-          name: 'Students',
-          data: [120, 45, 78, 150, 168, 99, 120, 45, 78, 150, 168, 99]
-        }
-      ],
-      grid: {
-        borderColor: '#00000010'
-      },
-      yaxis: {
-        show: false
-      }
-    };
-    var chart = new ApexCharts(document.querySelector('#course-report-bar-chart'), course_report_bar_chart_options);
-    chart.render();
+    fetch('/chart-data/course-report')
+      .then(response => response.json())
+      .then(data => {
+        const chartOptions = {
+          chart: {
+            type: 'bar',
+            height: 250, // Slightly taller for better scaling
+            toolbar: { show: false }
+          },
+          plotOptions: {
+            bar: {
+              columnWidth: '60%',
+              borderRadius: 4
+            }
+          },
+          stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+          },
+          dataLabels: {
+            enabled: false
+          },
+          legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            fontFamily: `'Public Sans', sans-serif`,
+            offsetX: 10,
+            offsetY: 10,
+            itemMargin: { horizontal: 15, vertical: 5 }
+          },
+          colors: ['#4680ff', '#ffa21d'],
+          series: [
+            {
+              name: 'Teachers',
+              data: data.teacher_data
+            },
+            {
+              name: 'Students',
+              data: data.student_data
+            }
+          ],
+          grid: {
+            borderColor: '#00000010'
+          },
+          yaxis: {
+            show: true,
+            min: 0,
+            labels: {
+              style: {
+                fontFamily: `'Public Sans', sans-serif`,
+                fontSize: '12px'
+              }
+            },
+            title: {
+              text: 'Count',
+              style: {
+                fontSize: '13px',
+                fontWeight: 600
+              }
+            }
+          },
+          xaxis: {
+            categories: data.months,
+            labels: {
+              style: {
+                fontFamily: `'Public Sans', sans-serif`,
+                fontSize: '12px'
+              }
+            }
+          },
+          tooltip: {
+            y: {
+              formatter: function (val) {
+                return `${val} total`;
+              }
+            }
+          }
+        };
+
+        const chart = new ApexCharts(document.querySelector('#course-report-bar-chart'), chartOptions);
+        chart.render();
+      });
   }, 500);
 });

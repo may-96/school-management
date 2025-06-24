@@ -56,47 +56,73 @@ class VoucherDataTable extends DataTable
             })
             ->rawColumns(['status'])
 
-            ->addColumn('actions', function ($payment) {
-                return '
-                    <ul class="list-inline mb-0 text-end">
-                        <li class="list-inline-item">
-                            <a href="#"
-                               class="avtar avtar-xs btn-link-secondary open-payment-modal"
-                               data-bs-toggle="modal"
-                               data-bs-target="#student-add-payment_modal"
-                               data-invoice-id="' . e($payment->invoice_id) . '"
-                               data-reference-number="' . e($payment->reference_no) . '"
-                               data-voucher-id="' . e($payment->id) . '">
-                               <i class="ti ti-plus f-20"></i>
-                            </a>
-                        </li>
-                       <li class="list-inline-item">
-    <a href="#"
-       class="avtar avtar-xs btn-link-secondary view-payment-slip"
-       data-bs-toggle="modal"
-       data-bs-target="#student-payment-slip_model"
-       data-voucher-id="' . e($payment->id) . '"
-       data-student-id="' . e($payment->student_id) . '">
-       <i class="ti ti-eye f-20"></i>
-    </a>
-</li>
+            ->addColumn('actions', function ($voucher) {
+                $status = strtolower($voucher->status);
 
-                        <li class="list-inline-item">
-                            <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
-                                <i class="ti ti-edit f-20"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <form id="delete-form-' . $payment->id . '" action="' . route('voucher.destroy', $payment->id) . '" method="POST" style="display: none;">
-                                ' . csrf_field() . method_field('DELETE') . '
-                            </form>
-                            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $payment->id . '">
-                                <i class="ti ti-trash f-20"></i>
-                            </a>
-                        </li>
-                    </ul>
-                ';
+                $deleteButton = '';
+                if ($status === 'unpaid') {
+                    $deleteButton = '
+            <li class="list-inline-item">
+                <form id="delete-form-' . $voucher->id . '" action="' . route('voucher.destroy', $voucher->id) . '" method="POST" style="display: none;">
+                    ' . csrf_field() . method_field('DELETE') . '
+                </form>
+                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $voucher->id . '">
+                    <i class="ti ti-trash f-20"></i>
+                </a>
+            </li>
+        ';
+                }
+
+                $addPaymentButton = '';
+                if ($status === 'unpaid' || $status === 'partial paid') {
+                    $addPaymentButton = '
+            <li class="list-inline-item">
+                <a href="#"
+                   class="avtar avtar-xs btn-link-secondary open-payment-modal"
+                   data-bs-toggle="modal"
+                   data-bs-target="#student-add-payment_modal"
+                   data-invoice-id="' . e($voucher->invoice_id) . '"
+                   data-reference-number="' . e($voucher->reference_no) . '"
+                   data-voucher-id="' . e($voucher->id) . '">
+                   <i class="ti ti-plus f-20"></i>
+                </a>
+            </li>
+        ';
+                }
+
+                $editButton = '';
+                if ($status === 'unpaid' || $status === 'partial paid') {
+                    $editButton = '
+            <li class="list-inline-item">
+                <a href="' . route('voucher.edit', $voucher->id) . '" class="avtar avtar-xs btn-link-secondary">
+                    <i class="ti ti-edit f-20"></i>
+                </a>
+            </li>
+        ';
+                }
+
+                return '
+        <ul class="list-inline mb-0 text-end">
+            ' . $addPaymentButton . '
+            <li class="list-inline-item">
+                <a href="#"
+                   class="avtar avtar-xs btn-link-secondary view-payment-slip"
+                   data-bs-toggle="modal"
+                   data-bs-target="#student-payment-slip_model"
+                   data-voucher-id="' . e($voucher->id) . '"
+                   data-student-id="' . e($voucher->student_id) . '">
+                    <i class="ti ti-eye f-20"></i>
+                </a>
+            </li>
+            ' . $editButton . '
+            ' . $deleteButton . '
+        </ul>
+    ';
             })
+
+
+
+
             ->rawColumns(['student_name', 'status', 'actions']);
     }
 

@@ -176,108 +176,52 @@
                                                                      <th class="text-end">Actions</th>
                                                                  </tr>
                                                              </thead>
-                                                             <tbody>
-                                                                 @foreach ($student->payments as $payment)
-                                                                     <tr>
-                                                                         <td>{{ $payment->invoice_id }}</td>
-                                                                         <td>
-                                                                             <div class="row align-items-center">
-                                                                                 <div class="col-auto pe-0">
-                                                                                     @if ($student->profile_image)
-                                                                                         <img src="{{ asset('storage/students/' . $student->profile_image) }}"
-                                                                                             alt="img"
-                                                                                             class="img-fluid rounded-circle"
-                                                                                             style="height:40px; width:40px;" />
-                                                                                     @else
-                                                                                         <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
-                                                                                             alt="img"
-                                                                                             class="img-fluid rounded-circle"
-                                                                                             style="height:40px; width:40px;" />
-                                                                                     @endif
-                                                                                 </div>
-                                                                                 <div class="col">
-                                                                                     <h6 class="mb-0">
-                                                                                         {{ $student->first_name }}
-                                                                                         {{ $student->last_name }}</h6>
-                                                                                     <p class="f-12 mb-0">
-                                                                                         <a href="#!"
-                                                                                             class="text-muted">
-                                                                                             <span
-                                                                                                 class="text-truncate w-100">{{ $student->parents_mobile }}</span>
-                                                                                         </a>
-                                                                                     </p>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </td>
-                                                                         <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y') }}
-                                                                         </td>
-                                                                         <td>{{ $payment->amount }} Pkr</td>
-                                                                         <td colspan="1">
-                                                                             @php
-                                                                                 $status = strtolower($payment->status);
-                                                                             @endphp
-
-                                                                             @if ($status === 'paid')
-                                                                                 <span
-                                                                                     class="badge bg-light-success">Paid</span>
-                                                                             @elseif ($status === 'unpaid')
-                                                                                 <span
-                                                                                     class="badge bg-light-danger">Unpaid</span>
-                                                                             @elseif ($status === 'partial paid')
-                                                                                 <span
-                                                                                     class="badge bg-light-warning">Partial
-                                                                                     Paid</span>
-                                                                             @else
-                                                                                 <span
-                                                                                     class="badge bg-light-secondary">Unknown</span>
-                                                                             @endif
-                                                                         </td>
-                                                                         <td class="text-end">
-                                                                             <ul class="list-inline mb-0">
-                                                                                 <li class="list-inline-item">
-                                                                                     <a data-bs-toggle="modal"
-                                                                                         data-bs-target="#student-add-payment_modal"
-                                                                                         href="#"
-                                                                                         class="avtar avtar-xs btn-link-secondary">
-                                                                                         <i class="ti ti-plus f-20"></i>
-                                                                                     </a>
-                                                                                 </li>
-                                                                                 <li class="list-inline-item">
-                                                                                     <a data-bs-toggle="modal"
-                                                                                         data-bs-target="#student-payment-slip_model"
-                                                                                         href="#"
-                                                                                         class="avtar avtar-xs btn-link-secondary">
-                                                                                         <i class="ti ti-eye f-20"></i>
-                                                                                     </a>
-                                                                                 </li>
-                                                                                 <li class="list-inline-item">
-                                                                                     <a href="{{ route('voucher.edit', $payment->id) }}"
-                                                                                         class="avtar avtar-xs btn-link-secondary">
-                                                                                         <i class="ti ti-edit f-20"></i>
-                                                                                     </a>
-                                                                                 </li>
-                                                                                 <li class="list-inline-item">
-                                                                                     <form
-                                                                                         id="delete-form-{{ $payment->id }}"
-                                                                                         action="{{ route('voucher.destroy', $payment->id) }}"
-                                                                                         method="POST"
-                                                                                         style="display: none;">
-                                                                                         @csrf
-                                                                                         @method('DELETE')
-                                                                                     </form>
-
-                                                                                     <a href="#"
-                                                                                         class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                                                                                         data-id="{{ $payment->id }}">
-                                                                                         <i class="ti ti-trash f-20"></i>
-                                                                                     </a>
-                                                                                 </li>
-                                                                             </ul>
-                                                                         </td>
-                                                                     </tr>
-                                                                 @endforeach
-                                                             </tbody>
                                                          </table>
+
+                                                         @push('scripts')
+                                                             <script>
+                                                                 $(document).ready(function() {
+                                                                     $('#pc-dt-simple-1').DataTable({
+                                                                         processing: true,
+                                                                         serverSide: true,
+                                                                         ajax: '{{ route('student.payments.data', $student->id) }}',
+                                                                         columns: [{
+                                                                                 data: 'invoice_id',
+                                                                                 name: 'invoice_id'
+                                                                             },
+                                                                             {
+                                                                                 data: 'student_info',
+                                                                                 name: 'student_info',
+                                                                                 orderable: false,
+                                                                                 searchable: false
+                                                                             },
+                                                                             {
+                                                                                 data: 'payment_date',
+                                                                                 name: 'payment_date'
+                                                                             },
+                                                                             {
+                                                                                 data: 'amount',
+                                                                                 name: 'amount'
+                                                                             },
+                                                                             {
+                                                                                 data: 'status',
+                                                                                 name: 'status',
+                                                                                 orderable: false,
+                                                                                 searchable: false
+                                                                             },
+                                                                             {
+                                                                                 data: 'actions',
+                                                                                 name: 'actions',
+                                                                                 orderable: false,
+                                                                                 searchable: false,
+                                                                                 className: 'text-end'
+                                                                             }
+                                                                         ]
+                                                                     });
+                                                                 });
+                                                             </script>
+                                                         @endpush
+
                                                      </div>
                                                  </div>
                                              </div>
@@ -463,7 +407,7 @@
          </div>
      </div> --}}
 
-     <script type="module">
+     {{-- <script type="module">
          import {
              DataTable
          } from '../assets/js/plugins/module.js';
@@ -471,12 +415,11 @@
          window.dt = new DataTable('#pc-dt-simple-2');
          window.dt = new DataTable('#pc-dt-simple-3');
          window.dt = new DataTable('#pc-dt-simple-4');
-     </script>
+     </script> --}}
 
      {{-- @push('scripts')
          {!! $dataTable->scripts() !!}
      @endpush --}}
 
      {{-- @stack('scripts') --}}
-
  @endsection
