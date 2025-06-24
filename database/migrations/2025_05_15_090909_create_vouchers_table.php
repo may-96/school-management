@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->string('invoice_id')->unique();
             $table->string('reference_no')->nullable();
             $table->string('payment_method')->nullable();

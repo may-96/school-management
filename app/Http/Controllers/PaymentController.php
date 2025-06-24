@@ -8,7 +8,6 @@ use App\DataTables\PaymentDataTable;
 use App\Models\Voucher;
 
 class PaymentController extends Controller
-
 {
 
     public function index(PaymentDataTable $dataTable)
@@ -27,37 +26,49 @@ class PaymentController extends Controller
         $request->validate([
             'voucher_id' => 'required|exists:vouchers,id',
             'reference_number' => 'required',
-            'payment_method'   => 'required',
-            'amount'           => 'required|numeric',
-            'payment_date'     => 'required|date',
-            'notes'            => 'nullable|string',
+            'payment_method' => 'required',
+            'amount' => 'required|numeric|min:1',
+            'payment_date' => 'required|date',
+            'notes' => 'nullable|string',
+            'voucher_amount' => 'nullable|numeric|min:0',
         ]);
 
-        // Generate unique invoice ID (auto)
+        $voucher = Voucher::findOrFail($request->voucher_id);
+
+        if ($request->filled('voucher_amount')) {
+            $newAmount = floatval($request->voucher_amount);
+            if ($newAmount < $voucher->amount) {
+                $voucher->amount = $newAmount;
+                $voucher->save();
+            }
+        }
+
         $invoiceId = $this->generateUniquePaymentInvoiceId();
 
-        // Create payment
-        $payment = Payment::create([
-            'voucher_id'       => $request->voucher_id,
-            'invoice_id'       => $invoiceId,
+        Payment::create([
+            'voucher_id' => $voucher->id,
+            'invoice_id' => $invoiceId,
             'reference_number' => $request->reference_number,
-            'payment_method'   => $request->payment_method,
-            'amount'           => $request->amount,
-            'payment_date'     => $request->payment_date,
-            'notes'            => $request->notes,
+            'payment_method' => $request->payment_method,
+            'amount' => $request->amount,
+            'payment_date' => $request->payment_date,
+            'notes' => $request->notes,
         ]);
 
-        // ✅ After payment is created, update the voucher status to "paid"
-        $voucher = Voucher::find($request->voucher_id);
-        if ($voucher) {
+        $totalPaid = $voucher->payments()->sum('amount');
+
+        if ($totalPaid >= $voucher->amount) {
             $voucher->status = 'paid';
-            $voucher->save();
+        } elseif ($totalPaid > 0) {
+            $voucher->status = 'partial paid';
+        } else {
+            $voucher->status = 'unpaid';
         }
+
+        $voucher->save();
 
         return redirect()->route('payment.index')->with('success', 'Payment added successfully!');
     }
-
-
 
     private function generateUniquePaymentInvoiceId()
     {
@@ -80,20 +91,20 @@ class PaymentController extends Controller
     {
         $request->validate([
             'reference_number' => 'required|string',
-            'payment_method'   => 'required|string',
-            'amount'           => 'required|numeric',
-            'payment_date'     => 'required|date',
-            'notes'            => 'nullable|string',
+            'payment_method' => 'required|string',
+            'amount' => 'required|numeric',
+            'payment_date' => 'required|date',
+            'notes' => 'nullable|string',
         ]);
 
         $payment = Payment::findOrFail($id);
 
         $payment->update([
             'reference_number' => $request->reference_number,
-            'payment_method'   => $request->payment_method,
-            'amount'           => $request->amount,
-            'payment_date'     => $request->payment_date,
-            'notes'            => $request->notes,
+            'payment_method' => $request->payment_method,
+            'amount' => $request->amount,
+            'payment_date' => $request->payment_date,
+            'notes' => $request->notes,
         ]);
 
         return redirect()->route('payment.index')->with('success', 'Payment updated successfully!');
