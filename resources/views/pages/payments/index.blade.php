@@ -149,8 +149,6 @@
                                 </div>
                             </div>
 
-
-
                             <!-- Payment Date -->
                             <div class="mb-3 row">
                                 <label class="col-lg-4 col-form-label">Payment Date:</label>
@@ -159,8 +157,6 @@
                                         required>
                                 </div>
                             </div>
-
-
 
                             <!-- Notes -->
                             <div class="mb-3 row">
@@ -183,20 +179,6 @@
         </div>
     </div>
 
-
-
-
-
-    {{-- <script type="module">
-        import {
-            DataTable
-        } from '../assets/js/plugins/module.js';
-        window.dt = new DataTable('#pc-dt-simple-1');
-        window.dt = new DataTable('#pc-dt-simple-2');
-        window.dt = new DataTable('#pc-dt-simple-3');
-        window.dt = new DataTable('#pc-dt-simple-4');
-    </script> --}}
-
     @push('scripts')
         {!! $dataTable->scripts() !!}
         <script>
@@ -217,9 +199,5 @@
             });
         </script>
     @endpush
-
-
-
-
 
 @endsection

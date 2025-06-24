@@ -8,7 +8,6 @@
                 </div>
                 <div class="card my-5">
                     <div class="card-body">
-
                         <div class="tab-content">
                             <div class="tab-pane show active" id="auth-1" role="tabpanel" aria-labelledby="auth-tab-1">
                                 <div class="text-center">
@@ -22,7 +21,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

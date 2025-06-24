@@ -234,7 +234,6 @@
     </div>
 
     {{-- add modal user  --}}
-
     <div class="modal fade" id="add-user-modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -340,7 +339,6 @@
     </div>
 
     {{-- edit model user  --}}
-
     {{-- <div class="modal fade" id="edit-user-modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">

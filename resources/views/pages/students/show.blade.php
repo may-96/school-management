@@ -163,8 +163,6 @@
                                                      role="tabpanel" aria-labelledby="analytics-tab-1" tabindex="0">
                                                      <div class="table-responsive">
 
-                                                         {{-- {!! $dataTable->table(['class' => 'table table-hover'], true) !!} --}}
-
                                                          <table class="table table-hover" id="pc-dt-simple-1">
                                                              <thead>
                                                                  <tr>
@@ -221,6 +219,7 @@
                                                                  });
                                                              </script>
                                                          @endpush
+
                                                      </div>
                                                  </div>
                                              </div>

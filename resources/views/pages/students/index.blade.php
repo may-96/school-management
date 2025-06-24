@@ -30,7 +30,7 @@
                 </div>
 
                 <script>
-                    setTimeout(function () {
+                    setTimeout(function() {
                         let alert = document.getElementById('success-alert');
                         if (alert) {
                             let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
@@ -89,18 +89,16 @@
         function handleButtonState() {
             const button = document.getElementById("idBtnSub");
             const checkedBoxes = $('.student-checkbox:checked');
-            const selectedStudentIds = checkedBoxes.map(function () {
+            const selectedStudentIds = checkedBoxes.map(function() {
                 return $(this).data('student-id');
             }).get();
 
             localStorage.setItem('selectedStudentIds', JSON.stringify(selectedStudentIds));
 
             if (selectedStudentIds.length === 1) {
-                // Point to the correct student-specific voucher creation route
                 button.href = `/students/voucher/create/${selectedStudentIds[0]}`;
                 button.style.visibility = "visible";
             } else if (selectedStudentIds.length > 1) {
-                // Placeholder for future multi-student voucher creation support
                 button.href = `/students/voucher/create`;
                 button.style.visibility = "visible";
             } else {
@@ -110,23 +108,22 @@
         }
     </script>
 
-
     @push('scripts')
         {!! $dataTable->scripts() !!}
 
         <script>
-            $('#student-table').on('draw.dt', function () {
+            $('#student-table').on('draw.dt', function() {
                 bindCheckboxEvents();
             });
 
             function bindCheckboxEvents() {
-                $('#bulk-checkbox').off('change').on('change', function () {
+                $('#bulk-checkbox').off('change').on('change', function() {
                     const isChecked = $(this).is(':checked');
                     $('.student-checkbox').prop('checked', isChecked);
                     handleButtonState();
                 });
 
-                $('.student-checkbox').off('change').on('change', function () {
+                $('.student-checkbox').off('change').on('change', function() {
                     handleButtonState();
 
                     const all = $('.student-checkbox').length;
@@ -135,7 +132,7 @@
                 });
             }
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 bindCheckboxEvents();
             });
         </script>

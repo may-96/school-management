@@ -9,7 +9,7 @@ class SchoolController extends Controller
 {
     public function create()
     {
-        $school = School::first(); // only one school setting assumed
+        $school = School::first();
         return view('appsetting', compact('school'));
     }
 
@@ -20,7 +20,6 @@ class SchoolController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        // If record exists, update it; otherwise, create new
         $school = School::first();
         if ($school) {
             $school->update([
@@ -38,7 +37,6 @@ class SchoolController extends Controller
     }
 
 
-    // Show saved data
     public function index()
     {
         $schools = School::all();

@@ -242,8 +242,6 @@ class StudentController extends Controller
                     '</ul>';
             })
 
-
-
             ->rawColumns(['student_info', 'status', 'actions'])
             ->make(true);
     }

@@ -85,7 +85,6 @@
                                             <h5>Personal Details</h5>
                                         </div>
                                         <div class="card-body">
-
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item px-0 pt-0">
                                                     <div class="row">
@@ -140,13 +139,11 @@
                                     <form method="POST" action="{{ route('admin.users.update-profile') }}"
                                         enctype="multipart/form-data">
                                         @csrf
-
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Personal Information</h5>
                                             </div>
                                             <div class="card-body">
-
                                                 <div class="row">
                                                     <div class="col-sm-12 text-center mb-3">
                                                         <div class="user-upload wid-75">
@@ -189,10 +186,8 @@
                                                                 }
                                                             </script>
 
-
                                                         </div>
                                                     </div>
-
                                                     <div class="col-sm-6 mb-3">
                                                         <label class="form-label">First Name</label>
                                                         <input type="text" name="first_name" class="form-control"
@@ -230,13 +225,11 @@
                                 <div class="col-lg-6">
                                     <form action="{{ route('admin.users.update-password') }}" method="POST">
                                         @csrf
-
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5>Change Password</h5>
                                             </div>
                                             <div class="card-body">
-
                                                 <div class="row d-flex justify-content-center">
                                                     <div class="col-sm-10">
                                                         <div class="mb-3">
@@ -270,6 +263,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <script>
                                                     document.querySelectorAll('.toggle-password').forEach(function(icon) {
                                                         icon.addEventListener('click', function() {
@@ -286,7 +280,6 @@
                                                         });
                                                     });
                                                 </script>
-
 
                                             </div>
                                             <div class="col-12 text-end btn-page">

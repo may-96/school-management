@@ -46,6 +46,7 @@
                         </a>
                     </div>
                 </li>
+
                 <script>
                     function setTheme(mode) {
                         localStorage.setItem('theme', mode);
@@ -57,7 +58,6 @@
                         layout_change_default();
                     }
                 </script>
-
 
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"

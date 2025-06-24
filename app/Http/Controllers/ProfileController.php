@@ -26,8 +26,6 @@ class ProfileController extends Controller
         ]);
     }
 
-
-
     public function updateProfile(Request $request): RedirectResponse
     {
         $user = $request->user();

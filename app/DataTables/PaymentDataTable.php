@@ -3,13 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\Payment;
-// use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-// use Yajra\DataTables\EloquentDataTable;
-// use Yajra\DataTables\Html\Builder as HtmlBuilder;
-// use Yajra\DataTables\Html\Button;
-// use Yajra\DataTables\Html\Column;
-// use Yajra\DataTables\Html\Editor\Editor;
-// use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Carbon;
 
@@ -66,12 +59,10 @@ class PaymentDataTable extends DataTable
     {
         $query = Payment::query();
 
-        // Filter by voucher_id if sent via request
         if ($voucherId = request('voucher_id')) {
             $query->where('voucher_id', $voucherId);
         }
 
-        // Optional: Filter by student_id if needed, assuming relation through voucher -> student
         if ($studentId = request('student_id')) {
             $query->whereHas('voucher', function ($q) use ($studentId) {
                 $q->where('student_id', $studentId);

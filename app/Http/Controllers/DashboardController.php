@@ -18,12 +18,10 @@ class DashboardController extends Controller
         $totalTeachers = Teacher::count();
         $totalStudents = Student::count();
 
-        // Count vouchers by each status
         $totalPaid = Voucher::where('status', 'paid')->count();
         $totalPartialPaid = Voucher::where('status', 'partial paid')->count();
         $totalUnpaid = Voucher::where('status', 'unpaid')->count();
 
-        // Combined total of all vouchers
         $totalVouchers = $totalPaid + $totalPartialPaid + $totalUnpaid;
 
         $school = School::latest()->first();
