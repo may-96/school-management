@@ -31,7 +31,7 @@
                 </div>
 
                 <script>
-                    setTimeout(function () {
+                    setTimeout(function() {
                         let alert = document.getElementById('success-alert');
                         if (alert) {
                             let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
@@ -126,18 +126,15 @@
                                         </div>
                                     </div>
 
-                                    {{-- AMOUNT --}}
                                     <!-- Voucher Amount Editable -->
                                     <div class="mb-3 row me-0">
                                         <label class="col-lg-4 col-form-label">Voucher Amount:</label>
                                         <div class="col-lg-8">
-                                            <input type="number" step="0.01" id="voucherAmountDisplay" class="form-control"
-                                                name="amount">
+                                            <input type="number" step="0.01" id="voucherAmountDisplay"
+                                                class="form-control" name="amount">
                                             <input type="hidden" id="voucherAmountOriginal">
                                         </div>
                                     </div>
-
-
 
                                     <!-- PAYMENT DATE -->
                                     <div class="mb-3 row me-0">
@@ -164,8 +161,7 @@
                                             <small class="text-muted d-block">Enter Notes</small>
                                         </label>
                                         <div class="col-lg-8">
-                                            <textarea class="form-control" rows="2" name="notes"
-                                                placeholder="Enter notes"></textarea>
+                                            <textarea class="form-control" rows="2" name="notes" placeholder="Enter notes"></textarea>
                                         </div>
                                     </div>
 
@@ -231,8 +227,8 @@
 
     @push('scripts')
         <script>
-         $(document).ready(function () {
-                $(document).on('click', '.open-payment-modal', function () {
+            $(document).ready(function() {
+                $(document).on('click', '.open-payment-modal', function() {
                     let invoiceId = $(this).data('invoice-id');
                     let referenceNumber = $(this).data('reference-number');
                     let voucherId = $(this).data('voucher-id');
@@ -248,7 +244,7 @@
                     $('#voucherAmountOriginal').val(voucherAmount.toFixed(2));
                 });
 
-                $('#voucherAmountDisplay').on('input', function () {
+                $('#voucherAmountDisplay').on('input', function() {
                     let original = parseFloat($('#voucherAmountOriginal').val());
                     let current = parseFloat($(this).val());
 
@@ -258,65 +254,61 @@
                 });
             });
 
-
-
             let studentId = null;
             let voucherId = null;
 
-            $(document).on('click', '.view-payment-slip', function () {
+            $(document).on('click', '.view-payment-slip', function() {
                 studentId = $(this).data('student-id');
                 voucherId = $(this).data('voucher-id');
             });
-            $('#student-payment-slip_model').on('hidden.bs.modal', function () {
+            $('#student-payment-slip_model').on('hidden.bs.modal', function() {
                 $('#payment-slip-table').DataTable().clear().destroy();
             });
 
-
-            $('#student-payment-slip_model').on('shown.bs.modal', function () {
+            $('#student-payment-slip_model').on('shown.bs.modal', function() {
                 $('#payment-slip-table').DataTable({
                     processing: true,
                     serverSide: true,
                     destroy: true,
                     ajax: {
                         url: "{{ route('payment.data') }}",
-                        data: function (d) {
+                        data: function(d) {
                             d.student_id = studentId;
                             d.voucher_id = voucherId;
                         }
                     },
                     columns: [{
-                        data: 'invoice_id'
-                    },
-                    {
-                        data: 'reference_number'
-                    },
-                    {
-                        data: 'payment_method'
-                    },
-                    {
-                        data: 'payment_date'
-                    },
-                    {
-                        data: 'amount'
-                    }
+                            data: 'invoice_id'
+                        },
+                        {
+                            data: 'reference_number'
+                        },
+                        {
+                            data: 'payment_method'
+                        },
+                        {
+                            data: 'payment_date'
+                        },
+                        {
+                            data: 'amount'
+                        }
                     ]
                 });
             });
-
         </script>
     @endpush
-
+    
     @push('scripts')
         {!! $dataTable->scripts() !!}
     @endpush
 
     {{-- input date click event --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const inputs = document.querySelectorAll("input, select, textarea");
 
             inputs.forEach(input => {
-                input.addEventListener("click", function () {
+                input.addEventListener("click", function() {
                     this.focus();
 
                     if (this.type === "date") {

@@ -61,7 +61,7 @@
                                          </select>
                                      </div>
 
-                                     {{-- <div class="col-sm-6 col-xl-3">
+                                     <div class="col-sm-6 col-xl-3">
                                          <label class="form-label">Status</label>
                                          <select class="form-select" name="status" required>
                                              <option value="">Please Select</option>
@@ -71,9 +71,9 @@
                                                      {{ $status }}</option>
                                              @endforeach
                                          </select>
-                                     </div> --}}
+                                     </div>
 
-                                     <div class="col-sm-6 col-xl-6">
+                                     <div class="col-sm-6 col-xl-3">
                                          <label class="form-label">Notes</label>
                                          <textarea name="notes" class="form-control" rows="1">{{ $voucher->notes }}</textarea>
                                      </div>

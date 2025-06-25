@@ -86,7 +86,7 @@
 
     {{-- student edit fees model  --}}
 
-    <!-- Modal -->
+    {{-- Student Edit Payment Modal --}}
     <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <form id="edit-payment-form" method="POST">
@@ -199,5 +199,22 @@
             });
         </script>
     @endpush
+
+    {{-- input date click event --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = document.querySelectorAll("input, select, textarea");
+
+            inputs.forEach(input => {
+                input.addEventListener("click", function() {
+                    this.focus();
+
+                    if (this.type === "date") {
+                        this.showPicker?.();
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

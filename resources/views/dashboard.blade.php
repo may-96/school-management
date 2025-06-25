@@ -130,9 +130,9 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">Paid Vouchers</p>
+                                    <p class="mb-1">Total Amount</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ $totalPaid }}</h4>
+                                        <h4 class="mb-0">{{ number_format($totalPaidAmount) }} Pkr</h4>
                                         {{-- <span class="text-success fw-medium">30.6%</span> --}}
                                     </div>
                                 </div>
@@ -150,9 +150,9 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">Unpaid Vouchers</p>
+                                    <p class="mb-1">Pending Amount</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ $totalUnpaid }}</h4>
+                                        <h4 class="mb-0">{{ number_format($totalPendingAmount) }} Pkr</h4>
                                         {{-- <span class="text-danger fw-medium">30.6%</span> --}}
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Student Performance</h5>
+                                <h5 class="mb-0">Teachers & Student</h5>
                                 {{-- <button class="btn btn-sm btn-link-primary">View Report</button> --}}
                             </div>
                             {{-- <h4 class="mb-1">78%</h4> --}}
@@ -180,12 +180,16 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                              <div class="d-flex align-items-center justify-content-between">
+                                <h5 class="mb-4">Vouchers</h5>
+                                {{-- <button class="btn btn-sm btn-link-primary">View Report</button> --}}
+                            </div>
                             <div class="row g-3 mb-3">
                                 <div class="col-md-6 col-xxl-3">
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Total</h6>
+                                                <h6 class="mb-0">Total Vouchers</h6>
                                              
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalVouchers }}</h5>
@@ -197,7 +201,7 @@
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Paid</h6>
+                                                <h6 class="mb-0">Paid Vouchers</h6>
                                             
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalPaid }}</h5>
@@ -209,7 +213,7 @@
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Partial Paid</h6>
+                                                <h6 class="mb-0">Partial Paid Vouchers</h6>
                                              
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalPartialPaid }}</h5>
@@ -221,7 +225,7 @@
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Unpaid</h6>
+                                                <h6 class="mb-0">Unpaid Vouchers</h6>
                                                 <p class="mb-0 text-muted d-flex align-items-center gap-1">
                                                     {{-- <svg class="pc-icon text-success wid-15 hei-15">
                                                         <use xlink:href="#custom-arrow-up"></use>

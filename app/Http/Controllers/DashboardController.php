@@ -18,6 +18,10 @@ class DashboardController extends Controller
         $totalTeachers = Teacher::count();
         $totalStudents = Student::count();
 
+        $totalPaidAmount = Voucher::where('status', 'paid')->sum('amount');
+
+        $totalPendingAmount = Voucher::whereIn('status', ['unpaid', 'partial paid'])->sum('amount');
+
         $totalPaid = Voucher::where('status', 'paid')->count();
         $totalPartialPaid = Voucher::where('status', 'partial paid')->count();
         $totalUnpaid = Voucher::where('status', 'unpaid')->count();
@@ -29,6 +33,8 @@ class DashboardController extends Controller
         return view('dashboard', compact(
             'totalTeachers',
             'totalStudents',
+            'totalPaidAmount',
+            'totalPendingAmount',
             'totalPaid',
             'totalPartialPaid',
             'totalUnpaid',
@@ -38,8 +44,7 @@ class DashboardController extends Controller
     }
 
 
-
-
+    // students and teachers charts data
     public function getCourseReportChartData()
     {
         $months = collect(range(1, 12))->map(function ($month) {
@@ -71,7 +76,7 @@ class DashboardController extends Controller
         ]);
     }
 
-
+    // payments and vouchers charts data
     public function getInvoiceChartData()
     {
         $months = collect(range(1, 12))->map(function ($m) {
