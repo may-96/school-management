@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const chartOptions = {
                     chart: {
                         type: "bar",
-                        height: 250, // Slightly taller for better scaling
+                        height: 250,
                         toolbar: { show: false },
                     },
                     plotOptions: {
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             },
                         },
                         title: {
-                            text: "Count",
+                            text: "",
                             style: {
                                 fontSize: "13px",
                                 fontWeight: 600,
