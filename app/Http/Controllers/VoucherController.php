@@ -20,7 +20,7 @@ class VoucherController extends Controller
     public function create($studentId = null)
     {
         $student = Student::find($studentId);
-        $invoiceId = 'INV-' . now()->format('YmdHis');
+        $invoiceId = 'VOU-' . now()->format('YmdHis');
 
         return view('pages.vouchers.create', compact('student', 'invoiceId'));
     }
@@ -60,7 +60,7 @@ class VoucherController extends Controller
 
             $voucher = Voucher::create([
                 'student_id' => $studentId,
-                'invoice_id' => 'INV-' . now()->format('YmdHis') . '-' . $studentId,
+                'invoice_id' => 'VOU-' . now()->format('YmdHis') . '-' . $studentId,
                 'payment_method' => $request->payment_method,
                 'status' => 'unpaid',
                 'amount' => $totalAmount,

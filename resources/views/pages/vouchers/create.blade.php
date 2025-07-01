@@ -37,7 +37,8 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <form id="studentForm" action="{{ route('students.vouchers.store', ['student' => $student ? $student->id : null]) }}"
+                            <form id="studentForm"
+                                action="{{ route('students.vouchers.store', ['student' => $student ? $student->id : null]) }}"
                                 method="POST">
                                 @csrf
                                 {{-- Hidden Fields --}}
@@ -70,7 +71,6 @@
                                         <input type="date" name="payment_date" class="form-control" required />
                                     </div>
 
-                                    <!-- Fee Details -->
                                     <div class="col-12">
                                         <h5>Fee Details</h5>
                                         <div class="table-responsive">
@@ -83,90 +83,144 @@
                                                         <th class="text-center">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <!-- Dynamic rows added with JavaScript -->
-                                                    <script>
-                                                        document.addEventListener("DOMContentLoaded", function () {
-                                                            const tableBody = document.querySelector("tbody");
-                                                            const addItemBtn = document.getElementById("add-item-btn");
-                                                            const grandTotalEl = document.getElementById("grand-total");
-                                                            const amountInput = document.querySelector('input[name="amount"]');
-
-                                                            function updateRowNumbers() {
-                                                                tableBody.querySelectorAll("tr").forEach((row, i) => {
-                                                                    row.querySelector("td:first-child").textContent = i + 1;
-                                                                });
-                                                            }
-
-                                                            function calculateTotal() {
-                                                                let total = 0;
-                                                                document.querySelectorAll(".fee-input").forEach(input => {
-                                                                    let val = parseFloat(input.value);
-                                                                    if (!isNaN(val)) total += val;
-                                                                });
-                                                                grandTotalEl.textContent = `Pkr ${total.toFixed(2)}`;
-                                                                amountInput.value = total.toFixed(2);
-                                                            }
-
-                                                            function attachListeners() {
-                                                                document.querySelectorAll(".fee-input").forEach(input => {
-                                                                    input.addEventListener("input", calculateTotal);
-                                                                });
-                                                            }
-
-                                                            addItemBtn.addEventListener("click", function () {
-                                                                const row = document.createElement("tr");
-                                                                row.innerHTML = `
-                                                                                            <td>#</td>
-                                                                                            <td>
-                                                                                                <select name="fee_type[]" class="form-select" required>
-                                                                                                    <option value="">Please Select</option>
-                                                                                                    <option>Admission Fees</option>
-                                                                                                    <option>Monthly Fees</option>
-                                                                                                    <option>Tuition Fees</option>
-                                                                                                    <option>Lab Fees</option>
-                                                                                                    <option>Application Fees</option>
-                                                                                                    <option>Examination Fees</option>
-                                                                                                    <option>Registration Fees</option>
-                                                                                                    <option>Accomodation Fees</option>
-                                                                                                    <option>Library Fees</option>
-                                                                                                </select>
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <input type="number" name="fee_amount[]" class="form-control fee-input" required />
-                                                                                            </td>
-                                                                                            <td class="text-center">
-                                                                                                <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item"><i class="ti ti-trash f-20"></i></a>
-                                                                                            </td>
-                                                                                        `;
-                                                                tableBody.appendChild(row);
-                                                                updateRowNumbers();
-                                                                attachListeners();
-                                                            });
-
-                                                            tableBody.addEventListener("click", function (e) {
-                                                                if (e.target.closest(".remove-item")) {
-                                                                    e.preventDefault();
-                                                                    e.target.closest("tr").remove();
-                                                                    updateRowNumbers();
-                                                                    calculateTotal();
-                                                                }
-                                                            });
-                                                        });
-                                                    </script>
+                                                <tbody id="feeTableBody">
                                                 </tbody>
                                             </table>
                                         </div>
 
                                         <div class="text-start">
                                             <hr class="mb-4 mt-0 border-secondary border-opacity-50" />
-                                            <button type="button" class="btn btn-light-primary" id="add-item-btn">
+                                            <button type="button" class="btn btn-light-primary d-flex" id="add-item-btn">
                                                 <i class="ti ti-plus"></i> Add new item
                                             </button>
                                         </div>
+
                                     </div>
 
-                                    <!-- Grand Total -->
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            const tableBody = document.getElementById("feeTableBody");
+                                            const addItemBtn = document.getElementById("add-item-btn");
+                                            const grandTotalEl = document.getElementById("grand-total");
+                                            const amountInput = document.querySelector('input[name="amount"]');
+
+                                            const allFeeTypes = [
+                                                "Admission Fees",
+                                                "Monthly Fees",
+                                                "Tuition Fees",
+                                                "Lab Fees",
+                                                "Application Fees",
+                                                "Examination Fees",
+                                                "Registration Fees",
+                                                "Accomodation Fees",
+                                                "Library Fees"
+                                            ];
+
+                                            function getSelectedFeeTypes() {
+                                                return Array.from(document.querySelectorAll('select[name="fee_type[]"]'))
+                                                    .map(select => select.value)
+                                                    .filter(val => val !== "");
+                                            }
+
+                                            function generateFeeTypeOptions() {
+                                                const selected = getSelectedFeeTypes();
+                                                return allFeeTypes
+                                                    .filter(type => !selected.includes(type))
+                                                    .map(type => `<option value="${type}">${type}</option>`)
+                                                    .join("");
+                                            }
+
+                                            function updateRowNumbers() {
+                                                tableBody.querySelectorAll("tr").forEach((row, i) => {
+                                                    row.querySelector("td:first-child").textContent = i + 1;
+                                                });
+                                            }
+
+                                            function calculateTotal() {
+                                                let total = 0;
+                                                document.querySelectorAll(".fee-input").forEach(input => {
+                                                    const val = parseFloat(input.value);
+                                                    if (!isNaN(val)) total += val;
+                                                });
+                                                grandTotalEl.textContent = `Pkr ${total.toFixed(2)}`;
+                                                amountInput.value = total.toFixed(2);
+                                            }
+
+                                            function refreshAllSelectOptions() {
+                                                const selected = getSelectedFeeTypes();
+                                                document.querySelectorAll('select[name="fee_type[]"]').forEach(select => {
+                                                    const currentValue = select.value;
+                                                    select.innerHTML = '<option value="">Please Select</option>' + allFeeTypes
+                                                        .filter(type => !selected.includes(type) || type === currentValue)
+                                                        .map(type =>
+                                                            `<option value="${type}" ${type === currentValue ? 'selected' : ''}>${type}</option>`
+                                                        )
+                                                        .join("");
+                                                });
+                                            }
+
+                                            function attachListeners() {
+                                                document.querySelectorAll(".fee-input").forEach(input => {
+                                                    input.removeEventListener("input", calculateTotal);
+                                                    input.addEventListener("input", calculateTotal);
+                                                });
+
+                                                document.querySelectorAll('select[name="fee_type[]"]').forEach(select => {
+                                                    select.removeEventListener("change", refreshAllSelectOptions);
+                                                    select.addEventListener("change", refreshAllSelectOptions);
+                                                });
+
+                                                document.querySelectorAll(".remove-item").forEach(btn => {
+                                                    btn.removeEventListener("click", handleRemove);
+                                                    btn.addEventListener("click", handleRemove);
+                                                });
+                                            }
+
+                                            function handleRemove(e) {
+                                                e.preventDefault();
+                                                const row = e.target.closest("tr");
+                                                if (row) row.remove();
+                                                updateRowNumbers();
+                                                calculateTotal();
+                                                refreshAllSelectOptions();
+                                            }
+
+                                            addItemBtn.addEventListener("click", function() {
+                                                const options = generateFeeTypeOptions();
+                                                if (!options) {
+                                                    alert("All fee types have been selected.");
+                                                    return;
+                                                }
+
+                                                const row = document.createElement("tr");
+                                                row.innerHTML = `
+                <td>#</td>
+                <td>
+                    <select name="fee_type[]" class="form-select" required>
+                        <option value="">Please Select</option>
+                        ${options}
+                    </select>
+                </td>
+                <td>
+                    <input type="number" name="fee_amount[]" class="form-control fee-input" required />
+                </td>
+                <td class="text-center">
+                    <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item">
+                        <i class="ti ti-trash f-20"></i>
+                    </a>
+                </td>
+            `;
+                                                tableBody.appendChild(row);
+                                                updateRowNumbers();
+                                                attachListeners();
+                                                refreshAllSelectOptions();
+                                            });
+
+                                            updateRowNumbers();
+                                            attachListeners();
+                                        });
+                                    </script>
+
                                     <div class="col-12">
                                         <div class="invoice-total ms-auto">
                                             <div class="row">
@@ -180,7 +234,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Submit -->
                                     <div class="col-12">
                                         <div class="row justify-content-end g-3">
                                             <div class="col-sm-auto">
@@ -199,11 +252,11 @@
 
     {{-- input date click event --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const inputs = document.querySelectorAll("input, select, textarea");
 
             inputs.forEach(input => {
-                input.addEventListener("click", function () {
+                input.addEventListener("click", function() {
                     this.focus();
 
                     if (this.type === "date") {
@@ -214,16 +267,15 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const form = document.getElementById("voucher-form");
 
-            form.addEventListener("submit", function (e) {
+            form.addEventListener("submit", function(e) {
                 const existingInputs = form.querySelectorAll("input[name='student_ids[]']");
                 if (existingInputs.length === 0) {
-                    // Only inject if not already present
                     const selectedIds = JSON.parse(localStorage.getItem("selectedStudentIds") || "[]");
 
-                    selectedIds.forEach(function (id) {
+                    selectedIds.forEach(function(id) {
                         const input = document.createElement("input");
                         input.type = "hidden";
                         input.name = "student_ids[]";
@@ -234,7 +286,7 @@
             });
         });
 
-        document.getElementById('studentForm').addEventListener('submit', function (e) {
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
             var studentIds = localStorage.getItem('selectedStudentIds');
 
             document.getElementById('student_ids_input').value = studentIds;
@@ -242,4 +294,3 @@
     </script>
 
 @endsection
-
