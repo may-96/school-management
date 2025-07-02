@@ -159,12 +159,17 @@
                                                         default => 'secondary',
                                                     };
                                                 @endphp
+
                                                 <h6>Payment Date :
                                                     <span class="text-muted f-w-600">
-                                                        {{ $voucher->payment ? \Carbon\Carbon::parse($voucher->payment->payment_date)->format('d/m/Y') : 'N/A' }}
-
+                                                        @if ($voucher->payment && $voucher->payment->payment_date)
+                                                            {{ \Carbon\Carbon::parse($voucher->payment->payment_date)->format('d/m/Y') }}
+                                                        @else
+                                                            N/A
+                                                        @endif
                                                     </span>
                                                 </h6>
+
                                                 <span
                                                     class="badge bg-light-{{ $badgeClass }} text-{{ $badgeClass }} rounded-pill ms-2">
                                                     {{ ucfirst($voucher->status) }}

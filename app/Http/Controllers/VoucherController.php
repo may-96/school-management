@@ -82,7 +82,7 @@ class VoucherController extends Controller
 
     public function show($id)
     {
-        $voucher = Voucher::with('student', 'voucherItems')->findOrFail($id);
+        $voucher = Voucher::with(['student', 'voucherItems', 'payment'])->findOrFail($id);
         return view('pages.vouchers.show', compact('voucher'));
     }
 
@@ -134,5 +134,4 @@ class VoucherController extends Controller
 
         return redirect()->back()->with('success', 'Voucher deleted successfully.');
     }
-
 }

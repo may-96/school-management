@@ -41,6 +41,7 @@
                                 action="{{ route('students.vouchers.store', ['student' => $student ? $student->id : null]) }}"
                                 method="POST">
                                 @csrf
+
                                 {{-- Hidden Fields --}}
                                 <input type="hidden" name="student_ids" id="student_ids_input">
 
@@ -131,16 +132,16 @@
                                             }
 
                                             function updateRowNumbers() {
-                                                tableBody.querySelectorAll("tr").forEach((row, i) => {
-                                                    row.querySelector("td:first-child").textContent = i + 1;
+                                                tableBody.querySelectorAll("tr").forEach((row, index) => {
+                                                    row.querySelector("td:first-child").textContent = index + 1;
                                                 });
                                             }
 
                                             function calculateTotal() {
                                                 let total = 0;
                                                 document.querySelectorAll(".fee-input").forEach(input => {
-                                                    const val = parseFloat(input.value);
-                                                    if (!isNaN(val)) total += val;
+                                                    const value = parseFloat(input.value);
+                                                    if (!isNaN(value)) total += value;
                                                 });
                                                 grandTotalEl.textContent = `Pkr ${total.toFixed(2)}`;
                                                 amountInput.value = total.toFixed(2);
@@ -150,7 +151,9 @@
                                                 const selected = getSelectedFeeTypes();
                                                 document.querySelectorAll('select[name="fee_type[]"]').forEach(select => {
                                                     const currentValue = select.value;
-                                                    select.innerHTML = '<option value="">Please Select</option>' + allFeeTypes
+                                                    select.innerHTML =
+                                                        '<option value="">Please Select</option>' +
+                                                        allFeeTypes
                                                         .filter(type => !selected.includes(type) || type === currentValue)
                                                         .map(type =>
                                                             `<option value="${type}" ${type === currentValue ? 'selected' : ''}>${type}</option>`
@@ -187,6 +190,7 @@
 
                                             addItemBtn.addEventListener("click", function() {
                                                 const options = generateFeeTypeOptions();
+
                                                 if (!options) {
                                                     alert("All fee types have been selected.");
                                                     return;
@@ -211,6 +215,7 @@
                 </td>
             `;
                                                 tableBody.appendChild(row);
+
                                                 updateRowNumbers();
                                                 attachListeners();
                                                 refreshAllSelectOptions();
@@ -220,6 +225,7 @@
                                             attachListeners();
                                         });
                                     </script>
+
 
                                     <div class="col-12">
                                         <div class="invoice-total ms-auto">
