@@ -24,18 +24,7 @@
                 </div>
             </div>
 
-            {{-- Error Alert --}}
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                    <ul class="mb-0 mt-1 ps-3">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="btn-close mt-1" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
+            <x-alert-error />
 
             <div class="row">
                 <div class="col-12">
@@ -47,7 +36,7 @@
                             @csrf
                             <div class="card-body">
                                 <div class="row">
-                                    <!-- First Name -->
+                                    {{-- First Name --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">First Name</label>
@@ -56,7 +45,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Last Name -->
+                                    {{-- Last Name --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Last Name</label>
@@ -65,7 +54,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Email -->
+                                    {{-- Email --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
@@ -74,7 +63,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Date of Birth -->
+                                    {{-- Date of Birth --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Date of Birth</label>
@@ -82,7 +71,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Joining Date -->
+                                    {{-- Joining Date --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Joining Date</label>
@@ -90,7 +79,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Mobile Number -->
+                                    {{-- Mobile Number --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Mobile Number</label>
@@ -99,7 +88,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Gender -->
+                                    {{-- Gender --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Gender</label>
@@ -112,7 +101,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Class -->
+                                    {{-- Class --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Class</label>
@@ -138,7 +127,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Department -->
+                                    {{-- Department --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Department</label>
@@ -150,7 +139,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Education -->
+                                    {{-- Education --}}
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Education</label>
@@ -159,7 +148,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Teacher Profile (file) -->
+                                    {{-- Teacher Profile (file) --}}
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">Teacher Profile</label>
@@ -167,7 +156,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Submit -->
+                                    {{-- Submit --}}
                                     <div class="col-md-12 text-end">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
@@ -182,22 +171,4 @@
             </div>
         </div>
     </div>
-
-    {{-- input date click event --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const inputs = document.querySelectorAll("input, select, textarea");
-
-            inputs.forEach(input => {
-                input.addEventListener("click", function() {
-                    this.focus();
-
-                    if (this.type === "date") {
-                        this.showPicker?.();
-                    }
-                });
-            });
-        });
-    </script>
-
 @endsection

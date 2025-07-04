@@ -1,10 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    <!-- [ Main Content ] start -->
     <div class="pc-container">
         <div class="pc-content">
-            <!-- [ breadcrumb ] start -->
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
@@ -23,40 +21,8 @@
                     </div>
                 </div>
             </div>
-            <!-- [ breadcrumb ] end -->
 
-            {{-- Success Alert --}}
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-
-                <script>
-                    setTimeout(function() {
-                        let alert = document.getElementById('success-alert');
-                        if (alert) {
-                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                            bsAlert.close();
-                        }
-                    }, 3000);
-                </script>
-
-                @php
-                    session()->forget('success');
-                @endphp
-            @endif
-
-            {{-- Error Alert --}}
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <x-alert-success />
 
             <div class="row">
                 <div class="col-12">
@@ -84,7 +50,6 @@
         </div>
     </div>
 
-    {{-- student edit fees model  --}}
 
     {{-- Student Edit Payment Modal --}}
     <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -199,22 +164,4 @@
             });
         </script>
     @endpush
-
-    {{-- input date click event --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const inputs = document.querySelectorAll("input, select, textarea");
-
-            inputs.forEach(input => {
-                input.addEventListener("click", function() {
-                    this.focus();
-
-                    if (this.type === "date") {
-                        this.showPicker?.();
-                    }
-                });
-            });
-        });
-    </script>
-
 @endsection

@@ -23,15 +23,8 @@
              </div>
 
              {{-- Error Alert --}}
-             @if ($errors->any())
-                 <div class="alert alert-danger">
-                     <ul class="mb-0">
-                         @foreach ($errors->all() as $error)
-                             <li>{{ $error }}</li>
-                         @endforeach
-                     </ul>
-                 </div>
-             @endif
+             <x-alert-success />
+
 
              <div class="row">
                  <div class="col-sm-12">
@@ -292,22 +285,4 @@
              </div>
          </div>
      </div>
-
-     {{-- input date click event  --}}
-     <script>
-         document.addEventListener("DOMContentLoaded", function() {
-             const inputs = document.querySelectorAll("input, select, textarea");
-
-             inputs.forEach(input => {
-                 input.addEventListener("click", function() {
-                     this.focus();
-
-                     if (this.type === "date") {
-                         this.showPicker?.();
-                     }
-                 });
-             });
-         });
-     </script>
-
  @endsection

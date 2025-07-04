@@ -24,17 +24,7 @@
                 </div>
             </div>
 
-            {{-- Error Alert --}}
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                    <ul class="mb-0 mt-1 ps-3">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="btn-close mt-1" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+            <x-alert-error />
 
             <div class="row">
                 <div class="col-12">
@@ -48,49 +38,49 @@
                             @method('PUT')
                             <div class="card-body">
                                 <div class="row">
-                                    <!-- First Name -->
+                                    {{-- First Name --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">First Name</label>
                                         <input type="text" class="form-control" name="first_name"
                                             value="{{ $student->first_name }}" placeholder="Enter first name" required>
                                     </div>
 
-                                    <!-- Last Name -->
+                                    {{-- Last Name --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Last Name</label>
                                         <input type="text" class="form-control" name="last_name"
                                             value="{{ $student->last_name }}" placeholder="Enter last name" required>
                                     </div>
 
-                                    <!-- Date of Birth -->
+                                    {{-- Date of Birth --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth</label>
                                         <input type="date" class="form-control" name="dob"
                                             value="{{ $student->dob }}" required>
                                     </div>
 
-                                    <!-- Registration Date -->
+                                    {{-- Registration Date --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Registration Date</label>
                                         <input type="date" class="form-control" name="registration_date"
                                             value="{{ $student->registration_date }}" required>
                                     </div>
 
-                                    <!-- Admission No -->
+                                    {{-- Admission No --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Admission No</label>
                                         <input type="text" class="form-control" name="admission_no"
                                             value="{{ $student->admission_no }}" required>
                                     </div>
 
-                                    <!-- Roll No -->
+                                    {{-- Roll No --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Roll No</label>
                                         <input type="text" class="form-control" name="roll_no"
                                             value="{{ $student->roll_no }}" required>
                                     </div>
 
-                                    <!-- Class -->
+                                    {{-- Class --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Class</label>
                                         <select class="form-select" name="class" required>
@@ -103,14 +93,14 @@
                                         </select>
                                     </div>
 
-                                    <!-- Section -->
+                                    {{-- Section --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Section</label>
                                         <input type="text" class="form-control" name="section"
                                             value="{{ $student->section }}" required>
                                     </div>
 
-                                    <!-- Gender -->
+                                    {{-- Gender --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Gender</label>
                                         <select class="form-select" name="gender" required>
@@ -123,7 +113,7 @@
                                         </select>
                                     </div>
 
-                                    <!-- Status -->
+                                    {{-- Status --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
                                         <select class="form-select" name="status" required>
@@ -135,41 +125,41 @@
                                         </select>
                                     </div>
 
-                                    <!-- Parent Name -->
+                                    {{-- Parent Name --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Parents Name</label>
                                         <input type="text" class="form-control" name="parents_name"
                                             value="{{ $student->parents_name }}" required>
                                     </div>
 
-                                    <!-- Parent Mobile -->
+                                    {{-- Parent Mobile --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Parents Mobile Number</label>
                                         <input type="number" class="form-control" name="parents_mobile"
                                             value="{{ $student->parents_mobile }}" required>
                                     </div>
 
-                                    <!-- Secondary Mobile -->
+                                    {{-- Secondary Mobile --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Secondary Mobile Number</label>
                                         <input type="number" class="form-control" name="secondary_mobile"
                                             value="{{ $student->secondary_mobile }}">
                                     </div>
 
-                                    <!-- Profile Photo -->
+                                    {{-- Profile Photo --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Student Profile</label>
                                         <input class="form-control" type="file" name="profile_photo"
                                             accept="image/*">
                                     </div>
 
-                                    <!-- Address -->
+                                    {{-- Address --}}
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Address</label>
                                         <textarea class="form-control" name="address" rows="2" required>{{ $student->address }}</textarea>
                                     </div>
 
-                                    <!-- Submit Button -->
+                                    {{-- Submit Button --}}
                                     <div class="col-md-12 text-end">
                                         <button class="btn btn-primary" type="submit">Update</button>
                                     </div>
@@ -181,22 +171,4 @@
             </div>
         </div>
     </div>
-
-    {{-- input date click event --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const inputs = document.querySelectorAll("input, select, textarea");
-
-            inputs.forEach(input => {
-                input.addEventListener("click", function() {
-                    this.focus();
-
-                    if (this.type === "date") {
-                        this.showPicker?.();
-                    }
-                });
-            });
-        });
-    </script>
-
 @endsection

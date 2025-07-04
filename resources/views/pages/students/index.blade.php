@@ -22,38 +22,9 @@
                 </div>
             </div>
 
-            {{-- Success Alert --}}
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            <x-alert-success />
 
-                <script>
-                    setTimeout(function() {
-                        let alert = document.getElementById('success-alert');
-                        if (alert) {
-                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                            bsAlert.close();
-                        }
-                    }, 3000);
-                </script>
-
-                @php
-                    session()->forget('success');
-                @endphp
-            @endif
-
-            {{-- Error Alert --}}
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <x-alert-error />
 
             <div class="row">
                 <div class="col-12">
@@ -141,5 +112,4 @@
             });
         </script>
     @endpush
-
 @endsection

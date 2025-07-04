@@ -24,17 +24,7 @@
                 </div>
             </div>
 
-            {{-- Error Alert --}}
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                    <ul class="mb-0 mt-1 ps-3">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="btn-close mt-1" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+            <x-alert-error />
 
             <div class="row">
                 <div class="col-12">
@@ -152,22 +142,4 @@
             </div>
         </div>
     </div>
-
-    {{-- input date click event --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const inputs = document.querySelectorAll("input, select, textarea");
-
-            inputs.forEach(input => {
-                input.addEventListener("click", function() {
-                    this.focus();
-
-                    if (this.type === "date") {
-                        this.showPicker?.();
-                    }
-                });
-            });
-        });
-    </script>
-
 @endsection

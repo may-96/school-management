@@ -22,27 +22,7 @@
                 </div>
             </div>
 
-            {{-- Success Alert --}}
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-
-                <script>
-                    setTimeout(function() {
-                        let alert = document.getElementById('success-alert');
-                        if (alert) {
-                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                            bsAlert.close();
-                        }
-                    }, 3000);
-                </script>
-
-                @php
-                    session()->forget('success');
-                @endphp
-            @endif
+            <x-alert-success />
 
             <div class="row">
                 <div class="col-12">
@@ -51,11 +31,6 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="p-4">
-                                        {{-- <h2 class="text-white">Govt High Secondary School No 1</h2>
-                                        <p class="text-white">The Brand new User Interface with power of Bootstrap
-                                            Components. Explore the
-                                            Endless possibilities with Able
-                                            Pro.</p> --}}
                                         @if ($school)
                                             <h2 class="text-white">{{ $school->name }}</h2>
                                             <p class="text-white">{{ $school->description }}</p>
@@ -63,7 +38,6 @@
                                             <h2 class="text-white">School Name Not Set</h2>
                                             <p class="text-white">Please configure your school settings.</p>
                                         @endif
-
                                     </div>
                                 </div>
                                 <div class="col-sm-6 text-center">
@@ -90,10 +64,8 @@
                                     <p class="mb-1">Total Teachers</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">{{ $totalTeachers }}</h4>
-                                        {{-- <span class="text-success fw-medium">30.6%</span> optional percentage --}}
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -111,7 +83,6 @@
                                     <p class="mb-1">Total Students</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">{{ $totalStudents }}</h4>
-                                        {{-- <span class="text-primary fw-medium">12.4%</span> optional --}}
                                     </div>
                                 </div>
 
@@ -133,7 +104,6 @@
                                     <p class="mb-1">Total Amount</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">{{ number_format($totalPaidAmount) }} Pkr</h4>
-                                        {{-- <span class="text-success fw-medium">30.6%</span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +123,6 @@
                                     <p class="mb-1">Pending Amount</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">{{ number_format($totalPendingAmount) }} Pkr</h4>
-                                        {{-- <span class="text-danger fw-medium">30.6%</span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -165,13 +134,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-0">Teachers & Student</h5>
-                                {{-- <button class="btn btn-sm btn-link-primary">View Report</button> --}}
                             </div>
-                            {{-- <h4 class="mb-1">78%</h4> --}}
-                            {{-- <p class="d-inline-flex align-items-center text-success gap-1 mb-0"> <i
-                                    class="ti ti-arrow-narrow-up"></i>
-                                2.1% </p> --}}
-                            {{-- <p class="text-muted mb-1">1-30 Dec, 2024</p> --}}
                             <div id="course-report-bar-chart"></div>
                         </div>
                     </div>
@@ -180,9 +143,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                              <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-4">Vouchers</h5>
-                                {{-- <button class="btn btn-sm btn-link-primary">View Report</button> --}}
                             </div>
                             <div class="row g-3 mb-3">
                                 <div class="col-md-6 col-xxl-3">
@@ -190,10 +152,10 @@
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
                                                 <h6 class="mb-0">Total Vouchers</h6>
-                                             
+
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalVouchers }}</h5>
-                                          
+
                                         </div>
                                     </div>
                                 </div>
@@ -202,22 +164,22 @@
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
                                                 <h6 class="mb-0">Paid Vouchers</h6>
-                                            
+
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalPaid }}</h5>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
-                                 <div class="col-md-6 col-xxl-3">
+                                <div class="col-md-6 col-xxl-3">
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
                                                 <h6 class="mb-0">Partial Paid Vouchers</h6>
-                                             
+
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalPartialPaid }}</h5>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -227,21 +189,12 @@
                                             <div class="d-flex align-items-center justify-content-between gap-1">
                                                 <h6 class="mb-0">Unpaid Vouchers</h6>
                                                 <p class="mb-0 text-muted d-flex align-items-center gap-1">
-                                                    {{-- <svg class="pc-icon text-success wid-15 hei-15">
-                                                        <use xlink:href="#custom-arrow-up"></use>
-                                                    </svg>
-                                                    10.73% --}}
                                                 </p>
                                             </div>
                                             <h5 class="mb-2 mt-3">{{ $totalUnpaid }}</h5>
-                                            {{-- <div class="d-flex align-items-center gap-1">
-                                                <h5 class="mb-0"></h5>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-2"></p>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>
                             <div id="invoice-chart"></div>
                         </div>

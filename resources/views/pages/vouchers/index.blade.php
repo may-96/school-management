@@ -23,38 +23,8 @@
                 </div>
             </div>
 
-            {{-- Success Alert --}}
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-
-                <script>
-                    setTimeout(function() {
-                        let alert = document.getElementById('success-alert');
-                        if (alert) {
-                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                            bsAlert.close();
-                        }
-                    }, 3000);
-                </script>
-
-                @php
-                    session()->forget('success');
-                @endphp
-            @endif
-
-            {{-- Error Alert --}}
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <x-alert-success />
+            <x-alert-error />
 
             <div class="row">
                 <div class="col-12">
@@ -126,7 +96,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- Voucher Amount Editable -->
+                                    {{-- Voucher Amount Editable --}}
                                     <div class="mb-3 row me-0">
                                         <label class="col-lg-4 col-form-label">Voucher Amount:</label>
                                         <div class="col-lg-8">
@@ -136,7 +106,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- PAYMENT DATE -->
+                                    {{-- PAYMENT DATE --}}
                                     <div class="mb-3 row me-0">
                                         <label class="col-lg-4 col-form-label">Payment Date:
                                             <small class="text-muted d-block">Enter the Payment Date</small>
@@ -146,7 +116,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- REFERENCE NUMBER -->
+                                    {{-- REFERENCE NUMBER --}}
                                     <div class="mb-3 row me-0">
                                         <label class="col-lg-4 col-form-label">Refrence No :</label>
                                         <div class="col-lg-8">
@@ -155,7 +125,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- NOTES -->
+                                    {{-- NOTES --}}
                                     <div class="mb-3 row me-0">
                                         <label class="col-lg-4 col-form-label">Notes:
                                             <small class="text-muted d-block">Enter Notes</small>
@@ -165,7 +135,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- ACTION BUTTONS -->
+                                    {{-- ACTION BUTTONS --}}
                                     <div class="text-end btn-page mb-0 mt-4 me-0">
                                         <button type="button" class="btn btn-outline-secondary"
                                             data-bs-dismiss="modal">Cancel</button>
@@ -210,7 +180,7 @@
                                                 <th>Amount</th>
                                             </tr>
                                         </thead>
-                                        <tbody></tbody> <!-- DataTables will fill this -->
+                                        <tbody></tbody>
                                     </table>
 
                                 </div>
@@ -297,26 +267,8 @@
             });
         </script>
     @endpush
-    
+
     @push('scripts')
         {!! $dataTable->scripts() !!}
     @endpush
-
-    {{-- input date click event --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const inputs = document.querySelectorAll("input, select, textarea");
-
-            inputs.forEach(input => {
-                input.addEventListener("click", function() {
-                    this.focus();
-
-                    if (this.type === "date") {
-                        this.showPicker?.();
-                    }
-                });
-            });
-        });
-    </script>
-
 @endsection
