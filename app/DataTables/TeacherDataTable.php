@@ -5,12 +5,13 @@ namespace App\DataTables;
 use App\Models\Teacher;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherDataTable extends DataTable
 {
     public function dataTable($query)
     {
-        return datatables()
+        $dataTable = datatables()
             ->eloquent($query)
             ->filterColumn('name', function ($query, $keyword) {
                 $query->where(function ($q) use ($keyword) {
@@ -49,28 +50,44 @@ class TeacherDataTable extends DataTable
                         <h6 class="mb-0">' . $teacher->department . '</h6>
                         <small class="text-truncate w-100 text-muted">' . $teacher->class . '</small>
                     </div>';
-            })
-            ->addColumn('action', function ($teacher) {
-                return '
-                    <a href="' . route('teacher.show', $teacher->id) . '" class="avtar avtar-xs btn-link-secondary">
-                        <i class="ti ti-eye f-20"></i>
-                    </a>
-                    <a href="' . route('teacher.edit', $teacher->id) . '" class="avtar avtar-xs btn-link-secondary">
-                        <i class="ti ti-edit f-20"></i>
-                    </a>
-                    <form id="delete-form-' . $teacher->id . '" action="' . route('teacher.destroy', $teacher->id) . '" method="POST" style="display: none;">
-                        ' . csrf_field() . method_field('DELETE') . '
-                    </form>
-                    <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $teacher->id . '">
-                        <i class="ti ti-trash f-20"></i>
-                    </a>';
-            })
-            ->rawColumns(['name', 'department_class', 'action']);
+            });
+
+        if (Auth::user() && Auth::user()->role === 'admin') {
+            $dataTable->addColumn('added_by', function ($teacher) {
+                if ($teacher->user) {
+                    return trim($teacher->user->first_name . ' ' . $teacher->user->last_name);
+                }
+                return 'Unknown';
+            });
+        }
+
+        $dataTable->addColumn('action', function ($teacher) {
+            return '
+                <a href="' . route('teacher.show', $teacher->id) . '" class="avtar avtar-xs btn-link-secondary">
+                    <i class="ti ti-eye f-20"></i>
+                </a>
+                <a href="' . route('teacher.edit', $teacher->id) . '" class="avtar avtar-xs btn-link-secondary">
+                    <i class="ti ti-edit f-20"></i>
+                </a>
+                <form id="delete-form-' . $teacher->id . '" action="' . route('teacher.destroy', $teacher->id) . '" method="POST" style="display: none;">
+                    ' . csrf_field() . method_field('DELETE') . '
+                </form>
+                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $teacher->id . '">
+                    <i class="ti ti-trash f-20"></i>
+                </a>';
+        });
+
+        $rawCols = ['name', 'department_class', 'action'];
+        if (Auth::user() && Auth::user()->role === 'admin') {
+            $rawCols[] = 'added_by';
+        }
+
+        return $dataTable->rawColumns($rawCols);
     }
 
     public function query(Teacher $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('user'); 
     }
 
     public function html()
@@ -86,7 +103,7 @@ class TeacherDataTable extends DataTable
 
     protected function getColumns()
     {
-        return [
+        $columns = [
             Column::computed('name')
                 ->title('Name')
                 ->exportable(false)
@@ -103,13 +120,23 @@ class TeacherDataTable extends DataTable
             Column::make('education'),
             Column::make('mobile_number')->title('Mobile'),
             Column::make('joining_date'),
+        ];
 
-            Column::computed('action')
+        if (Auth::user() && Auth::user()->role === 'admin') {
+            $columns[] = Column::computed('added_by')
+                ->title('Added By')
                 ->exportable(false)
                 ->printable(false)
-                ->width(120)
-                ->addClass('text-center'),
-        ];
+                ->addClass('text-left');
+        }
+
+        $columns[] = Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(120)
+            ->addClass('text-center');
+
+        return $columns;
     }
 
     protected function filename(): string

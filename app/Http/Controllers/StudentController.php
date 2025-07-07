@@ -9,6 +9,7 @@ use App\DataTables\StudentVoucherPaymentDataTable;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 
@@ -45,6 +46,7 @@ class StudentController extends Controller
 
         $data = $request->except('profile_photo');
         $data['profile_image'] = $fileName;
+        $data['user_id'] = Auth::id();
 
         Student::create($data);
 

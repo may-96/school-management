@@ -17,9 +17,5 @@ class VoucherItem extends Model
     {
         return $this->belongsTo(Voucher::class);
     }
-
-    public function voucherItems()
-    {
-        return $this->hasMany(VoucherItem::class);
-    }
+    
 }

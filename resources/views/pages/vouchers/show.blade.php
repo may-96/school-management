@@ -169,7 +169,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($voucher->voucherItems as $index => $item)
+                                                    @foreach ($voucher->items as $index => $item)
                                                         <tr>
                                                             <td>{{ $index + 1 }}</td>
                                                             <td>{{ $item->fee_type }}</td>

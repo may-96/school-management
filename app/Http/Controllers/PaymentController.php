@@ -6,6 +6,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\DataTables\PaymentDataTable;
 use App\Models\Voucher;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -60,6 +61,7 @@ class PaymentController extends Controller
             'amount'           => $request->amount,
             'payment_date'     => $request->payment_date,
             'notes'            => $request->notes,
+            'user_id'        => Auth::id(),
         ]);
 
         $totalPaid = $voucher->payments()->sum('amount');
@@ -121,7 +123,7 @@ class PaymentController extends Controller
 
     public function show($id, PaymentDataTable $dataTable)
     {
-        $voucher = Voucher::with(['student', 'voucherItems'])->findOrFail($id);
+        $voucher = Voucher::with(['student', 'items'])->findOrFail($id);
 
         return $dataTable->render('pages.vouchers.show', compact('voucher'));
     }

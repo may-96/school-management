@@ -24,19 +24,13 @@ class Voucher extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function voucherItems()
-    {
-        return $this->hasMany(VoucherItem::class);
-    }
-
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
-    }
-
-      public function payments()
+    public function payments()
     {
         return $this->hasMany(Payment::class);
     }
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

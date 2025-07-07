@@ -6,12 +6,13 @@ use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\Services\DataTable;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class StudentDataTable extends DataTable
 {
     public function dataTable($query)
     {
-        return datatables()
+        $dataTable = datatables()
             ->eloquent($query)
             ->addColumn('checkbox', function ($student) {
                 return '
@@ -71,28 +72,44 @@ class StudentDataTable extends DataTable
                 $badge = $student->status == 'Active' ? 'bg-light-success' : 'bg-light-danger';
                 return '<span class="badge ' . $badge . '">' . $student->status . '</span>';
             })
-            ->addColumn('admission_date', fn($student) => Carbon::parse($student->registration_date)->format('Y/m/d'))
-            ->addColumn('action', function ($student) {
-                return '
-                <a href="' . route('student.show', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-eye f-20"></i>
-                </a>
-                <a href="' . route('student.edit', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-edit f-20"></i>
-                </a>
-                <form id="delete-form-' . $student->id . '" action="' . route('student.destroy', $student->id) . '" method="POST" style="display: none;">
-                    ' . csrf_field() . method_field('DELETE') . '
-                </form>
-                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $student->id . '">
-                    <i class="ti ti-trash f-20"></i>
-                </a>';
-            })
-            ->rawColumns(['checkbox', 'name_roll', 'class_section', 'parents', 'status', 'action']);
+            ->addColumn('admission_date', fn($student) => Carbon::parse($student->registration_date)->format('Y/m/d'));
+
+        if (Auth::user() && Auth::user()->role === 'admin') {
+            $dataTable->addColumn('added_by', function ($student) {
+                if ($student->user) {
+                    return trim($student->user->first_name . ' ' . $student->user->last_name);
+                }
+                return 'Unknown';
+            });
+        }
+
+        $dataTable->addColumn('action', function ($student) {
+            return '
+            <a href="' . route('student.show', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
+                <i class="ti ti-eye f-20"></i>
+            </a>
+            <a href="' . route('student.edit', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
+                <i class="ti ti-edit f-20"></i>
+            </a>
+            <form id="delete-form-' . $student->id . '" action="' . route('student.destroy', $student->id) . '" method="POST" style="display: none;">
+                ' . csrf_field() . method_field('DELETE') . '
+            </form>
+            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $student->id . '">
+                <i class="ti ti-trash f-20"></i>
+            </a>';
+        });
+
+        $raw = ['checkbox', 'name_roll', 'class_section', 'parents', 'status', 'action'];
+        if (Auth::user() && Auth::user()->role === 'admin') {
+            $raw[] = 'added_by';
+        }
+
+        return $dataTable->rawColumns($raw);
     }
 
     public function query(): QueryBuilder
     {
-        return Student::select([
+        return Student::with('user')->select([
             'id',
             'first_name',
             'last_name',
@@ -104,7 +121,8 @@ class StudentDataTable extends DataTable
             'parents_mobile',
             'status',
             'registration_date',
-            'profile_image'
+            'profile_image',
+            'user_id'
         ]);
     }
 
@@ -120,36 +138,36 @@ class StudentDataTable extends DataTable
 
     public function getColumns()
     {
-        return [
+        $columns = [
             [
                 'data' => 'checkbox',
                 'name' => 'checkbox',
                 'title' => '
-        <div class="form-check form-check-inline pc-icon-checkbox">
-            <input class="form-check-input" type="checkbox" id="bulk-checkbox" />
-            <i class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
-            <i class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
-        </div>
-    ',
+                <div class="form-check form-check-inline pc-icon-checkbox">
+                    <input class="form-check-input" type="checkbox" id="bulk-checkbox" />
+                    <i class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+                    <i class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+                </div>',
                 'orderable' => false,
                 'searchable' => false,
                 'escape' => false,
             ],
 
-            ['data' => 'name_roll', 'name' => 'first_name', 'title' => 'Name / Roll No', 'searchable' => true],
-
+            ['data' => 'name_roll', 'name' => 'first_name', 'title' => 'Name / Roll No'],
             ['data' => 'admission_no', 'name' => 'admission_no', 'title' => 'Admission No'],
-
-            ['data' => 'class_section', 'name' => 'class', 'title' => 'Class / Section'],
-
+            ['data' => 'class_section', 'name' => 'class', 'title' => 'Class / Sec'],
             ['data' => 'parents', 'name' => 'parents_name', 'title' => 'Parents'],
-
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
-
             ['data' => 'admission_date', 'name' => 'registration_date', 'title' => 'Admission Date'],
-
-            ['data' => 'action', 'name' => 'action', 'title' => 'Action', 'orderable' => false, 'searchable' => false],
         ];
+
+        if (Auth::user() && Auth::user()->role === 'admin') {
+            $columns[] = ['data' => 'added_by', 'name' => 'user_id', 'title' => 'Added By'];
+        }
+
+        $columns[] = ['data' => 'action', 'name' => 'action', 'title' => 'Action', 'orderable' => false, 'searchable' => false];
+
+        return $columns;
     }
 
     public function filename(): string

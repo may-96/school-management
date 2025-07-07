@@ -13,9 +13,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::with(['students', 'teachers', 'vouchers', 'payments'])->get();
         return view('pages.admin.users', compact('users'));
     }
+
 
     public function store(Request $request)
     {
@@ -77,8 +78,13 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->role === 'admin') {
+            abort(403, 'You are not allowed to delete an admin.');
+        }
+
         Log::info("Trying to delete user: " . $user->id);
         $user->delete();
+
         return redirect()->back()->with('success', 'User deleted successfully!');
     }
 }

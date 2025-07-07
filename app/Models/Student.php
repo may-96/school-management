@@ -16,7 +16,7 @@ class Student extends Model
 
     public function payments()
     {
-        return $this->hasMany(Voucher::class);
+        return $this->hasMany(Voucher::class); //payment model
     }
 
     public function vouchers()
@@ -24,4 +24,8 @@ class Student extends Model
         return $this->hasMany(Voucher::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -22,38 +22,9 @@
                 </div>
             </div>
 
-            {{-- Success Alert --}}
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            <x-alert-success />
 
-                <script>
-                    setTimeout(function() {
-                        let alert = document.getElementById('success-alert');
-                        if (alert) {
-                            let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                            bsAlert.close();
-                        }
-                    }, 3000);
-                </script>
-
-                @php
-                    session()->forget('success');
-                @endphp
-            @endif
-
-            {{-- Error Alert --}}
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <x-alert-error />
 
             <div class="row">
                 <div class="col-sm-12">
@@ -68,6 +39,7 @@
                                     <thead>
                                         <tr>
                                             <th>Users</th>
+                                            {{-- <th>Totals</th> --}}
                                             <th>Contacts</th>
                                             <th>ROLE</th>
                                             <th class="text-end">STATUS</th>
@@ -99,6 +71,20 @@
                                                         </div>
                                                     </div>
                                                 </td>
+                                                {{-- <td>
+                                                    <div class="row">
+                                                        <div class="col-auto pe-0">
+                                                            <small class="text-muted d-block">Students:
+                                                                {{ $user->students->count() }}</small>
+                                                            <small class="text-muted d-block">Teachers:
+                                                                {{ $user->teachers->count() }}</small>
+                                                            <small class="text-muted d-block">Vouchers:
+                                                                {{ $user->vouchers->count() }}</small>
+                                                            <small class="text-muted d-block">Payments:
+                                                                {{ $user->payments->count() }}</small>
+                                                        </div>
+                                                    </div>
+                                                </td> --}}
                                                 <td>
                                                     <div class="row">
                                                         <div class="col">
@@ -144,11 +130,11 @@
                                                         @method('DELETE')
 
                                                         @if ($user->role !== 'admin')
-                                                            <a href="#"
-                                                                class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                                                                data-id="{{ $user->id }}">
-                                                                <i class="ti ti-trash f-20"></i>
-                                                            </a>
+                                                        <a href="#"
+                                                            class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                                                            data-id="{{ $user->id }}">
+                                                            <i class="ti ti-trash f-20"></i>
+                                                        </a>
                                                         @endif
                                                     </form>
 
@@ -421,5 +407,4 @@
             </div>
         </div>
     </div> --}}
-
 @endsection

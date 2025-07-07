@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\DataTables\TeacherDataTable;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 
@@ -38,6 +39,7 @@ class TeacherController extends Controller
 
         $data = $request->except('profile_photo');
         $data['profile_image'] = $fileName;
+        $data['user_id'] = Auth::id();
 
         Teacher::create($data);
 

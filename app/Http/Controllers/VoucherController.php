@@ -7,6 +7,7 @@ use App\Models\Voucher;
 use App\Models\VoucherItem;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 
 class VoucherController extends Controller
 {
@@ -37,6 +38,10 @@ class VoucherController extends Controller
             $studentIds = [$request->student_id];
         }
 
+        if (empty($studentIds)) {
+            return back()->withErrors(['student_id' => 'Please select at least one student.']);
+        }
+
         $request->validate([
             'invoice_id' => 'required|unique:vouchers,invoice_id',
             'payment_method' => 'required',
@@ -47,9 +52,6 @@ class VoucherController extends Controller
             'fee_amount.*' => 'required|numeric|min:0',
         ]);
 
-        if (empty($studentIds)) {
-            return back()->withErrors(['student_id' => 'Please select at least one student.']);
-        }
 
         $totalAmount = array_sum($request->fee_amount);
 
@@ -66,6 +68,7 @@ class VoucherController extends Controller
                 'amount' => $totalAmount,
                 'notes' => $request->notes,
                 'payment_date' => $request->payment_date,
+                'user_id'        => Auth::id(),
             ]);
 
             foreach ($request->fee_type as $index => $type) {
@@ -82,13 +85,13 @@ class VoucherController extends Controller
 
     public function show($id)
     {
-        $voucher = Voucher::with(['student', 'voucherItems', 'payment'])->findOrFail($id);
+        $voucher = Voucher::with(['student', 'items', 'payments'])->findOrFail($id);
         return view('pages.vouchers.show', compact('voucher'));
     }
 
     public function edit($id)
     {
-        $voucher = Voucher::with('student', 'voucherItems')->findOrFail($id);
+        $voucher = Voucher::with('student', 'items')->findOrFail($id);
         return view('pages.vouchers.edit', compact('voucher'));
     }
 
