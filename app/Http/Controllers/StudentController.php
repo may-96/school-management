@@ -149,102 +149,109 @@ class StudentController extends Controller
     public function paymentData($id)
     {
         $student = Student::with('payments')->findOrFail($id);
-        $payments = $student->payments()->with('student');
+        $payments = $student->payments()->with(['student', 'user']); 
 
-        return DataTables::of($payments)
+        $dataTable = DataTables::of($payments)
             ->addColumn('student_info', function ($payment) use ($student) {
                 $imgUrl = $student->profile_image
                     ? asset('storage/students/' . $student->profile_image)
                     : asset('assets/images/user/avatar-1.jpg');
 
                 return '
-                <div class="row align-items-center">
-                    <div class="col-auto pe-0">
-                        <img src="' . $imgUrl . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
-                    </div>
-                    <div class="col">
-                        <h6 class="mb-0">' . $student->first_name . ' ' . $student->last_name . '</h6>
-                        <p class="f-12 mb-0"><a href="#!" class="text-muted">
-                            <span class="text-truncate w-100">' . $student->parents_mobile . '</span></a></p>
-                    </div>
-                </div>';
+            <div class="row align-items-center">
+                <div class="col-auto pe-0">
+                    <img src="' . $imgUrl . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
+                </div>
+                <div class="col">
+                    <h6 class="mb-0">' . $student->first_name . ' ' . $student->last_name . '</h6>
+                    <p class="f-12 mb-0"><a href="#!" class="text-muted">
+                        <span class="text-truncate w-100">' . $student->parents_mobile . '</span></a></p>
+                </div>
+            </div>';
             })
-            ->editColumn('payment_date', function ($payment) {
-                return \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y');
-            })
-            ->editColumn('amount', function ($payment) {
-                return $payment->amount . ' Pkr';
-            })
+            ->editColumn('payment_date', fn($payment) => \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y'))
+            ->editColumn('amount', fn($payment) => $payment->amount . ' Pkr')
             ->addColumn('status', function ($payment) {
-                $status = strtolower($payment->status);
-                return match ($status) {
+                return match (strtolower($payment->status)) {
                     'paid' => '<span class="badge bg-light-success">Paid</span>',
                     'unpaid' => '<span class="badge bg-light-danger">Unpaid</span>',
                     'partial paid' => '<span class="badge bg-light-warning">Partial Paid</span>',
                     default => '<span class="badge bg-light-secondary">Unknown</span>',
                 };
-            })
-            ->addColumn('actions', function ($payment) {
-                $status = strtolower($payment->status);
+            });
 
-                $addButton = '';
-                $editButton = '';
-                $deleteButton = '';
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            $dataTable->addColumn('added_by', function ($payment) {
+                return $payment->user
+                    ? trim($payment->user->first_name . ' ' . $payment->user->last_name)
+                    : 'Unknown';
+            });
+        }
 
-                if (in_array($status, ['unpaid', 'partial paid'])) {
-                    $addButton = '
-            <li class="list-inline-item">
-                <a href="#"
-                    class="avtar avtar-xs btn-link-secondary open-payment-modal"
-                    data-bs-toggle="modal"
-                    data-bs-target="#student-add-payment_modal"
-                    data-invoice-id="' . e($payment->invoice_id) . '"
-                    data-reference-number="' . e($payment->reference_no) . '"
-                    data-voucher-id="' . e($payment->id) . '"
-                    data-voucher-amount="' . e($payment->amount - $payment->payments()->sum('amount')) . '">
-                    <i class="ti ti-plus f-20"></i>
-                </a>
-            </li>';
+        $dataTable->addColumn('actions', function ($payment) {
+            $status = strtolower($payment->status);
 
-                    $editButton = '
-            <li class="list-inline-item">
-                <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-edit f-20"></i>
-                </a>
-            </li>';
-                }
+            $addButton = '';
+            $editButton = '';
+            $deleteButton = '';
 
-                if ($status === 'unpaid') {
-                    $deleteButton = '
-            <li class="list-inline-item">
-                <form id="delete-form-' . $payment->id . '" action="' . route('voucher.destroy', $payment->id) . '" method="POST" style="display: none;">
-                    ' . csrf_field() . method_field('DELETE') . '
-                </form>
-                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $payment->id . '">
-                    <i class="ti ti-trash f-20"></i>
-                </a>
-            </li>';
-                }
+            if (in_array($status, ['unpaid', 'partial paid'])) {
+                $addButton = '
+        <li class="list-inline-item">
+            <a href="#"
+                class="avtar avtar-xs btn-link-secondary open-payment-modal"
+                data-bs-toggle="modal"
+                data-bs-target="#student-add-payment_modal"
+                data-invoice-id="' . e($payment->invoice_id) . '"
+                data-reference-number="' . e($payment->reference_no) . '"
+                data-voucher-id="' . e($payment->id) . '"
+                data-voucher-amount="' . e($payment->amount - $payment->payments()->sum('amount')) . '">
+                <i class="ti ti-plus f-20"></i>
+            </a>
+        </li>';
 
-                return '
-        <ul class="list-inline mb-0 text-end">'
-                    . $addButton . '
-            <li class="list-inline-item">
-                <a href="#"
-                   class="avtar avtar-xs btn-link-secondary view-payment-slip"
-                   data-bs-toggle="modal"
-                   data-bs-target="#student-payment-slip_model"
-                   data-voucher-id="' . e($payment->id) . '"
-                   data-student-id="' . e($payment->student_id) . '">
-                   <i class="ti ti-eye f-20"></i>
-                </a>
-            </li>'
-                    . $editButton .
-                    $deleteButton .
-                    '</ul>';
-            })
+                $editButton = '
+        <li class="list-inline-item">
+            <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
+                <i class="ti ti-edit f-20"></i>
+            </a>
+        </li>';
+            }
 
-            ->rawColumns(['student_info', 'status', 'actions'])
-            ->make(true);
+            if ($status === 'unpaid') {
+                $deleteButton = '
+        <li class="list-inline-item">
+            <form id="delete-form-' . $payment->id . '" action="' . route('voucher.destroy', $payment->id) . '" method="POST" style="display: none;">
+                ' . csrf_field() . method_field('DELETE') . '
+            </form>
+            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $payment->id . '">
+                <i class="ti ti-trash f-20"></i>
+            </a>
+        </li>';
+            }
+
+            return '
+    <ul class="list-inline mb-0 text-end">'
+                . $addButton . '
+        <li class="list-inline-item">
+            <a href="#"
+               class="avtar avtar-xs btn-link-secondary view-payment-slip"
+               data-bs-toggle="modal"
+               data-bs-target="#student-payment-slip_model"
+               data-voucher-id="' . e($payment->id) . '"
+               data-student-id="' . e($payment->student_id) . '">
+               <i class="ti ti-eye f-20"></i>
+            </a>
+        </li>' . $editButton . $deleteButton . '
+    </ul>';
+        });
+
+        $rawColumns = ['student_info', 'status', 'actions'];
+
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            $rawColumns[] = 'added_by';
+        }
+
+        return $dataTable->rawColumns($rawColumns)->make(true);
     }
 }

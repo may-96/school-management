@@ -107,18 +107,12 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Department</label>
-                                            <select name="department" class="form-select">
-                                                <option {{ $teacher->department == 'Developer' ? 'selected' : '' }}>
-                                                    Developer</option>
-                                                <option
-                                                    {{ $teacher->department == 'Javascript Developer' ? 'selected' : '' }}>
-                                                    Javascript Developer</option>
-                                                <option
-                                                    {{ $teacher->department == 'Frontend Developer' ? 'selected' : '' }}>
-                                                    Frontend Developer</option>
-                                            </select>
+                                            <input type="text" name="department" class="form-control"
+                                                value="{{ old('department', $teacher->department) }}"
+                                                placeholder="Enter department">
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Education</label>

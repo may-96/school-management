@@ -131,13 +131,11 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Department</label>
-                                            <select name="department" class="form-select">
-                                                <option>Developer</option>
-                                                <option>Javascript Developer</option>
-                                                <option>Frontend Developer</option>
-                                            </select>
+                                            <input type="text" name="department" class="form-control"
+                                                placeholder="Enter department">
                                         </div>
                                     </div>
+
 
                                     {{-- Education --}}
                                     <div class="col-md-6">

@@ -171,6 +171,9 @@
                                                                      <th>Due Date</th>
                                                                      <th>Amount</th>
                                                                      <th>Status</th>
+                                                                     @if (auth()->check() && auth()->user()->role === 'admin')
+                                                                         <th>Added By</th>
+                                                                     @endif
                                                                      <th class="text-end">Actions</th>
                                                                  </tr>
                                                              </thead>
@@ -201,13 +204,21 @@
                                                                                  data: 'amount',
                                                                                  name: 'amount'
                                                                              },
+
                                                                              {
                                                                                  data: 'status',
                                                                                  name: 'status',
                                                                                  orderable: false,
                                                                                  searchable: false
                                                                              },
-                                                                             {
+
+                                                                             @if (auth()->check() && auth()->user()->role === 'admin')
+                                                                                 {
+                                                                                     data: 'added_by',
+                                                                                     name: 'added_by'
+                                                                                 },
+                                                                             @endif
+                                                                              {
                                                                                  data: 'actions',
                                                                                  name: 'actions',
                                                                                  orderable: false,
@@ -219,6 +230,7 @@
                                                                  });
                                                              </script>
                                                          @endpush
+
 
                                                      </div>
                                                  </div>
