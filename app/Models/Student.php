@@ -13,12 +13,6 @@ class Student extends Model
 
     protected $guarded = [];
 
-
-    public function payments()
-    {
-        return $this->hasMany(Voucher::class); //payment model
-    }
-
     public function vouchers()
     {
         return $this->hasMany(Voucher::class);

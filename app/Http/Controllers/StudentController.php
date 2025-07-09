@@ -148,8 +148,10 @@ class StudentController extends Controller
 
     public function paymentData($id)
     {
-        $student = Student::with('payments')->findOrFail($id);
-        $payments = $student->payments()->with(['student', 'user']); 
+
+        $student = Student::with('vouchers')->findOrFail($id);
+        $payments = $student->vouchers()->with(['student', 'user']);
+
 
         $dataTable = DataTables::of($payments)
             ->addColumn('student_info', function ($payment) use ($student) {
