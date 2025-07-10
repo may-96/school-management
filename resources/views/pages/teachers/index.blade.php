@@ -22,6 +22,7 @@
             </div>
 
             <x-alert-success />
+            
             <x-alert-error />
 
             <div class="row">

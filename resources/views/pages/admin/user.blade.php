@@ -21,9 +21,24 @@
                 </div>
             </div>
 
-            <x-alert-success />
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-alert">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
 
-            <x-alert-error />
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
 
             <div class="row">
                 <div class="col-sm-12">
@@ -206,7 +221,7 @@
                                                             <label class="form-label">Old Password</label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="current_password"
-                                                                    class="form-control password-input pe-5" required />
+                                                                    class="form-control pe-5" required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
@@ -216,7 +231,7 @@
                                                             <label class="form-label">New Password</label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="password"
-                                                                    class="form-control password-input pe-5" required />
+                                                                    class="form-control pe-5" required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
@@ -226,31 +241,13 @@
                                                             <label class="form-label">Confirm Password</label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="password_confirmation"
-                                                                    class="form-control password-input pe-5" required />
+                                                                    class="form-control pe-5" required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <script>
-                                                    document.querySelectorAll('.toggle-password').forEach(function(icon) {
-                                                        icon.addEventListener('click', function() {
-                                                            const input = this.previousElementSibling;
-                                                            if (input.type === 'password') {
-                                                                input.type = 'text';
-                                                                this.classList.remove('fa-eye');
-                                                                this.classList.add('fa-eye-slash');
-                                                            } else {
-                                                                input.type = 'password';
-                                                                this.classList.remove('fa-eye-slash');
-                                                                this.classList.add('fa-eye');
-                                                            }
-                                                        });
-                                                    });
-                                                </script>
-
                                             </div>
                                             <div class="col-12 text-end btn-page">
                                                 <button type="submit" class="btn btn-primary mb-4 me-4">Update</button>
@@ -265,4 +262,42 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.querySelectorAll('.toggle-password').forEach(function(icon) {
+                icon.addEventListener('click', function() {
+                    const input = this.previousElementSibling;
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        this.classList.remove('fa-eye');
+                        this.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        this.classList.remove('fa-eye-slash');
+                        this.classList.add('fa-eye');
+                    }
+                });
+            });
+        </script>
+    @endpush
+    @push('scripts')
+        <script>
+            setTimeout(function() {
+                const successAlert = document.getElementById('success-alert');
+                const errorAlert = document.getElementById('error-alert');
+
+                if (successAlert) {
+                    let alertInstance = bootstrap.Alert.getOrCreateInstance(successAlert);
+                    alertInstance.close();
+                }
+
+                if (errorAlert) {
+                    let alertInstance = bootstrap.Alert.getOrCreateInstance(errorAlert);
+                    alertInstance.close();
+                }
+            }, 3000);
+        </script>
+    @endpush
+
 @endsection

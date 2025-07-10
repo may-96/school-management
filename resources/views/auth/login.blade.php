@@ -48,15 +48,15 @@
                             </div>
                         </form>
 
-                        <div class="d-flex justify-content-between align-items-end mt-4">
+                        {{-- <div class="d-flex justify-content-between align-items-end mt-4">
                             <h6 class="f-w-500 mb-0">Don't have an Account?</h6>
-                            <a href="{{ route('register') }}" class="link-primary">Create Account</a>
-                            {{-- @auth
+                            <a href="{{ route('register') }}" class="link-primary">Create Account</a> --}}
+                        {{-- @auth
                                 @if (auth()->user()->role === 'admin')
                                     <a href="{{ route('register') }}" class="link-primary">Create Account</a>
                                 @endif
                             @endauth --}}
-                        </div>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>

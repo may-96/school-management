@@ -1,4 +1,4 @@
-@extends('layouts.master')
+{{-- @extends('layouts.master')
 
 @section('content')
     <div class="auth-main">
@@ -81,4 +81,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}
