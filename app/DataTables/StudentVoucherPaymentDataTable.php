@@ -53,7 +53,7 @@ class StudentVoucherPaymentDataTable extends DataTable
                 ';
             })
             ->addColumn('payment_date', fn($payment) => Carbon::parse($payment->payment_date)->format('d/m/Y'))
-            ->addColumn('amount', fn($payment) => $payment->amount . ' Pkr')
+            ->addColumn('amount', fn($payment) => $payment->amount . ' PKR')
             ->addColumn('status', function ($voucher) {
                 $totalAmount = $voucher->amount;          
                 $paidAmount = $voucher->payments->sum('amount'); 
