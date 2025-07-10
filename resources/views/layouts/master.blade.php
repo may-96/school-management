@@ -10,10 +10,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="description"
-        content="Able Pro is trending dashboard template made using Bootstrap 5 design framework. Able Pro is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies." />
+        content="Basic School Management System to manage students, their vouchers and payments and teachers data" />
     <meta name="keywords"
-        content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
-    <meta name="author" content="Phoenixcoded" />
+        content="school, management, students, vouchers, payments, teachers" />
+    <meta name="author" content="ScrumAD" />
 
     {{-- Icon School Management System --}}
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon" />
