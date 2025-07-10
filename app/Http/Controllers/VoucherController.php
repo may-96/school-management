@@ -8,6 +8,7 @@ use App\Models\VoucherItem;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
+use App\Models\School;
 
 class VoucherController extends Controller
 {
@@ -83,11 +84,17 @@ class VoucherController extends Controller
         return redirect()->route('voucher.index')->with('success', 'Vouchers created successfully!');
     }
 
-    public function show($id)
+    public function show($invoice_id)
     {
-        $voucher = Voucher::with(['student', 'items', 'payments'])->findOrFail($id);
-        return view('pages.vouchers.show', compact('voucher'));
+        $voucher = Voucher::with(['student', 'items', 'payments'])
+            ->where('invoice_id', $invoice_id)
+            ->firstOrFail();
+
+        $school = School::first();
+
+        return view('pages.vouchers.show', compact('voucher', 'school'));
     }
+
 
     public function edit($id)
     {

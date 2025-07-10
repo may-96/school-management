@@ -6,13 +6,13 @@
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Dashboard</li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <div class="col-md-12">
                             <div class="page-header-title">
                                 <h2 class="mb-0">Dashboard</h2>
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">Total Amount</p>
+                                    <p class="mb-1">Paid Amount</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">{{ number_format($totalPaidAmount) }} Pkr</h4>
                                     </div>

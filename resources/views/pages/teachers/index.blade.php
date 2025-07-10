@@ -8,9 +8,8 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/teacher') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0)">Teachers</a></li>
-                                <li class="breadcrumb-item" aria-current="page">List</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Teachers</li>
                             </ul>
                         </div>
                         <div class="col-md-12">

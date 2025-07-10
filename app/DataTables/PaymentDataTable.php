@@ -45,7 +45,7 @@ class PaymentDataTable extends DataTable
                     </li>
                 </ul>';
             })
-            ->editColumn('amount', fn($payment) => number_format($payment->amount) . ' Pkr')
+            ->editColumn('amount', fn($payment) => number_format($payment->amount) . ' PKR')
             ->editColumn('payment_date', fn($payment) => Carbon::parse($payment->payment_date)->format('d/m/Y'));
 
         if (Auth::user() && Auth::user()->role === 'admin') {

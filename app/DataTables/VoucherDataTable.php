@@ -22,6 +22,10 @@ class VoucherDataTable extends DataTable
                         ->orWhere('parents_mobile', 'like', "%$keyword%");
                 });
             })
+            ->addColumn('invoice_id', function ($voucher) {
+                return '<a href="' . route('voucher.show', $voucher->invoice_id) . '" class="text-body text-decoration-none">' . e($voucher->invoice_id) . '</a>';
+            })
+
             ->addColumn('student_name', function ($voucher) {
                 $img = $voucher->student->profile_image
                     ? asset('storage/students/' . $voucher->student->profile_image)
@@ -30,9 +34,7 @@ class VoucherDataTable extends DataTable
                 return '
                     <div class="row align-items-center">
                         <div class="col-auto pe-0">
-                            <a href="' . route('voucher.show', $voucher->id) . '">
-                                <img src="' . $img . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
-                            </a>
+                            <img src="' . $img . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
                         </div>
                         <div class="col">
                             <h6 class="mb-1">
@@ -49,8 +51,15 @@ class VoucherDataTable extends DataTable
             ->addColumn('amount', function ($voucher) {
                 $paid = $voucher->payments()->sum('amount');
                 $remaining = $voucher->amount - $paid;
-                return number_format($remaining, 2) . ' Pkr';
+
+                return '
+        <div class="d-flex flex-column">
+            <span>' . number_format($remaining, 2) . ' PKR</span>
+            <small class="text-muted">Paid: ' . number_format($paid) . ' PKR</small>
+        </div>
+    ';
             })
+
             ->addColumn('status', function ($voucher) {
                 return match (strtolower($voucher->status)) {
                     'paid' => '<span class="badge bg-light-success">Paid</span>',
@@ -123,7 +132,8 @@ class VoucherDataTable extends DataTable
                 </ul>';
         });
 
-        $rawCols = ['student_name', 'status', 'actions', 'amount'];
+        $rawCols = ['invoice_id', 'student_name', 'status', 'actions', 'amount'];
+
         if (Auth::user() && Auth::user()->role === 'admin') {
             $rawCols[] = 'added_by';
         }

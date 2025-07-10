@@ -42,6 +42,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Students
     Route::resource('student', StudentController::class);
     Route::get('/student/{id}/payments/data', [StudentController::class, 'paymentData'])->name('student.payments.data');
+    Route::post('/students/status-check-multiple', [StudentController::class, 'checkMultipleStatuses']);
+
 
 
     // Vouchers
@@ -49,8 +51,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/students/voucher/create/{student?}', [VoucherController::class, 'create'])->name('students.vouchers.create');
     Route::post('/students/vouchers/{student?}', [VoucherController::class, 'store'])->name('students.vouchers.store');
+    Route::get('/voucher/{invoice_id}', [VoucherController::class, 'show'])->name('voucher.show');
 
-    Route::get('/vouchers/{student}', [VoucherController::class, 'show'])->name('voucher.show');
     Route::get('/voucher/{id}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
     Route::put('/voucher/{id}', [VoucherController::class, 'update'])->name('voucher.update');
     Route::delete('/voucher/{id}', [VoucherController::class, 'destroy'])->name('voucher.destroy');

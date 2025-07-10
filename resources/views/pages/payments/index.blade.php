@@ -8,14 +8,13 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/payments/index') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0)">Payment</a></li>
-                                <li class="breadcrumb-item" aria-current="page">List</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Payments</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h2 class="mb-0">List</h2>
+                                <h2 class="mb-0">Payments List</h2>
                             </div>
                         </div>
                     </div>

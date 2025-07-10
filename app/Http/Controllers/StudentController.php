@@ -143,6 +143,26 @@ class StudentController extends Controller
         return $fileName;
     }
 
+    public function checkMultipleStatuses(Request $request)
+    {
+        $ids = $request->input('student_ids', []);
+
+        $inactiveStudents = Student::whereIn('id', $ids)
+            ->where('status', '!=', 'active')
+            ->get(['id', 'first_name', 'last_name'])
+            ->map(function ($student) {
+                return [
+                    'id' => $student->id,
+                    'name' => $student->first_name . ' ' . $student->last_name
+                ];
+            });
+
+        return response()->json([
+            'inactive' => $inactiveStudents,
+        ]);
+    }
+
+
 
     // yajra datatable voucher list for each student
 
@@ -171,8 +191,20 @@ class StudentController extends Controller
                 </div>
             </div>';
             })
+            ->addColumn('invoice_id', function ($voucher) {
+                return '<a href="' . route('voucher.show', $voucher->invoice_id) . '" class="text-body text-decoration-none">' . e($voucher->invoice_id) . '</a>';
+            })
             ->editColumn('payment_date', fn($payment) => \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y'))
-            ->editColumn('amount', fn($payment) => $payment->amount . ' Pkr')
+            ->editColumn('amount', function ($payment) {
+                $paidAmount = $payment->payments()->sum('amount');
+                $remaining = $payment->amount - $paidAmount;
+
+                return '
+        <div>' . number_format($remaining) . ' PKR</div>
+        <div class="text-muted small">Paid: ' . number_format($paidAmount) . ' PKR</div>
+    ';
+            })
+
             ->addColumn('status', function ($payment) {
                 return match (strtolower($payment->status)) {
                     'paid' => '<span class="badge bg-light-success">Paid</span>',
@@ -248,7 +280,8 @@ class StudentController extends Controller
     </ul>';
         });
 
-        $rawColumns = ['student_info', 'status', 'actions'];
+        $rawColumns = ['invoice_id', 'student_info', 'status', 'actions', 'amount'];
+
 
         if (Auth::check() && Auth::user()->role === 'admin') {
             $rawColumns[] = 'added_by';

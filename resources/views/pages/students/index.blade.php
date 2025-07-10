@@ -8,9 +8,9 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/student') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0)">Students</a></li>
-                                <li class="breadcrumb-item" aria-current="page">List</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Students</li>
+                                {{-- <a href="javascript: void(0)">#</a> --}}
                             </ul>
                         </div>
                         <div class="col-md-12">
@@ -24,7 +24,19 @@
 
             <x-alert-success />
 
-            <x-alert-error />
+            {{-- Error Alert --}}
+            <div id="js-error-container">
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            </div>
 
             <div class="row">
                 <div class="col-12">
@@ -112,4 +124,75 @@
             });
         </script>
     @endpush
+
+    <script>
+        function showErrorAlert(messages) {
+            const container = document.getElementById("js-error-container");
+
+            if (container) {
+                const items = Array.isArray(messages) ?
+                    messages.map(msg => `<li>${msg}</li>`).join('') :
+                    `<li>${messages}</li>`;
+
+                container.innerHTML = `
+                <div id="auto-hide-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul class="mb-0">${items}</ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    const alertEl = document.getElementById('auto-hide-alert');
+                    if (alertEl && typeof bootstrap !== 'undefined') {
+                        const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
+                        alert.close();
+                    }
+                }, 3000);
+            }
+        }
+
+        // Student voucher button click handling
+        document.getElementById("idBtnSub").addEventListener("click", function(e) {
+            e.preventDefault();
+
+            const selectedStudentIds = JSON.parse(localStorage.getItem('selectedStudentIds') || "[]");
+
+            if (selectedStudentIds.length === 0) {
+                showErrorAlert("Please select at least one student.");
+                return;
+            }
+
+            fetch(`/students/status-check-multiple`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        student_ids: selectedStudentIds
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.inactive && data.inactive.length > 0) {
+                        const inactiveNames = data.inactive.map(s => s.name).join(', ');
+                        showErrorAlert([
+                            `Inactive student(s): ${inactiveNames}`
+                        ]);
+                    } else {
+                        if (selectedStudentIds.length === 1) {
+                            window.location.href = `/students/voucher/create/${selectedStudentIds[0]}`;
+                        } else {
+                            window.location.href = `/students/voucher/create`; // bulk route
+                        }
+                    }
+                })
+                .catch(error => {
+                    showErrorAlert("Something went wrong. Please try again.");
+                    console.error(error);
+                });
+        });
+    </script>
+
 @endsection

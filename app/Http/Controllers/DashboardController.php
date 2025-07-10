@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Models\Student;
-use App\Models\Payment;
+// use App\Models\Payment;
 use App\Models\School;
 use App\Models\Voucher;
 use Carbon\Carbon;

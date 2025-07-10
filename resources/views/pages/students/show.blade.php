@@ -10,8 +10,7 @@
                          <div class="col-md-12">
                              <ul class="breadcrumb">
                                  <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Student</a></li>
-                                 <li class="breadcrumb-item" aria-current="page">Profile & Voucher List</li>
+                                 <li class="breadcrumb-item" aria-current="page">Profile & Vouchers</li>
                              </ul>
                          </div>
                          <div class="col-md-12">
@@ -162,11 +161,10 @@
                                                  <div class="tab-pane fade show active" id="analytics-tab-1-pane"
                                                      role="tabpanel" aria-labelledby="analytics-tab-1" tabindex="0">
                                                      <div class="table-responsive">
-
                                                          <table class="table table-hover" id="pc-dt-simple-1">
                                                              <thead>
                                                                  <tr>
-                                                                     <th>Invoice Id</th>
+                                                                     <th>Voucher Id</th>
                                                                      <th>Student Name</th>
                                                                      <th>Due Date</th>
                                                                      <th>Amount</th>
@@ -178,60 +176,6 @@
                                                                  </tr>
                                                              </thead>
                                                          </table>
-
-                                                         @push('scripts')
-                                                             <script>
-                                                                 $(document).ready(function() {
-                                                                     $('#pc-dt-simple-1').DataTable({
-                                                                         processing: true,
-                                                                         serverSide: true,
-                                                                         ajax: '{{ route('student.payments.data', $student->id) }}',
-                                                                         columns: [{
-                                                                                 data: 'invoice_id',
-                                                                                 name: 'invoice_id'
-                                                                             },
-                                                                             {
-                                                                                 data: 'student_info',
-                                                                                 name: 'student_info',
-                                                                                 orderable: false,
-                                                                                 searchable: false
-                                                                             },
-                                                                             {
-                                                                                 data: 'payment_date',
-                                                                                 name: 'payment_date'
-                                                                             },
-                                                                             {
-                                                                                 data: 'amount',
-                                                                                 name: 'amount'
-                                                                             },
-
-                                                                             {
-                                                                                 data: 'status',
-                                                                                 name: 'status',
-                                                                                 orderable: false,
-                                                                                 searchable: false
-                                                                             },
-
-                                                                             @if (auth()->check() && auth()->user()->role === 'admin')
-                                                                                 {
-                                                                                     data: 'added_by',
-                                                                                     name: 'added_by'
-                                                                                 },
-                                                                             @endif
-                                                                              {
-                                                                                 data: 'actions',
-                                                                                 name: 'actions',
-                                                                                 orderable: false,
-                                                                                 searchable: false,
-                                                                                 className: 'text-end'
-                                                                             }
-                                                                         ]
-                                                                     });
-                                                                 });
-                                                             </script>
-                                                         @endpush
-
-
                                                      </div>
                                                  </div>
                                              </div>
@@ -397,6 +341,58 @@
              </div>
          </div>
      </div>
+
+
+     @push('scripts')
+         <script>
+             $(document).ready(function() {
+                 $('#pc-dt-simple-1').DataTable({
+                     processing: true,
+                     serverSide: true,
+                     ajax: '{{ route('student.payments.data', $student->id) }}',
+                     columns: [{
+                             data: 'invoice_id',
+                             name: 'invoice_id'
+                         },
+                         {
+                             data: 'student_info',
+                             name: 'student_info',
+                             orderable: false,
+                             searchable: false
+                         },
+                         {
+                             data: 'payment_date',
+                             name: 'payment_date'
+                         },
+                         {
+                             data: 'amount',
+                             name: 'amount'
+                         },
+
+                         {
+                             data: 'status',
+                             name: 'status',
+                             orderable: false,
+                             searchable: false
+                         },
+
+                         @if (auth()->check() && auth()->user()->role === 'admin')
+                             {
+                                 data: 'added_by',
+                                 name: 'added_by'
+                             },
+                         @endif {
+                             data: 'actions',
+                             name: 'actions',
+                             orderable: false,
+                             searchable: false,
+                             className: 'text-end'
+                         }
+                     ]
+                 });
+             });
+         </script>
+     @endpush
 
      @push('scripts')
          <script>
