@@ -134,7 +134,7 @@
                                                     const value = parseFloat(input.value);
                                                     if (!isNaN(value)) total += value;
                                                 });
-                                                grandTotalEl.textContent = `Pkr ${total.toFixed(2)}`;
+                                                grandTotalEl.textContent = `PKR ${total.toFixed(2)}`;
                                                 amountInput.value = total.toFixed(2);
                                             }
 
@@ -225,7 +225,7 @@
                                                     <p class="f-w-600 mb-1 text-start">Grand Total:</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <p class="f-w-600 mb-1 text-end" id="grand-total">Pkr 0.00</p>
+                                                    <p class="f-w-600 mb-1 text-end" id="grand-total">PKR 0.00</p>
                                                 </div>
                                             </div>
                                         </div>

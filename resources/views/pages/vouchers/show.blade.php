@@ -172,7 +172,7 @@
                                                         <tr>
                                                             <td>{{ $index + 1 }}</td>
                                                             <td>{{ $item->fee_type }}</td>
-                                                            <td class="text-end">{{ number_format($item->fee_amount) }} Pkr
+                                                            <td class="text-end">{{ number_format($item->fee_amount) }} PKR
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -192,7 +192,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <p class="f-w-600 mb-1 text-end">{{ number_format($voucher->amount) }}
-                                                        Pkr</p>
+                                                        PKR</p>
                                                 </div>
                                             </div>
                                         </div>

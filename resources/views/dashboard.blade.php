@@ -103,7 +103,7 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Paid Amount</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ number_format($totalPaidAmount) }} Pkr</h4>
+                                        <h4 class="mb-0">{{ number_format($totalPaidAmount) }} PKR</h4>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Pending Amount</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ number_format($totalPendingAmount) }} Pkr</h4>
+                                        <h4 class="mb-0">{{ number_format($totalPendingAmount) }} PKR</h4>
                                     </div>
                                 </div>
                             </div>
