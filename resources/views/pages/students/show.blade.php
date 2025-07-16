@@ -41,6 +41,7 @@
                                  </li>
                              </ul>
                          </div>
+
                      </div>
                      <div class="tab-content">
                          <div class="tab-pane show active" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
@@ -57,7 +58,7 @@
                                                          <img src="{{ asset('storage/students/' . $student->profile_image) }}"
                                                              alt="img" class="img-fluid" />
                                                      @else
-                                                         <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
+                                                         <img src="{{ asset('assets/images/user/avatar-2.jpg') }}"
                                                              alt="img" class="img-fluid" />
                                                      @endif
                                                  </div>
@@ -154,6 +155,25 @@
                                          <div class="card-header">
                                              <div class="d-sm-flex align-items-center justify-content-between">
                                                  <h5 class="mb-3 mb-sm-0">Vouchers list</h5>
+                                                 <input type="hidden" id="active_student_id"
+                                                     value="{{ $student->id }}">
+
+                                                 @if ($student->status === 'Active')
+                                                     <a href="#"
+                                                         class="btn btn-outline-secondary d-inline-flex align-items-center"
+                                                         id="idBtnSub">
+                                                         <i class="ph-duotone ph-plus-circle me-1"></i>Create Fee Voucher
+                                                     </a>
+                                                 @else
+                                                     <span
+                                                         class="btn btn-outline-secondary d-inline-flex align-items-center disabled"
+                                                         data-bs-toggle="tooltip"
+                                                         title="Inactive students cannot be assigned vouchers">
+                                                         <i class="ph-duotone ph-plus-circle me-1 text-muted"></i> Create
+                                                         Fee Voucher
+                                                     </span>
+                                                 @endif
+
                                              </div>
                                          </div>
                                          <div class="card-body">
@@ -297,6 +317,94 @@
          </div>
      </div>
 
+     {{-- Student Edit Payment Modal --}}
+     <div class="modal fade" id="student-edit-payment_modal" data-bs-keyboard="false" tabindex="-1"
+         aria-hidden="true">
+         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+             <form id="edit-payment-form" method="POST">
+                 @csrf
+                 @method('PUT')
+                 <input type="hidden" name="payment_id" id="edit_payment_id">
+                 <div class="modal-content">
+                     <div class="modal-header justify-content-between">
+                         <h4 class="mb-0">Edit Payment</h4>
+                         <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal" title="Close">
+                             <i class="ti ti-x f-20"></i>
+                         </a>
+                     </div>
+                     <div class="modal-body">
+                         <div class="row">
+                             <!-- Invoice ID & Voucher ID (readonly) -->
+                             <div class="mb-3 row">
+                                 <label class="col-lg-4 col-form-label">INVOICE & VOUCHER ID:</label>
+                                 <div class="col-lg-8 d-flex align-items-center justify-content-between">
+                                     <span class="text-muted" id="edit_invoice_id"></span><span class="text-muted"
+                                         id="edit_voucher_invoice_id"></span>
+                                 </div>
+                             </div>
+
+                             <!-- Payment Method -->
+                             <div class="mb-3 row">
+                                 <label class="col-lg-4 col-form-label">Payment Method:</label>
+                                 <div class="col-lg-8">
+                                     <select class="form-select" name="payment_method" id="edit_payment_method" required>
+                                         <option value="">Please Select</option>
+                                         <option value="cash">Cash</option>
+                                         <option value="cheque">Cheque</option>
+                                         <option value="credit card">Credit Card</option>
+                                         <option value="online transfer">Online Transfer</option>
+                                     </select>
+                                 </div>
+                             </div>
+
+                             <!-- Amount -->
+                             <div class="mb-3 row">
+                                 <label class="col-lg-4 col-form-label">Amount:</label>
+                                 <div class="col-lg-8">
+                                     <input type="number" name="amount" id="edit_amount" class="form-control"
+                                         required>
+                                 </div>
+                             </div>
+
+                             <!-- Reference No -->
+                             <div class="mb-3 row me-0">
+                                 <label class="col-lg-4 col-form-label">Refrence No :</label>
+                                 <div class="col-lg-8">
+                                     <input type="text" id="edit_reference_number" name="reference_number"
+                                         class="form-control" placeholder="Enter reference number" required>
+                                 </div>
+                             </div>
+
+                             <!-- Payment Date -->
+                             <div class="mb-3 row">
+                                 <label class="col-lg-4 col-form-label">Payment Date:</label>
+                                 <div class="col-lg-8">
+                                     <input type="date" name="payment_date" id="edit_payment_date"
+                                         class="form-control" required>
+                                 </div>
+                             </div>
+
+                             <!-- Notes -->
+                             <div class="mb-3 row">
+                                 <label class="col-lg-4 col-form-label">Notes:</label>
+                                 <div class="col-lg-8">
+                                     <textarea name="notes" id="edit_notes" class="form-control" rows="2"></textarea>
+                                 </div>
+                             </div>
+
+                             <!-- Submit -->
+                             <div class="text-end mt-4">
+                                 <button type="button" class="btn btn-outline-secondary"
+                                     data-bs-dismiss="modal">Cancel</button>
+                                 <button type="submit" class="btn btn-primary">Update</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </form>
+         </div>
+     </div>
+
      {{-- student Payment slip model --}}
      <div class="modal fade" id="student-payment-slip_model" data-bs-keyboard="false" tabindex="-1"
          aria-hidden="true">
@@ -325,6 +433,7 @@
                                                  <th>Payment Method</th>
                                                  <th>Payment Date</th>
                                                  <th>Amount</th>
+                                                 <th>Actions</th>
                                              </tr>
                                          </thead>
                                          <tbody></tbody> <!-- DataTables will fill this -->
@@ -423,8 +532,6 @@
                  });
              });
 
-
-
              let studentId = null;
              let voucherId = null;
 
@@ -463,8 +570,56 @@
                          },
                          {
                              data: 'amount'
+                         },
+                         {
+                             data: 'action',
+                             orderable: false,
+                             searchable: false
                          }
                      ]
+                 });
+             });
+         </script>
+
+         <script>
+             $(document).on('click', '.edit-payment-btn', function(e) {
+                 e.preventDefault();
+
+                 const id = $(this).data('id');
+                 const maxAmount = parseFloat($(this).data('max-amount'));
+
+                 $('#edit_payment_id').val(id);
+                 $('#edit_invoice_id').text($(this).data('invoice_id'));
+                 $('#edit_voucher_invoice_id').text($(this).data('voucher_invoice_id'));
+
+                 $('#edit_payment_method').val($(this).data('payment_method'));
+                 $('#edit_amount').val($(this).data('amount')).attr('max', maxAmount);
+                 $('#edit_payment_date').val($(this).data('payment_date'));
+                 $('#edit_reference_number').val($(this).data('reference_number'));
+                 $('#edit_notes').val($(this).data('notes'));
+
+                 $('#edit-payment-form').attr('action', '/payments/' + id);
+
+                 $('#edit_amount').data('max-amount', maxAmount);
+             });
+
+             $('#edit_amount').on('input', function() {
+                 const max = parseFloat($(this).data('max-amount'));
+                 let val = parseFloat($(this).val());
+
+                 if (val > max) {
+                     $(this).val(max);
+                 }
+             });
+         </script>
+
+         <script>
+             $(document).ready(function() {
+                 $('#idBtnSub').on('click', function(e) {
+                     e.preventDefault();
+                     const studentId = $('#active_student_id').val();
+                     const url = `/students/voucher/create/${studentId}`;
+                     window.location.href = url;
                  });
              });
          </script>

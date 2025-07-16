@@ -38,7 +38,7 @@
                                         <div class="form-floating mb-0">
                                             <input type="text" class="form-control" id="schoolName" name="name"
                                                 placeholder="Enter school name"
-                                                value="{{ old('name', $school->name ?? '') }}">
+                                                value="{{ old('name', $school->name ?? '') }}" required>
                                             <label for="schoolName">School Name</label>
                                         </div>
                                     </div>

@@ -69,16 +69,6 @@
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('payment.index') }}" class="pc-link">
-                        <span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-dollar-square"></use>
-                            </svg>
-                        </span>
-                        <span class="pc-mtext" data-i18n="Payments">Payments</span><span class="pc-arrow"></span>
-                    </a>
-                </li>
-                <li class="pc-item pc-hasmenu">
                     <a href="{{ route('voucher.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
@@ -86,6 +76,16 @@
                             </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Vouchers">Vouchers</span><span class="pc-arrow"></span>
+                    </a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('payment.index') }}" class="pc-link">
+                        <span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-dollar-square"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext" data-i18n="Payments">Payments</span><span class="pc-arrow"></span>
                     </a>
                 </li>
                 @auth

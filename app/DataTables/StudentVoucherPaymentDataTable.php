@@ -32,7 +32,7 @@ class StudentVoucherPaymentDataTable extends DataTable
             ->addColumn('student_name', function ($payment) {
                 $img = $payment->student->profile_image
                     ? asset('storage/students/' . $payment->student->profile_image)
-                    : asset('assets/images/user/avatar-1.jpg');
+                    : asset('assets/images/user/avatar-2.jpg');
 
                 return '
                     <div class="row align-items-center">

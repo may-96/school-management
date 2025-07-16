@@ -12,12 +12,16 @@
                             <div class="tab-pane show active" id="auth-1" role="tabpanel" aria-labelledby="auth-tab-1">
                                 <div class="text-center">
                                     <h3 class="text-center mb-3">Welcome To<br>School Management System</h3>
-                                    {{-- <p class="mb-4">Login or Sign Up</p> --}}
                                     <div class="d-grid my-3">
-                                        <a href="{{ route('login') }}"
-                                            class="btn mt-2 btn-light-primary bg-light text-muted"><span> Login</span></a>
-                                        {{-- <a href="{{ route('register') }}"
-                                            class="btn mt-2 btn-light-primary bg-light text-muted"><span> Sign Up</span></a> --}}
+                                        @auth
+                                            <a href="{{ route('dashboard') }}"
+                                                class="btn mt-2 btn-light-primary bg-light text-muted"><span>Go to
+                                                    Dashboard</span></a>
+                                        @else
+                                            <a href="{{ route('login') }}"
+                                                class="btn mt-2 btn-light-primary bg-light text-muted"><span>Login</span></a>
+                                        @endauth
+
                                     </div>
                                 </div>
                             </div>
@@ -25,10 +29,6 @@
                     </div>
                 </div>
                 <div class="auth-footer">
-                    {{-- <p class="m-0 w-100 text-center">By signing up, you confirm to have read School Management System <a
-                            href="#">Privacy Policy</a> and agree to the
-                        <a href="#">Terms of Service</a>.
-                    </p> --}}
                 </div>
             </div>
             <div class="auth-sidecontent justify-content-center align-items-center">

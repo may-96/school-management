@@ -29,7 +29,7 @@ class TeacherDataTable extends DataTable
             ->addColumn('name', function ($teacher) {
                 $image = $teacher->profile_image
                     ? asset('storage/teachers/' . $teacher->profile_image)
-                    : asset('assets/images/user/avatar-1.jpg');
+                    : asset('assets/images/user/avatar-5.jpg');
 
                 return '
                     <div class="d-flex align-items-center">
@@ -64,16 +64,16 @@ class TeacherDataTable extends DataTable
         $dataTable->addColumn('action', function ($teacher) {
             return '
                 <a href="' . route('teacher.show', $teacher->id) . '" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-eye f-20"></i>
+                    <i class="ti ti-eye f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="View"></i>
                 </a>
                 <a href="' . route('teacher.edit', $teacher->id) . '" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-edit f-20"></i>
+                    <i class="ti ti-edit f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
                 </a>
                 <form id="delete-form-' . $teacher->id . '" action="' . route('teacher.destroy', $teacher->id) . '" method="POST" style="display: none;">
                     ' . csrf_field() . method_field('DELETE') . '
                 </form>
                 <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $teacher->id . '">
-                    <i class="ti ti-trash f-20"></i>
+                    <i class="ti ti-trash f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
                 </a>';
         });
 
@@ -87,7 +87,7 @@ class TeacherDataTable extends DataTable
 
     public function query(Teacher $model)
     {
-        return $model->newQuery()->with('user'); 
+        return $model->newQuery()->with('user');
     }
 
     public function html()

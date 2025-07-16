@@ -219,7 +219,7 @@
             </div>
 
             {{-- Success Alert --}}
-   @if (session('success'))
+   {{-- @if (session('success'))
        <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
            {{ session('success') }}
            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -236,7 +236,6 @@
        </script>
    @endif
 
-   {{-- Error Alert --}}
    @if ($errors->any())
        <div class="alert alert-danger">
            <ul class="mb-0">
@@ -273,7 +272,6 @@
    </div>
    </div>
 
-   {{-- JS for Button Visibility --}}
    <script>
        $(document).on('click', '#bulk-checkbox', function() {
            $('.student-checkbox').prop('checked', this.checked);
@@ -293,17 +291,17 @@
                button.href = `/voucher/create/${studentId}`;
                button.style.visibility = "visible";
            } else if (checkedBoxes.length > 1) {
-               button.href = "#"; // Optional: Set this to a bulk voucher route
+               button.href = "#"; 
                button.style.visibility = "visible";
            } else {
                button.href = "#";
                button.style.visibility = "hidden";
            }
        }
-   </script>
-{{-- @endsection --}}
+   </script> --}}
+   {{-- @endsection --}}
 
-{{-- @push('scripts') --}}
+   {{-- @push('scripts') --}}
    {{-- Yajra DataTables Scripts --}}
    {{-- {!! $dataTable->scripts() !!} --}}
 
@@ -321,4 +319,15 @@
            });
        });
    </script> --}}
-{{-- @endpush --}}
+   {{-- @endpush --}}
+   
+   <div class="col-sm-6 col-xl-3">
+       <label class="form-label">Status</label>
+       <select class="form-select" name="status">
+           <option value="">Please Select</option>
+           @foreach (['Paid', 'Unpaid', 'Partial Paid'] as $status)
+               <option value="{{ $status }}" {{ $voucher->status === $status ? 'selected' : '' }}>
+                   {{ $status }}</option>
+           @endforeach
+       </select>
+   </div>

@@ -51,7 +51,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/students/voucher/create/{student?}', [VoucherController::class, 'create'])->name('students.vouchers.create');
     Route::post('/students/vouchers/{student?}', [VoucherController::class, 'store'])->name('students.vouchers.store');
-    Route::get('/voucher/{invoice_id}', [VoucherController::class, 'show'])->name('voucher.show');
+    Route::get('/voucher/{id}', [VoucherController::class, 'show'])->name('voucher.show');
+
 
     Route::get('/voucher/{id}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
     Route::put('/voucher/{id}', [VoucherController::class, 'update'])->name('voucher.update');
@@ -62,6 +63,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/payments/{id}', [PaymentController::class, 'update'])->name('payment.update');
     Route::get('/payments/{id}/data', [PaymentController::class, 'getPayment']);
 
+    // Route::get('/payment-data', [PaymentController::class, 'getPaymentData'])->name('payment.data');
+    Route::get('/payment/data', [PaymentController::class, 'data'])->name('payment.data');
 
 
     Route::get('payments/index', [PaymentController::class, 'index'])->name('payment.index');

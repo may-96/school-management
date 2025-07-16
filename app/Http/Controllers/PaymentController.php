@@ -8,6 +8,8 @@ use App\DataTables\PaymentDataTable;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class PaymentController extends Controller
 {
 
@@ -76,7 +78,7 @@ class PaymentController extends Controller
 
         $voucher->save();
 
-        return redirect()->route('payment.index')->with('success', 'Payment added successfully!');
+        return redirect()->route('voucher.index')->with('success', 'Payment added successfully!');
     }
 
     private function generateUniquePaymentInvoiceId()
@@ -147,5 +149,61 @@ class PaymentController extends Controller
         }
 
         return redirect()->back()->with('success', 'Payment deleted and Voucher Status is Updated!');
+    }
+
+
+
+
+    public function data(Request $request)
+    {
+        $query = Payment::with(['voucher.payments'])
+            ->when($request->student_id, function ($q) use ($request) {
+                $q->whereHas('voucher', function ($q2) use ($request) {
+                    $q2->where('student_id', $request->student_id);
+                });
+            })
+            ->when($request->voucher_id, function ($q) use ($request) {
+                $q->where('voucher_id', $request->voucher_id);
+            });
+
+        return DataTables::of($query)
+            ->addColumn('action', function ($payment) {
+                return '
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a href="#"
+                            class="avtar avtar-xs btn-link-secondary edit-payment-btn"
+                            data-id="' . $payment->id . '"
+                            data-invoice_id="' . $payment->invoice_id . '"
+                            data-voucher_invoice_id="' . optional($payment->voucher)->invoice_id . '"
+                            data-reference_number="' . $payment->reference_number . '"
+                            data-payment_method="' . $payment->payment_method . '"
+                            data-amount="' . $payment->amount . '"
+                            data-payment_date="' . $payment->payment_date . '"
+                            data-notes="' . htmlspecialchars($payment->notes ?? '') . '"
+                            data-max-amount="' . ($payment->voucher->amount - $payment->voucher->payments->sum('amount')) . '"
+                            data-bs-toggle="modal"
+                            data-bs-target="#student-edit-payment_modal">
+                            <i class="ti ti-edit f-20" data-bs-toggle="tooltip" title="Edit"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <form id="delete-form-' . $payment->id . '" action="' . route('payment.destroy', $payment->id) . '" method="POST" style="display: none;">
+                            ' . csrf_field() . method_field('DELETE') . '
+                        </form>
+                        <a href="#"
+                            class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                            data-id="' . $payment->id . '"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete-confirmation-modal">
+                            <i class="ti ti-trash f-20" data-bs-toggle="tooltip" title="Delete"></i>
+                        </a>
+                    </li>
+                </ul>';
+            })
+            ->editColumn('amount', fn($payment) => number_format($payment->amount) . ' PKR')
+            ->editColumn('payment_date', fn($payment) => \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y'))
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }

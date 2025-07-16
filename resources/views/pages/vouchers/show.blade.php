@@ -62,12 +62,13 @@
                         <div class="card-body p-3">
                             <ul class="list-inline ms-auto mb-0 d-flex justify-content-end flex-wrap">
                                 <li class="list-inline-item align-bottom me-2">
-                                    @if ($voucher->status == 'unpaid' || $voucher->status == 'partially paid')
+                                    @if (in_array(strtolower($voucher->status), ['unpaid', 'partial paid']))
                                         <a href="{{ route('voucher.edit', $voucher->id) }}"
                                             class="avtar avtar-s btn-link-secondary">
                                             <i class="ph-duotone ph-pencil-simple-line f-22"></i>
                                         </a>
                                     @endif
+
 
                                 </li>
 
@@ -85,7 +86,11 @@
 
                         <div class="card mb-3 d-screen-none d-print-block">
                             <div class="card-body p-3">
-                                <h2 class="text-center d-print-block mt-2">{{ $school->name }}</h2>
+                                @if ($school)
+                                    <h2 class="text-center d-print-block mt-2">{{ $school->name }}</h2>
+                                @else
+                                    <h2 class="text-center">School Name Not Set</h2>
+                                @endif
                             </div>
                         </div>
 
@@ -123,7 +128,7 @@
                                             <div class="col-sm-6 text-sm-end">
                                                 <h6>Due Date :
                                                     <span class="text-muted f-w-600">
-                                                        {{ \Carbon\Carbon::parse($voucher->due_date)->format('d/m/Y') ?? 'N/A' }}
+                                                        {{ \Carbon\Carbon::parse($voucher->payment_date)->format('d/m/Y') ?? 'N/A' }}
                                                     </span>
                                                 </h6>
                                                 <p class="f-w-400 mb-1 text-end">

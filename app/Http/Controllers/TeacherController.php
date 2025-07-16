@@ -8,28 +8,26 @@ use App\DataTables\TeacherDataTable;
 use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
-
 {
     public function create()
     {
-        return view("pages.teachers.create");
+        return view('pages.teachers.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'     => 'required',
-            'last_name'      => 'required',
-            'email'          => 'required|email|unique:teachers,email',
-            'date_of_birth'  => 'nullable|date',
-            'joining_date'   => 'nullable|date',
-            'mobile_number'  => 'nullable',
-            'gender'         => 'required',
-            'department'     => 'required',
-            'class'          => 'nullable',
-            'education'      => 'nullable',
-            'profile_photo'  => 'required|mimes:jpg,jpeg,png|max:2048',
-
+            'first_name' => 'required|string|max:25',
+            'last_name' => 'required|string|max:25',
+            'gender' => 'required',
+            'mobile_number' => 'required|string|max:25',
+            'date_of_birth' => 'required|date',
+            'joining_date' => 'required|date',
+            'email' => 'nullable|email|unique:teachers,email',
+            'class' => 'nullable',
+            'department' => 'nullable|string|max:40',
+            'education' => 'nullable|string|max:40',
+            'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $fileName = null;
@@ -57,20 +55,18 @@ class TeacherController extends Controller
         $teacher = Teacher::findOrFail($id);
 
         $request->validate([
-            'first_name'     => 'required',
-            'last_name'      => 'required',
-            'email'          => 'required|email|unique:teachers,email,' . $teacher->id,
-            'date_of_birth'  => 'nullable|date',
-            'joining_date'   => 'nullable|date',
-            'mobile_number'  => 'nullable',
-            'gender'         => 'required',
-            'department'     => 'required',
-            'class'          => 'nullable',
-            'education'      => 'nullable',
+            'first_name' => 'required|string|max:25',
+            'last_name' => 'required|string|max:25',
+            'gender' => 'required',
+            'mobile_number' => 'required|string|max:25',
+            'date_of_birth' => 'required|date',
+            'joining_date' => 'required|date',
+            'email' => 'nullable|email|unique:teachers,email,' . $teacher->id,
+            'class' => 'nullable',
+            'department' => 'nullable|string|max:40',
+            'education' => 'nullable|string|max:40',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-
         ]);
-
 
         if ($request->hasFile('profile_photo')) {
             if ($teacher->profile_image && file_exists(storage_path('app/public/teachers/' . $teacher->profile_image))) {
@@ -83,16 +79,16 @@ class TeacherController extends Controller
         }
 
         $teacher->update([
-            'first_name'    => $request->first_name,
-            'last_name'     => $request->last_name,
-            'email'         => $request->email,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
-            'joining_date'  => $request->joining_date,
+            'joining_date' => $request->joining_date,
             'mobile_number' => $request->mobile_number,
-            'gender'        => $request->gender,
-            'department'    => $request->department,
-            'class'         => $request->class,
-            'education'     => $request->education,
+            'gender' => $request->gender,
+            'department' => $request->department,
+            'class' => $request->class,
+            'education' => $request->education,
             'profile_image' => $imagePath,
         ]);
 

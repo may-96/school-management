@@ -36,45 +36,19 @@
                                  <input type="hidden" name="student_id" value="{{ $voucher->student_id }}">
                                  <input type="hidden" name="invoice_id" value="{{ $voucher->invoice_id }}">
                                  <input type="hidden" name="reference_no" value="{{ $voucher->reference_no }}">
-
                                  <input type="hidden" name="amount" value="{{ $voucher->amount ?? 0.0 }}">
 
                                  <div class="row g-3">
-                                     <div class="col-sm-6 col-xl-3">
-                                         <label class="form-label">Payment Method</label>
-                                         <select class="form-select" name="payment_method" required>
-                                             <option value="">Please Select</option>
-                                             @foreach (['Cheque', 'Cash', 'Credit Card', 'Easypaisa', 'Bank Transfer'] as $method)
-                                                 <option value="{{ $method }}"
-                                                     {{ $voucher->payment_method === $method ? 'selected' : '' }}>
-                                                     {{ $method }}</option>
-                                             @endforeach
-                                         </select>
-                                     </div>
-
-                                     <div class="col-sm-6 col-xl-3">
-                                         <label class="form-label">Status</label>
-                                         <select class="form-select" name="status" required>
-                                             <option value="">Please Select</option>
-                                             @foreach (['Paid', 'Unpaid', 'Partial Paid'] as $status)
-                                                 <option value="{{ $status }}"
-                                                     {{ $voucher->status === $status ? 'selected' : '' }}>
-                                                     {{ $status }}</option>
-                                             @endforeach
-                                         </select>
-                                     </div>
-
-                                     <div class="col-sm-6 col-xl-3">
-                                         <label class="form-label">Notes</label>
-                                         <textarea name="notes" class="form-control" rows="1">{{ $voucher->notes }}</textarea>
-                                     </div>
-
-                                     <div class="col-sm-6 col-xl-3">
+                                     <div class="col-sm-6 col-xl-6">
                                          <label class="form-label">Due Date</label>
                                          <input type="date" name="payment_date" class="form-control"
                                              value="{{ \Carbon\Carbon::parse($voucher->payment_date)->format('Y-m-d') }}"
                                              required />
+                                     </div>
 
+                                     <div class="col-sm-6 col-xl-6">
+                                         <label class="form-label">Notes</label>
+                                         <textarea name="notes" class="form-control" rows="1">{{ $voucher->notes }}</textarea>
                                      </div>
 
                                      <div class="col-12">
@@ -94,12 +68,15 @@
                                                          <tr>
                                                              <td>{{ $index + 1 }}</td>
                                                              <td>
-                                                                 <select name="fee_type[]" class="form-select" required>
+                                                                 <select name="fee_type[]"
+                                                                     class="form-select {{ $index === 0 ? 'first-fee-type' : '' }}"
+                                                                     required>
                                                                      <option value="">Please Select</option>
                                                                      @foreach (['Admission Fees', 'Monthly Fees', 'Tuition Fees', 'Lab Fees', 'Application Fees', 'Examination Fees', 'Registration Fees', 'Accomodation Fees', 'Library Fees'] as $type)
                                                                          <option value="{{ $type }}"
                                                                              {{ $item->fee_type === $type ? 'selected' : '' }}>
-                                                                             {{ $type }}</option>
+                                                                             {{ $type }}
+                                                                         </option>
                                                                      @endforeach
                                                                  </select>
                                                              </td>
@@ -109,9 +86,12 @@
                                                                      value="{{ $item->fee_amount }}" required />
                                                              </td>
                                                              <td class="text-center">
-                                                                 <a href="#"
-                                                                     class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item"><i
-                                                                         class="ti ti-trash f-20"></i></a>
+                                                                 @if ($index > 0)
+                                                                     <a href="#"
+                                                                         class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item">
+                                                                         <i class="ti ti-trash f-20"></i>
+                                                                     </a>
+                                                                 @endif
                                                              </td>
                                                          </tr>
                                                      @endforeach
@@ -150,6 +130,14 @@
                                      </div>
                                  </div>
                              </form>
+
+                             <style>
+                                 .first-fee-type {
+                                     pointer-events: none;
+                                     background-color: #e9ecef;
+                                 }
+                             </style>
+
                              <script>
                                  document.addEventListener("DOMContentLoaded", function() {
                                      const tableBody = document.querySelector("#voucher-form tbody");
@@ -158,15 +146,9 @@
                                      const amountInput = document.querySelector('input[name="amount"]');
 
                                      const allFeeTypes = [
-                                         "Admission Fees",
-                                         "Monthly Fees",
-                                         "Tuition Fees",
-                                         "Lab Fees",
-                                         "Application Fees",
-                                         "Examination Fees",
-                                         "Registration Fees",
-                                         "Accomodation Fees",
-                                         "Library Fees"
+                                         "Admission Fees", "Monthly Fees", "Tuition Fees", "Lab Fees",
+                                         "Application Fees", "Examination Fees", "Registration Fees",
+                                         "Accomodation Fees", "Library Fees"
                                      ];
 
                                      function getSelectedFeeTypes() {
@@ -201,8 +183,9 @@
 
                                      function refreshAllSelectOptions() {
                                          const selected = getSelectedFeeTypes();
-                                         document.querySelectorAll('select[name="fee_type[]"]').forEach(select => {
+                                         document.querySelectorAll('select[name="fee_type[]"]').forEach((select, idx) => {
                                              const currentValue = select.value;
+                                             if (idx === 0) return; // Skip first row
                                              select.innerHTML =
                                                  '<option value="">Please Select</option>' +
                                                  allFeeTypes
@@ -220,7 +203,8 @@
                                              input.addEventListener("input", calculateTotal);
                                          });
 
-                                         document.querySelectorAll('select[name="fee_type[]"]').forEach(select => {
+                                         document.querySelectorAll('select[name="fee_type[]"]').forEach((select, idx) => {
+                                             if (idx === 0) return; // Skip first row
                                              select.removeEventListener("change", refreshAllSelectOptions);
                                              select.addEventListener("change", refreshAllSelectOptions);
                                          });
@@ -265,6 +249,7 @@
                     </a>
                 </td>
             `;
+
                                          tableBody.appendChild(row);
                                          updateRowNumbers();
                                          attachListeners();
@@ -277,6 +262,7 @@
                                      calculateTotal();
                                  });
                              </script>
+
 
                          </div>
                      </div>

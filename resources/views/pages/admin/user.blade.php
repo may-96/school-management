@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-alert">
                     <ul class="mb-0">
                         @foreach ($errors->all() as $error)
@@ -30,7 +30,8 @@
                     </ul>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif
+            @endif --}}
+
 
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
@@ -217,43 +218,65 @@
                                             <div class="card-body">
                                                 <div class="row d-flex justify-content-center">
                                                     <div class="col-sm-10">
+
+                                                        {{-- Old Password --}}
                                                         <div class="mb-3">
-                                                            <label class="form-label">Old Password</label>
+                                                            <label class="form-label">Old Password <span
+                                                                    class="text-danger">*</span></label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="current_password"
                                                                     class="form-control pe-5" required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
+                                                            @error('current_password')
+                                                                <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
                                                         </div>
 
+                                                        {{-- New Password --}}
                                                         <div class="mb-3">
-                                                            <label class="form-label">New Password</label>
+                                                            <label class="form-label">New Password <span
+                                                                    class="text-danger">*</span></label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="password"
                                                                     class="form-control pe-5" required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
+                                                            @error('password')
+                                                                <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
                                                         </div>
 
+                                                        {{-- Confirm Password --}}
                                                         <div class="mb-3">
-                                                            <label class="form-label">Confirm Password</label>
+                                                            <label class="form-label">Confirm Password <span
+                                                                    class="text-danger">*</span></label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="password_confirmation"
                                                                     class="form-control pe-5" required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
+                                                            {{-- Laravel does not use error bag for password_confirmation unless you manually validate it --}}
+                                                            @if ($errors->has('password_confirmation'))
+                                                                <small
+                                                                    class="text-danger">{{ $errors->first('password_confirmation') }}</small>
+                                                            @endif
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {{-- Submit --}}
                                             <div class="col-12 text-end btn-page">
                                                 <button type="submit" class="btn btn-primary mb-4 me-4">Update</button>
                                             </div>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -299,5 +322,4 @@
             }, 3000);
         </script>
     @endpush
-
 @endsection

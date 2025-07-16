@@ -15,40 +15,49 @@ class StudentDataTable extends DataTable
         $dataTable = datatables()
             ->eloquent($query)
             ->addColumn('checkbox', function ($student) {
+                $disabled = $student->status !== 'Active' ? 'disabled' : '';
+
                 return '
-                <div class="d-flex align-items-center">
-                    <div class="form-check form-check-inline m-0 pc-icon-checkbox">
-                        <input
-                            class="form-check-input student-checkbox"
-                            type="checkbox"
-                            id="checkbox-' . $student->id . '"
-                            data-student-id="' . $student->id . '"
-                            value="' . $student->id . '"
-                            onchange="handleButtonState()"
-                        />
-                        <i class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
-                        <i class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
-                    </div>
-                </div>';
+    <div class="d-flex align-items-center">
+        <div class="form-check form-check-inline m-0 pc-icon-checkbox">
+            <input
+                class="form-check-input student-checkbox"
+                type="checkbox"
+                id="checkbox-' . $student->id . '"
+                data-student-id="' . $student->id . '"
+                data-status="' . $student->status . '"
+                value="' . $student->id . '"
+                onchange="handleButtonState()"
+                ' . $disabled . '
+            />
+            <i class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
+            <i class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
+        </div>
+    </div>';
             })
+
+
             ->addColumn('name_roll', function ($student) {
                 $image = $student->profile_image
                     ? asset('storage/students/' . $student->profile_image)
-                    : asset('assets/images/user/avatar-1.jpg');
+                    : asset('assets/images/user/avatar-2.jpg');
+
+                $profileUrl = route('student.show', $student->id);
 
                 return '
-                <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                        <a href="' . route('student.show', $student->id) . '">
-                            <img src="' . $image . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
-                        </a>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-0">' . $student->first_name . ' ' . $student->last_name . '</h6>
-                        <small class="text-truncate w-100 text-muted">Roll ' . $student->roll_no . '</small>
-                    </div>
-                </div>';
+        <a href="' . $profileUrl . '" class="text-dark text-decoration-none">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    <img src="' . $image . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h6 class="mb-0">' . $student->first_name . ' ' . $student->last_name . '</h6>
+                    <small class="text-truncate w-100 text-muted">Roll ' . $student->roll_no . '</small>
+                </div>
+            </div>
+        </a>';
             })
+
             ->addColumn('admission_no', fn($student) => $student->admission_no)
             ->addColumn('class_section', function ($student) {
                 return '
@@ -85,19 +94,38 @@ class StudentDataTable extends DataTable
 
         $dataTable->addColumn('action', function ($student) {
             return '
-            <a href="' . route('student.show', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
-                <i class="ti ti-eye f-20"></i>
-            </a>
-            <a href="' . route('student.edit', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
-                <i class="ti ti-edit f-20"></i>
-            </a>
-            <form id="delete-form-' . $student->id . '" action="' . route('student.destroy', $student->id) . '" method="POST" style="display: none;">
-                ' . csrf_field() . method_field('DELETE') . '
-            </form>
-            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $student->id . '">
-                <i class="ti ti-trash f-20"></i>
-            </a>';
+            ' . ($student->status === 'Active' ? '
+            <a href="' . route('students.vouchers.create', ['student' => $student->id]) . '"
+                class="avtar avtar-xs btn-link-secondary single-voucher-btn"
+                data-student-id="' . $student->id . '">
+                <i class="ti ti-file-plus f-20" data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Create Voucher"></i>
+            </a>' : '
+            <span class="avtar avtar-xs btn-link-secondary disabled" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Inactive Student">
+                <i class="ti ti-file-plus f-20 text-muted"></i>
+            </span>') . '
+
+        <a href="' . route('student.show', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
+            <i class="ti ti-eye f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="View"></i>
+        </a>
+
+        <a href="' . route('student.edit', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
+            <i class="ti ti-edit f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+        </a>
+
+        <form id="delete-form-' . $student->id . '" action="' . route('student.destroy', $student->id) . '" method="POST" style="display: none;">
+            ' . csrf_field() . method_field('DELETE') . '
+        </form>
+
+        <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $student->id . '">
+            <i class="ti ti-trash f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
+        </a>';
         });
+
+
+
 
         $raw = ['checkbox', 'name_roll', 'class_section', 'parents', 'status', 'action'];
         if (Auth::user() && Auth::user()->role === 'admin') {

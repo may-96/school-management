@@ -23,7 +23,6 @@
                 </div>
             </div>
 
-            <x-alert-error />
 
             <div class="row">
                 <div class="col-12">
@@ -39,55 +38,111 @@
                                 <div class="row">
                                     {{-- First Name --}}
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">First Name</label>
+                                        <label class="form-label">First Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="first_name"
-                                            value="{{ $student->first_name }}" placeholder="Enter first name" required>
+                                            value="{{ old('first_name', $student->first_name) }}"
+                                            placeholder="Enter first name">
+                                        @error('first_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Last Name --}}
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Last Name</label>
+                                        <label class="form-label">Last Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="last_name"
-                                            value="{{ $student->last_name }}" placeholder="Enter last name" required>
+                                            value="{{ old('last_name', $student->last_name) }}"
+                                            placeholder="Enter last name">
+                                        @error('last_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    {{-- Parents Name --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Parents Name</label>
+                                        <input type="text" class="form-control" name="parents_name"
+                                            value="{{ old('parents_name', $student->parents_name) }}">
+                                    </div>
+
+                                    {{-- Parents Mobile Number --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Parents Mobile Number <span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" name="parents_mobile"
+                                            value="{{ old('parents_mobile', $student->parents_mobile) }}">
+                                        @error('parents_mobile')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Date of Birth --}}
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Date of Birth</label>
+                                        <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" name="dob"
-                                            value="{{ $student->dob }}" required>
+                                            value="{{ old('dob', $student->dob) }}">
+                                        @error('dob')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Registration Date --}}
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Registration Date</label>
+                                        <label class="form-label">Registration Date <span
+                                                class="text-danger">*</span></label>
                                         <input type="date" class="form-control" name="registration_date"
-                                            value="{{ $student->registration_date }}" required>
+                                            value="{{ old('registration_date', $student->registration_date) }}">
+                                        @error('registration_date')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    {{-- Gender --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                        <select class="form-select" name="gender">
+                                            <option value="">Select</option>
+                                            @foreach (['Male', 'Female', 'Other'] as $gender)
+                                                <option value="{{ $gender }}"
+                                                    {{ old('gender', $student->gender) == $gender ? 'selected' : '' }}>
+                                                    {{ $gender }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('gender')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Admission No --}}
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Admission No</label>
+                                        <label class="form-label">Admission No <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="admission_no"
-                                            value="{{ $student->admission_no }}" required>
+                                            value="{{ old('admission_no', $student->admission_no) }}">
+                                        @error('admission_no')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Roll No --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Roll No</label>
-                                        <input type="text" class="form-control" name="roll_no"
-                                            value="{{ $student->roll_no }}" required>
+                                        <input type="number" class="form-control" name="roll_no"
+                                            value="{{ old('roll_no', $student->roll_no) }}">
+                                        @error('roll_no')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Class --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Class</label>
-                                        <select class="form-select" name="class" required>
-                                            <option disabled>Select</option>
+                                        <select class="form-select" name="class">
+                                            <option>Select</option>
                                             @foreach (['K.G', 'Montesori', 'Nursery', 'Prep', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '1st Year', '2nd Year'] as $class)
                                                 <option value="{{ $class }}"
-                                                    {{ $student->class == $class ? 'selected' : '' }}>{{ $class }}
-                                                </option>
+                                                    {{ old('class', $student->class) == $class ? 'selected' : '' }}>
+                                                    {{ $class }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -96,58 +151,42 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Section</label>
                                         <input type="text" class="form-control" name="section"
-                                            value="{{ $student->section }}" required>
-                                    </div>
-
-                                    {{-- Gender --}}
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Gender</label>
-                                        <select class="form-select" name="gender" required>
-                                            <option disabled>Select</option>
-                                            @foreach (['Male', 'Female', 'Other'] as $gender)
-                                                <option value="{{ $gender }}"
-                                                    {{ $student->gender == $gender ? 'selected' : '' }}>
-                                                    {{ $gender }}</option>
-                                            @endforeach
-                                        </select>
+                                            value="{{ old('section', $student->section) }}">
+                                        @error('section')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Status --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
-                                        <select class="form-select" name="status" required>
-                                            <option disabled>Select</option>
-                                            <option value="Active" {{ $student->status == 'Active' ? 'selected' : '' }}>
-                                                Active</option>
-                                            <option value="Inactive"
-                                                {{ $student->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                                        <select class="form-select" name="status">
+                                            {{-- <option value="">Select</option> --}}
+                                            @foreach (['Active', 'Inactive'] as $status)
+                                                <option value="{{ $status }}"
+                                                    {{ old('status', $student->status) == $status ? 'selected' : '' }}>
+                                                    {{ $status }}
+                                                </option>
+                                            @endforeach
                                         </select>
-                                    </div>
-
-                                    {{-- Parent Name --}}
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Parents Name</label>
-                                        <input type="text" class="form-control" name="parents_name"
-                                            value="{{ $student->parents_name }}" required>
-                                    </div>
-
-                                    {{-- Parent Mobile --}}
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Parents Mobile Number</label>
-                                        <input type="number" class="form-control" name="parents_mobile"
-                                            value="{{ $student->parents_mobile }}" required>
+                                        @error('status')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Secondary Mobile --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Secondary Mobile Number</label>
                                         <input type="number" class="form-control" name="secondary_mobile"
-                                            value="{{ $student->secondary_mobile }}">
+                                            value="{{ old('secondary_mobile', $student->secondary_mobile) }}">
+                                        @error('secondary_mobile')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Profile Photo --}}
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Student Profile</label>
+                                        <label class="form-label">Student Profile Photo</label>
                                         <input class="form-control" type="file" name="profile_photo"
                                             accept="image/*">
                                     </div>
@@ -155,16 +194,20 @@
                                     {{-- Address --}}
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Address</label>
-                                        <textarea class="form-control" name="address" rows="2" required>{{ $student->address }}</textarea>
+                                        <textarea class="form-control" name="address" rows="2">{{ old('address', $student->address) }}</textarea>
+                                        @error('address')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
-                                    {{-- Submit Button --}}
+                                    {{-- Submit --}}
                                     <div class="col-md-12 text-end">
                                         <button class="btn btn-primary" type="submit">Update</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

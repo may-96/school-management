@@ -66,21 +66,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <!-- Invoice ID (readonly) -->
+                            <!-- Invoice ID & Voucher ID (readonly) -->
                             <div class="mb-3 row">
-                                <label class="col-lg-4 col-form-label">INVOICE ID:</label>
-                                <div class="col-lg-8 d-flex align-items-center">
-                                    <span class="text-muted" id="edit_invoice_id"></span>
+                                <label class="col-lg-4 col-form-label">INVOICE & VOUCHER ID:</label>
+                                <div class="col-lg-8 d-flex align-items-center justify-content-between">
+                                    <span class="text-muted" id="edit_invoice_id"></span><span class="text-muted"
+                                        id="edit_voucher_invoice_id"></span>
                                 </div>
                             </div>
-
-                            {{-- <!-- Reference No (readonly) -->
-                            <div class="mb-3 row">
-                                <label class="col-lg-4 col-form-label">Reference No:</label>
-                                <div class="col-lg-8 d-flex align-items-center">
-                                    <span class="text-muted" id="edit_reference_number"></span>
-                                </div>
-                            </div> --}}
 
                             <!-- Payment Method -->
                             <div class="mb-3 row">
@@ -109,7 +102,7 @@
                                 <label class="col-lg-4 col-form-label">Refrence No :</label>
                                 <div class="col-lg-8">
                                     <input type="text" id="edit_reference_number" name="reference_number"
-                                        class="form-control" placeholder="Enter reference number">
+                                        class="form-control" placeholder="Enter reference number" required>
                                 </div>
                             </div>
 
@@ -150,16 +143,48 @@
                 e.preventDefault();
 
                 const id = $(this).data('id');
+                const maxAmount = parseFloat($(this).data('max-amount'));
 
                 $('#edit_payment_id').val(id);
                 $('#edit_invoice_id').text($(this).data('invoice_id'));
+                $('#edit_voucher_invoice_id').text($(this).data('voucher_invoice_id'));
+
                 $('#edit_payment_method').val($(this).data('payment_method'));
-                $('#edit_amount').val($(this).data('amount'));
+                $('#edit_amount').val($(this).data('amount')).attr('max', maxAmount); // set max attribute
                 $('#edit_payment_date').val($(this).data('payment_date'));
                 $('#edit_reference_number').val($(this).data('reference_number'));
                 $('#edit_notes').val($(this).data('notes'));
 
                 $('#edit-payment-form').attr('action', '/payments/' + id);
+
+                // Store maxAmount for later validation
+                $('#edit_amount').data('max-amount', maxAmount);
+            });
+
+            // Prevent typing more than max amount
+            $('#edit_amount').on('input', function() {
+                const max = parseFloat($(this).data('max-amount'));
+                let val = parseFloat($(this).val());
+
+                if (val > max) {
+                    $(this).val(max);
+                }
+            });
+        </script>
+
+        {{-- tooltips --}}
+        <script>
+            function initTooltips() {
+                const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                tooltipTriggerList.map(function(tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initTooltips);
+
+            $(document).on('draw.dt', function() {
+                initTooltips();
             });
         </script>
     @endpush

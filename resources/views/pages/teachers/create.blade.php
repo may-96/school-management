@@ -23,7 +23,6 @@
                 </div>
             </div>
 
-            <x-alert-error />
 
             <div class="row">
                 <div class="col-12">
@@ -36,121 +35,122 @@
                             <div class="card-body">
                                 <div class="row">
                                     {{-- First Name --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">First Name</label>
-                                            <input type="text" name="first_name" class="form-control"
-                                                placeholder="Enter first name" required />
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">First Name <span class="text-danger">*</span></label>
+                                        <input type="text" name="first_name" class="form-control"
+                                            value="{{ old('first_name') }}" placeholder="Enter first name" />
+                                        @error('first_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Last Name --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" name="last_name" class="form-control"
-                                                placeholder="Enter last name" required />
-                                        </div>
-                                    </div>
-
-                                    {{-- Email --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control"
-                                                placeholder="Enter email" required />
-                                        </div>
-                                    </div>
-
-                                    {{-- Date of Birth --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Date of Birth</label>
-                                            <input type="date" name="date_of_birth" class="form-control" />
-                                        </div>
-                                    </div>
-
-                                    {{-- Joining Date --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Joining Date</label>
-                                            <input type="date" name="joining_date" class="form-control" />
-                                        </div>
-                                    </div>
-
-                                    {{-- Mobile Number --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Mobile Number</label>
-                                            <input type="number" name="mobile_number" class="form-control"
-                                                placeholder="Enter Mobile number" />
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                                        <input type="text" name="last_name" class="form-control"
+                                            value="{{ old('last_name') }}" placeholder="Enter last name" />
+                                        @error('last_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Gender --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Gender</label>
-                                            <select name="gender" class="form-select">
-                                                <option>Select</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                        <select name="gender" class="form-select">
+                                            <option value="">Select</option>
+                                            @foreach (['Male', 'Female', 'Other'] as $gender)
+                                                <option value="{{ $gender }}"
+                                                    {{ old('gender') == $gender ? 'selected' : '' }}>{{ $gender }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('gender')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
+                                    {{-- Mobile Number --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                                        <input type="text" name="mobile_number" class="form-control"
+                                            value="{{ old('mobile_number') }}" placeholder="Enter Mobile number" />
+                                        @error('mobile_number')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+
+
+                                    {{-- Date of Birth --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" name="date_of_birth" class="form-control"
+                                            value="{{ old('date_of_birth') }}" />
+                                        @error('date_of_birth')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    {{-- Joining Date --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Joining Date <span class="text-danger">*</span></label>
+                                        <input type="date" name="joining_date" class="form-control"
+                                            value="{{ old('joining_date') }}" />
+                                        @error('joining_date')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+
+                                    {{-- Email --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" name="email" class="form-control"
+                                            value="{{ old('email') }}" placeholder="Enter email" />
+                                        @error('email')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+
                                     {{-- Class --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Class</label>
-                                            <select name="class" class="form-select">
-                                                <option>Select</option>
-                                                <option>Montesori</option>
-                                                <option>K.G</option>
-                                                <option>Nursery</option>
-                                                <option>Prep</option>
-                                                <option>1st</option>
-                                                <option>2nd</option>
-                                                <option>3rd</option>
-                                                <option>4th</option>
-                                                <option>5th</option>
-                                                <option>6th</option>
-                                                <option>7th</option>
-                                                <option>8th</option>
-                                                <option>9th</option>
-                                                <option>10th</option>
-                                                <option>11th</option>
-                                                <option>12th</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Class</label>
+                                        <select name="class" class="form-select">
+                                            <option value="">Select</option>
+                                            @foreach (['Montesori', 'K.G', 'Nursery', 'Prep', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th'] as $class)
+                                                <option value="{{ $class }}"
+                                                    {{ old('class') == $class ? 'selected' : '' }}>{{ $class }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     {{-- Department --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Department</label>
-                                            <input type="text" name="department" class="form-control"
-                                                placeholder="Enter department">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Department</label>
+                                        <input type="text" name="department" class="form-control"
+                                            value="{{ old('department') }}" placeholder="Enter department">
+                                        @error('department')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
-
 
                                     {{-- Education --}}
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Education</label>
-                                            <input type="text" name="education" class="form-control"
-                                                placeholder="Education" />
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Education</label>
+                                        <input type="text" name="education" class="form-control"
+                                            value="{{ old('education') }}" placeholder="Education" />
+                                        @error('education')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
-                                    {{-- Teacher Profile (file) --}}
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Teacher Profile</label>
-                                            <input class="form-control" type="file" name="profile_photo" />
-                                        </div>
+                                    {{-- Teacher Profile --}}
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Teacher Profile</label>
+                                        <input class="form-control" type="file" name="profile_photo" />
                                     </div>
 
                                     {{-- Submit --}}
@@ -160,9 +160,6 @@
                                 </div>
                             </div>
                         </form>
-                        @error('profile_image')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
                     </div>
                 </div>
             </div>

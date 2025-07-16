@@ -22,7 +22,7 @@
             </div>
 
             <x-alert-success />
-            
+
             <x-alert-error />
 
             <div class="row">
@@ -132,6 +132,21 @@
 
     @push('scripts')
         {!! $dataTable->scripts() !!}
-    @endpush
 
+        {{-- tooltips --}}
+        <script>
+            function initTooltips() {
+                const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                tooltipTriggerList.map(function(tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initTooltips);
+
+            $(document).on('draw.dt', function() {
+                initTooltips();
+            });
+        </script>
+    @endpush
 @endsection

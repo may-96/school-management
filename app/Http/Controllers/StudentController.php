@@ -12,7 +12,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
-
 {
     public function create()
     {
@@ -22,21 +21,21 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:25',
+            'last_name' => 'required|string|max:25',
+            'parents_name' => 'required|string|max:25',
+            'parents_mobile' => 'required|string|max:25',
             'dob' => 'required|date',
             'registration_date' => 'required|date',
-            'admission_no' => 'nullable|string|max:255',
-            'roll_no' => 'nullable|string|max:255',
+            'gender' => 'required|string',
+            'admission_no' => 'required|string|max:25',
+            'roll_no' => 'nullable|string|max:15',
             'class' => 'nullable|string',
-            'section' => 'nullable|string',
-            'gender' => 'nullable|string',
+            'section' => 'nullable|string|max:15',
             'status' => 'nullable|string',
-            'parents_name' => 'nullable|string',
-            'parents_mobile' => 'nullable|numeric',
-            'secondary_mobile' => 'nullable|numeric',
+            'secondary_mobile' => 'nullable|string|max:25',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'address' => 'nullable|string',
+            'address' => 'nullable|string|max:50',
         ]);
 
         $fileName = null;
@@ -62,21 +61,21 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:25',
+            'last_name' => 'required|string|max:25',
+            'parents_name' => 'required|string|max:25',
+            'parents_mobile' => 'required|string|max:25',
             'dob' => 'required|date',
             'registration_date' => 'required|date',
-            'admission_no' => 'nullable|string|max:255',
-            'roll_no' => 'nullable|string|max:255',
+            'gender' => 'required|string',
+            'admission_no' => 'required|string|max:25',
+            'roll_no' => 'nullable|string|max:15',
             'class' => 'nullable|string',
-            'section' => 'nullable|string',
-            'gender' => 'nullable|string',
+            'section' => 'nullable|string|max:15',
             'status' => 'nullable|string',
-            'parents_name' => 'nullable|string',
-            'parents_mobile' => 'nullable|numeric',
-            'secondary_mobile' => 'nullable|numeric',
+            'secondary_mobile' => 'nullable|string|max:25',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'address' => 'nullable|string',
+            'address' => 'nullable|string|max:50',
         ]);
 
         $student = Student::findOrFail($id);
@@ -153,7 +152,7 @@ class StudentController extends Controller
             ->map(function ($student) {
                 return [
                     'id' => $student->id,
-                    'name' => $student->first_name . ' ' . $student->last_name
+                    'name' => $student->first_name . ' ' . $student->last_name,
                 ];
             });
 
@@ -162,32 +161,34 @@ class StudentController extends Controller
         ]);
     }
 
-
-
     // yajra datatable voucher list for each student
 
     public function paymentData($id)
     {
-
         $student = Student::with('vouchers')->findOrFail($id);
         $payments = $student->vouchers()->with(['student', 'user']);
 
-
         $dataTable = DataTables::of($payments)
             ->addColumn('student_info', function ($payment) use ($student) {
-                $imgUrl = $student->profile_image
-                    ? asset('storage/students/' . $student->profile_image)
-                    : asset('assets/images/user/avatar-1.jpg');
+                $imgUrl = $student->profile_image ? asset('storage/students/' . $student->profile_image) : asset('assets/images/user/avatar-2.jpg');
 
                 return '
             <div class="row align-items-center">
                 <div class="col-auto pe-0">
-                    <img src="' . $imgUrl . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
+                    <img src="' .
+                    $imgUrl .
+                    '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
                 </div>
                 <div class="col">
-                    <h6 class="mb-0">' . $student->first_name . ' ' . $student->last_name . '</h6>
+                    <h6 class="mb-0">' .
+                    $student->first_name .
+                    ' ' .
+                    $student->last_name .
+                    '</h6>
                     <p class="f-12 mb-0"><a href="#!" class="text-muted">
-                        <span class="text-truncate w-100">' . $student->parents_mobile . '</span></a></p>
+                        <span class="text-truncate w-100">' .
+                    $student->parents_mobile .
+                    '</span></a></p>
                 </div>
             </div>';
             })
@@ -200,8 +201,12 @@ class StudentController extends Controller
                 $remaining = $payment->amount - $paidAmount;
 
                 return '
-        <div>' . number_format($remaining) . ' PKR</div>
-        <div class="text-muted small">Paid: ' . number_format($paidAmount) . ' PKR</div>
+        <div>' .
+                    number_format($remaining) .
+                    ' PKR</div>
+        <div class="text-muted small">Paid: ' .
+                    number_format($paidAmount) .
+                    ' PKR</div>
     ';
             })
 
@@ -216,9 +221,7 @@ class StudentController extends Controller
 
         if (Auth::check() && Auth::user()->role === 'admin') {
             $dataTable->addColumn('added_by', function ($payment) {
-                return $payment->user
-                    ? trim($payment->user->first_name . ' ' . $payment->user->last_name)
-                    : 'Unknown';
+                return $payment->user ? trim($payment->user->first_name . ' ' . $payment->user->last_name) : 'Unknown';
             });
         }
 
@@ -230,58 +233,87 @@ class StudentController extends Controller
             $deleteButton = '';
 
             if (in_array($status, ['unpaid', 'partial paid'])) {
-                $addButton = '
+                $addButton =
+                    '
         <li class="list-inline-item">
             <a href="#"
                 class="avtar avtar-xs btn-link-secondary open-payment-modal"
                 data-bs-toggle="modal"
                 data-bs-target="#student-add-payment_modal"
-                data-invoice-id="' . e($payment->invoice_id) . '"
-                data-reference-number="' . e($payment->reference_no) . '"
-                data-voucher-id="' . e($payment->id) . '"
-                data-voucher-amount="' . e($payment->amount - $payment->payments()->sum('amount')) . '">
-                <i class="ti ti-plus f-20"></i>
+                data-invoice-id="' .
+                    e($payment->invoice_id) .
+                    '"
+                data-reference-number="' .
+                    e($payment->reference_no) .
+                    '"
+                data-voucher-id="' .
+                    e($payment->id) .
+                    '"
+                data-voucher-amount="' .
+                    e($payment->amount - $payment->payments()->sum('amount')) .
+                    '">
+                <i class="ti ti-plus f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Payment"></i>
             </a>
         </li>';
 
-                $editButton = '
+                $editButton =
+                    '
         <li class="list-inline-item">
-            <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
+            <a href="' .
+                    route('voucher.edit', $payment->id) .
+                    '" class="avtar avtar-xs btn-link-secondary">
                 <i class="ti ti-edit f-20"></i>
             </a>
         </li>';
             }
 
             if ($status === 'unpaid') {
-                $deleteButton = '
+                $deleteButton =
+                    '
         <li class="list-inline-item">
-            <form id="delete-form-' . $payment->id . '" action="' . route('voucher.destroy', $payment->id) . '" method="POST" style="display: none;">
-                ' . csrf_field() . method_field('DELETE') . '
+            <form id="delete-form-' .
+                    $payment->id .
+                    '" action="' .
+                    route('voucher.destroy', $payment->id) .
+                    '" method="POST" style="display: none;">
+                ' .
+                    csrf_field() .
+                    method_field('DELETE') .
+                    '
             </form>
-            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $payment->id . '">
+            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' .
+                    $payment->id .
+                    '">
                 <i class="ti ti-trash f-20"></i>
             </a>
         </li>';
             }
 
             return '
-    <ul class="list-inline mb-0 text-end">'
-                . $addButton . '
+    <ul class="list-inline mb-0 text-end">' .
+                $addButton .
+                '
         <li class="list-inline-item">
             <a href="#"
                class="avtar avtar-xs btn-link-secondary view-payment-slip"
                data-bs-toggle="modal"
                data-bs-target="#student-payment-slip_model"
-               data-voucher-id="' . e($payment->id) . '"
-               data-student-id="' . e($payment->student_id) . '">
+               data-voucher-id="' .
+                e($payment->id) .
+                '"
+               data-student-id="' .
+                e($payment->student_id) .
+                '">
                <i class="ti ti-eye f-20"></i>
             </a>
-        </li>' . $editButton . $deleteButton . '
+        </li>' .
+                $editButton .
+                $deleteButton .
+                '
     </ul>';
         });
 
         $rawColumns = ['invoice_id', 'student_info', 'status', 'actions', 'amount'];
-
 
         if (Auth::check() && Auth::user()->role === 'admin') {
             $rawColumns[] = 'added_by';

@@ -21,8 +21,32 @@
                 </div>
             </div>
 
-            {{-- Error Alert --}}
-            <x-alert-error />
+            @if ($errors->any())
+                <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert"
+                    style="display: none;">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <script>
+                    if (!sessionStorage.getItem('errorShown')) {
+                        const alertBox = document.getElementById('errorAlert');
+                        alertBox.style.display = 'block';
+
+                        setTimeout(() => {
+                            alertBox.classList.remove('show');
+                            setTimeout(() => alertBox.remove(), 300);
+                        }, 3000);
+
+                        sessionStorage.setItem('errorShown', 'true');
+                    }
+                </script>
+            @endif
+
 
             <div class="row">
                 <div class="col-sm-12">
@@ -34,33 +58,21 @@
                                 @csrf
 
                                 {{-- Hidden Fields --}}
+                                <input type="hidden" name="student_id" value="{{ $student ? $student->id : '' }}">
                                 <input type="hidden" name="student_ids" id="student_ids_input">
 
                                 <input type="hidden" name="invoice_id" value="{{ $invoiceId ?? '' }}">
-
                                 <input type="hidden" name="amount" value="0.00">
 
                                 <div class="row g-3">
-                                    <div class="col-sm-6 col-xl-3">
-                                        <label class="form-label">Payment Method</label>
-                                        <select class="form-select" name="payment_method" required>
-                                            <option value="">Please Select</option>
-                                            <option>Cheque</option>
-                                            <option>Cash</option>
-                                            <option>Credit Card</option>
-                                            <option>Easypaisa</option>
-                                            <option>Bank Transfer</option>
-                                        </select>
+                                    <div class="col-sm-6 col-xl-6">
+                                        <label class="form-label">Due Date</label>
+                                        <input type="date" name="payment_date" class="form-control" required />
                                     </div>
 
                                     <div class="col-sm-6 col-xl-6">
                                         <label class="form-label">Notes</label>
                                         <textarea name="notes" class="form-control" rows="1"></textarea>
-                                    </div>
-
-                                    <div class="col-sm-6 col-xl-3">
-                                        <label class="form-label">Due Date</label>
-                                        <input type="date" name="payment_date" class="form-control" required />
                                     </div>
 
                                     <div class="col-12">
@@ -76,6 +88,28 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="feeTableBody">
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <select name="fee_type[]" class="form-select" required>
+                                                                <option value="">Please Select</option>
+                                                                <option value="Admission Fees">Admission Fees</option>
+                                                                <option value="Monthly Fees">Monthly Fees</option>
+                                                                <option value="Tuition Fees">Tuition Fees</option>
+                                                                <option value="Lab Fees">Lab Fees</option>
+                                                                <option value="Application Fees">Application Fees</option>
+                                                                <option value="Examination Fees">Examination Fees</option>
+                                                                <option value="Registration Fees">Registration Fees</option>
+                                                                <option value="Accomodation Fees">Accomodation Fees</option>
+                                                                <option value="Library Fees">Library Fees</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" name="fee_amount[]"
+                                                                class="form-control fee-input" required />
+                                                        </td>
+
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -86,7 +120,6 @@
                                                 <i class="ti ti-plus"></i> Add new item
                                             </button>
                                         </div>
-
                                     </div>
 
                                     <script>
@@ -173,10 +206,12 @@
                                             function handleRemove(e) {
                                                 e.preventDefault();
                                                 const row = e.target.closest("tr");
-                                                if (row) row.remove();
-                                                updateRowNumbers();
-                                                calculateTotal();
-                                                refreshAllSelectOptions();
+                                                if (row && row.rowIndex !== 1) {
+                                                    row.remove();
+                                                    updateRowNumbers();
+                                                    calculateTotal();
+                                                    refreshAllSelectOptions();
+                                                }
                                             }
 
                                             addItemBtn.addEventListener("click", function() {
@@ -189,22 +224,22 @@
 
                                                 const row = document.createElement("tr");
                                                 row.innerHTML = `
-                <td>#</td>
-                <td>
-                    <select name="fee_type[]" class="form-select" required>
-                        <option value="">Please Select</option>
-                        ${options}
-                    </select>
-                </td>
-                <td>
-                    <input type="number" name="fee_amount[]" class="form-control fee-input" required />
-                </td>
-                <td class="text-center">
-                    <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item">
-                        <i class="ti ti-trash f-20"></i>
-                    </a>
-                </td>
-            `;
+                        <td>#</td>
+                        <td>
+                            <select name="fee_type[]" class="form-select" required>
+                                <option value="">Please Select</option>
+                                ${options}
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" name="fee_amount[]" class="form-control fee-input" required />
+                        </td>
+                        <td class="text-center">
+                            <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item">
+                                <i class="ti ti-trash f-20"></i>
+                            </a>
+                        </td>
+                    `;
                                                 tableBody.appendChild(row);
 
                                                 updateRowNumbers();
@@ -216,7 +251,6 @@
                                             attachListeners();
                                         });
                                     </script>
-
 
                                     <div class="col-12">
                                         <div class="invoice-total ms-auto">
@@ -240,6 +274,7 @@
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

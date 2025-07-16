@@ -129,11 +129,11 @@
                                                         @method('DELETE')
 
                                                         @if ($user->role !== 'admin')
-                                                        <a href="#"
-                                                            class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                                                            data-id="{{ $user->id }}">
-                                                            <i class="ti ti-trash f-20"></i>
-                                                        </a>
+                                                            <a href="#"
+                                                                class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                                                                data-id="{{ $user->id }}">
+                                                                <i class="ti ti-trash f-20"></i>
+                                                            </a>
                                                         @endif
                                                     </form>
 
@@ -177,8 +177,7 @@
                                                                     </div>
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Status</label>
-                                                                        <select name="status" class="form-select"
-                                                                            required>
+                                                                        <select name="status" class="form-select" required>
                                                                             <option value="active"
                                                                                 {{ $user->status === 'active' ? 'selected' : '' }}>
                                                                                 Active</option>
@@ -197,6 +196,7 @@
                                                                         <label class="form-label">Password</label>
                                                                         <input type="password" name="password"
                                                                             class="form-control">
+                                                                        <small class="text-muted">Leave blank to keep the current password</small>
                                                                     </div>
                                                                 </div>
                                                             </div>

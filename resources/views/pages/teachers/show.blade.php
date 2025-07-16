@@ -52,7 +52,7 @@
                                                         <img src="{{ asset('storage/teachers/' . $teacher->profile_image) }}"
                                                             alt="img" class="img-fluid" />
                                                     @else
-                                                        <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
+                                                        <img src="{{ asset('assets/images/user/avatar-5.jpg') }}"
                                                             alt="img" class="img-fluid" />
                                                     @endif
                                                 </div>

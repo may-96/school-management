@@ -23,8 +23,6 @@
                 </div>
             </div>
 
-            <x-alert-error />
-
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -36,100 +34,155 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">First Name</label>
+                                        <label class="form-label">First Name <span class="text-danger">*</span></label>
                                         <input type="text" name="first_name" class="form-control"
-                                            placeholder="Enter first name" />
+                                            value="{{ old('first_name') }}" placeholder="Enter first name" />
+                                        @error('first_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Last Name</label>
+                                        <label class="form-label">Last Name <span class="text-danger">*</span></label>
                                         <input type="text" name="last_name" class="form-control"
-                                            placeholder="Enter last name" />
+                                            value="{{ old('last_name') }}" placeholder="Enter last name" />
+                                        @error('last_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Date of Birth</label>
-                                        <input type="date" name="dob" class="form-control" />
+                                        <label class="form-label">Parents Name <span class="text-danger">*</span></label>
+                                        <input type="text" name="parents_name" class="form-control"
+                                            value="{{ old('parents_name') }}" placeholder="Enter parents name" />
+                                        @error('parents_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Registration Date</label>
-                                        <input type="date" name="registration_date" class="form-control" />
+                                        <label class="form-label">Parents Mobile Number <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="parents_mobile" class="form-control"
+                                            value="{{ old('parents_mobile') }}" placeholder="Enter parents mobile number" />
+                                        @error('parents_mobile')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Admission No</label>
+                                        <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" name="dob" class="form-control"
+                                            value="{{ old('dob') }}" />
+                                        @error('dob')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Registration Date <span
+                                                class="text-danger">*</span></label>
+                                        <input type="date" name="registration_date" class="form-control"
+                                            value="{{ old('registration_date') }}" />
+                                        @error('registration_date')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                        <select name="gender" class="form-select">
+                                            <option value="">Select</option>
+                                            @foreach (['Male', 'Female', 'Other'] as $g)
+                                                <option value="{{ $g }}"
+                                                    {{ old('gender') == $g ? 'selected' : '' }}>{{ $g }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('gender')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Admission No <span class="text-danger">*</span></label>
                                         <input type="number" name="admission_no" class="form-control"
-                                            placeholder="Enter ID number" />
+                                            value="{{ old('admission_no') }}" placeholder="Enter ID number" />
+                                        @error('admission_no')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Roll No</label>
                                         <input type="number" name="roll_no" class="form-control"
-                                            placeholder="Enter roll no" />
+                                            value="{{ old('roll_no') }}" placeholder="Enter roll no" />
+                                        @error('roll_no')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Class</label>
                                         <select name="class" class="form-select">
                                             <option>Select</option>
-                                            <option>K.G</option>
-                                            <option>Montesori</option>
-                                            <option>Nursery</option>
-                                            <option>Prep</option>
-                                            <option>1st</option>
-                                            <option>2nd</option>
-                                            <option>3rd</option>
-                                            <option>4th</option>
-                                            <option>5th</option>
-                                            <option>6th</option>
-                                            <option>7th</option>
-                                            <option>8th</option>
-                                            <option>9th</option>
-                                            <option>10th</option>
-                                            <option>1st Year</option>
-                                            <option>2nd Year</option>
+                                            @foreach (['K.G', 'Montesori', 'Nursery', 'Prep', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '1st Year', '2nd Year'] as $item)
+                                                <option {{ old('class') == $item ? 'selected' : '' }}>{{ $item }}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        @error('class')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Section</label>
                                         <input type="text" name="section" class="form-control"
-                                            placeholder="Enter Section" />
+                                            value="{{ old('section') }}" placeholder="Enter Section" />
+                                        @error('section')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Gender</label>
-                                        <select name="gender" class="form-select">
-                                            <option>Select</option>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                            <option>Other</option>
-                                        </select>
-                                    </div>
+
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
                                         <select name="status" class="form-select">
-                                            <option>Select</option>
-                                            <option>Active</option>
-                                            <option>Inactive</option>
+                                            @foreach (['Active', 'Inactive'] as $s)
+                                                <option value="{{ $s }}"
+                                                    {{ old('status', 'Inactive') == $s ? 'selected' : '' }}>
+                                                    {{ $s }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Parents Name</label>
-                                        <input type="text" name="parents_name" class="form-control"
-                                            placeholder="Enter parents name" />
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Parents Mobile Number</label>
-                                        <input type="number" name="parents_mobile" class="form-control"
-                                            placeholder="Enter parents mobile number" />
-                                    </div>
+
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Secondary Mobile Number</label>
                                         <input type="text" name="secondary_mobile" class="form-control"
+                                            value="{{ old('secondary_mobile') }}"
                                             placeholder="Enter Secondary Mobile Number" />
+                                        @error('secondary_mobile')  
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Student Profile</label>
                                         <input type="file" name="profile_photo" class="form-control" />
+                                        @error('profile_photo')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Address</label>
-                                        <textarea name="address" class="form-control" rows="2" placeholder="Enter address"></textarea>
+                                        <textarea name="address" class="form-control" rows="2" placeholder="Enter address">{{ old('address') }}</textarea>
+                                        @error('address')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="col-md-12 text-end">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>

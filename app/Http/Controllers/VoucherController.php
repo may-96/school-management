@@ -24,6 +24,10 @@ class VoucherController extends Controller
         $student = Student::find($studentId);
         $invoiceId = 'VOU-' . now()->format('YmdHis');
 
+        // if ($student->status !== 'Active') {
+        //     abort(403, 'Cannot create voucher for inactive student.');
+        // }
+
         return view('pages.vouchers.create', compact('student', 'invoiceId'));
     }
 
@@ -45,7 +49,7 @@ class VoucherController extends Controller
 
         $request->validate([
             'invoice_id' => 'required|unique:vouchers,invoice_id',
-            'payment_method' => 'required',
+            // 'payment_method' => 'required',
             'payment_date' => 'required|date',
             'fee_type' => 'required|array|min:1',
             'fee_amount' => 'required|array|min:1',
@@ -64,7 +68,7 @@ class VoucherController extends Controller
             $voucher = Voucher::create([
                 'student_id' => $studentId,
                 'invoice_id' => 'VOU-' . now()->format('YmdHis') . '-' . $studentId,
-                'payment_method' => $request->payment_method,
+                // 'payment_method' => $request->payment_method,
                 'status' => 'unpaid',
                 'amount' => $totalAmount,
                 'notes' => $request->notes,
@@ -84,16 +88,14 @@ class VoucherController extends Controller
         return redirect()->route('voucher.index')->with('success', 'Vouchers created successfully!');
     }
 
-    public function show($invoice_id)
+    public function show($id)
     {
-        $voucher = Voucher::with(['student', 'items', 'payments'])
-            ->where('invoice_id', $invoice_id)
-            ->firstOrFail();
-
+        $voucher = Voucher::with(['student', 'items', 'payments'])->findOrFail($id);
         $school = School::first();
 
         return view('pages.vouchers.show', compact('voucher', 'school'));
     }
+
 
 
     public function edit($id)
@@ -107,8 +109,6 @@ class VoucherController extends Controller
         $voucher = Voucher::findOrFail($id);
 
         $request->validate([
-            'payment_method' => 'required',
-            'status' => 'required',
             'payment_date' => 'required|date',
             'fee_type' => 'required|array|min:1',
             'fee_amount' => 'required|array|min:1',
@@ -116,14 +116,30 @@ class VoucherController extends Controller
             'fee_amount.*' => 'required|numeric|min:0',
         ]);
 
+        // Total amount from items
+        $totalAmount = array_sum($request->fee_amount);
+
+        // Assuming you have a relation: $voucher->payments()
+        $paidAmount = $voucher->payments()->sum('amount');
+
+        // Determine status
+        if ($paidAmount == 0) {
+            $status = 'Unpaid';
+        } elseif ($paidAmount < $totalAmount) {
+            $status = 'Partial Paid';
+        } else {
+            $status = 'Paid';
+        }
+
+        // Update voucher
         $voucher->update([
-            'payment_method' => $request->payment_method,
-            'status' => $request->status,
+            'status' => $status,
             'payment_date' => $request->payment_date,
             'notes' => $request->notes,
-            'amount' => array_sum($request->fee_amount),
+            'amount' => $totalAmount,
         ]);
 
+        // Delete old items and recreate
         VoucherItem::where('voucher_id', $voucher->id)->delete();
 
         foreach ($request->fee_type as $index => $type) {
@@ -136,6 +152,7 @@ class VoucherController extends Controller
 
         return redirect()->route('voucher.show', $voucher->id)->with('success', 'Voucher updated successfully!');
     }
+
 
     public function destroy($id)
     {

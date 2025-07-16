@@ -13,40 +13,61 @@ class PaymentDataTable extends DataTable
     {
         $dataTable = datatables()
             ->eloquent($query)
+
+            ->editColumn('invoice_id', function ($payment) {
+                $paymentInvoice = $payment->invoice_id ?? 'N/A';
+                $voucherInvoice = optional($payment->voucher)->invoice_id ?? 'N/A';
+
+                return '
+                    <div>
+                        <strong>' . e($paymentInvoice) . '</strong><br>
+                        <small class="text-muted"> ' . e($voucherInvoice) . '</small>
+                    </div>
+                ';
+            })
+
             ->addColumn('action', function ($payment) {
                 return '
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                      <a href="#"
-                          class="avtar avtar-xs btn-link-secondary edit-payment-btn"
-                          data-id="' . $payment->id . '"
-                          data-invoice_id="' . $payment->invoice_id . '"
-                          data-reference_number="' . $payment->reference_number . '"
-                          data-payment_method="' . $payment->payment_method . '"
-                          data-amount="' . $payment->amount . '"
-                          data-payment_date="' . $payment->payment_date . '"
-                          data-notes="' . htmlspecialchars($payment->notes) . '"
-                          data-bs-toggle="modal"
-                          data-bs-target="#student-edit-payment_modal">
-                          <i class="ti ti-edit f-20"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <form id="delete-form-' . $payment->id . '" action="' . route('payment.destroy', $payment->id) . '" method="POST" style="display: none;">
-                            ' . csrf_field() . method_field('DELETE') . '
-                        </form>
-                        <a href="#"
-                            class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                            data-id="' . $payment->id . '"
-                            data-bs-toggle="modal"
-                            data-bs-target="#delete-confirmation-modal">
-                            <i class="ti ti-trash f-20"></i>
-                        </a>
-                    </li>
-                </ul>';
+    <ul class="list-inline mb-0">
+        <li class="list-inline-item">
+         <a href="#"
+    class="avtar avtar-xs btn-link-secondary edit-payment-btn"
+    data-id="' . $payment->id . '"
+    data-invoice_id="' . $payment->invoice_id . '"
+    data-voucher_invoice_id="' . optional($payment->voucher)->invoice_id . '"
+    data-reference_number="' . $payment->reference_number . '"
+    data-payment_method="' . $payment->payment_method . '"
+    data-amount="' . $payment->amount . '"
+    data-payment_date="' . $payment->payment_date . '"
+    data-notes="' . htmlspecialchars($payment->notes) . '"
+    data-max-amount="' . ($payment->voucher->amount - $payment->voucher->payments->sum('amount')) . '"
+    data-bs-toggle="modal"
+    data-bs-target="#student-edit-payment_modal">
+    <i class="ti ti-edit f-20" data-bs-toggle="tooltip" title="Edit" data-bs-placement="top"></i>
+</a>
+
+        </li>
+        <li class="list-inline-item">
+            <form id="delete-form-' . $payment->id . '" action="' . route('payment.destroy', $payment->id) . '" method="POST" style="display: none;">
+                ' . csrf_field() . method_field('DELETE') . '
+            </form>
+            <a href="#"
+                class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                data-id="' . $payment->id . '"
+                data-bs-toggle="modal"
+                data-bs-target="#delete-confirmation-modal">
+                <i class="ti ti-trash f-20" data-bs-toggle="tooltip" title="Delete" data-bs-placement="top"></i>
+            </a>
+        </li>
+    </ul>';
             })
+
+
+
             ->editColumn('amount', fn($payment) => number_format($payment->amount) . ' PKR')
-            ->editColumn('payment_date', fn($payment) => Carbon::parse($payment->payment_date)->format('d/m/Y'));
+
+            ->editColumn('payment_date', fn($payment) =>
+            Carbon::parse($payment->payment_date)->format('d/m/Y'));
 
         if (Auth::user() && Auth::user()->role === 'admin') {
             $dataTable->addColumn('added_by', function ($payment) {
@@ -57,7 +78,7 @@ class PaymentDataTable extends DataTable
             });
         }
 
-        $raw = ['action'];
+        $raw = ['invoice_id', 'action'];
         if (Auth::user() && Auth::user()->role === 'admin') {
             $raw[] = 'added_by';
         }
@@ -67,7 +88,7 @@ class PaymentDataTable extends DataTable
 
     public function query()
     {
-        $query = Payment::with('user'); 
+        $query = Payment::with(['user', 'voucher']);
 
         if ($voucherId = request('voucher_id')) {
             $query->where('voucher_id', $voucherId);
