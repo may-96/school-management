@@ -10,7 +10,6 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class ProfileController extends Controller
-
 {
     public function user(): View
     {
@@ -32,10 +31,10 @@ class ProfileController extends Controller
 
         $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'phone'      => 'nullable|string|max:20',
-            'email'      => 'required|email|max:255|unique:users,email,' . $user->id,
-            'address'    => 'nullable|string|max:500',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'address' => 'nullable|string|max:500',
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -49,13 +48,13 @@ class ProfileController extends Controller
         }
 
         $user->first_name = $request->first_name;
-        $user->last_name  = $request->last_name;
-        $user->phone      = $request->phone;
-        $user->email      = $request->email;
-        $user->address    = $request->address;
+        $user->last_name = $request->last_name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->address = $request->address;
         $user->save();
 
-        return redirect()->route('admin.user')->with('success', 'Profile updated successfully!');
+        return redirect()->back()->with('success', 'Profile updated successfully!')->with('active_tab', 'profile-2');
     }
 
     public function updatePassword(Request $request)
@@ -68,12 +67,14 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+            return back()
+                ->withErrors(['current_password' => 'The current password is incorrect.'])
+                ->with('active_tab', 'profile-2');
         }
 
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('admin.user')->with('success', 'Password updated successfully!');
+        return redirect()->back()->with('success', 'Password updated successfully!')->with('active_tab', 'profile-2');
     }
 }

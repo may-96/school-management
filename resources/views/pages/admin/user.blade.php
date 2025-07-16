@@ -321,5 +321,19 @@
                 }
             }, 3000);
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const activeTab = @json(session('active_tab'));
+
+                if (activeTab) {
+                    $('.tab-pane').removeClass('active show');
+                    $('.nav-link').removeClass('active');
+
+                    $('#' + activeTab).addClass('active show');
+                    $('a[href="#' + activeTab + '"]').addClass('active');
+                }
+            });
+        </script>
     @endpush
 @endsection
