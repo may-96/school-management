@@ -30,11 +30,11 @@ class ProfileController extends Controller
         $user = $request->user();
 
         $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'address' => 'nullable|string|max:500',
+            'first_name' => 'nullable|string|max:25',
+            'last_name' => 'nullable|string|max:25',
+            'phone' => 'nullable|string|max:25',
+            'email' => 'required|email|max:40|unique:users,email,' . $user->id,
+            'address' => 'nullable|string|max:50',
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -54,13 +54,13 @@ class ProfileController extends Controller
         $user->address = $request->address;
         $user->save();
 
-        return redirect()->back()->with('success', 'Profile updated successfully!')->with('active_tab', 'profile-2');
+        return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 
     public function updatePassword(Request $request)
     {
         $request->validate([
-            'current_password' => 'required',
+            'current_password' => 'required|max:25',
             'password' => 'required|min:8|confirmed',
         ]);
 

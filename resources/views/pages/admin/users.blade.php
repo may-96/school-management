@@ -63,27 +63,13 @@
                                                         </div>
                                                         <div class="col justify-content-center">
                                                             <h5 class="mb-0">
-                                                                {{ old('first_name', $user->first_name . ' ' . $user->last_name) }}
+                                                                {{ $user->first_name . ' ' . $user->last_name }}
                                                             </h5>
                                                             <small
                                                                 class="text-truncate w-100 text-muted">{{ $user->email }}</small>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                {{-- <td>
-                                                    <div class="row">
-                                                        <div class="col-auto pe-0">
-                                                            <small class="text-muted d-block">Students:
-                                                                {{ $user->students->count() }}</small>
-                                                            <small class="text-muted d-block">Teachers:
-                                                                {{ $user->teachers->count() }}</small>
-                                                            <small class="text-muted d-block">Vouchers:
-                                                                {{ $user->vouchers->count() }}</small>
-                                                            <small class="text-muted d-block">Payments:
-                                                                {{ $user->payments->count() }}</small>
-                                                        </div>
-                                                    </div>
-                                                </td> --}}
                                                 <td>
                                                     <div class="row">
                                                         <div class="col">
@@ -147,7 +133,8 @@
                                                     <div class="modal-content">
                                                         <form action="{{ route('admin.users.update', $user) }}"
                                                             method="POST">
-                                                            @csrf @method('PUT')
+                                                            @csrf
+                                                            @method('PUT')
                                                             <div class="modal-header">
                                                                 <h4 class="mb-0">User Edit</h4>
                                                                 <button type="button" class="btn-close"
@@ -155,48 +142,83 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row">
+                                                                    {{-- First Name --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">First Name</label>
                                                                         <input type="text" name="first_name"
                                                                             class="form-control"
-                                                                            value="{{ explode(' ', $user->first_name)[0] }}"
-                                                                            required>
+                                                                            value="{{ old('first_name', $user->first_name) }}">
+                                                                        @error('first_name')
+                                                                            <small
+                                                                                class="text-danger">{{ $message }}</small>
+                                                                        @enderror
                                                                     </div>
+
+                                                                    {{-- Last Name --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Last Name</label>
                                                                         <input type="text" name="last_name"
                                                                             class="form-control"
-                                                                            value="{{ explode(' ', $user->last_name)[0] ?? '' }}"
-                                                                            required>
+                                                                            value="{{ old('last_name', $user->last_name) }}">
+                                                                        @error('last_name')
+                                                                            <small
+                                                                                class="text-danger">{{ $message }}</small>
+                                                                        @enderror
                                                                     </div>
+
+                                                                    {{-- Phone --}}
                                                                     <div class="col-sm-6 mb-3">
-                                                                        <label class="form-label">Contact Phone</label>
+                                                                        <label class="form-label">Phone</label>
                                                                         <input type="text" name="phone"
                                                                             class="form-control"
-                                                                            value="{{ old('phone', $user->phone) }}" />
+                                                                            value="{{ old('phone', $user->phone) }}">
+                                                                        @error('phone')
+                                                                            <small
+                                                                                class="text-danger">{{ $message }}</small>
+                                                                        @enderror
                                                                     </div>
+
+                                                                    {{-- Status --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Status</label>
-                                                                        <select name="status" class="form-select" required>
+                                                                        <select name="status" class="form-select">
+                                                                            <option value="">Select</option>
                                                                             <option value="active"
-                                                                                {{ $user->status === 'active' ? 'selected' : '' }}>
+                                                                                {{ old('status', $user->status) == 'active' ? 'selected' : '' }}>
                                                                                 Active</option>
                                                                             <option value="inactive"
-                                                                                {{ $user->status === 'inactive' ? 'selected' : '' }}>
+                                                                                {{ old('status', $user->status) == 'inactive' ? 'selected' : '' }}>
                                                                                 Inactive</option>
                                                                         </select>
+                                                                        @error('status')
+                                                                            <small
+                                                                                class="text-danger">{{ $message }}</small>
+                                                                        @enderror
                                                                     </div>
+
+                                                                    {{-- Email --}}
                                                                     <div class="col-sm-6 mb-3">
-                                                                        <label class="form-label">Email</label>
+                                                                        <label class="form-label">Email <span class="text-danger">*</span></label>
                                                                         <input type="email" name="email"
                                                                             class="form-control"
-                                                                            value="{{ $user->email }}" required>
+                                                                            value="{{ old('email', $user->email) }}">
+                                                                        @error('email')
+                                                                            <small
+                                                                                class="text-danger">{{ $message }}</small>
+                                                                        @enderror
                                                                     </div>
+
+                                                                    {{-- Password --}}
                                                                     <div class="col-sm-6 mb-3">
                                                                         <label class="form-label">Password</label>
                                                                         <input type="password" name="password"
-                                                                            class="form-control">
-                                                                        <small class="text-muted">Leave blank to keep the current password</small>
+                                                                            class="form-control" readonly>
+                                                                        <small class="text-muted">
+                                                                            Current password required</small>
+                                                                        @error('password')
+                                                                            <br><small
+                                                                                class="text-danger">{{ $message }}</small>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -204,6 +226,7 @@
                                                                 <button class="btn btn-primary">Update</button>
                                                             </div>
                                                         </form>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,176 +257,82 @@
                 </div>
                 <div class="modal-body">
                     <div class="collapse multi-collapse show">
-                        <form action="{{ route('admin.users.store') }}" method="POST">
+                        <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                {{-- <div class="col-sm-12 text-center mb-3">
-                                    <div class="user-upload wid-75">
-                                        <div class="user-upload wid-75">
-                                            <!-- Display image or default image -->
-                                            <img id="profilePhotoPreview"
-                                                src="{{ $user->profile_photo_path ? asset('storage/' . $user->profile_photo_path) : asset('assets/images/user/default.jpg') }}"
-                                                alt="Profile Photo" class="img-fluid" />
-
-                                            <!-- Upload Label -->
-                                            <label for="profile_photo" class="img-avtar-upload">
-                                                <i class="ti ti-camera f-24 mb-1"></i>
-                                                <span>Upload</span>
-                                            </label>
-
-                                            <!-- Hidden File Input -->
-                                            <input type="file" id="profile_photo"
-                                                name="profile_photo" class="d-none"
-                                                onchange="previewImage(event)" />
-                                        </div>
-
-                                        <!-- JavaScript to handle preview -->
-                                        <script>
-                                            function previewImage(event) {
-                                                const file = event.target.files[0];
-                                                const reader = new FileReader();
-
-                                                reader.onload = function(e) {
-                                                    // Update the profile photo preview with the new image
-                                                    document.getElementById('profilePhotoPreview').src = e.target.result;
-                                                };
-
-                                                // Read the uploaded file
-                                                if (file) {
-                                                    reader.readAsDataURL(file);
-                                                }
-                                            }
-                                        </script>
-
-
-                                    </div>
-                                </div> --}}
                                 {{-- First Name --}}
                                 <div class="col-sm-6 mb-3">
                                     <label class="form-label">First Name</label>
-                                    <input type="text" name="first_name" class="form-control" required>
+                                    <input type="text" name="first_name" class="form-control"
+                                        value="{{ old('first_name') }}">
+                                    @error('first_name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
                                 {{-- Last Name --}}
                                 <div class="col-sm-6 mb-3">
                                     <label class="form-label">Last Name</label>
-                                    <input type="text" name="last_name" class="form-control" required>
+                                    <input type="text" name="last_name" class="form-control"
+                                        value="{{ old('last_name') }}">
+                                    @error('last_name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
-                                {{-- Role --}}
+
+                                {{-- Phone --}}
                                 <div class="col-sm-6 mb-3">
                                     <label class="form-label">Phone</label>
-                                    <input type="text" name="phone" class="form-control" required>
+                                    <input type="text" name="phone" class="form-control"
+                                        value="{{ old('phone') }}">
+                                    @error('phone')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
                                 {{-- Status --}}
                                 <div class="col-sm-6 mb-3">
                                     <label class="form-label">Status</label>
-                                    <select name="status" class="form-select" required>
-                                        <option value="select">Select</option>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
+                                    <select name="status" class="form-select">
+                                        <option value="">Select</option>
+                                        <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active
+                                        </option>
+                                        <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>
+                                            Inactive</option>
                                     </select>
+                                    @error('status')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
                                 {{-- Email --}}
                                 <div class="col-sm-6 mb-3">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control" required>
+                                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" class="form-control"
+                                        value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
                                 {{-- Password --}}
                                 <div class="col-sm-6 mb-3">
-                                    <label class="form-label">Password</label>
+                                    <label class="form-label">Password <span class="text-danger">*</span></label>
                                     <input type="password" name="password" class="form-control" required>
+                                    @error('password')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="text-end">
                                 <button class="btn btn-primary">Submit</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- edit model user  --}}
-    {{-- <div class="modal fade" id="edit-user-modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header justify-content-between">
-                    <div class="collapse multi-collapse show">
-                        <h4 class="mb-0">User Edit</h4>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-end">
-                        <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal" title="Close">
-                            <i class="ti ti-x f-20"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="collapse multi-collapse show">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-12 text-center mb-3">
-                                                <div class="user-upload wid-75">
-                                                    <img src="../assets/images/user/saqib.jpg" alt="img"
-                                                        class="img-fluid" style="height:75px; width:75px" />
-                                                    <label for="uplfile" class="img-avtar-upload">
-                                                        <i class="ti ti-camera f-24 mb-1"></i>
-                                                        <span>Upload</span>
-                                                    </label>
-                                                    <input type="file" id="uplfile" class="d-none" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" value="Saqib" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" value="Din" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Role</label>
-                                                    <input type="text" class="form-control" value="Owner" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Status</label>
-                                                    <input type="text" class="form-control" value="Joined" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Email <span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control"
-                                                        value="din.97legend@gmail.com" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Password</label>
-                                                    <input type="password" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 text-end">
-                                                <button class="btn btn-primary">Update</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 @endsection

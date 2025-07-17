@@ -28,11 +28,11 @@ class PaymentController extends Controller
     {
         $request->validate([
             'voucher_id'        => 'required|exists:vouchers,id',
-            'reference_number'  => 'required',
+            'reference_number'  => 'required|string|max:30',
             'payment_method'    => 'required',
             'amount'            => 'required|numeric|min:1',
             'payment_date'      => 'required|date',
-            'notes'             => 'nullable|string',
+            'notes'             => 'nullable|string|max:50',
             'voucher_amount'    => 'nullable|numeric|min:0',
         ]);
 
@@ -101,11 +101,11 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'reference_number' => 'required|string',
+            'reference_number' => 'required|string|max:30',
             'payment_method' => 'required|string',
             'amount' => 'required|numeric',
             'payment_date' => 'required|date',
-            'notes' => 'nullable|string',
+            'notes' => 'nullable|string|max:50',
         ]);
 
         $payment = Payment::findOrFail($id);

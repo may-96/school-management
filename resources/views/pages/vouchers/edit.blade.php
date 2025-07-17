@@ -185,7 +185,7 @@
                                          const selected = getSelectedFeeTypes();
                                          document.querySelectorAll('select[name="fee_type[]"]').forEach((select, idx) => {
                                              const currentValue = select.value;
-                                             if (idx === 0) return; // Skip first row
+                                             if (idx === 0) return;
                                              select.innerHTML =
                                                  '<option value="">Please Select</option>' +
                                                  allFeeTypes
@@ -204,7 +204,7 @@
                                          });
 
                                          document.querySelectorAll('select[name="fee_type[]"]').forEach((select, idx) => {
-                                             if (idx === 0) return; // Skip first row
+                                             if (idx === 0) return;
                                              select.removeEventListener("change", refreshAllSelectOptions);
                                              select.addEventListener("change", refreshAllSelectOptions);
                                          });
@@ -262,8 +262,6 @@
                                      calculateTotal();
                                  });
                              </script>
-
-
                          </div>
                      </div>
                  </div>

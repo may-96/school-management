@@ -18,15 +18,10 @@ class VoucherController extends Controller
         return $dataTable->render('pages.vouchers.index');
     }
 
-
     public function create($studentId = null)
     {
         $student = Student::find($studentId);
         $invoiceId = 'VOU-' . now()->format('YmdHis');
-
-        // if ($student->status !== 'Active') {
-        //     abort(403, 'Cannot create voucher for inactive student.');
-        // }
 
         return view('pages.vouchers.create', compact('student', 'invoiceId'));
     }
@@ -52,9 +47,9 @@ class VoucherController extends Controller
             // 'payment_method' => 'required',
             'payment_date' => 'required|date',
             'fee_type' => 'required|array|min:1',
-            'fee_amount' => 'required|array|min:1',
+            'fee_amount' => 'required|array|min:1|max:999999',
             'fee_type.*' => 'required|string',
-            'fee_amount.*' => 'required|numeric|min:0',
+            'fee_amount.*' => 'required|numeric|min:0|max:999999',
         ]);
 
 
@@ -111,9 +106,9 @@ class VoucherController extends Controller
         $request->validate([
             'payment_date' => 'required|date',
             'fee_type' => 'required|array|min:1',
-            'fee_amount' => 'required|array|min:1',
+            'fee_amount' => 'required|array|min:1|max:999999',
             'fee_type.*' => 'required|string',
-            'fee_amount.*' => 'required|numeric|min:0',
+            'fee_amount.*' => 'required|numeric|min:0|max:999999',
         ]);
 
         // Total amount from items

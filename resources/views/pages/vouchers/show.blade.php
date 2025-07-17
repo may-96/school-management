@@ -68,8 +68,6 @@
                                             <i class="ph-duotone ph-pencil-simple-line f-22"></i>
                                         </a>
                                     @endif
-
-
                                 </li>
 
                                 <li class="list-inline-item align-bottom me-2">

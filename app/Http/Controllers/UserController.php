@@ -21,12 +21,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'     => 'required|string|max:255',
-            'last_name'      => 'required|string|max:255',
+            'first_name'     => 'nullable|string|max:25',
+            'last_name'      => 'nullable|string|max:25',
             'email'          => 'required|email|unique:users,email',
             'password'       => 'required|string|min:6',
-            'phone'          => 'required|string|max:15',
-            'status'         => 'required|in:active,inactive',
+            'phone'          => 'nullable|string|max:15',
+            'status'         => 'nullable|in:active,inactive',
             'profile_photo'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
@@ -35,7 +35,7 @@ class UserController extends Controller
             $profilePhotoPath = $request->file('profile_photo')->store('profile-photos', 'public');
         }
 
-        $user = User::create([
+        User::create([
             'first_name'         => $request->first_name,
             'last_name'          => $request->last_name,
             'email'              => $request->email,
@@ -49,26 +49,28 @@ class UserController extends Controller
     }
 
 
+
     public function update(Request $request, User $user)
     {
-        $data = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'phone'      => 'required|string|max:15',
-            'status'     => ['required', Rule::in(['active', 'inactive'])],
-            'email'      => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-            'password'   => 'nullable|string|min:8|confirmed',
+        $validatedData = $request->validate([
+            'first_name' => 'nullable|string|max:25',
+            'last_name'  => 'nullable|string|max:25',
+            'phone'      => 'nullable|string|max:15',
+            'status'     => ['nullable', Rule::in(['active', 'inactive'])],
+            'email'      => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'password'   => 'nullable|string|min:6',
         ]);
 
-        $user->first_name = $data['first_name'];
-        $user->last_name  = $data['last_name'];
-        $user->phone      = $data['phone'];
-        $user->status     = $data['status'];
-        $user->email      = $data['email'];
+        // Update user fields
+        $user->first_name = $validatedData['first_name'] ?? $user->first_name;
+        $user->last_name  = $validatedData['last_name'] ?? $user->last_name;
+        $user->phone      = $validatedData['phone'] ?? $user->phone;
+        $user->status     = $validatedData['status'] ?? $user->status;
+        $user->email      = $validatedData['email'];
 
-        if (!empty($data['password'])) {
-            $user->password = Hash::make($data['password']);
-        }
+        // if (!empty($validatedData['password'])) {
+        //     $user->password = Hash::make($validatedData['password']);
+        // }
 
         $user->save();
 

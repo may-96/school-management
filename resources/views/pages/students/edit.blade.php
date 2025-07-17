@@ -63,6 +63,9 @@
                                         <label class="form-label">Parents Name</label>
                                         <input type="text" class="form-control" name="parents_name"
                                             value="{{ old('parents_name', $student->parents_name) }}">
+                                        @error('parents_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Parents Mobile Number --}}

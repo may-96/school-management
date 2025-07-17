@@ -178,25 +178,41 @@
                                                         <label class="form-label">First Name</label>
                                                         <input type="text" name="first_name" class="form-control"
                                                             value="{{ old('first_name', $user->first_name) }}" />
+                                                        @error('first_name')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-sm-6 mb-3">
                                                         <label class="form-label">Last Name</label>
                                                         <input type="text" name="last_name" class="form-control"
                                                             value="{{ old('last_name', $user->last_name) }}" />
+                                                        @error('last_name')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-sm-6 mb-3">
                                                         <label class="form-label">Contact Phone</label>
                                                         <input type="text" name="phone" class="form-control"
                                                             value="{{ old('phone', $user->phone) }}" />
+                                                        @error('phone')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-sm-6 mb-3">
-                                                        <label class="form-label">Email</label>
+                                                        <label class="form-label">Email <span
+                                                                class="text-danger">*</span></label>
                                                         <input type="email" name="email" class="form-control"
                                                             value="{{ old('email', $user->email) }}" />
+                                                        @error('email')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-sm-12 mb-3">
                                                         <label class="form-label">Address</label>
                                                         <textarea name="address" class="form-control">{{ old('address', $user->address) }}</textarea>
+                                                        @error('address')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
