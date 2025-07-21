@@ -68,7 +68,7 @@
                         <div class="row">
                             <!-- Invoice ID & Voucher ID (readonly) -->
                             <div class="mb-3 row">
-                                <label class="col-lg-4 col-form-label">INVOICE & VOUCHER ID:</label>
+                                <label class="col-lg-4 col-form-label">Payment & Voucher ID:</label>
                                 <div class="col-lg-8 d-flex align-items-center justify-content-between">
                                     <span class="text-muted" id="edit_invoice_id"></span><span class="text-muted"
                                         id="edit_voucher_invoice_id"></span>
@@ -77,7 +77,8 @@
 
                             <!-- Payment Method -->
                             <div class="mb-3 row">
-                                <label class="col-lg-4 col-form-label">Payment Method:</label>
+                                <label class="col-lg-4 col-form-label">Payment Method: <span
+                                        class="text-danger">*</span></label>
                                 <div class="col-lg-8">
                                     <select class="form-select" name="payment_method" id="edit_payment_method" required>
                                         <option value="">Please Select</option>
@@ -91,9 +92,19 @@
 
                             <!-- Amount -->
                             <div class="mb-3 row">
-                                <label class="col-lg-4 col-form-label">Amount:</label>
+                                <label class="col-lg-4 col-form-label">Amount: <span class="text-danger">*</span></label>
                                 <div class="col-lg-8">
-                                    <input type="number" name="amount" id="edit_amount" class="form-control" required>
+                                    <input type="number" name="amount" id="edit_amount" class="form-control" readonly>
+                                </div>
+                            </div>
+
+                            <!-- Payment Date -->
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label">Payment Date: <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-8">
+                                    <input type="date" name="payment_date" id="edit_payment_date" class="form-control"
+                                        max="{{ date('Y-m-d') }}" required>
                                 </div>
                             </div>
 
@@ -102,16 +113,7 @@
                                 <label class="col-lg-4 col-form-label">Refrence No :</label>
                                 <div class="col-lg-8">
                                     <input type="text" id="edit_reference_number" name="reference_number"
-                                        class="form-control" placeholder="Enter reference number" required>
-                                </div>
-                            </div>
-
-                            <!-- Payment Date -->
-                            <div class="mb-3 row">
-                                <label class="col-lg-4 col-form-label">Payment Date:</label>
-                                <div class="col-lg-8">
-                                    <input type="date" name="payment_date" id="edit_payment_date" class="form-control"
-                                        required>
+                                        class="form-control" placeholder="Enter reference number">
                                 </div>
                             </div>
 

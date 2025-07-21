@@ -88,6 +88,18 @@
                         <span class="pc-mtext" data-i18n="Payments">Payments</span><span class="pc-arrow"></span>
                     </a>
                 </li>
+
+                {{-- class and sections --}}
+                {{-- <li class="pc-item pc-hasmenu">
+                    <a href="#" class="pc-link">
+                        <span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-kanban"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext" data-i18n="Attributes">Attributes</span><span class="pc-arrow"></span>
+                    </a>
+                </li> --}}
                 @auth
                     @if (auth()->user()->role == 'admin')
                         <li class="pc-item pc-hasmenu">

@@ -65,14 +65,24 @@
                                 <input type="hidden" name="amount" value="0.00">
 
                                 <div class="row g-3">
-                                    <div class="col-sm-6 col-xl-6">
-                                        <label class="form-label">Due Date</label>
-                                        <input type="date" name="payment_date" class="form-control" required />
+
+                                    <div class="col-sm-6 col-xl-6 mb-3">
+                                        <label for="month_year" class="form-label">Month & Year <span
+                                                class="text-danger">*</span></label>
+                                        <input type="month" name="month_year" id="month_year" class="form-control"
+                                            required>
                                     </div>
+                                    <script>
+                                        document.getElementById('month_year').addEventListener('focus', function() {
+                                            this.showPicker && this.showPicker(); 
+                                        });
+                                    </script>
+
 
                                     <div class="col-sm-6 col-xl-6">
-                                        <label class="form-label">Notes</label>
-                                        <textarea name="notes" class="form-control" rows="1"></textarea>
+                                        <label class="form-label">Due Date <span class="text-danger">*</span></label>
+                                        <input type="date" name="payment_date" class="form-control"
+                                            max="{{ date('Y-m-d') }}" required />
                                     </div>
 
                                     <div class="col-12">
@@ -263,6 +273,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-xl-12">
+                                        <label class="form-label">Notes</label>
+                                        <textarea name="notes" class="form-control" rows="2"></textarea>
                                     </div>
 
                                     <div class="col-12">

@@ -173,7 +173,6 @@
                                                          Fee Voucher
                                                      </span>
                                                  @endif
-
                                              </div>
                                          </div>
                                          <div class="card-body">
@@ -234,7 +233,7 @@
 
                                      {{-- DISPLAY SECTION --}}
                                      <div class="mb-3 row me-0" style="display:none;">
-                                         <label class="col-lg-4 col-form-label">INVOICE ID :</label>
+                                         <label class="col-lg-4 col-form-label">Payment ID :</label>
                                          <div class="col-lg-8 d-flex align-items-center">
                                              <span class="text-muted d-block" id="invoiceIdDisplay">--</span>
                                              <input type="hidden" name="invoice_id" id="invoiceIdInput">
@@ -245,7 +244,8 @@
 
                                      {{-- PAYMENT METHOD --}}
                                      <div class="mb-3 row me-0">
-                                         <label class="col-lg-4 col-form-label">Payment Method:
+                                         <label class="col-lg-4 col-form-label">Payment Method: <span
+                                                 class="text-danger">*</span>
                                              <small class="text-muted d-block">Enter your Payment Method</small>
                                          </label>
                                          <div class="col-lg-8">
@@ -259,10 +259,10 @@
                                          </div>
                                      </div>
 
-                                     {{-- AMOUNT --}}
                                      <!-- Voucher Amount Editable -->
                                      <div class="mb-3 row me-0">
-                                         <label class="col-lg-4 col-form-label">Voucher Amount:</label>
+                                         <label class="col-lg-4 col-form-label">Amount: <span
+                                                 class="text-danger">*</span></label>
                                          <div class="col-lg-8">
                                              <input type="number" step="0.01" id="voucherAmountDisplay"
                                                  class="form-control" name="amount">
@@ -270,15 +270,18 @@
                                          </div>
                                      </div>
 
-
-
                                      <!-- PAYMENT DATE -->
                                      <div class="mb-3 row me-0">
-                                         <label class="col-lg-4 col-form-label">Payment Date:
+                                         <label class="col-lg-4 col-form-label">Payment Date: <span
+                                                 class="text-danger">*</span>
                                              <small class="text-muted d-block">Enter the Payment Date</small>
                                          </label>
                                          <div class="col-lg-8">
-                                             <input type="date" class="form-control" name="payment_date" required />
+                                             <input type="date" class="form-control" max="{{ date('Y-m-d') }}"
+                                                 name="payment_date" required />
+                                             @error('payment_date')
+                                                 <small class="text-danger">{{ $message }}</small>
+                                             @enderror
                                          </div>
                                      </div>
 
@@ -336,7 +339,7 @@
                          <div class="row">
                              <!-- Invoice ID & Voucher ID (readonly) -->
                              <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">INVOICE & VOUCHER ID:</label>
+                                 <label class="col-lg-4 col-form-label">Payment & Voucher ID:</label>
                                  <div class="col-lg-8 d-flex align-items-center justify-content-between">
                                      <span class="text-muted" id="edit_invoice_id"></span><span class="text-muted"
                                          id="edit_voucher_invoice_id"></span>
@@ -345,7 +348,8 @@
 
                              <!-- Payment Method -->
                              <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">Payment Method:</label>
+                                 <label class="col-lg-4 col-form-label">Payment Method: <span
+                                         class="text-danger">*</span></label>
                                  <div class="col-lg-8">
                                      <select class="form-select" name="payment_method" id="edit_payment_method" required>
                                          <option value="">Please Select</option>
@@ -359,10 +363,23 @@
 
                              <!-- Amount -->
                              <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">Amount:</label>
+                                 <label class="col-lg-4 col-form-label">Amount: <span class="text-danger">*</span></label>
                                  <div class="col-lg-8">
                                      <input type="number" name="amount" id="edit_amount" class="form-control"
-                                         required>
+                                         readonly>
+                                 </div>
+                             </div>
+
+                             <!-- Payment Date -->
+                             <div class="mb-3 row">
+                                 <label class="col-lg-4 col-form-label">Payment Date: <span
+                                         class="text-danger">*</span></label>
+                                 <div class="col-lg-8">
+                                     <input type="date" name="payment_date" id="edit_payment_date"
+                                         class="form-control" max="{{ date('Y-m-d') }}" required>
+                                     @error('payment_date')
+                                         <small class="text-danger">{{ $message }}</small>
+                                     @enderror
                                  </div>
                              </div>
 
@@ -371,16 +388,7 @@
                                  <label class="col-lg-4 col-form-label">Refrence No :</label>
                                  <div class="col-lg-8">
                                      <input type="text" id="edit_reference_number" name="reference_number"
-                                         class="form-control" placeholder="Enter reference number" required>
-                                 </div>
-                             </div>
-
-                             <!-- Payment Date -->
-                             <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">Payment Date:</label>
-                                 <div class="col-lg-8">
-                                     <input type="date" name="payment_date" id="edit_payment_date"
-                                         class="form-control" required>
+                                         class="form-control" placeholder="Enter reference number">
                                  </div>
                              </div>
 
@@ -621,6 +629,17 @@
                      const url = `/students/voucher/create/${studentId}`;
                      window.location.href = url;
                  });
+             });
+         </script>
+         <script>
+             document.addEventListener('DOMContentLoaded', function() {
+                 const hash = window.location.hash;
+                 if (hash) {
+                     const tabTrigger = document.querySelector(`a[href="${hash}"]`);
+                     if (tabTrigger) {
+                         new bootstrap.Tab(tabTrigger).show();
+                     }
+                 }
              });
          </script>
      @endpush

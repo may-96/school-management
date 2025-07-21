@@ -72,7 +72,7 @@
 
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                                        <input type="date" name="dob" class="form-control"
+                                        <input type="date" name="dob" class="form-control" max="{{ date('Y-m-d') }}"
                                             value="{{ old('dob') }}" />
                                         @error('dob')
                                             <small class="text-danger">{{ $message }}</small>
@@ -83,7 +83,7 @@
                                         <label class="form-label">Registration Date <span
                                                 class="text-danger">*</span></label>
                                         <input type="date" name="registration_date" class="form-control"
-                                            value="{{ old('registration_date') }}" />
+                                            max="{{ date('Y-m-d') }}" value="{{ old('registration_date') }}" />
                                         @error('registration_date')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -150,7 +150,7 @@
                                         <select name="status" class="form-select">
                                             @foreach (['Active', 'Inactive'] as $s)
                                                 <option value="{{ $s }}"
-                                                    {{ old('status', 'Inactive') == $s ? 'selected' : '' }}>
+                                                    {{ old('status', 'Active') == $s ? 'selected' : '' }}>
                                                     {{ $s }}
                                                 </option>
                                             @endforeach
@@ -162,7 +162,7 @@
                                         <input type="text" name="secondary_mobile" class="form-control"
                                             value="{{ old('secondary_mobile') }}"
                                             placeholder="Enter Secondary Mobile Number" />
-                                        @error('secondary_mobile')  
+                                        @error('secondary_mobile')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>

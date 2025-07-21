@@ -29,17 +29,35 @@
                     <div class="card welcome-banner bg-blue-800">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="p-4">
-                                        @if ($school)
-                                            <h2 class="text-white">{{ $school->name }}</h2>
-                                            <p class="text-white">{{ $school->description }}</p>
-                                        @else
-                                            <h2 class="text-white">School Name Not Set</h2>
-                                            <p class="text-white">Please configure your school settings.</p>
-                                        @endif
+                                <!-- Left Column: Logo + Name + Description -->
+                                <div class="col-sm-6 d-flex align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <!-- Logo (Left) -->
+                                        <div class="me-3">
+                                            <div class="user-upload wid-75">
+                                                @if ($school && $school->logo)
+                                                    <img src="{{ asset('storage/schools/' . $school->logo) }}"
+                                                        alt="Logo" class="img-fluid" style="max-width: 150px;">
+                                                @else
+                                                    <img src="{{ asset('assets/images/user/sms.png') }}"
+                                                        alt="Default Logo" class="img-fluid"
+                                                        style="max-width: 150px;" />
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="pt-3">
+                                            @if ($school)
+                                                <h2 class="text-white">{{ $school->name }}</h2>
+                                                <p class="text-white">{{ $school->description }}</p>
+                                            @else
+                                                <h2 class="text-white">School Name Not Set</h2>
+                                                <p class="text-white">Please configure your school settings.</p>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="col-sm-6 text-center">
                                     <div class="img-welcome-banner">
                                         <img src="../assets/images/widget/welcome-banner.png" alt="img"
@@ -47,6 +65,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

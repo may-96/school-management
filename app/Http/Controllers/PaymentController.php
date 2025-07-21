@@ -7,15 +7,14 @@ use Illuminate\Http\Request;
 use App\DataTables\PaymentDataTable;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 use Yajra\DataTables\Facades\DataTables;
 
 class PaymentController extends Controller
 {
-
     public function index(PaymentDataTable $dataTable)
     {
-
         return $dataTable->render('pages.payments.index');
     }
 
@@ -27,16 +26,29 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'voucher_id'        => 'required|exists:vouchers,id',
-            'reference_number'  => 'required|string|max:30',
-            'payment_method'    => 'required',
-            'amount'            => 'required|numeric|min:1',
-            'payment_date'      => 'required|date',
-            'notes'             => 'nullable|string|max:50',
-            'voucher_amount'    => 'nullable|numeric|min:0',
+            'voucher_id' => 'required|exists:vouchers,id',
+            'reference_number' => 'nullable|string|max:30',
+            'payment_method' => 'required',
+            'amount' => 'required|numeric|min:1',
+            'payment_date' => 'required|date',
+            'notes' => 'nullable|string|max:50',
+            'voucher_amount' => 'nullable|numeric|min:0',
         ]);
 
         $voucher = Voucher::findOrFail($request->voucher_id);
+
+        if ($voucher->month_year) {
+            $voucherMonthStart = Carbon::createFromFormat('Y-m', $voucher->month_year)->startOfMonth();
+            $paymentDate = Carbon::parse($request->payment_date);
+
+            if ($paymentDate->lt($voucherMonthStart)) {
+                return back()
+                    ->withErrors([
+                        'payment_date' => 'Payment date cannot be before the voucher month (' . $voucherMonthStart->format('F Y') . ').',
+                    ])
+                    ->withInput();
+            }
+        }
 
         if ($request->filled('voucher_amount')) {
             $newAmount = floatval($request->voucher_amount);
@@ -56,14 +68,14 @@ class PaymentController extends Controller
         $invoiceId = $this->generateUniquePaymentInvoiceId();
 
         Payment::create([
-            'voucher_id'       => $voucher->id,
-            'invoice_id'       => $invoiceId,
+            'voucher_id' => $voucher->id,
+            'invoice_id' => $invoiceId,
             'reference_number' => $request->reference_number,
-            'payment_method'   => $request->payment_method,
-            'amount'           => $request->amount,
-            'payment_date'     => $request->payment_date,
-            'notes'            => $request->notes,
-            'user_id'        => Auth::id(),
+            'payment_method' => $request->payment_method,
+            'amount' => $request->amount,
+            'payment_date' => $request->payment_date,
+            'notes' => $request->notes,
+            'user_id' => Auth::id(),
         ]);
 
         $totalPaid = $voucher->payments()->sum('amount');
@@ -84,12 +96,11 @@ class PaymentController extends Controller
     private function generateUniquePaymentInvoiceId()
     {
         do {
-            $invoiceId = 'INV-' . now()->format('YmdHis');
+            $invoiceId = 'PAY-' . now()->format('YmdHis');
         } while (Payment::where('invoice_id', $invoiceId)->exists());
 
         return $invoiceId;
     }
-
 
     public function getPayment($id)
     {
@@ -97,18 +108,31 @@ class PaymentController extends Controller
         return response()->json($payment);
     }
 
-
     public function update(Request $request, $id)
     {
         $request->validate([
-            'reference_number' => 'required|string|max:30',
+            'reference_number' => 'nullable|string|max:30',
             'payment_method' => 'required|string',
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:1',
             'payment_date' => 'required|date',
             'notes' => 'nullable|string|max:50',
         ]);
 
         $payment = Payment::findOrFail($id);
+        $voucher = $payment->voucher;
+
+        if ($voucher && $voucher->month_year) {
+            $voucherStart = Carbon::createFromFormat('Y-m', $voucher->month_year)->startOfMonth();
+            $paymentDate = Carbon::parse($request->payment_date);
+
+            if ($paymentDate->lt($voucherStart)) {
+                return back()
+                    ->withErrors([
+                        'payment_date' => 'Payment date cannot be before the voucher month (' . $voucherStart->format('F Y') . ').',
+                    ])
+                    ->withInput();
+            }
+        }
 
         $payment->update([
             'reference_number' => $request->reference_number,
@@ -121,15 +145,12 @@ class PaymentController extends Controller
         return redirect()->route('payment.index')->with('success', 'Payment updated successfully!');
     }
 
-
-
     public function show($id, PaymentDataTable $dataTable)
     {
         $voucher = Voucher::with(['student', 'items'])->findOrFail($id);
 
         return $dataTable->render('pages.vouchers.show', compact('voucher'));
     }
-
 
     public function destroy($id)
     {
@@ -151,9 +172,6 @@ class PaymentController extends Controller
         return redirect()->back()->with('success', 'Payment deleted and Voucher Status is Updated!');
     }
 
-
-
-
     public function data(Request $request)
     {
         $query = Payment::with(['voucher.payments'])
@@ -173,27 +191,54 @@ class PaymentController extends Controller
                     <li class="list-inline-item">
                         <a href="#"
                             class="avtar avtar-xs btn-link-secondary edit-payment-btn"
-                            data-id="' . $payment->id . '"
-                            data-invoice_id="' . $payment->invoice_id . '"
-                            data-voucher_invoice_id="' . optional($payment->voucher)->invoice_id . '"
-                            data-reference_number="' . $payment->reference_number . '"
-                            data-payment_method="' . $payment->payment_method . '"
-                            data-amount="' . $payment->amount . '"
-                            data-payment_date="' . $payment->payment_date . '"
-                            data-notes="' . htmlspecialchars($payment->notes ?? '') . '"
-                            data-max-amount="' . ($payment->voucher->amount - $payment->voucher->payments->sum('amount')) . '"
+                            data-id="' .
+                    $payment->id .
+                    '"
+                            data-invoice_id="' .
+                    $payment->invoice_id .
+                    '"
+                            data-voucher_invoice_id="' .
+                    optional($payment->voucher)->invoice_id .
+                    '"
+                            data-reference_number="' .
+                    $payment->reference_number .
+                    '"
+                            data-payment_method="' .
+                    $payment->payment_method .
+                    '"
+                            data-amount="' .
+                    $payment->amount .
+                    '"
+                            data-payment_date="' .
+                    $payment->payment_date .
+                    '"
+                            data-notes="' .
+                    htmlspecialchars($payment->notes ?? '') .
+                    '"
+                            data-max-amount="' .
+                    ($payment->voucher->amount - $payment->voucher->payments->sum('amount')) .
+                    '"
                             data-bs-toggle="modal"
                             data-bs-target="#student-edit-payment_modal">
                             <i class="ti ti-edit f-20" data-bs-toggle="tooltip" title="Edit"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <form id="delete-form-' . $payment->id . '" action="' . route('payment.destroy', $payment->id) . '" method="POST" style="display: none;">
-                            ' . csrf_field() . method_field('DELETE') . '
+                        <form id="delete-form-' .
+                    $payment->id .
+                    '" action="' .
+                    route('payment.destroy', $payment->id) .
+                    '" method="POST" style="display: none;">
+                            ' .
+                    csrf_field() .
+                    method_field('DELETE') .
+                    '
                         </form>
                         <a href="#"
                             class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                            data-id="' . $payment->id . '"
+                            data-id="' .
+                    $payment->id .
+                    '"
                             data-bs-toggle="modal"
                             data-bs-target="#delete-confirmation-modal">
                             <i class="ti ti-trash f-20" data-bs-toggle="tooltip" title="Delete"></i>

@@ -85,9 +85,17 @@
                         <div class="card mb-3 d-screen-none d-print-block">
                             <div class="card-body p-3">
                                 @if ($school)
-                                    <h2 class="text-center d-print-block mt-2">{{ $school->name }}</h2>
+                                    <div class="d-flex align-items-center justify-content-center text-center ">
+                                        <img src="{{ asset('storage/schools/' . $school->logo) }}" alt="School Logo"
+                                            class="img-fluid user-upload" style="max-width: 150px;">
+                                            <h2 class="text-center d-print-block ms-2 mt-2">{{ $school->name }}</h2>
+                                        </div>
                                 @else
-                                    <h2 class="text-center">School Name Not Set</h2>
+                                    <div class="d-flex align-items-center justify-content-center text-center">
+                                        <img src="{{ asset('assets/images/user/sms.png') }}" alt="Default Logo"
+                                            class="img-fluid user-upload" style="max-width: 150px;">
+                                        <h2 class="text-center ms-2">School Name Not Set</h2>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -131,6 +139,7 @@
                                                 </h6>
                                                 <p class="f-w-400 mb-1 text-end">
                                                     <span class="text-muted f-w-600">{{ $voucher->invoice_id }}</span>
+                                                    <span class="text-muted f-w-600">{{ $voucher->payment_id }}</span>
                                                 </p>
                                                 @php
                                                     $status = strtolower($voucher->status);
@@ -143,13 +152,13 @@
                                                 @endphp
 
                                                 <h6>Payment Date :
-                                                    <span class="text-muted f-w-600">
-                                                        @if ($voucher->payment && $voucher->payment->payment_date)
-                                                            {{ \Carbon\Carbon::parse($voucher->payment->payment_date)->format('d/m/Y') }}
-                                                        @else
-                                                            N/A
-                                                        @endif
-                                                    </span>
+                                                    @forelse ($voucher->payments as $payment)
+                                                        <span class="text-muted f-w-600">
+                                                            {{ \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y') }}
+                                                        </span>
+                                                    @empty
+                                                        <span class="text-muted f-w-600">N/A</span>
+                                                    @endforelse
                                                 </h6>
 
                                                 <span
@@ -200,6 +209,13 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-6 col-xl-12">
+                                        <label class="form-label">Notes :</label>
+                                        <p class="text-light" readonly>{{ $voucher->notes }}</p>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

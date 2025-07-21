@@ -89,7 +89,7 @@
                                     {{-- Date of Birth --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                                        <input type="date" name="date_of_birth" class="form-control"
+                                        <input type="date" name="date_of_birth" class="form-control" max="{{ date('Y-m-d') }}"
                                             value="{{ old('date_of_birth', $teacher->date_of_birth) }}">
                                         @error('date_of_birth')
                                             <small class="text-danger">{{ $message }}</small>
@@ -99,7 +99,7 @@
                                     {{-- Joining Date --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Joining Date <span class="text-danger">*</span></label>
-                                        <input type="date" name="joining_date" class="form-control"
+                                        <input type="date" name="joining_date" class="form-control" max="{{ date('Y-m-d') }}"
                                             value="{{ old('joining_date', $teacher->joining_date) }}">
                                         @error('joining_date')
                                             <small class="text-danger">{{ $message }}</small>

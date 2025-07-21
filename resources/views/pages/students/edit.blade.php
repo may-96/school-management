@@ -82,7 +82,7 @@
                                     {{-- Date of Birth --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="dob"
+                                        <input type="date" class="form-control" max="{{ date('Y-m-d') }}" name="dob"
                                             value="{{ old('dob', $student->dob) }}">
                                         @error('dob')
                                             <small class="text-danger">{{ $message }}</small>
@@ -93,7 +93,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Registration Date <span
                                                 class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" name="registration_date"
+                                        <input type="date" class="form-control" max="{{ date('Y-m-d') }}" name="registration_date"
                                             value="{{ old('registration_date', $student->registration_date) }}">
                                         @error('registration_date')
                                             <small class="text-danger">{{ $message }}</small>

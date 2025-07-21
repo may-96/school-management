@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('schools.store') }}" method="POST">
+                            <form action="{{ route('schools.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -50,9 +50,21 @@
                                             <label for="description">Description</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 text-end">
-                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">School Logo</label>
+                                        <input type="file" class="form-control" id="logo" name="logo">
                                     </div>
+
+                                    <div class="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-primary">
+                                            @if (isset($school))
+                                                Update
+                                            @else
+                                                Save
+                                            @endif
+                                        </button>
+                                    </div>
+
                                 </div>
                             </form>
                         </div>

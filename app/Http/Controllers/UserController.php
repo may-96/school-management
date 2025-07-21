@@ -68,9 +68,9 @@ class UserController extends Controller
         $user->status     = $validatedData['status'] ?? $user->status;
         $user->email      = $validatedData['email'];
 
-        // if (!empty($validatedData['password'])) {
-        //     $user->password = Hash::make($validatedData['password']);
-        // }
+        if (!empty($validatedData['password'])) {
+            $user->password = Hash::make($validatedData['password']);
+        }
 
         $user->save();
 

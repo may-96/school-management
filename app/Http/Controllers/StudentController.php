@@ -28,7 +28,7 @@ class StudentController extends Controller
             'dob' => 'required|date',
             'registration_date' => 'required|date',
             'gender' => 'required|string',
-            'admission_no' => 'required|string|max:25',
+            'admission_no' => 'required|unique:students|string|max:25',
             'roll_no' => 'nullable|string|max:15',
             'class' => 'nullable|string',
             'section' => 'nullable|string|max:15',
@@ -44,6 +44,11 @@ class StudentController extends Controller
         }
 
         $data = $request->except('profile_photo');
+
+        if (empty($data['status'])) {
+            unset($data['status']);
+        }
+
         $data['profile_image'] = $fileName;
         $data['user_id'] = Auth::id();
 
@@ -68,7 +73,7 @@ class StudentController extends Controller
             'dob' => 'required|date',
             'registration_date' => 'required|date',
             'gender' => 'required|string',
-            'admission_no' => 'required|string|max:25',
+            'admission_no' => 'required|unique:students|string|max:25',
             'roll_no' => 'nullable|string|max:15',
             'class' => 'nullable|string',
             'section' => 'nullable|string|max:15',
@@ -120,14 +125,22 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
 
+        // Check if the student has vouchers
+        if ($student->vouchers()->count() > 0) {
+            return redirect()->back()->with('error', 'Please delete the vouchers associated with this student before deleting the student.');
+        }
+
+        // Delete profile image if exists
         if ($student->profile_image && file_exists(storage_path('app/public/students/' . $student->profile_image))) {
             unlink(storage_path('app/public/students/' . $student->profile_image));
         }
 
+        // Delete student record
         $student->delete();
 
         return redirect()->back()->with('success', 'Student deleted successfully!');
     }
+
 
     public function show(StudentVoucherPaymentDataTable $dataTable, $id)
     {

@@ -45,6 +45,8 @@ class VoucherController extends Controller
         $request->validate([
             'invoice_id' => 'required|unique:vouchers,invoice_id',
             // 'payment_method' => 'required',
+            'notes' => 'nullable|string|max:50',
+            'month_year' => 'required|string|max:7', // Format: YYYY-MM
             'payment_date' => 'required|date',
             'fee_type' => 'required|array|min:1',
             'fee_amount' => 'required|array|min:1|max:999999',
@@ -67,6 +69,7 @@ class VoucherController extends Controller
                 'status' => 'unpaid',
                 'amount' => $totalAmount,
                 'notes' => $request->notes,
+                'month_year' => $request->month_year,
                 'payment_date' => $request->payment_date,
                 'user_id'        => Auth::id(),
             ]);
@@ -80,7 +83,7 @@ class VoucherController extends Controller
             }
         }
 
-        return redirect()->route('voucher.index')->with('success', 'Vouchers created successfully!');
+        return redirect()->route('student.index')->with('success', 'Vouchers created successfully!');
     }
 
     public function show($id)
@@ -105,6 +108,8 @@ class VoucherController extends Controller
 
         $request->validate([
             'payment_date' => 'required|date',
+            'notes' => 'nullable|string|max:50',
+            'month_year' => 'required|string|max:7',
             'fee_type' => 'required|array|min:1',
             'fee_amount' => 'required|array|min:1|max:999999',
             'fee_type.*' => 'required|string',
@@ -130,6 +135,7 @@ class VoucherController extends Controller
         $voucher->update([
             'status' => $status,
             'payment_date' => $request->payment_date,
+            'month_year' => $request->month_year,
             'notes' => $request->notes,
             'amount' => $totalAmount,
         ]);

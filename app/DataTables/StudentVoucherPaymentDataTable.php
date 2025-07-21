@@ -30,23 +30,31 @@ class StudentVoucherPaymentDataTable extends DataTable
                 });
             })
             ->addColumn('student_name', function ($payment) {
-                $img = $payment->student->profile_image
-                    ? asset('storage/students/' . $payment->student->profile_image)
-                    : asset('assets/images/user/avatar-2.jpg');
+                $img = $payment->student->profile_image ? asset('storage/students/' . $payment->student->profile_image) : asset('assets/images/user/avatar-2.jpg');
 
                 return '
                     <div class="row align-items-center">
                         <div class="col-auto pe-0">
-                            <a href="' . route('voucher.show', $payment->id) . '">
-                                <img src="' . $img . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
+                            <a href="' .
+                    route('voucher.show', $payment->id) .
+                    '">
+                                <img src="' .
+                    $img .
+                    '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
                             </a>
                         </div>
                         <div class="col">
                             <h6 class="mb-1">
-                                <span class="text-truncate w-100">' . $payment->student->first_name . ' ' . $payment->student->last_name . '</span>
+                                <span class="text-truncate w-100">' .
+                    $payment->student->first_name .
+                    ' ' .
+                    $payment->student->last_name .
+                    '</span>
                             </h6>
                             <p class="f-12 mb-0">
-                                <a href="#!" class="text-muted">' . $payment->student->parents_mobile . '</a>
+                                <a href="#!" class="text-muted">' .
+                    $payment->student->parents_mobile .
+                    '</a>
                             </p>
                         </div>
                     </div>
@@ -55,8 +63,8 @@ class StudentVoucherPaymentDataTable extends DataTable
             ->addColumn('payment_date', fn($payment) => Carbon::parse($payment->payment_date)->format('d/m/Y'))
             ->addColumn('amount', fn($payment) => $payment->amount . ' PKR')
             ->addColumn('status', function ($voucher) {
-                $totalAmount = $voucher->amount;          
-                $paidAmount = $voucher->payments->sum('amount'); 
+                $totalAmount = $voucher->amount;
+                $paidAmount = $voucher->payments->sum('amount');
 
                 if ($paidAmount >= $totalAmount) {
                     return '<span class="badge bg-light-success">Paid</span>';
@@ -74,9 +82,15 @@ class StudentVoucherPaymentDataTable extends DataTable
                                class="avtar avtar-xs btn-link-secondary open-payment-modal"
                                data-bs-toggle="modal"
                                data-bs-target="#student-add-payment_modal"
-                               data-invoice-id="' . e($payment->invoice_id) . '"
-                               data-reference-number="' . e($payment->reference_no) . '"
-                               data-voucher-id="' . e($payment->id) . '">
+                               data-invoice-id="' .
+                    e($payment->invoice_id) .
+                    '"
+                               data-reference-number="' .
+                    e($payment->reference_no) .
+                    '"
+                               data-voucher-id="' .
+                    e($payment->id) .
+                    '">
                                <i class="ti ti-plus f-20"></i>
                             </a>
                         </li>
@@ -86,15 +100,26 @@ class StudentVoucherPaymentDataTable extends DataTable
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="' . route('voucher.edit', $payment->id) . '" class="avtar avtar-xs btn-link-secondary">
+                            <a href="' .
+                    route('voucher.edit', $payment->id) .
+                    '" class="avtar avtar-xs btn-link-secondary">
                                 <i class="ti ti-edit f-20"></i>
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <form id="delete-form-' . $payment->id . '" action="' . route('voucher.destroy', $payment->id) . '" method="POST" style="display: none;">
-                                ' . csrf_field() . method_field('DELETE') . '
+                            <form id="delete-form-' .
+                    $payment->id .
+                    '" action="' .
+                    route('voucher.destroy', $payment->id) .
+                    '" method="POST" style="display: none;">
+                                ' .
+                    csrf_field() .
+                    method_field('DELETE') .
+                    '
                             </form>
-                            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $payment->id . '">
+                            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' .
+                    $payment->id .
+                    '">
                                 <i class="ti ti-trash f-20"></i>
                             </a>
                         </li>
@@ -106,30 +131,17 @@ class StudentVoucherPaymentDataTable extends DataTable
 
     public function query(): QueryBuilder
     {
-        return Voucher::with('student')
-            ->select('vouchers.*')
-            ->where('student_id', $this->student_id);
+        return Voucher::with('student')->select('vouchers.*')->where('student_id', $this->student_id);
     }
 
     public function html(): HtmlBuilder
     {
-        return $this->builder()
-            ->setTableId('voucher-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->orderBy(0);
+        return $this->builder()->setTableId('voucher-table')->columns($this->getColumns())->minifiedAjax()->orderBy(0);
     }
 
     protected function getColumns(): array
     {
-        return [
-            ['data' => 'invoice_id', 'title' => 'Invoice Id'],
-            ['data' => 'student_name', 'title' => 'Student Name'],
-            ['data' => 'payment_date', 'title' => 'Due Date'],
-            ['data' => 'amount', 'title' => 'Amount'],
-            ['data' => 'status', 'title' => 'Status', 'orderable' => false, 'searchable' => false],
-            ['data' => 'actions', 'title' => 'Actions', 'orderable' => false, 'searchable' => false, 'className' => 'text-end'],
-        ];
+        return [['data' => 'invoice_id', 'title' => 'Invoice Id'], ['data' => 'student_name', 'title' => 'Student Name'], ['data' => 'payment_date', 'title' => 'Due Date'], ['data' => 'amount', 'title' => 'Amount'], ['data' => 'status', 'title' => 'Status', 'orderable' => false, 'searchable' => false], ['data' => 'actions', 'title' => 'Actions', 'orderable' => false, 'searchable' => false, 'className' => 'text-end']];
     }
 
     protected function filename(): string

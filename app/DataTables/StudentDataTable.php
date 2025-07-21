@@ -23,12 +23,22 @@ class StudentDataTable extends DataTable
             <input
                 class="form-check-input student-checkbox"
                 type="checkbox"
-                id="checkbox-' . $student->id . '"
-                data-student-id="' . $student->id . '"
-                data-status="' . $student->status . '"
-                value="' . $student->id . '"
+                id="checkbox-' .
+                    $student->id .
+                    '"
+                data-student-id="' .
+                    $student->id .
+                    '"
+                data-status="' .
+                    $student->status .
+                    '"
+                value="' .
+                    $student->id .
+                    '"
                 onchange="handleButtonState()"
-                ' . $disabled . '
+                ' .
+                    $disabled .
+                    '
             />
             <i class="material-icons-two-tone pc-icon-uncheck ms-1">check_box_outline_blank</i>
             <i class="material-icons-two-tone text-primary pc-icon-check ms-1">check_box</i>
@@ -36,23 +46,30 @@ class StudentDataTable extends DataTable
     </div>';
             })
 
-
             ->addColumn('name_roll', function ($student) {
-                $image = $student->profile_image
-                    ? asset('storage/students/' . $student->profile_image)
-                    : asset('assets/images/user/avatar-2.jpg');
+                $image = $student->profile_image ? asset('storage/students/' . $student->profile_image) : asset('assets/images/user/avatar-2.jpg');
 
                 $profileUrl = route('student.show', $student->id);
 
                 return '
-        <a href="' . $profileUrl . '" class="text-dark text-decoration-none">
+        <a href="' .
+                    $profileUrl .
+                    '" class="text-dark text-decoration-none">
             <div class="d-flex align-items-center">
                 <div class="flex-shrink-0">
-                    <img src="' . $image . '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
+                    <img src="' .
+                    $image .
+                    '" class="img-fluid rounded-circle" style="height:40px; width:40px;" />
                 </div>
                 <div class="flex-grow-1 ms-3">
-                    <h6 class="mb-0">' . $student->first_name . ' ' . $student->last_name . '</h6>
-                    <small class="text-truncate w-100 text-muted">Roll ' . $student->roll_no . '</small>
+                    <h6 class="mb-0">' .
+                    $student->first_name .
+                    ' ' .
+                    $student->last_name .
+                    '</h6>
+                    <small class="text-truncate w-100 text-muted">Roll ' .
+                    $student->roll_no .
+                    '</small>
                 </div>
             </div>
         </a>';
@@ -63,8 +80,12 @@ class StudentDataTable extends DataTable
                 return '
                 <div class="d-flex align-items-center">
                     <div class="flex-grow-1">
-                        <h6 class="mb-0">' . $student->class . '</h6>
-                        <small class="text-truncate w-100 text-muted">Sec ' . $student->section . '</small>
+                        <h6 class="mb-0">' .
+                    $student->class .
+                    '</h6>
+                        <small class="text-truncate w-100 text-muted">Sec ' .
+                    $student->section .
+                    '</small>
                     </div>
                 </div>';
             })
@@ -72,8 +93,12 @@ class StudentDataTable extends DataTable
                 return '
                 <div class="d-flex align-items-center">
                     <div class="flex-grow-1">
-                        <h6 class="mb-0">' . $student->parents_name . '</h6>
-                        <small class="text-truncate w-100 text-muted">' . $student->parents_mobile . '</small>
+                        <h6 class="mb-0">' .
+                    $student->parents_name .
+                    '</h6>
+                        <small class="text-truncate w-100 text-muted">' .
+                    $student->parents_mobile .
+                    '</small>
                     </div>
                 </div>';
             })
@@ -94,38 +119,56 @@ class StudentDataTable extends DataTable
 
         $dataTable->addColumn('action', function ($student) {
             return '
-            ' . ($student->status === 'Active' ? '
-            <a href="' . route('students.vouchers.create', ['student' => $student->id]) . '"
+            ' .
+                ($student->status === 'Active'
+                    ? '
+            <a href="' .
+                    route('students.vouchers.create', ['student' => $student->id]) .
+                    '"
                 class="avtar avtar-xs btn-link-secondary single-voucher-btn"
-                data-student-id="' . $student->id . '">
+                data-student-id="' .
+                    $student->id .
+                    '">
                 <i class="ti ti-file-plus f-20" data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title="Create Voucher"></i>
-            </a>' : '
+            </a>'
+                    : '
             <span class="avtar avtar-xs btn-link-secondary disabled" data-bs-toggle="tooltip"
                 data-bs-placement="top" title="Inactive Student">
                 <i class="ti ti-file-plus f-20 text-muted"></i>
-            </span>') . '
+            </span>') .
+                '
 
-        <a href="' . route('student.show', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
+        <a href="' .
+                route('student.show', $student->id) .
+                '" class="avtar avtar-xs btn-link-secondary">
             <i class="ti ti-eye f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="View"></i>
         </a>
 
-        <a href="' . route('student.edit', $student->id) . '" class="avtar avtar-xs btn-link-secondary">
+        <a href="' .
+                route('student.edit', $student->id) .
+                '" class="avtar avtar-xs btn-link-secondary">
             <i class="ti ti-edit f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
         </a>
 
-        <form id="delete-form-' . $student->id . '" action="' . route('student.destroy', $student->id) . '" method="POST" style="display: none;">
-            ' . csrf_field() . method_field('DELETE') . '
+        <form id="delete-form-' .
+                $student->id .
+                '" action="' .
+                route('student.destroy', $student->id) .
+                '" method="POST" style="display: none;">
+            ' .
+                csrf_field() .
+                method_field('DELETE') .
+                '
         </form>
 
-        <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' . $student->id . '">
+        <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' .
+                $student->id .
+                '">
             <i class="ti ti-trash f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
         </a>';
         });
-
-
-
 
         $raw = ['checkbox', 'name_roll', 'class_section', 'parents', 'status', 'action'];
         if (Auth::user() && Auth::user()->role === 'admin') {
@@ -137,31 +180,12 @@ class StudentDataTable extends DataTable
 
     public function query(): QueryBuilder
     {
-        return Student::with('user')->select([
-            'id',
-            'first_name',
-            'last_name',
-            'roll_no',
-            'admission_no',
-            'class',
-            'section',
-            'parents_name',
-            'parents_mobile',
-            'status',
-            'registration_date',
-            'profile_image',
-            'user_id'
-        ]);
+        return Student::with('user')->select(['id', 'first_name', 'last_name', 'roll_no', 'admission_no', 'class', 'section', 'parents_name', 'parents_mobile', 'status', 'registration_date', 'profile_image', 'user_id']);
     }
 
     public function html()
     {
-        return $this->builder()
-            ->setTableId('student-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->responsive(true)
-            ->autoWidth(false);
+        return $this->builder()->setTableId('student-table')->columns($this->getColumns())->minifiedAjax()->responsive(true)->autoWidth(false);
     }
 
     public function getColumns()
