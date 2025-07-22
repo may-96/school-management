@@ -42,7 +42,7 @@
 
                                      <div class="col-sm-6 col-xl-6 mb-3">
                                          <label for="month_year" class="form-label">Month & Year <span class="text-danger">*</span></label>
-                                         <input type="month" name="month_year" id="month_year" class="form-control"
+                                         <input type="month" name="month_year" id="month_year" class="form-control" max="{{ date('Y-m') }}"
                                              value="{{ old('month_year', $voucher->month_year) }}" required>
                                      </div>
                                      <script>

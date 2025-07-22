@@ -39,16 +39,18 @@ class PaymentController extends Controller
 
         if ($voucher->month_year) {
             $voucherMonthStart = Carbon::createFromFormat('Y-m', $voucher->month_year)->startOfMonth();
+            $voucherMonthEnd = Carbon::createFromFormat('Y-m', $voucher->month_year)->endOfMonth();
             $paymentDate = Carbon::parse($request->payment_date);
 
-            if ($paymentDate->lt($voucherMonthStart)) {
+            if ($paymentDate->lt($voucherMonthStart) || $paymentDate->gt($voucherMonthEnd)) {
                 return back()
                     ->withErrors([
-                        'payment_date' => 'Payment date cannot be before the voucher month (' . $voucherMonthStart->format('F Y') . ').',
+                        'payment_date' => 'Payment date must be within the voucher month (' . $voucherMonthStart->format('F Y') . ').',
                     ])
                     ->withInput();
             }
         }
+
 
         if ($request->filled('voucher_amount')) {
             $newAmount = floatval($request->voucher_amount);

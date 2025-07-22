@@ -88,8 +88,8 @@
                                     <div class="d-flex align-items-center justify-content-center text-center ">
                                         <img src="{{ asset('storage/schools/' . $school->logo) }}" alt="School Logo"
                                             class="img-fluid user-upload" style="max-width: 150px;">
-                                            <h2 class="text-center d-print-block ms-2 mt-2">{{ $school->name }}</h2>
-                                        </div>
+                                        <h2 class="text-center d-print-block ms-2 mt-2">{{ $school->name }}</h2>
+                                    </div>
                                 @else
                                     <div class="d-flex align-items-center justify-content-center text-center">
                                         <img src="{{ asset('assets/images/user/sms.png') }}" alt="Default Logo"
@@ -224,4 +224,26 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        const body = document.body;
+
+        window.addEventListener('beforeprint', () => {
+            body.setAttribute('data-pc-theme', 'light');
+        });
+
+        window.addEventListener('afterprint', () => {
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                body.setAttribute('data-pc-theme', 'dark');
+            } else if (savedTheme === 'light') {
+                body.setAttribute('data-pc-theme', 'light');
+            } else {
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const systemTheme = systemPrefersDark ? 'dark' : 'light';
+                body.setAttribute('data-pc-theme', systemTheme);
+            }
+        });
+    </script>
 @endsection

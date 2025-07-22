@@ -22,9 +22,21 @@ class VoucherDataTable extends DataTable
                         ->orWhere('parents_mobile', 'like', "%$keyword%");
                 });
             })
+            
             ->addColumn('invoice_id', function ($voucher) {
-                return '<a href="' . route('voucher.show', $voucher) . '" class="text-body text-decoration-none">' . e($voucher->invoice_id) . '</a>';
+                $monthYear = $voucher->month_year
+                    ? str(Carbon::createFromFormat('Y-m', $voucher->month_year)->format('F Y'))
+                    : '';
+
+                return '
+        <a href="' . route('voucher.show', $voucher) . '" class="text-body text-decoration-none">
+            ' . e($voucher->invoice_id) . '
+        </a>
+        <br>
+        <small class="text-muted">' . $monthYear . '</small>
+    ';
             })
+
 
             ->addColumn('student_name', function ($voucher) {
                 $img = $voucher->student->profile_image ? asset('storage/students/' . $voucher->student->profile_image) : asset('assets/images/user/avatar-2.jpg');
