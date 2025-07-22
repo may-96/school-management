@@ -29,19 +29,19 @@
                                  <li class="nav-item">
                                      <a class="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="#profile-1"
                                          role="tab" aria-selected="true">
-                                         <i class="ti ti-user me-2"></i>Classes
+                                         <i class="ti ti-school me-2"></i>Classes
                                      </a>
                                  </li>
                                  <li class="nav-item">
                                      <a class="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2"
                                          role="tab" aria-selected="true">
-                                         <i class="ti ti-file-text me-2"></i>Sections
+                                         <i class="ti ti-layout-grid me-2"></i>Sections
                                      </a>
                                  </li>
                                  <li class="nav-item">
                                      <a class="nav-link" id="profile-tab-3" data-bs-toggle="tab" href="#profile-3"
                                          role="tab" aria-selected="true">
-                                         <i class="ti ti-file-text me-2"></i>Subjects
+                                         <i class="ti ti-notebook me-2"></i>Subjects
                                      </a>
                                  </li>
                              </ul>
@@ -53,11 +53,13 @@
                              <div class="row">
                                  <div class="col-12">
                                      <div class="card">
-                                         <div class="card-header">
+                                         <div class="card-header d-flex align-items-center justify-content-between">
                                              <h5>Class List</h5>
+                                             <a data-bs-toggle="modal" data-bs-target="#add-class-modal" href="#"
+                                                 class="btn btn-primary">Add Class</a>
                                          </div>
                                          <div class="card-body">
-                                         <h1>Work is Pending</h1>
+                                             <h1>Work is Pending</h1>
                                          </div>
                                      </div>
                                  </div>
@@ -71,10 +73,12 @@
                                          <div class="card-header">
                                              <div class="d-sm-flex align-items-center justify-content-between">
                                                  <h5 class="mb-3 mb-sm-0">Section List</h5>
+                                                 <a data-bs-toggle="modal" data-bs-target="#add-section-modal"
+                                                     href="#" class="btn btn-primary">Add Section</a>
                                              </div>
                                          </div>
                                          <div class="card-body">
-                                            
+
                                          </div>
                                      </div>
                                  </div>
@@ -87,10 +91,12 @@
                                          <div class="card-header">
                                              <div class="d-sm-flex align-items-center justify-content-between">
                                                  <h5 class="mb-3 mb-sm-0">Subject List</h5>
+                                                 <a data-bs-toggle="modal" data-bs-target="#add-subject-modal"
+                                                     href="#" class="btn btn-primary">Add Subject</a>
                                              </div>
                                          </div>
                                          <div class="card-body">
-                                            
+
                                          </div>
                                      </div>
                                  </div>
@@ -101,5 +107,4 @@
              </div>
          </div>
      </div>
-   
  @endsection

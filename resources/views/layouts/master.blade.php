@@ -67,7 +67,7 @@
 
     {{-- Dark mode and light mode --}}
     <script src="{{ asset('assets/js/theme.js') }}"></script>
-    <script src="{{ asset('assets/js/inputdateclickevent.js') }}"></script>
+    <script src="{{ asset('assets/js/custom_pages/inputdateclickevent.js') }}"></script>
 
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>

@@ -152,18 +152,16 @@
                 $('#edit_voucher_invoice_id').text($(this).data('voucher_invoice_id'));
 
                 $('#edit_payment_method').val($(this).data('payment_method'));
-                $('#edit_amount').val($(this).data('amount')).attr('max', maxAmount); // set max attribute
+                $('#edit_amount').val($(this).data('amount')).attr('max', maxAmount); 
                 $('#edit_payment_date').val($(this).data('payment_date'));
                 $('#edit_reference_number').val($(this).data('reference_number'));
                 $('#edit_notes').val($(this).data('notes'));
 
                 $('#edit-payment-form').attr('action', '/payments/' + id);
 
-                // Store maxAmount for later validation
                 $('#edit_amount').data('max-amount', maxAmount);
             });
 
-            // Prevent typing more than max amount
             $('#edit_amount').on('input', function() {
                 const max = parseFloat($(this).data('max-amount'));
                 let val = parseFloat($(this).val());

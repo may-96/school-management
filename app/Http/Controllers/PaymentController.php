@@ -161,18 +161,25 @@ class PaymentController extends Controller
 
         $payment->delete();
 
-        $remainingPayments = Payment::where('voucher_id', $voucherId)->count();
+        $voucher = Voucher::find($voucherId);
 
-        if ($remainingPayments === 0) {
-            $voucher = Voucher::find($voucherId);
-            if ($voucher) {
+        if ($voucher) {
+            $totalPaid = $voucher->payments()->sum('amount');
+
+            if ($totalPaid == 0) {
                 $voucher->status = 'unpaid';
-                $voucher->save();
+            } elseif ($totalPaid < $voucher->amount) {
+                $voucher->status = 'partial paid';
+            } else {
+                $voucher->status = 'paid';
             }
+
+            $voucher->save();
         }
 
-        return redirect()->back()->with('success', 'Payment deleted and Voucher Status is Updated!');
+        return redirect()->back()->with('success', 'Payment deleted and Voucher status updated.');
     }
+
 
     public function data(Request $request)
     {

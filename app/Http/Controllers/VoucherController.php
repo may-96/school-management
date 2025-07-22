@@ -44,9 +44,8 @@ class VoucherController extends Controller
 
         $request->validate([
             'invoice_id' => 'required|unique:vouchers,invoice_id',
-            // 'payment_method' => 'required',
             'notes' => 'nullable|string|max:50',
-            'month_year' => 'required|string|max:7', // Format: YYYY-MM
+            'month_year' => 'required|string|max:7', 
             'payment_date' => 'required|date',
             'fee_type' => 'required|array|min:1',
             'fee_amount' => 'required|array|min:1|max:999999',
@@ -65,7 +64,6 @@ class VoucherController extends Controller
             $voucher = Voucher::create([
                 'student_id' => $studentId,
                 'invoice_id' => 'VOU-' . now()->format('YmdHis') . '-' . $studentId,
-                // 'payment_method' => $request->payment_method,
                 'status' => 'unpaid',
                 'amount' => $totalAmount,
                 'notes' => $request->notes,
@@ -116,13 +114,10 @@ class VoucherController extends Controller
             'fee_amount.*' => 'required|numeric|min:0|max:999999',
         ]);
 
-        // Total amount from items
         $totalAmount = array_sum($request->fee_amount);
 
-        // Assuming you have a relation: $voucher->payments()
         $paidAmount = $voucher->payments()->sum('amount');
 
-        // Determine status
         if ($paidAmount == 0) {
             $status = 'Unpaid';
         } elseif ($paidAmount < $totalAmount) {
@@ -131,7 +126,6 @@ class VoucherController extends Controller
             $status = 'Paid';
         }
 
-        // Update voucher
         $voucher->update([
             'status' => $status,
             'payment_date' => $request->payment_date,
@@ -140,7 +134,6 @@ class VoucherController extends Controller
             'amount' => $totalAmount,
         ]);
 
-        // Delete old items and recreate
         VoucherItem::where('voucher_id', $voucher->id)->delete();
 
         foreach ($request->fee_type as $index => $type) {
