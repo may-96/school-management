@@ -22,37 +22,7 @@
                 </div>
             </div>
 
-            <x-alert-success />
-
-            {{-- Error Alert --}}
-            <div id="js-error-container">
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="autoDismiss">
-                        {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                <script>
-                    setTimeout(function() {
-                        let alertEl = document.getElementById('autoDismiss');
-                        if (alertEl) {
-                            alertEl.classList.remove('show');
-                            alertEl.classList.add('fade');
-                            setTimeout(() => alertEl.remove(), 500);
-                        }
-                    }, 3000); 
-                </script>
-            </div>
+            <x-alerts />
 
             <div class="row">
                 <div class="col-12">
@@ -61,12 +31,12 @@
                             <div class="d-sm-flex align-items-center justify-content-between">
                                 <h5 class="mb-3 mb-sm-0">Student list</h5>
                                 <div>
-                                    <a href="#" class="btn btn-outline-secondary d-inline-flex align-items-center"
+                                    <a href="#" class="btn btn-outline-secondary d-inline-flex align-items-center me-2"
                                         id="idBtnSub" style="visibility: hidden;">
                                         <i class="ph-duotone ph-plus-circle me-1"></i>Create Fee Voucher
                                     </a>
 
-                                    <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
+                                    <a href="{{ route('students.create') }}" class="btn btn-primary">Add Student</a>
                                 </div>
                             </div>
                         </div>
@@ -221,7 +191,7 @@
         </script>
 
         {{-- show error alert messages --}}
-        <script>
+        {{-- <script>
             function showErrorAlert(messages) {
                 const container = document.getElementById("js-error-container");
 
@@ -247,7 +217,7 @@
                     }, 3000);
                 }
             }
-        </script>
+        </script> --}}
 
         {{-- tooltips --}}
         <script>

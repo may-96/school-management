@@ -21,9 +21,7 @@
                 </div>
             </div>
 
-            <x-alert-success />
-
-            <x-alert-error />
+            <x-alerts />
 
             <div class="row">
                 <div class="col-12">
@@ -32,89 +30,13 @@
                             <div class="d-sm-flex align-items-center justify-content-between">
                                 <h5 class="mb-3 mb-sm-0">Teacher list</h5>
                                 <div>
-                                    <a href="{{ route('teacher.create') }}" class="btn btn-primary">Add Teacher</a>
+                                    <a href="{{ route('teachers.create') }}" class="btn btn-primary">Add Teacher</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body p-4">
                             <div class="table-responsive">
-
-                                {{-- Yajra DataTable --}}
-
                                 {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
-
-                                {{-- <table class="table table-hover" id="pc-dt-simple">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Departments / Class</th>
-                                            <th>Education</th>
-                                            <th>Mobile</th>
-                                            <th>Joining Date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($teachers as $teacher)
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0">
-                                                            <a href="{{ route('teacher.show', $teacher->id) }}">
-                                                                @if ($teacher->profile_image)
-                                                                    <img src="{{ asset('storage/teachers/' . $teacher->profile_image) }}"
-                                                                        alt="img" class="img-fluid rounded-circle"
-                                                                        style="height:40px; width:40px;" />
-                                                                @else
-                                                                    <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
-                                                                        alt="img" class="img-fluid rounded-circle"
-                                                                        style="height:40px; width:40px;" />
-                                                                @endif
-                                                            </a>
-                                                        </div>
-                                                        <div class="flex-grow-1 ms-3">
-                                                            <h6 class="mb-0">{{ $teacher->first_name }}
-                                                                {{ $teacher->last_name }}</h6>
-                                                            <small
-                                                                class="text-truncate w-100 text-muted">{{ $teacher->email }}</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="mb-0">{{ $teacher->department }}</h6>
-                                                        <small
-                                                            class="text-truncate w-100 text-muted">{{ $teacher->class }}</small>
-                                                    </div>
-                                                </td>
-                                                <td>{{ $teacher->education }}</td>
-                                                <td>{{ $teacher->mobile_number }}</td>
-                                                <td>{{ $teacher->joining_date }}</td>
-                                                <td>
-                                                    <a href="{{ route('teacher.show', $teacher->id) }}"
-                                                        class="avtar avtar-xs btn-link-secondary">
-                                                        <i class="ti ti-eye f-20"></i>
-                                                    </a>
-                                                    <a href="{{ route('teacher.edit', $teacher->id) }}"
-                                                        class="avtar avtar-xs btn-link-secondary">
-                                                        <i class="ti ti-edit f-20"></i>
-                                                    </a>
-                                                    <form id="delete-form-{{ $teacher->id }}"
-                                                        action="{{ route('teacher.destroy', $teacher->id) }}"
-                                                        method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                    <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"
-                                                        data-id="{{ $teacher->id }}">
-                                                        <i class="ti ti-trash f-20"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table> --}}
-
                             </div>
                         </div>
                     </div>
@@ -123,12 +45,142 @@
         </div>
     </div>
 
-    {{-- <script type="module">
-        import {
-            DataTable
-        } from '../assets/js/plugins/module.js';
-        window.dt = new DataTable('#pc-dt-simple');
-    </script> --}}
+    {{-- Assign Modal --}}
+    <div class="modal fade" id="add-teacher-assign-modal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-between">
+                    <h5 class="modal-title">Assign</h5>
+                    <a href="#" class="avtar avtar-s btn-link-danger" data-bs-dismiss="modal">
+                        <i class="ti ti-x f-20"></i>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('assign.class') }}" method="POST" id="assign-form">
+                        @csrf
+
+                        <input type="hidden" name="teacher_id" id="teacher_id">
+
+                        <div class="mb-3">
+                            <label class="form-label">Class <span class="text-danger">*</span></label>
+                            <select name="class_id" id="class_id" class="form-select" required>
+                                <option value="">Select Class</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Section <span class="text-danger">*</span></label>
+                            <select name="class_section_id" id="section_id" class="form-select" required>
+                                <option value="">Select Section</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <select name="subject_id" id="subject_id" class="form-select">
+                                <option value="">Select Subject</option>
+                            </select>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="isHeadMaster"
+                                name="is_head_master">
+                            <label class="form-check-label" for="isHeadMaster">
+                                Assign as Head Master
+                            </label>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Assign</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- teacher assign  --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById('add-teacher-assign-modal');
+            const classDropdown = document.getElementById('class_id');
+            const sectionDropdown = document.getElementById('section_id');
+            const subjectDropdown = document.getElementById('subject_id');
+            const teacherIdInput = document.getElementById('teacher_id');
+            const assignForm = document.getElementById('assign-form');
+            const isHeadMaster = document.getElementById('isHeadMaster');
+
+            modal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const teacherId = button.getAttribute('data-teacher-id');
+                teacherIdInput.value = teacherId;
+
+                classDropdown.innerHTML = '<option value="">Select Class</option>';
+                sectionDropdown.innerHTML = '<option value="">Select Section</option>';
+                sectionDropdown.setAttribute('disabled', true);
+                subjectDropdown.innerHTML = '<option value="">Select Subject</option>';
+                isHeadMaster.checked = false;
+
+                // Fetch classes and subjects
+                fetch(`/teacher-assignment/${teacherId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.classes.forEach(item => {
+                            const option = document.createElement('option');
+                            option.value = item.id;
+                            option.text = item.name;
+                            classDropdown.appendChild(option);
+                        });
+
+                        data.subjects.forEach(item => {
+                            const option = document.createElement('option');
+                            option.value = item.id;
+                            option.text = item.name;
+                            subjectDropdown.appendChild(option);
+                        });
+                    });
+            });
+
+            classDropdown.addEventListener('change', function() {
+                const classId = this.value;
+                sectionDropdown.innerHTML = '<option>Loading...</option>';
+                sectionDropdown.setAttribute('disabled', true);
+
+                if (classId) {
+                    fetch(`/get-class-sections/${classId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            sectionDropdown.innerHTML = '<option value="">Select Section</option>';
+                            data.forEach(item => {
+                                const option = document.createElement('option');
+                                option.value = item.id;
+                                option.text = item.section_name;
+                                sectionDropdown.appendChild(option);
+                            });
+                            sectionDropdown.removeAttribute('disabled');
+                        })
+                        .catch(() => {
+                            sectionDropdown.innerHTML = '<option>Error loading</option>';
+                            sectionDropdown.setAttribute('disabled', true);
+                        });
+                } else {
+                    sectionDropdown.innerHTML = '<option value="">Select Section</option>';
+                    sectionDropdown.setAttribute('disabled', true);
+                }
+            });
+
+            assignForm.addEventListener('submit', function(e) {
+                const classValue = classDropdown.value;
+                const sectionValue = sectionDropdown.value;
+
+                if (!classValue || !sectionValue) {
+                    e.preventDefault();
+                    alert("Please select Class and Section.");
+                    return;
+                }
+            });
+        });
+    </script>
 
     @push('scripts')
         {!! $dataTable->scripts() !!}
@@ -136,7 +188,7 @@
         {{-- tooltips --}}
         <script>
             function initTooltips() {
-                const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-hover="tooltip"]'));
                 tooltipTriggerList.map(function(tooltipTriggerEl) {
                     return new bootstrap.Tooltip(tooltipTriggerEl);
                 });

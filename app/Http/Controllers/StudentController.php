@@ -5,21 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\DataTables\StudentDataTable;
-use App\DataTables\StudentVoucherPaymentDataTable;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use App\Models\ClassModel;
+use App\Models\ClassSection;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
     public function create()
     {
-        return view('pages.students.create');
+        $classes = ClassModel::with('sections')->get();
+        return view('pages.students.create', compact('classes'));
     }
 
     public function store(Request $request)
     {
+
+        // dd($request->class_section_id, DB::table('class_sections')->find('id'));
+
         $request->validate([
             'first_name' => 'required|string|max:25',
             'last_name' => 'required|string|max:25',
@@ -30,12 +37,11 @@ class StudentController extends Controller
             'gender' => 'required|string',
             'admission_no' => 'required|unique:students|string|max:25',
             'roll_no' => 'nullable|string|max:15',
-            'class' => 'nullable|string',
-            'section' => 'nullable|string|max:15',
+            'class_section_id' => 'nullable|exists:class_section,id',
             'status' => 'nullable|string',
             'secondary_mobile' => 'nullable|string|max:25',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'address' => 'nullable|string|max:50',
+            'address' => 'nullable|string|max:100',
         ]);
 
         $fileName = null;
@@ -49,22 +55,37 @@ class StudentController extends Controller
             unset($data['status']);
         }
 
+        if ($request->filled('class_id') && !$request->filled('class_section_id')) {
+            return back()->withInput()->withErrors([
+                'class_section_id' => 'Please select a section when a class is chosen.',
+            ]);
+        }
+
         $data['profile_image'] = $fileName;
         $data['user_id'] = Auth::id();
 
         Student::create($data);
 
-        return redirect()->route('student.index')->with('success', 'Student added successfully!');
+        return redirect()->route('students.index')->with('success', 'Student added successfully!');
     }
 
     public function edit($id)
     {
         $student = Student::findOrFail($id);
-        return view('pages.students.edit', compact('student'));
+
+        $selectedClassId = optional(ClassSection::find($student->class_section_id))->class_id;
+
+        $classes = ClassModel::all();
+
+        return view('pages.students.edit', compact('student', 'classes', 'selectedClassId'));
     }
+
 
     public function update(Request $request, $id)
     {
+
+        // dd($request->class_section_id, DB::table('class_section')->pluck('id'));
+
         $request->validate([
             'first_name' => 'required|string|max:25',
             'last_name' => 'required|string|max:25',
@@ -73,21 +94,20 @@ class StudentController extends Controller
             'dob' => 'required|date',
             'registration_date' => 'required|date',
             'gender' => 'required|string',
-            'admission_no' => 'required|unique:students|string|max:25',
+            'admission_no' => 'required|string|max:25|unique:students,admission_no,' . $id,
             'roll_no' => 'nullable|string|max:15',
-            'class' => 'nullable|string',
-            'section' => 'nullable|string|max:15',
+            'class_section_id' => 'nullable|exists:class_section,id',
             'status' => 'nullable|string',
             'secondary_mobile' => 'nullable|string|max:25',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'address' => 'nullable|string|max:50',
+            'address' => 'nullable|string|max:100',
         ]);
 
         $student = Student::findOrFail($id);
 
         if ($request->hasFile('profile_photo')) {
-            if ($student->profile_image && file_exists(storage_path('app/public/students/' . $student->profile_image))) {
-                unlink(storage_path('app/public/students/' . $student->profile_image));
+            if ($student->profile_image && Storage::exists('public/students/' . $student->profile_image)) {
+                Storage::delete('public/students/' . $student->profile_image);
             }
 
             $imagePath = $this->uploadProfilePhoto($request->file('profile_photo'));
@@ -96,56 +116,57 @@ class StudentController extends Controller
         }
 
         $student->update([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'dob' => $request->input('dob'),
+            'first_name'        => $request->input('first_name'),
+            'last_name'         => $request->input('last_name'),
+            'parents_name'      => $request->input('parents_name'),
+            'parents_mobile'    => $request->input('parents_mobile'),
+            'dob'               => $request->input('dob'),
             'registration_date' => $request->input('registration_date'),
-            'admission_no' => $request->input('admission_no'),
-            'roll_no' => $request->input('roll_no'),
-            'class' => $request->input('class'),
-            'section' => $request->input('section'),
-            'gender' => $request->input('gender'),
-            'status' => $request->input('status'),
-            'parents_name' => $request->input('parents_name'),
-            'parents_mobile' => $request->input('parents_mobile'),
-            'secondary_mobile' => $request->input('secondary_mobile'),
-            'profile_image' => $imagePath,
-            'address' => $request->input('address'),
+            'gender'            => $request->input('gender'),
+            'admission_no'      => $request->input('admission_no'),
+            'roll_no'           => $request->input('roll_no'),
+            'status'            => $request->input('status'),
+            'secondary_mobile'  => $request->input('secondary_mobile'),
+            'profile_image'     => $imagePath,
+            'address'           => $request->input('address'),
+            'class_section_id'  => $request->input('class_section_id'),
         ]);
 
-        return redirect()->route('student.index')->with('success', 'Student updated successfully!');
+        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
     }
+
 
     public function index(StudentDataTable $dataTable)
     {
         return $dataTable->render('pages.students.index');
     }
 
+    public function show(StudentDataTable $dataTable, $id)
+    {
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
+        $student = Student::findOrFail($id);
+
+        return $dataTable->render('pages.students.show', compact('student'));
+    }
+
     public function destroy($id)
     {
         $student = Student::findOrFail($id);
 
-        // Check if the student has vouchers
         if ($student->vouchers()->count() > 0) {
-            return redirect()->back()->with('error', 'Please delete the vouchers associated with this student before deleting the student.');
+            return redirect()->back()->with('warning', 'Please delete the vouchers associated with this student before deleting the student.');
         }
 
-        // Delete profile image if exists
         if ($student->profile_image && file_exists(storage_path('app/public/students/' . $student->profile_image))) {
             unlink(storage_path('app/public/students/' . $student->profile_image));
         }
 
-        // Delete student record
         $student->delete();
 
         return redirect()->back()->with('success', 'Student deleted successfully!');
-    }
-
-
-    public function show(StudentVoucherPaymentDataTable $dataTable, $id)
-    {
-        $student = Student::findOrFail($id);
-        return $dataTable->setStudentId($id)->render('pages.students.show', compact('student'));
     }
 
     private function uploadProfilePhoto($file)
@@ -174,8 +195,7 @@ class StudentController extends Controller
         ]);
     }
 
-    // yajra datatable voucher list for each student
-
+    // yajra datatable student voucher list for each student
     public function paymentData($id)
     {
         $student = Student::with('vouchers')->findOrFail($id);
@@ -206,7 +226,17 @@ class StudentController extends Controller
             </div>';
             })
             ->addColumn('invoice_id', function ($voucher) {
-                return '<a href="' . route('voucher.show', $voucher->invoice_id) . '" class="text-body text-decoration-none">' . e($voucher->invoice_id) . '</a>';
+                $monthYear = $voucher->month_year
+                    ? str(Carbon::createFromFormat('Y-m', $voucher->month_year)->format('F Y'))
+                    : '';
+
+                return '
+        <a href="' . route('voucher.show', $voucher) . '" class="text-body text-decoration-none">
+            ' . e($voucher->invoice_id) . '
+        </a>
+        <br>
+        <small class="text-muted">' . $monthYear . '</small>
+    ';
             })
             ->editColumn('payment_date', fn($payment) => \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y'))
             ->editColumn('amount', function ($payment) {
@@ -238,7 +268,7 @@ class StudentController extends Controller
             });
         }
 
-        $dataTable->addColumn('actions', function ($payment) {
+        $dataTable->addColumn('actions', function ($payment) use ($student) {
             $status = strtolower($payment->status);
 
             $addButton = '';
@@ -250,7 +280,7 @@ class StudentController extends Controller
                     '
         <li class="list-inline-item">
             <a href="#"
-                class="avtar avtar-xs btn-link-secondary open-payment-modal"
+                class="avtar avtar-xs btn-link-secondary open-payment-modal" data-bs-hover="tooltip" data-bs-placement="top" title="Add Payment"
                 data-bs-toggle="modal"
                 data-bs-target="#student-add-payment_modal"
                 data-invoice-id="' .
@@ -265,18 +295,19 @@ class StudentController extends Controller
                 data-voucher-amount="' .
                     e($payment->amount - $payment->payments()->sum('amount')) .
                     '">
-                <i class="ti ti-plus f-20" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Payment"></i>
+                <i class="ti ti-plus f-20" ></i>
             </a>
         </li>';
 
                 $editButton =
                     '
         <li class="list-inline-item">
-            <a href="' .
-                    route('voucher.edit', $payment->id) .
-                    '" class="avtar avtar-xs btn-link-secondary">
-                <i class="ti ti-edit f-20"></i>
-            </a>
+              <a href="' . route('voucher.edit', $payment->id) . '?redirect_to=show&student_id=' . $student->id . '" 
+           class="avtar avtar-xs btn-link-secondary" 
+           data-bs-hover="tooltip" 
+           title="Edit">
+            <i class="ti ti-edit f-20"></i>
+        </a>
         </li>';
             }
 
@@ -284,17 +315,15 @@ class StudentController extends Controller
                 $deleteButton =
                     '
         <li class="list-inline-item">
-            <form id="delete-form-' .
-                    $payment->id .
-                    '" action="' .
-                    route('voucher.destroy', $payment->id) .
-                    '" method="POST" style="display: none;">
-                ' .
-                    csrf_field() .
-                    method_field('DELETE') .
-                    '
-            </form>
-            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' .
+          <form id="delete-form-' . $payment->id . '" 
+      action="' . route('voucher.destroy', $payment->id) . '" 
+      method="POST" style="display: none;">
+    ' . csrf_field() . method_field('DELETE') . '
+    <input type="hidden" name="redirect_to" value="show">
+    <input type="hidden" name="student_id" value="' . $student->id . '">
+</form>
+
+            <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-bs-hover="tooltip" title="Delete" data-id="' .
                     $payment->id .
                     '">
                 <i class="ti ti-trash f-20"></i>
@@ -308,7 +337,7 @@ class StudentController extends Controller
                 '
         <li class="list-inline-item">
             <a href="#"
-               class="avtar avtar-xs btn-link-secondary view-payment-slip"
+               class="avtar avtar-xs btn-link-secondary view-payment-slip" data-bs-hover="tooltip" title="View Payment Slip"
                data-bs-toggle="modal"
                data-bs-target="#student-payment-slip_model"
                data-voucher-id="' .

@@ -16,5 +16,19 @@ class Teacher extends Model
     {
         return $this->belongsTo(User::class);
     }
- 
+
+    public function classSection()
+    {
+        return $this->belongsTo(ClassSection::class);
+    }
+    
+    public function assignments()
+    {
+        return $this->hasMany(ClassSectionSubjectTeacher::class);
+    }
+
+    public function payrolls()
+    {
+        return $this->morphMany(Payroll::class, 'employeeable', 'employee_type', 'employee_id');
+    }
 }

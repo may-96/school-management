@@ -23,13 +23,15 @@
                 </div>
             </div>
 
+            <x-alerts />
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="mb-0">Basic Information</h5>
                         </div>
-                        <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -107,7 +109,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Admission No <span class="text-danger">*</span></label>
                                         <input type="number" name="admission_no" class="form-control"
-                                            value="{{ old('admission_no') }}" placeholder="Enter ID number" />
+                                            value="{{ old('admission_no') }}" placeholder="Enter admission number" />
                                         @error('admission_no')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -124,23 +126,23 @@
 
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Class</label>
-                                        <select name="class" class="form-select">
-                                            <option>Select</option>
-                                            @foreach (['K.G', 'Montesori', 'Nursery', 'Prep', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '1st Year', '2nd Year'] as $item)
-                                                <option {{ old('class') == $item ? 'selected' : '' }}>{{ $item }}
-                                                </option>
+                                        <select id="class-dropdown" class="form-select">
+                                            <option value="">Select Class</option>
+                                            @foreach ($classes as $class)
+                                                <option value="{{ old('class_id', $class->id) }}">{{ $class->name }}</option>
                                             @endforeach
+                                            @error('class_id')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </select>
-                                        @error('class')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Section</label>
-                                        <input type="text" name="section" class="form-control"
-                                            value="{{ old('section') }}" placeholder="Enter Section" />
-                                        @error('section')
+                                        <select name="class_section_id" id="section-dropdown" class="form-select">
+                                            <option value="{{ old('class_section_id') }}">Select Section</option>
+                                        </select>
+                                        @error('class_section_id')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -161,7 +163,7 @@
                                         <label class="form-label">Secondary Mobile Number</label>
                                         <input type="text" name="secondary_mobile" class="form-control"
                                             value="{{ old('secondary_mobile') }}"
-                                            placeholder="Enter Secondary Mobile Number" />
+                                            placeholder="Enter secondary mobile number" />
                                         @error('secondary_mobile')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -194,4 +196,35 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const classDropdown = document.getElementById('class-dropdown');
+            const sectionDropdown = document.getElementById('section-dropdown');
+
+            classDropdown.addEventListener('change', function() {
+                const classId = this.value;
+                sectionDropdown.innerHTML = '<option>Loading...</option>';
+
+                if (classId) {
+                    fetch(`/get-class-sections/${classId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            sectionDropdown.innerHTML = '<option value="">Select Section</option>';
+                            data.forEach(item => {
+                                const option = document.createElement('option');
+                                option.value = item.id;
+                                option.text = item.section_name;
+                                sectionDropdown.appendChild(option);
+                            });
+                        })
+                        .catch(() => {
+                            sectionDropdown.innerHTML = '<option>Error loading</option>';
+                        });
+                } else {
+                    sectionDropdown.innerHTML = '<option value="">Select Section</option>';
+                }
+            });
+        });
+    </script>
 @endsection

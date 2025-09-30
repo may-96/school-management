@@ -10,17 +10,22 @@
                          <div class="col-md-12">
                              <ul class="breadcrumb">
                                  <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                 <li class="breadcrumb-item" aria-current="page">Profile & Vouchers</li>
+                                 <li class="breadcrumb-item"><a href="{{ url('/students') }}">Students</a></li>
+                                 <li class="breadcrumb-item" aria-current="page">{{ $student->first_name }}
+                                     {{ $student->last_name }}</li>
                              </ul>
                          </div>
                          <div class="col-md-12">
                              <div class="page-header-title">
-                                 <h2 class="mb-0">Student Profile</h2>
+                                 <h2 class="mb-0">{{ $student->first_name }} {{ $student->last_name }}</h2>
+                                 <p class="mb-1 text-muted">Student Profile</p>
                              </div>
                          </div>
                      </div>
                  </div>
              </div>
+
+             <x-alerts />
 
              <div class="row">
                  <div class="col-sm-12">
@@ -28,15 +33,19 @@
                          <div class="card-body py-0">
                              <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
                                  <li class="nav-item">
-                                     <a class="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="#profile-1"
-                                         role="tab" aria-selected="true">
-                                         <i class="ti ti-user me-2"></i>Profile
+                                     <a class="nav-link {{ session('active_tab', 'profile-1') == 'profile-1' ? 'active' : '' }}"
+                                         id="profile-tab-1" data-bs-toggle="tab" href="#profile-1" role="tab"
+                                         aria-selected="{{ session('active_tab', 'profile-1') == 'profile-1' ? 'true' : 'false' }}">
+                                         Profile
                                      </a>
                                  </li>
+
                                  <li class="nav-item">
-                                     <a class="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2"
-                                         role="tab" aria-selected="true">
-                                         <i class="ti ti-file-text me-2"></i>Vouchers
+                                     <a class="nav-link {{ session('active_tab') == 'profile-2' ? 'active' : '' }}"
+                                         id="profile-tab-2" data-bs-toggle="tab" data-bs-target="#profile-2" type="button"
+                                         role="tab" aria-controls="profile-2"
+                                         aria-selected="{{ session('active_tab') == 'profile-2' ? 'true' : 'false' }}">
+                                         Vouchers
                                      </a>
                                  </li>
                              </ul>
@@ -44,7 +53,8 @@
 
                      </div>
                      <div class="tab-content">
-                         <div class="tab-pane show active" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
+                         <div class="tab-pane fade {{ session('active_tab', 'profile-1') == 'profile-1' ? 'show active' : '' }}"
+                             id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
                              <div class="row">
                                  <div class="col-lg-8 col-xxl-12">
                                      <div class="card">
@@ -98,12 +108,17 @@
                                                      <div class="row">
                                                          <div class="col-md-6">
                                                              <p class="mb-1 text-muted">Class / Section</p>
-                                                             <p class="mb-0">{{ $student->class }} /
-                                                                 {{ $student->section }}</p>
+                                                             <p class="mb-0">
+                                                                 {{ optional(optional($student->classSection)->class)->name ?? 'N/A' }}
+                                                                 /
+                                                                 {{ optional(optional($student->classSection)->section)->name ?? 'N/A' }}
+                                                             </p>
+
+
                                                          </div>
                                                          <div class="col-md-6">
                                                              <p class="mb-1 text-muted">Roll No</p>
-                                                             <p class="mb-0">{{ $student->roll_no }}</p>
+                                                             <p class="mb-0">{{ $student->roll_no ?? 'N/A' }}</p>
                                                          </div>
                                                      </div>
                                                  </li>
@@ -111,11 +126,11 @@
                                                      <div class="row">
                                                          <div class="col-md-6">
                                                              <p class="mb-1 text-muted">Admission No</p>
-                                                             <p class="mb-0">{{ $student->admission_no }}</p>
+                                                             <p class="mb-0">{{ $student->admission_no ?? 'N/A' }}</p>
                                                          </div>
                                                          <div class="col-md-6">
                                                              <p class="mb-1 text-muted">Phone</p>
-                                                             <p class="mb-0">{{ $student->parents_mobile }}</p>
+                                                             <p class="mb-0">{{ $student->parents_mobile ?? 'N/A' }}</p>
                                                          </div>
                                                      </div>
                                                  </li>
@@ -133,13 +148,14 @@
                                                          </div>
                                                          <div class="col-md-6">
                                                              <p class="mb-1 text-muted">Secondary Mobile No</p>
-                                                             <p class="mb-0">{{ $student->secondary_mobile }}</p>
+                                                             <p class="mb-0">{{ $student->secondary_mobile ?? 'N/A' }}
+                                                             </p>
                                                          </div>
                                                      </div>
                                                  </li>
                                                  <li class="list-group-item px-0 pb-0">
                                                      <p class="mb-1 text-muted">Address</p>
-                                                     <p class="mb-0">{{ $student->address }}</p>
+                                                     <p class="mb-0">{{ $student->address ?? 'N/A' }}</p>
                                                  </li>
                                              </ul>
                                          </div>
@@ -148,7 +164,9 @@
                              </div>
                          </div>
 
-                         <div class="tab-pane" id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
+                         <div class="tab-pane fade {{ session('active_tab') == 'profile-2' ? 'show active' : '' }}"
+                             id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
+
                              <div class="row">
                                  <div class="col-12">
                                      <div class="card">
@@ -246,23 +264,24 @@
                                      <div class="mb-3 row me-0">
                                          <label class="col-lg-4 col-form-label">Payment Method: <span
                                                  class="text-danger">*</span>
-                                             <small class="text-muted d-block">Enter your Payment Method</small>
+                                             <small class="text-muted d-block">Select the Payment Method</small>
                                          </label>
                                          <div class="col-lg-8">
                                              <select class="form-select" name="payment_method" required>
                                                  <option value="">Please Select</option>
-                                                 <option value="cheque">Cheque</option>
-                                                 <option value="cash">Cash</option>
-                                                 <option value="credit card">Credit Card</option>
-                                                 <option value="online transfer">Online Transfer</option>
+                                                 <option value="Cash">Cash</option>
+                                                 <option value="Cheque">Cheque</option>
+                                                 <option value="Credit Card">Credit Card</option>
+                                                 <option value="Online Transfer">Online Transfer</option>
                                              </select>
                                          </div>
                                      </div>
 
                                      <!-- Voucher Amount Editable -->
                                      <div class="mb-3 row me-0">
-                                         <label class="col-lg-4 col-form-label">Amount: <span
-                                                 class="text-danger">*</span></label>
+                                         <label class="col-lg-4 col-form-label">Amount: <span class="text-danger">*</span>
+                                             <small class="text-muted d-block">Enter the Amount</small>
+                                         </label>
                                          <div class="col-lg-8">
                                              <input type="number" step="0.01" id="voucherAmountDisplay"
                                                  class="form-control" name="amount">
@@ -287,7 +306,9 @@
 
                                      <!-- REFERENCE NUMBER -->
                                      <div class="mb-3 row me-0">
-                                         <label class="col-lg-4 col-form-label">Refrence No :</label>
+                                         <label class="col-lg-4 col-form-label">Refrence No :
+                                             <small class="text-muted d-block">Enter the Reference Number</small>
+                                         </label>
                                          <div class="col-lg-8">
                                              <input type="text" name="reference_number" id="referenceNumberInput"
                                                  class="form-control" placeholder="Enter reference number">
@@ -297,7 +318,7 @@
                                      <!-- NOTES -->
                                      <div class="mb-3 row me-0">
                                          <label class="col-lg-4 col-form-label">Notes:
-                                             <small class="text-muted d-block">Enter Notes</small>
+                                             <small class="text-muted d-block">Enter the Notes</small>
                                          </label>
                                          <div class="col-lg-8">
                                              <textarea class="form-control" rows="2" name="notes" placeholder="Enter notes"></textarea>
@@ -348,22 +369,25 @@
 
                              <!-- Payment Method -->
                              <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">Payment Method: <span
-                                         class="text-danger">*</span></label>
+                                 <label class="col-lg-4 col-form-label">Payment Method: <span class="text-danger">*</span>
+                                     <small class="text-muted d-block">Select the Payment Method</small>
+                                 </label>
                                  <div class="col-lg-8">
                                      <select class="form-select" name="payment_method" id="edit_payment_method" required>
                                          <option value="">Please Select</option>
-                                         <option value="cash">Cash</option>
-                                         <option value="cheque">Cheque</option>
-                                         <option value="credit card">Credit Card</option>
-                                         <option value="online transfer">Online Transfer</option>
+                                         <option value="Cash">Cash</option>
+                                         <option value="Cheque">Cheque</option>
+                                         <option value="Credit Card">Credit Card</option>
+                                         <option value="Online Transfer">Online Transfer</option>
                                      </select>
                                  </div>
                              </div>
 
                              <!-- Amount -->
                              <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">Amount: <span class="text-danger">*</span></label>
+                                 <label class="col-lg-4 col-form-label">Amount:
+                                     <small class="text-muted d-block">Amount only readable</small>
+                                 </label>
                                  <div class="col-lg-8">
                                      <input type="number" name="amount" id="edit_amount" class="form-control"
                                          readonly>
@@ -372,8 +396,9 @@
 
                              <!-- Payment Date -->
                              <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">Payment Date: <span
-                                         class="text-danger">*</span></label>
+                                 <label class="col-lg-4 col-form-label">Payment Date: <span class="text-danger">*</span>
+                                     <small class="text-muted d-block">Enter the Payment Date</small>
+                                 </label>
                                  <div class="col-lg-8">
                                      <input type="date" name="payment_date" id="edit_payment_date"
                                          class="form-control" max="{{ date('Y-m-d') }}" required>
@@ -385,7 +410,9 @@
 
                              <!-- Reference No -->
                              <div class="mb-3 row me-0">
-                                 <label class="col-lg-4 col-form-label">Refrence No :</label>
+                                 <label class="col-lg-4 col-form-label">Refrence No :
+                                     <small class="text-muted d-block">Enter the Reference Number</small>
+                                 </label>
                                  <div class="col-lg-8">
                                      <input type="text" id="edit_reference_number" name="reference_number"
                                          class="form-control" placeholder="Enter reference number">
@@ -394,15 +421,17 @@
 
                              <!-- Notes -->
                              <div class="mb-3 row">
-                                 <label class="col-lg-4 col-form-label">Notes:</label>
+                                 <label class="col-lg-4 col-form-label">Notes:
+                                     <small class="text-muted d-block">Enter the Notes</small>
+                                 </label>
                                  <div class="col-lg-8">
-                                     <textarea name="notes" id="edit_notes" class="form-control" rows="2"></textarea>
+                                     <textarea name="notes" placeholder="Enter notes" id="edit_notes" class="form-control" rows="2"></textarea>
                                  </div>
                              </div>
 
                              <!-- Submit -->
                              <div class="text-end mt-4">
-                                 <button type="button" class="btn btn-outline-secondary"
+                                 <button type="button" class="btn btn-outline-secondary me-2"
                                      data-bs-dismiss="modal">Cancel</button>
                                  <button type="submit" class="btn btn-primary">Update</button>
                              </div>
@@ -547,10 +576,10 @@
                  studentId = $(this).data('student-id');
                  voucherId = $(this).data('voucher-id');
              });
-             $('#student-payment-slip_model').on('hidden.bs.modal', function() {
-                 $('#payment-slip-table').DataTable().clear().destroy();
-             });
 
+             //  $('#student-payment-slip_model').on('hidden.bs.modal', function() {
+             //      $('#payment-slip-table').DataTable().clear().destroy();
+             //  });
 
              $('#student-payment-slip_model').on('shown.bs.modal', function() {
                  $('#payment-slip-table').DataTable({
@@ -601,23 +630,17 @@
                  $('#edit_voucher_invoice_id').text($(this).data('voucher_invoice_id'));
 
                  $('#edit_payment_method').val($(this).data('payment_method'));
-                 $('#edit_amount').val($(this).data('amount')).attr('max', maxAmount);
+                 $('#edit_amount')
+                     .val($(this).data('amount'))
+                     .attr('max', maxAmount)
+                     .prop('readonly', true);
+
                  $('#edit_payment_date').val($(this).data('payment_date'));
                  $('#edit_reference_number').val($(this).data('reference_number'));
                  $('#edit_notes').val($(this).data('notes'));
 
                  $('#edit-payment-form').attr('action', '/payments/' + id);
-
                  $('#edit_amount').data('max-amount', maxAmount);
-             });
-
-             $('#edit_amount').on('input', function() {
-                 const max = parseFloat($(this).data('max-amount'));
-                 let val = parseFloat($(this).val());
-
-                 if (val > max) {
-                     $(this).val(max);
-                 }
              });
          </script>
 
@@ -626,11 +649,19 @@
                  $('#idBtnSub').on('click', function(e) {
                      e.preventDefault();
                      const studentId = $('#active_student_id').val();
+
+                     // normal URL without query string
                      const url = `/students/voucher/create/${studentId}`;
+
+                     // save redirect flag in sessionStorage (temporary)
+                     sessionStorage.setItem('redirect_to', 'show');
+
                      window.location.href = url;
                  });
              });
          </script>
+
+
          <script>
              document.addEventListener('DOMContentLoaded', function() {
                  const hash = window.location.hash;
@@ -640,6 +671,98 @@
                          new bootstrap.Tab(tabTrigger).show();
                      }
                  }
+             });
+         </script>
+         {{-- tooltips --}}
+         <script>
+             function initTooltips() {
+                 const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-hover="tooltip"]'));
+                 tooltipTriggerList.map(function(tooltipTriggerEl) {
+                     return new bootstrap.Tooltip(tooltipTriggerEl);
+                 });
+             }
+
+             document.addEventListener('DOMContentLoaded', initTooltips);
+
+             $(document).on('draw.dt', function() {
+                 initTooltips();
+             });
+         </script>
+
+         <script>
+             document.addEventListener("DOMContentLoaded", function() {
+                 let editModalEl = document.getElementById('student-edit-payment_modal');
+                 let viewModalEl = document.getElementById('student-payment-slip_model');
+
+                 // Cancel button click
+                 $(editModalEl).on('click', '.btn-cancel', function() {
+                     let editModal = bootstrap.Modal.getInstance(editModalEl);
+                     if (editModal) editModal.hide();
+
+                     let viewModal = new bootstrap.Modal(viewModalEl);
+                     viewModal.show();
+                 });
+
+                 // Modal X button / backdrop close
+                 editModalEl.addEventListener('hidden.bs.modal', function() {
+                     if (!editModalEl.dataset.closedByUpdate) {
+                         let viewModal = new bootstrap.Modal(viewModalEl);
+                         viewModal.show();
+                     }
+                     // Reset after every close
+                     editModalEl.dataset.closedByUpdate = "";
+                 });
+
+                 // Submit form (Update Payment)
+                 $('#edit-payment-form').on('submit', function(e) {
+                     e.preventDefault();
+
+                     let form = $(this);
+                     let url = form.attr('action');
+                     let data = form.serialize();
+
+                     $.ajax({
+                         url: url,
+                         type: 'POST',
+                         data: data,
+                         success: function(response) {
+                             // Mark as closed by update
+                             editModalEl.dataset.closedByUpdate = "true";
+
+                             let editModal = bootstrap.Modal.getInstance(editModalEl);
+                             if (editModal) editModal.hide();
+
+                             let viewModal = new bootstrap.Modal(viewModalEl);
+                             viewModal.show();
+
+                             let body = viewModalEl.querySelector('.modal-body');
+                             if (body) {
+                                 let alertBox = document.createElement('div');
+                                 alertBox.className =
+                                     'alert alert-success alert-dismissible fade show';
+                                 alertBox.role = 'alert';
+                                 alertBox.innerHTML = `
+        Payment updated successfully!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+                                 body.prepend(alertBox);
+
+                                 setTimeout(() => {
+                                     alertBox.classList.remove('show'); // bootstrap fade-out
+                                     alertBox.addEventListener('transitionend', () =>
+                                         alertBox.remove());
+                                 }, 3000);
+                             }
+
+
+                             // DataTable reload
+                             $('#payment-slip-table').DataTable().ajax.reload(null, false);
+                         },
+                         error: function(xhr) {
+                             alert('Something went wrong!');
+                         }
+                     });
+                 });
              });
          </script>
      @endpush

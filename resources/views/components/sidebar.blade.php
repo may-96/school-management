@@ -40,36 +40,50 @@
                             </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Dashboard">Dashboard</span>
-                        {{-- @php
-                            $totalAll =
-                                ($totalTeachers ?? 0) + ($totalStudents ?? 0) + ($totalPaid ?? 0);
-                            $displayTotal = $totalAll >= 99 ? '99+' : $totalAll;
-                        @endphp
-                        <span class="pc-badge">{{ $displayTotal }}</span> --}}
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('teacher.index') }}" class="pc-link">
+                    <a href="{{ route('teachers.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
-                                <use xlink:href="#custom-user"></use>
+                                <use xlink:href="#custom-user-add"></use>
                             </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Teachers">Teachers</span>
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('student.index') }}" class="pc-link">
+                    <a href="{{ route('students.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
-                                <use xlink:href="#custom-user-add"></use>
+                                <use xlink:href="#custom-profile-2user-outline"></use>
                             </svg>
                         </span>
                         <span class="pc-mtext" data-i18n="Students">Students</span>
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="{{ route('voucher.index') }}" class="pc-link">
+                    <a href="{{ route('employees.index') }}" class="pc-link">
+                        <span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-link"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext" data-i18n="Employee">Employees</span>
+                    </a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('payrolls.index') }}" class="pc-link">
+                        <span class="pc-micon">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-story"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext" data-i18n="Payroll">Payroll</span>
+                    </a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="{{ route('vouchers.index') }}" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-keyboard"></use>
@@ -113,7 +127,7 @@
                             </a>
                         </li>
                         <li class="pc-item pc-hasmenu">
-                            <a href="{{ route('appsetting') }}" class="pc-link">
+                            <a href="{{ route('appsettings') }}" class="pc-link">
                                 <span class="pc-micon">
                                     <svg class="pc-icon">
                                         <use xlink:href="#custom-setting-2"></use>

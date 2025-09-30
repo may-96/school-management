@@ -23,6 +23,8 @@
                 </div>
             </div>
 
+            <x-alerts />
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -39,7 +41,10 @@
                                             <input type="text" class="form-control" id="schoolName" name="name"
                                                 placeholder="Enter school name"
                                                 value="{{ old('name', $school->name ?? '') }}" required>
-                                            <label for="schoolName">School Name</label>
+                                            @error('name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                            <label for="schoolName">School Name <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -47,6 +52,9 @@
                                             <input type="text" class="form-control" id="description" name="description"
                                                 placeholder="Enter description"
                                                 value="{{ old('description', $school->description ?? '') }}">
+                                            @error('description')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                             <label for="description">Description</label>
                                         </div>
                                     </div>

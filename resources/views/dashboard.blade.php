@@ -6,70 +6,74 @@
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
-                        {{-- <div class="col-md-12">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="javascript: void(0)">School</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Dashboard</li>
-                            </ul>
-                        </div> --}}
                         <div class="col-md-12">
-                            <div class="page-header-title">
+                            <div class="page-header-title d-flex justify-content-between">
                                 <h2 class="mb-0">Dashboard</h2>
+                                <a id="refreshBtn" class="avtar avtar-xs btn-link-secondary" data-bs-toggle="tooltip"
+                                    data-bs-placement="left" title="Stats Refresh Now">
+                                    <i class="ti ti-refresh f-20"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <x-alert-success />
+            <div id="alert-container">
+                <x-alerts />
+            </div>
 
             <div class="row">
                 <div class="col-12">
-                    <div class="card welcome-banner bg-blue-800">
+                    <div class="card welcome-banner">
                         <div class="card-body">
                             <div class="row">
-                                <!-- Left Column: Logo + Name + Description -->
                                 <div class="col-sm-6 d-flex align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <!-- Logo (Left) -->
                                         <div class="me-3">
                                             <div class="user-upload wid-75">
                                                 @if ($school && $school->logo)
                                                     <img src="{{ asset('storage/schools/' . $school->logo) }}"
                                                         alt="Logo" class="img-fluid" style="max-width: 150px;">
                                                 @else
-                                                    <img src="{{ asset('assets/images/user/sms.png') }}"
-                                                        alt="Default Logo" class="img-fluid"
-                                                        style="max-width: 150px;" />
+                                                    <img src="{{ asset('assets/images/user/sms.png') }}" alt="Default Logo"
+                                                        class="img-fluid" style="max-width: 150px;" />
                                                 @endif
                                             </div>
                                         </div>
 
-                                        <div class="pt-3">
+                                        <div class="pt-0">
                                             @if ($school)
-                                                <h2 class="text-white">{{ $school->name }}</h2>
-                                                <p class="text-white">{{ $school->description }}</p>
+                                                <h2 class="text-white text-break">
+                                                    {{ $school->name }}
+                                                </h2>
+                                                <p class="text-white text-break">
+                                                    {{ $school->description }}
+                                                </p>
                                             @else
-                                                <h2 class="text-white">School Name Not Set</h2>
-                                                <p class="text-white">Please configure your school settings.</p>
+                                                <h2 class="text-white">
+                                                    School Name Not Set
+                                                </h2>
+                                                <p class="text-white">
+                                                    Please configure your
+                                                    school settings.</p>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6 text-center">
-                                    <div class="img-welcome-banner">
+                                    <div class="img-welcome-banner position-relative">
                                         <img src="../assets/images/widget/welcome-banner.png" alt="img"
                                             class="img-fluid" style="height:auto;" />
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+
+                <div class="col-lg-4 col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -82,14 +86,18 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Total Teachers</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ $totalTeachers }}</h4>
+                                        {{-- <h4 class="mb-0">{{ $totalTeachers }}</h4> --}}
+                                        <h4 class="mb-0" id="total_teachers">
+                                            {{ $stats['total_teachers'] ?? 0 }}
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+
+                <div class="col-lg-4 col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -101,14 +109,40 @@
                                 <div class="flex-grow-1 ms-3">
                                     <p class="mb-1">Total Students</p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ $totalStudents }}</h4>
+                                        {{-- <h4 class="mb-0">{{ $totalStudents }}</h4> --}}
+                                        <h4 class="mb-0" id="total_students">
+                                            {{ $stats['total_students'] ?? 0 }}
+                                        </h4>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar bg-light-info">
+                                        <i class="ti ti-users f-24"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-1">Total Employees</p>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        {{-- <h4 class="mb-0">{{ $totalEmployees }}</h4> --}}
+                                        <h4 class="mb-0" id="total_employees">
+                                            {{ $stats['total_employees'] ?? 0 }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -116,19 +150,28 @@
                                 <div class="flex-shrink-0">
                                     <div class="avtar bg-light-success">
                                         <i class="ti ti-currency-dollar f-24"></i>
-
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">Paid Amount</p>
+                                    <p class="mb-1 d-flex align-items-center justify-content-between">
+                                        Fee Received
+                                        <span class="text-success fw-medium">
+                                            <span id="total_paid">{{ $stats['total_paid'] ?? 0 }}</span>
+                                        </span>
+                                    </p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ number_format($totalPaidAmount) }} PKR</h4>
+                                        <h4 class="mb-0">
+                                            <span
+                                                id="total_paid_amount">{{ number_format($stats['total_paid_amount'] ?? 0) }}</span>
+                                            PKR
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -139,22 +182,102 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="mb-1">Pending Amount</p>
+                                    <p class="mb-1 d-flex align-items-center justify-content-between">
+                                        Fee Pending
+                                        <span class="text-danger fw-medium">
+                                            <span id="total_unpaid">{{ $stats['total_unpaid'] ?? 0 }}</span>
+                                        </span>
+                                    </p>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <h4 class="mb-0">{{ number_format($totalPendingAmount) }} PKR</h4>
+                                        <h4 class="mb-0">
+                                            <span
+                                                id="total_pending_amount">{{ number_format($stats['total_pending_amount'] ?? 0) }}</span>
+                                            PKR
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar bg-light-success">
+                                        <i class="ti ti-chart-bar text-success f-24"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-1 d-flex align-items-center justify-content-between">
+                                        Payroll Paid
+                                        <span class="text-success fw-medium">
+                                            <span id="paid_data">{{ $stats['paid_data'] ?? 0 }}</span>
+                                        </span>
+                                    </p>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h4 class="mb-0">
+                                            <span
+                                                id="total_paid_amount_data">{{ number_format($stats['total_paid_amount_data'] ?? 0) }}</span>
+                                            PKR
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="avtar bg-light-danger">
+                                        <i class="ti ti-calendar-event text-danger f-24"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <p class="mb-1 d-flex align-items-center justify-content-between">
+                                        Payroll Unpaid
+                                        <span class="text-danger fw-medium">
+                                            <span id="unpaid_data">{{ $stats['unpaid_data'] ?? 0 }}</span>
+                                        </span>
+                                    </p>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h4 class="mb-0">
+                                            <span
+                                                id="total_unpaid_amount_data">{{ number_format($stats['total_unpaid_amount_data'] ?? 0) }}</span>
+                                            PKR
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Teachers & Student</h5>
+                                <h5 class="mb-0">Teachers, Students &
+                                    Employees</h5>
                             </div>
                             <div id="course-report-bar-chart"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h5 class="mb-0">Payroll</h5>
+                            </div>
+                            <div id="payroll-report-bar-chart"></div>
                         </div>
                     </div>
                 </div>
@@ -166,51 +289,85 @@
                                 <h5 class="mb-4">Vouchers</h5>
                             </div>
                             <div class="row g-3 mb-3">
+                                <!-- Total Vouchers -->
                                 <div class="col-md-6 col-xxl-3">
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
-                                            <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Total Vouchers</h6>
-
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <h6 class="mb-0">Total
+                                                    Vouchers</h6>
+                                                <span class="fw-medium">
+                                                    <span id="total_vouchers">{{ $stats['total_vouchers'] ?? 0 }}</span>
+                                                </span>
                                             </div>
-                                            <h5 class="mb-2 mt-3">{{ $totalVouchers }}</h5>
-
+                                            <h5 class="mb-2 mt-3">
+                                                <span
+                                                    id="grand_total_amount">{{ number_format($stats['grand_total_amount'] ?? 0) }}</span>
+                                                PKR
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Paid Vouchers -->
                                 <div class="col-md-6 col-xxl-3">
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Paid Vouchers</h6>
-
+                                                <h6 class="mb-0">Paid
+                                                    Vouchers</h6>
+                                                <span class="fw-medium">
+                                                    <span id="voucher_total_paid">{{ $stats['total_paid'] ?? 0 }}</span>
+                                                </span>
                                             </div>
-                                            <h5 class="mb-2 mt-3">{{ $totalPaid }}</h5>
-
+                                            <h5 class="mb-2 mt-3">
+                                                <span
+                                                    id="voucher_total_paid_amount">{{ number_format($stats['total_paid_amount'] ?? 0) }}</span>
+                                                PKR
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Partial Paid Vouchers -->
                                 <div class="col-md-6 col-xxl-3">
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Partial Paid Vouchers</h6>
-
+                                                <h6 class="mb-0">
+                                                    Partial Paid Vouchers
+                                                </h6>
+                                                <span class="fw-medium">
+                                                    <span
+                                                        id="total_partial_paid">{{ $stats['total_partial_paid'] ?? 0 }}</span>
+                                                </span>
                                             </div>
-                                            <h5 class="mb-2 mt-3">{{ $totalPartialPaid }}</h5>
-
+                                            <h5 class="mb-2 mt-3">
+                                                <span
+                                                    id="total_partial_paid_amount">{{ number_format($stats['total_partial_paid_amount'] ?? 0) }}</span>
+                                                PKR
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Unpaid Vouchers -->
                                 <div class="col-md-6 col-xxl-3">
                                     <div class="card border mb-0">
                                         <div class="card-body p-3">
                                             <div class="d-flex align-items-center justify-content-between gap-1">
-                                                <h6 class="mb-0">Unpaid Vouchers</h6>
-                                                <p class="mb-0 text-muted d-flex align-items-center gap-1">
-                                                </p>
+                                                <h6 class="mb-0">Unpaid
+                                                    Vouchers</h6>
+                                                <span class="fw-medium">
+                                                    <span
+                                                        id="voucher_total_unpaid">{{ $stats['total_unpaid'] ?? 0 }}</span>
+                                                </span>
                                             </div>
-                                            <h5 class="mb-2 mt-3">{{ $totalUnpaid }}</h5>
+                                            <h5 class="mb-2 mt-3">
+                                                <span
+                                                    id="voucher_total_unpaid_amount">{{ number_format($stats['total_pending_amount'] ?? 0) }}</span>
+                                                PKR
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -222,4 +379,76 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function numberFormat(num) {
+            return !isNaN(num) && num !== null && num !== '' ?
+                new Intl.NumberFormat().format(num) :
+                (num ?? 0);
+        }
+
+        function showSuccessMessage(message) {
+            const container = document.getElementById('alert-container');
+            if (!container) return;
+
+            const alertBox = document.createElement('div');
+            alertBox.className = 'alert alert-success alert-dismissible fade show';
+            alertBox.role = 'alert';
+            alertBox.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+            container.innerHTML = '';
+            container.appendChild(alertBox);
+
+            setTimeout(() => {
+                let bsAlert = bootstrap.Alert.getOrCreateInstance(alertBox);
+                bsAlert.close();
+            }, 3000);
+        }
+
+        function refreshStats(isManual = false) {
+            return fetch("{{ route('dashboard.refresh') }}")
+                .then(res => res.json())
+                .then(data => {
+                    if (data.stats) {
+                        for (const key in data.stats) {
+                            const el = document.getElementById(key);
+                            if (el) {
+                                let value = data.stats[key];
+                                el.innerText = numberFormat(value);
+                            } else {
+                                console.warn(`Element with id "${key}" not found in DOM`);
+                            }
+                        }
+                    }
+
+                    if (data.last_checked) {
+                        const lastCheckedEl = document.getElementById('lastChecked');
+                        if (lastCheckedEl) {
+                            lastCheckedEl.innerText = data.last_checked;
+                        }
+                    }
+
+                    if (isManual) {
+                        showSuccessMessage("Dashboard stats refreshed successfully!");
+                    }
+                })
+                .catch(err => console.error("Error refreshing stats:", err));
+        }
+
+        // Manual Refresh Button
+        const refreshBtn = document.getElementById('refreshBtn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', function() {
+                refreshStats(true);
+            });
+        }
+
+        // Auto Refresh Every 15 Minute
+        setInterval(() => refreshStats(false), 900000);
+
+        // refreshStats(false);
+    </script>
 @endsection

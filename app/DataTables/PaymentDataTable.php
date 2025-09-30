@@ -19,13 +19,13 @@ class PaymentDataTable extends DataTable
                 $voucherInvoice = optional($payment->voucher)->invoice_id ?? 'N/A';
 
                 $monthYearRaw = optional($payment->voucher)->month_year;
-                $formattedMonthYear = $monthYearRaw ? \Carbon\Carbon::createFromFormat('Y-m', $monthYearRaw)->format('F Y') : '';
+                $formattedMonthYear = $monthYearRaw
+                    ? \Carbon\Carbon::createFromFormat('Y-m', $monthYearRaw)->format('M Y') // Changed
+                    : '';
 
                 return '
         <div>
-            <strong>' .
-                    e($paymentInvoice) .
-                    '</strong><br>
+            <strong>' . e($paymentInvoice) . '</strong><br>
             <small class="text-muted">' .
                     e($voucherInvoice) .
                     ($formattedMonthYear ? ' | ' . e($formattedMonthYear) : '') .
@@ -33,6 +33,7 @@ class PaymentDataTable extends DataTable
         </div>
     ';
             })
+
 
             ->addColumn('student_name', function ($payment) {
                 $student = optional($payment->voucher->student);
@@ -72,7 +73,7 @@ class PaymentDataTable extends DataTable
     <ul class="list-inline mb-0">
         <li class="list-inline-item">
             <a href="#"
-                class="avtar avtar-xs btn-link-secondary edit-payment-btn"
+                class="avtar avtar-xs btn-link-secondary edit-payment-btn"  data-bs-hover="tooltip" title="Edit" data-bs-placement="top"
                 data-id="' .
                     $payment->id .
                     '"
@@ -102,7 +103,7 @@ class PaymentDataTable extends DataTable
                     '"
                 data-bs-toggle="modal"
                 data-bs-target="#student-edit-payment_modal">
-                <i class="ti ti-edit f-20" data-bs-toggle="tooltip" title="Edit" data-bs-placement="top"></i>
+                <i class="ti ti-edit f-20"></i>
             </a>
         </li>
         <li class="list-inline-item">
@@ -117,13 +118,13 @@ class PaymentDataTable extends DataTable
                     '
             </form>
             <a href="#"
-                class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                class="avtar avtar-xs btn-link-secondary bs-pass-para" data-bs-hover="tooltip" title="Delete" data-bs-placement="top"
                 data-id="' .
                     $payment->id .
                     '"
                 data-bs-toggle="modal"
                 data-bs-target="#delete-confirmation-modal">
-                <i class="ti ti-trash f-20" data-bs-toggle="tooltip" title="Delete" data-bs-placement="top"></i>
+                <i class="ti ti-trash f-20" ></i>
             </a>
         </li>
     </ul>';

@@ -320,8 +320,8 @@
        });
    </script> --}}
    {{-- @endpush --}}
-   
-   <div class="col-sm-6 col-xl-3">
+
+   {{-- <div class="col-sm-6 col-xl-3">
        <label class="form-label">Status</label>
        <select class="form-select" name="status">
            <option value="">Please Select</option>
@@ -330,4 +330,140 @@
                    {{ $status }}</option>
            @endforeach
        </select>
-   </div>
+   </div> --}}
+
+   {{-- <table class="table table-hover" id="pc-dt-simple">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Departments / Class</th>
+                                            <th>Education</th>
+                                            <th>Mobile</th>
+                                            <th>Joining Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($teachers as $teacher)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0">
+                                                            <a href="{{ route('teacher.show', $teacher->id) }}">
+                                                                @if ($teacher->profile_image)
+                                                                    <img src="{{ asset('storage/teachers/' . $teacher->profile_image) }}"
+                                                                        alt="img" class="img-fluid rounded-circle"
+                                                                        style="height:40px; width:40px;" />
+                                                                @else
+                                                                    <img src="{{ asset('assets/images/user/avatar-1.jpg') }}"
+                                                                        alt="img" class="img-fluid rounded-circle"
+                                                                        style="height:40px; width:40px;" />
+                                                                @endif
+                                                            </a>
+                                                        </div>
+                                                        <div class="flex-grow-1 ms-3">
+                                                            <h6 class="mb-0">{{ $teacher->first_name }}
+                                                                {{ $teacher->last_name }}</h6>
+                                                            <small
+                                                                class="text-truncate w-100 text-muted">{{ $teacher->email }}</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-0">{{ $teacher->department }}</h6>
+                                                        <small
+                                                            class="text-truncate w-100 text-muted">{{ $teacher->class }}</small>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $teacher->education }}</td>
+                                                <td>{{ $teacher->mobile_number }}</td>
+                                                <td>{{ $teacher->joining_date }}</td>
+                                                <td>
+                                                    <a href="{{ route('teacher.show', $teacher->id) }}"
+                                                        class="avtar avtar-xs btn-link-secondary">
+                                                        <i class="ti ti-eye f-20"></i>
+                                                    </a>
+                                                    <a href="{{ route('teacher.edit', $teacher->id) }}"
+                                                        class="avtar avtar-xs btn-link-secondary">
+                                                        <i class="ti ti-edit f-20"></i>
+                                                    </a>
+                                                    <form id="delete-form-{{ $teacher->id }}"
+                                                        action="{{ route('teacher.destroy', $teacher->id) }}"
+                                                        method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para"
+                                                        data-id="{{ $teacher->id }}">
+                                                        <i class="ti ti-trash f-20"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table> --}}
+
+
+   {{-- stat data  --}}
+   {{-- //     $totalTeachers = Teacher::count();
+        //     $totalStudents = Student::count();
+        //     $totalEmployees = Employee::count();
+
+        //     $paidData = Payroll::where('status', 'paid')->count();
+        //     $unpaidData = Payroll::where('status', 'unpaid')->count();
+        //     $totalPaidAmountData = Payroll::where('status', 'paid')->sum('monthly_salary');
+        //     $totalUnpaidAmountData = Payroll::where('status', 'unpaid')->sum('monthly_salary');
+
+        //     $totalPaid = Voucher::whereIn('status', ['paid', 'partial paid'])->count();
+        //     $totalUnpaid = Voucher::where('status', 'unpaid')->count();
+        //     $totalPartialPaid = Voucher::where('status', 'partial paid')->count();
+        //     $totalVouchers = $totalPaid + $totalUnpaid;
+
+        //     $totalPaidAmount = DB::table('payments')->sum('amount');
+
+        //     $partialPaidVoucherIds = Voucher::where('status', 'partial paid')->pluck('id');
+        //     $totalPartialPaidAmount = DB::table('payments')
+        //         ->whereIn('voucher_id', $partialPaidVoucherIds)
+        //         ->sum('amount');
+
+        //     $partialRemaining = Voucher::where('status', 'partial paid')
+        //         ->select(DB::raw('SUM(amount - (SELECT COALESCE(SUM(payments.amount),0) FROM payments WHERE payments.voucher_id = vouchers.id)) AS remaining'))
+        //         ->value('remaining');
+
+        //     $unpaidRemaining = Voucher::where('status', 'unpaid')->sum('amount');
+
+        //     $totalPendingAmount = $unpaidRemaining + $partialRemaining;
+
+        //     $grandTotalAmount = $totalPaidAmount + $totalPendingAmount;
+
+        //     $pendingAmountFormatted = '
+        //     <div class="d-flex flex-column">
+        //         <span>' . number_format($totalPendingAmount, 2) . ' PKR</span>
+        //         <small class="text-muted">Paid: ' . number_format($totalPaidAmount, 2) . ' PKR</small>
+        //     </div>
+        // ';
+
+        //     $school = School::latest()->first();
+
+        //     return view('dashboard', compact(
+        //         'totalTeachers',
+        //         'totalStudents',
+        //         'totalEmployees',
+        //         'totalPaidAmount',
+        //         'totalPartialPaidAmount',
+        //         'unpaidRemaining',
+        //         'partialRemaining',
+        //         'totalPendingAmount',
+        //         'grandTotalAmount',
+        //         'totalPaid',
+        //         'totalPartialPaid',
+        //         'totalUnpaid',
+        //         'totalVouchers',
+        //         'pendingAmountFormatted',
+        //         'paidData',
+        //         'unpaidData',
+        //         'totalPaidAmountData',
+        //         'totalUnpaidAmountData',
+        //         'school'
+        //     )); --}}

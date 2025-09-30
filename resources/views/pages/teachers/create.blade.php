@@ -9,13 +9,13 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Teacher</li>
+                                <li class="breadcrumb-item" aria-current="page">Teachers</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
                                 <h2 class="mb-0">
-                                    Teacher Add
+                                    Add Teacher
                                 </h2>
                             </div>
                         </div>
@@ -23,6 +23,7 @@
                 </div>
             </div>
 
+            <x-alerts />
 
             <div class="row">
                 <div class="col-12">
@@ -30,7 +31,7 @@
                         <div class="card-header">
                             <h5 class="mb-0">Basic Information</h5>
                         </div>
-                        <form action="{{ route('teacher.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('teachers.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -85,8 +86,8 @@
                                     {{-- Date of Birth --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                                        <input type="date" name="date_of_birth" class="form-control" max="{{ date('Y-m-d') }}"
-                                            value="{{ old('date_of_birth') }}" />
+                                        <input type="date" name="date_of_birth" class="form-control"
+                                            max="{{ date('Y-m-d') }}" value="{{ old('date_of_birth') }}" />
                                         @error('date_of_birth')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -95,13 +96,23 @@
                                     {{-- Joining Date --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Joining Date <span class="text-danger">*</span></label>
-                                        <input type="date" name="joining_date" class="form-control" max="{{ date('Y-m-d') }}"
-                                            value="{{ old('joining_date') }}" />
+                                        <input type="date" name="joining_date" class="form-control"
+                                            max="{{ date('Y-m-d') }}" value="{{ old('joining_date') }}" />
                                         @error('joining_date')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
 
+                                    {{-- Monthly Salary --}}
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Monthly Salary <span class="text-danger">*</span></label>
+                                        <input type="number" name="monthly_salary" class="form-control"
+                                            value="{{ old('monthly_salary', $teacher->monthly_salary ?? '') }}"
+                                            placeholder="Enter monthly salary" step="0.01" min="0" />
+                                        @error('monthly_salary')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
 
                                     {{-- Email --}}
                                     <div class="col-md-6 mb-3">
@@ -111,20 +122,6 @@
                                         @error('email')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
-                                    </div>
-
-
-                                    {{-- Class --}}
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Class</label>
-                                        <select name="class" class="form-select">
-                                            <option value="">Select</option>
-                                            @foreach (['Montesori', 'K.G', 'Nursery', 'Prep', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th'] as $class)
-                                                <option value="{{ $class }}"
-                                                    {{ old('class') == $class ? 'selected' : '' }}>{{ $class }}
-                                                </option>
-                                            @endforeach
-                                        </select>
                                     </div>
 
                                     {{-- Department --}}
@@ -141,16 +138,35 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Education</label>
                                         <input type="text" name="education" class="form-control"
-                                            value="{{ old('education') }}" placeholder="Education" />
+                                            value="{{ old('education') }}" placeholder="Enter Education" />
                                         @error('education')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
 
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Status</label>
+                                        <select name="status" class="form-select">
+                                            <option value="Active" {{ old('status', $teacher->status ?? '') == 'Active' ? 'selected' : '' }}>Active</option>
+                                            <option value="Inactive" {{ old('status', $teacher->status ?? '') == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                                        </select>
+                                        @error('status')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
                                     {{-- Teacher Profile --}}
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Teacher Profile</label>
                                         <input class="form-control" type="file" name="profile_photo" />
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Address</label>
+                                        <textarea name="address" class="form-control" rows="2" placeholder="Enter address">{{ old('address') }}</textarea>
+                                        @error('address')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     {{-- Submit --}}

@@ -17,5 +17,9 @@ class VoucherItem extends Model
     {
         return $this->belongsTo(Voucher::class);
     }
-    
+
+    public function feeType()
+    {
+        return $this->belongsTo(FeeType::class, 'fee_type_id');
+    }
 }

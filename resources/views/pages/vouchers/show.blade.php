@@ -42,7 +42,8 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Voucher</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/vouchers') }}">Vouchers</a></li>
+                                <li class="breadcrumb-item" aria-current="page">{{ $voucher->invoice_id }}</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
@@ -54,7 +55,7 @@
                 </div>
             </div>
 
-            <x-alert-success />
+            <x-alerts />
 
             <div class="row">
                 <div class="col-sm-12">
@@ -63,7 +64,7 @@
                             <ul class="list-inline ms-auto mb-0 d-flex justify-content-end flex-wrap">
                                 <li class="list-inline-item align-bottom me-2">
                                     @if (in_array(strtolower($voucher->status), ['unpaid', 'partial paid']))
-                                        <a href="{{ route('voucher.edit', $voucher->id) }}"
+                                        <a href="{{ route('voucher.edit', $voucher->id) }}?redirect_to=voucher_show"
                                             class="avtar avtar-s btn-link-secondary">
                                             <i class="ph-duotone ph-pencil-simple-line f-22"></i>
                                         </a>
@@ -125,8 +126,9 @@
                                                     </p>
                                                     <p class="f-w-400 mb-1 text-start">Class / Section :
                                                         <span class="f-w-600 mb-1 text-end">
-                                                            {{ $voucher->student->class ?? 'N/A' }} /
-                                                            {{ $voucher->student->section ?? 'N/A' }}
+                                                            {{ optional(optional($voucher->student->classSection)->class)->name ?? 'N/A' }}
+                                                            /
+                                                            {{ optional(optional($voucher->student->classSection)->section)->name ?? 'N/A' }}
                                                         </span>
                                                     </p>
                                                 </div>
@@ -183,7 +185,9 @@
                                                     @foreach ($voucher->items as $index => $item)
                                                         <tr>
                                                             <td>{{ $index + 1 }}</td>
-                                                            <td>{{ $item->fee_type }}</td>
+                                                            <td>
+                                                                {{ $item->feeType->name ?? 'ID: ' . $item->fee_type_id }}
+                                                            </td>
                                                             <td class="text-end">{{ number_format($item->fee_amount) }} PKR
                                                             </td>
                                                         </tr>
@@ -224,7 +228,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         const body = document.body;
 

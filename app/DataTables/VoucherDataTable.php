@@ -22,7 +22,7 @@ class VoucherDataTable extends DataTable
                         ->orWhere('parents_mobile', 'like', "%$keyword%");
                 });
             })
-            
+
             ->addColumn('invoice_id', function ($voucher) {
                 $monthYear = $voucher->month_year
                     ? str(Carbon::createFromFormat('Y-m', $voucher->month_year)->format('F Y'))
@@ -106,7 +106,7 @@ class VoucherDataTable extends DataTable
                     '
             <li class="list-inline-item">
                 <a href="#"
-                    class="avtar avtar-xs btn-link-secondary open-payment-modal"
+                    class="avtar avtar-xs btn-link-secondary open-payment-modal" data-bs-hover="tooltip" title="Add Payment"
                     data-bs-toggle="modal"
                     data-bs-target="#student-add-payment_modal"
                     data-invoice-id="' .
@@ -121,7 +121,7 @@ class VoucherDataTable extends DataTable
                     data-voucher-amount="' .
                     e($voucher->amount - $voucher->payments()->sum('amount')) .
                     '">
-                    <i class="ti ti-plus f-20" data-bs-toggle="tooltip" title="Add Payment" data-bs-placement="top"></i>
+                    <i class="ti ti-plus f-20"></i>
                 </a>
             </li>';
 
@@ -130,8 +130,8 @@ class VoucherDataTable extends DataTable
             <li class="list-inline-item">
                 <a href="' .
                     route('voucher.edit', $voucher->id) .
-                    '" class="avtar avtar-xs btn-link-secondary">
-                    <i class="ti ti-edit f-20" data-bs-toggle="tooltip" title="Edit Voucher" data-bs-placement="top"></i>
+                    '" class="avtar avtar-xs btn-link-secondary" data-bs-hover="tooltip" title="Edit Voucher">
+                    <i class="ti ti-edit f-20"></i>
                 </a>
             </li>';
             }
@@ -140,20 +140,17 @@ class VoucherDataTable extends DataTable
                 $deleteButton =
                     '
             <li class="list-inline-item">
-                <form id="delete-form-' .
-                    $voucher->id .
-                    '" action="' .
-                    route('voucher.destroy', $voucher->id) .
-                    '" method="POST" style="display: none;">
-                    ' .
-                    csrf_field() .
-                    method_field('DELETE') .
-                    '
-                </form>
-                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-id="' .
+              <form id="delete-form-' . $voucher->id . '" 
+      action="' . route('voucher.destroy', $voucher->id) . '" 
+      method="POST" style="display: none;">
+    ' . csrf_field() . method_field('DELETE') . '
+    <input type="hidden" name="redirect_to" value="index">
+</form>
+
+                <a href="#" class="avtar avtar-xs btn-link-secondary bs-pass-para" data-bs-hover="tooltip" title="Delete" data-id="' .
                     $voucher->id .
                     '">
-                    <i class="ti ti-trash f-20" data-bs-toggle="tooltip" title="Delete Voucher" data-bs-placement="top"></i>
+                    <i class="ti ti-trash f-20"></i>
                 </a>
             </li>';
             }
@@ -164,7 +161,7 @@ class VoucherDataTable extends DataTable
                 '
             <li class="list-inline-item">
                 <a href="#"
-                   class="avtar avtar-xs btn-link-secondary view-payment-slip"
+                   class="avtar avtar-xs btn-link-secondary view-payment-slip" 
                    data-bs-toggle="modal"
                    data-bs-target="#student-payment-slip_model"
                    data-voucher-id="' .
@@ -173,7 +170,7 @@ class VoucherDataTable extends DataTable
                    data-student-id="' .
                 e($voucher->student_id) .
                 '">
-                   <i class="ti ti-eye f-20" data-bs-toggle="tooltip" title="View Payment Slip" data-bs-placement="top"></i>
+                   <i class="ti ti-eye f-20"></i>
                 </a>
             </li>' .
                 $editButton .

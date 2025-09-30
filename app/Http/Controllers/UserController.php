@@ -17,16 +17,15 @@ class UserController extends Controller
         return view('pages.admin.users', compact('users'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
             'first_name'     => 'nullable|string|max:25',
             'last_name'      => 'nullable|string|max:25',
-            'email'          => 'required|email|unique:users,email',
-            'password'       => 'required|string|min:6',
+            'email'          => 'required|email|max:30|unique:users,email',
+            'password'       => 'required|string|min:8|max:14|confirmed',
             'phone'          => 'nullable|string|max:15',
-            'status'         => 'nullable|in:active,inactive',
+            'status'         => ['nullable', Rule::in(['active', 'inactive'])],
             'profile_photo'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
@@ -57,8 +56,8 @@ class UserController extends Controller
             'last_name'  => 'nullable|string|max:25',
             'phone'      => 'nullable|string|max:15',
             'status'     => ['nullable', Rule::in(['active', 'inactive'])],
-            'email'      => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'password'   => 'nullable|string|min:6',
+            'email'      => ['required', 'email', 'max:30', Rule::unique('users')->ignore($user->id)],
+            'password'   => 'nullable|string|min:8|max:14|confirmed',
         ]);
 
         // Update user fields

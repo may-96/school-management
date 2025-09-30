@@ -8,7 +8,6 @@ use App\DataTables\PaymentDataTable;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
 use Yajra\DataTables\Facades\DataTables;
 
 class PaymentController extends Controller
@@ -25,13 +24,16 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
+
+        // UpdateDashboardStatsJob::dispatch();
+
         $request->validate([
             'voucher_id' => 'required|exists:vouchers,id',
-            'reference_number' => 'nullable|string|max:30',
             'payment_method' => 'required',
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|numeric|min:1|max:10000000',
             'payment_date' => 'required|date',
-            'notes' => 'nullable|string|max:50',
+            'reference_number' => 'nullable|string|max:30',
+            'notes' => 'nullable|string|max:100',
             'voucher_amount' => 'nullable|numeric|min:0',
         ]);
 
@@ -72,10 +74,10 @@ class PaymentController extends Controller
         Payment::create([
             'voucher_id' => $voucher->id,
             'invoice_id' => $invoiceId,
-            'reference_number' => $request->reference_number,
             'payment_method' => $request->payment_method,
             'amount' => $request->amount,
             'payment_date' => $request->payment_date,
+            'reference_number' => $request->reference_number,
             'notes' => $request->notes,
             'user_id' => Auth::id(),
         ]);
@@ -92,7 +94,8 @@ class PaymentController extends Controller
 
         $voucher->save();
 
-        return redirect()->route('voucher.index')->with('success', 'Payment added successfully!');
+        return redirect()->back()->with('success', 'Payment added successfully!')
+            ->with('active_tab', 'profile-2');
     }
 
     private function generateUniquePaymentInvoiceId()
@@ -113,11 +116,11 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'reference_number' => 'nullable|string|max:30',
             'payment_method' => 'required|string',
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|numeric|min:1|max:10000000',
             'payment_date' => 'required|date',
-            'notes' => 'nullable|string|max:50',
+            'reference_number' => 'nullable|string|max:30',
+            'notes' => 'nullable|string|max:100',
         ]);
 
         $payment = Payment::findOrFail($id);
@@ -137,14 +140,15 @@ class PaymentController extends Controller
         }
 
         $payment->update([
-            'reference_number' => $request->reference_number,
             'payment_method' => $request->payment_method,
             'amount' => $request->amount,
             'payment_date' => $request->payment_date,
+            'reference_number' => $request->reference_number,
             'notes' => $request->notes,
         ]);
 
-        return redirect()->route('payment.index')->with('success', 'Payment updated successfully!');
+        return redirect()->back()->with('success', 'Payment updated successfully!')
+            ->with('active_tab', 'profile-2');
     }
 
     public function show($id, PaymentDataTable $dataTable)
@@ -177,10 +181,11 @@ class PaymentController extends Controller
             $voucher->save();
         }
 
-        return redirect()->back()->with('success', 'Payment deleted and Voucher status updated.');
+        return redirect()->back()->with('success', 'Payment deleted and Voucher status updated.')
+            ->with('active_tab', 'profile-2');
     }
 
-
+    // each student view payment slip yajra datatable 
     public function data(Request $request)
     {
         $query = Payment::with(['voucher.payments'])

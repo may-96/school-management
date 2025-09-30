@@ -17,8 +17,8 @@ class SchoolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'name' => 'required|string|max:100',
+            'description' => 'nullable|string|max:225',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -50,11 +50,6 @@ class SchoolController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'School saved successfully.');
     }
-
-
-
-
-
 
     public function index()
     {

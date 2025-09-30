@@ -24,10 +24,12 @@ class TeacherController extends Controller
             'date_of_birth' => 'required|date',
             'joining_date' => 'required|date',
             'email' => 'nullable|email|max:30|unique:teachers,email',
-            'class' => 'nullable',
-            'department' => 'nullable|string|max:40',
-            'education' => 'nullable|string|max:40',
+            'department' => 'nullable|string|max:25',
+            'education' => 'nullable|string|max:25',
+            'monthly_salary' => 'required|numeric|min:0|max:10000000',
+            'status' => 'nullable|string|max:20',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'address' => 'nullable|string|max:100',
         ]);
 
         $fileName = null;
@@ -41,7 +43,7 @@ class TeacherController extends Controller
 
         Teacher::create($data);
 
-        return redirect()->route('teacher.index')->with('success', 'Teacher added successfully!');
+        return redirect()->route('teachers.index')->with('success', 'Teacher added successfully!');
     }
 
     public function edit($id)
@@ -62,10 +64,12 @@ class TeacherController extends Controller
             'date_of_birth' => 'required|date',
             'joining_date' => 'required|date',
             'email' => 'nullable|email|max:30|unique:teachers,email,' . $teacher->id,
-            'class' => 'nullable',
-            'department' => 'nullable|string|max:40',
-            'education' => 'nullable|string|max:40',
+            'department' => 'nullable|string|max:25',
+            'education' => 'nullable|string|max:25',
+            'monthly_salary' => 'required|numeric|min:0|max:10000000',
+            'status' => 'nullable|string|max:20',
             'profile_photo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'address' => 'nullable|string|max:100',
         ]);
 
         if ($request->hasFile('profile_photo')) {
@@ -87,12 +91,15 @@ class TeacherController extends Controller
             'mobile_number' => $request->mobile_number,
             'gender' => $request->gender,
             'department' => $request->department,
-            'class' => $request->class,
             'education' => $request->education,
+            'monthly_salary' => $request->monthly_salary,
+            'status' => $request->status,
             'profile_image' => $imagePath,
+            'address' => $request->input('address'),
+
         ]);
 
-        return redirect()->route('teacher.index')->with('success', 'Teacher updated successfully!');
+        return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');
     }
 
     public function index(TeacherDataTable $dataTable)
@@ -100,9 +107,28 @@ class TeacherController extends Controller
         return $dataTable->render('pages.teachers.index');
     }
 
+    public function show($id)
+    {
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
+        $teacher = Teacher::with([
+            'assignments.classSection.class',
+            'assignments.classSection.section',
+            'assignments.subject'
+        ])->findOrFail($id);
+
+        return view('pages.teachers.show', compact('teacher'));
+    }
+
     public function destroy($id)
     {
         $teacher = Teacher::findOrFail($id);
+
+        if ($teacher->payrolls()->exists()) {
+            return redirect()->back()->with('info', 'Teacher cannot be deleted because payroll has already been created.');
+        }
 
         if ($teacher->profile_image && file_exists(storage_path('app/public/teachers/' . $teacher->profile_image))) {
             unlink(storage_path('app/public/teachers/' . $teacher->profile_image));
@@ -111,12 +137,6 @@ class TeacherController extends Controller
         $teacher->delete();
 
         return redirect()->back()->with('success', 'Teacher deleted successfully!');
-    }
-
-    public function show($id)
-    {
-        $teacher = Teacher::findOrFail($id);
-        return view('pages.teachers.show', compact('teacher'));
     }
 
     private function uploadProfilePhoto($file)

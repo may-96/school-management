@@ -11,12 +11,11 @@
 
     <meta name="description"
         content="Basic School Management System to manage students, their vouchers and payments and teachers data" />
-    <meta name="keywords"
-        content="school, management, students, vouchers, payments, teachers" />
+    <meta name="keywords" content="school, management, students, vouchers, payments, teachers" />
     <meta name="author" content="ScrumAD" />
 
     {{-- Icon School Management System --}}
-    <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon" />
 
     {{-- [CSS Files] --}}
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/style.css') }}" />
@@ -77,6 +76,7 @@
     @if (Route::currentRouteName() === 'dashboard')
         <script src="{{ asset('assets/js/widgets/course-report-bar-chart.js') }}"></script>
         <script src="{{ asset('assets/js/widgets/invoice-chart.js') }}"></script>
+        <script src="{{ asset('assets/js/widgets/payroll-report-bar-chart.js') }}"></script>
     @endif
 
     <!-- jQuery + DataTables JS -->

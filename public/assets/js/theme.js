@@ -71,8 +71,15 @@ function layout_change(layout) {
   const defaultBtn = document.querySelector('.theme-layout .btn[data-value="default"]');
   if (defaultBtn) defaultBtn.classList.remove('active');
 
+   const welcomeCard = document.querySelector('.welcome-banner');
+
   if (layout === 'dark') {
     dark_flag = true;
+
+    if (welcomeCard) {
+      welcomeCard.classList.remove('bg-blue-800');
+    }
+
     updateLogo('.pc-sidebar .m-header .logo-lg', '../assets/images/logo-white.svg');
     updateLogo('.navbar-brand .logo-lg', '../assets/images/logo-white.svg');
     updateLogo('.auth-main.v1 .auth-sidefooter img', '../assets/images/logo-white.svg');
@@ -80,6 +87,11 @@ function layout_change(layout) {
     updateActiveButton('.theme-layout .btn[data-value="false"]');
   } else {
     dark_flag = false;
+
+    if (welcomeCard) {
+      welcomeCard.classList.add('bg-blue-800');
+    }
+
     updateLogo('.pc-sidebar .m-header .logo-lg', '../assets/images/logo-dark.svg');
     updateLogo('.navbar-brand .logo-lg', '../assets/images/logo-dark.svg');
     updateLogo('.auth-main.v1 .auth-sidefooter img', '../assets/images/logo-dark.svg');

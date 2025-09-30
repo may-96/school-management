@@ -21,25 +21,7 @@
                 </div>
             </div>
 
-            {{-- @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error-alert">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif --}}
-
-
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
+            <x-alerts />
 
             <div class="row">
                 <div class="col-sm-12">
@@ -47,23 +29,28 @@
                         <div class="card-body py-0">
                             <ul class="nav nav-tabs profile-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="profile-tab-1" data-bs-toggle="tab" href="#profile-1"
-                                        role="tab" aria-selected="true">
-                                        <i class="ti ti-file-text me-2"></i>Personal Details
+                                    <a class="nav-link {{ session('active_tab', 'profile-1') == 'profile-1' ? 'active' : '' }}"
+                                        id="profile-tab-1" data-bs-toggle="tab" href="#profile-1" role="tab"
+                                        aria-selected="{{ session('active_tab', 'profile-1') == 'profile-1' ? 'true' : 'false' }}">
+                                        <i class="ti ti-user me-2"></i>Personal Details
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab-2" data-bs-toggle="tab" href="#profile-2"
-                                        role="tab" aria-selected="true">
+                                    <a class="nav-link {{ session('active_tab') == 'profile-2' ? 'active' : '' }}"
+                                        id="profile-tab-2" data-bs-toggle="tab" href="#profile-2" role="tab"
+                                        aria-selected="{{ session('active_tab') == 'profile-2' ? 'true' : 'false' }}">
                                         <i class="ti ti-lock me-2"></i>Change Information
                                     </a>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
 
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="profile-1" role="tabpanel">
+                        <div class="tab-pane fade {{ session('active_tab', 'profile-1') == 'profile-1' ? 'show active' : '' }}"
+                            id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
                             <div class="row">
                                 <div class="col-lg-8 col-xxl-12">
                                     <div class="card">
@@ -87,11 +74,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">First Name</p>
-                                                            <p class="mb-0">{{ $user->first_name }}</p>
+                                                            <p class="mb-0">{{ $user->first_name ?? 'N/A' }}</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Last Name</p>
-                                                            <p class="mb-0">{{ $user->last_name }}</p>
+                                                            <p class="mb-0">{{ $user->last_name ?? 'N/A' }}</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -99,7 +86,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Contact Phone</p>
-                                                            <p class="mb-0">{{ $user->phone }}</p>
+                                                            <p class="mb-0">{{ $user->phone ?? 'N/A' }}</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <p class="mb-1 text-muted">Email</p>
@@ -109,7 +96,7 @@
                                                 </li>
                                                 <li class="list-group-item px-0 pb-0">
                                                     <p class="mb-1 text-muted">Address</p>
-                                                    <p class="mb-0">{{ $user->address }}</p>
+                                                    <p class="mb-0">{{ $user->address ?? 'N/A' }}</p>
                                                 </li>
                                             </ul>
                                         </div>
@@ -119,7 +106,8 @@
                         </div>
 
                         {{-- Profile Update Form --}}
-                        <div class="tab-pane" id="profile-2" role="tabpanel">
+                        <div class="tab-pane fade {{ session('active_tab') == 'profile-2' ? 'show active' : '' }}"
+                            id="profile-2" role="tabpanel" aria-labelledby="profile-tab-2">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form method="POST" action="{{ route('admin.users.update-profile') }}"
@@ -177,6 +165,7 @@
                                                     <div class="col-sm-6 mb-3">
                                                         <label class="form-label">First Name</label>
                                                         <input type="text" name="first_name" class="form-control"
+                                                            placeholder="Enter first name"
                                                             value="{{ old('first_name', $user->first_name) }}" />
                                                         @error('first_name')
                                                             <small class="text-danger">{{ $message }}</small>
@@ -185,14 +174,16 @@
                                                     <div class="col-sm-6 mb-3">
                                                         <label class="form-label">Last Name</label>
                                                         <input type="text" name="last_name" class="form-control"
+                                                            placeholder="Enter last name"
                                                             value="{{ old('last_name', $user->last_name) }}" />
                                                         @error('last_name')
                                                             <small class="text-danger">{{ $message }}</small>
                                                         @enderror
                                                     </div>
                                                     <div class="col-sm-6 mb-3">
-                                                        <label class="form-label">Contact Phone</label>
+                                                        <label class="form-label">Contact No</label>
                                                         <input type="text" name="phone" class="form-control"
+                                                            placeholder="Enter contact no"
                                                             value="{{ old('phone', $user->phone) }}" />
                                                         @error('phone')
                                                             <small class="text-danger">{{ $message }}</small>
@@ -202,6 +193,7 @@
                                                         <label class="form-label">Email <span
                                                                 class="text-danger">*</span></label>
                                                         <input type="email" name="email" class="form-control"
+                                                            placeholder="Enter email"
                                                             value="{{ old('email', $user->email) }}" />
                                                         @error('email')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -209,7 +201,7 @@
                                                     </div>
                                                     <div class="col-sm-12 mb-3">
                                                         <label class="form-label">Address</label>
-                                                        <textarea name="address" class="form-control">{{ old('address', $user->address) }}</textarea>
+                                                        <textarea name="address" class="form-control" placeholder="Enter address">{{ old('address', $user->address) }}</textarea>
                                                         @error('address')
                                                             <small class="text-danger">{{ $message }}</small>
                                                         @enderror
@@ -241,7 +233,8 @@
                                                                     class="text-danger">*</span></label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="current_password"
-                                                                    class="form-control pe-5" required />
+                                                                    class="form-control pe-5" placeholder="********"
+                                                                    required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
@@ -256,7 +249,8 @@
                                                                     class="text-danger">*</span></label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="password"
-                                                                    class="form-control pe-5" required />
+                                                                    class="form-control pe-5" placeholder="********"
+                                                                    required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
@@ -271,7 +265,8 @@
                                                                     class="text-danger">*</span></label>
                                                             <div class="position-relative">
                                                                 <input type="password" name="password_confirmation"
-                                                                    class="form-control pe-5" required />
+                                                                    class="form-control pe-5" placeholder="********"
+                                                                    required />
                                                                 <i class="fa fa-eye toggle-password position-absolute top-50 end-0 translate-middle-y me-3"
                                                                     style="cursor: pointer;"></i>
                                                             </div>
