@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <x-alerts />
+            {{-- <x-alerts /> --}}
 
             <div class="row">
                 <div class="col-12">
