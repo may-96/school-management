@@ -23,7 +23,7 @@ class UserController extends Controller
             'first_name'     => 'nullable|string|max:25',
             'last_name'      => 'nullable|string|max:25',
             'email'          => 'required|email|max:30|unique:users,email',
-            'password'       => 'required|string|min:8|max:14|confirmed',
+            'password'       => 'required|string|min:6',
             'phone'          => 'nullable|string|max:15',
             'status'         => ['nullable', Rule::in(['active', 'inactive'])],
             'profile_photo'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
@@ -57,7 +57,7 @@ class UserController extends Controller
             'phone'      => 'nullable|string|max:15',
             'status'     => ['nullable', Rule::in(['active', 'inactive'])],
             'email'      => ['required', 'email', 'max:30', Rule::unique('users')->ignore($user->id)],
-            'password'   => 'nullable|string|min:8|max:14|confirmed',
+            'password'   => 'nullable|string|min:6',
         ]);
 
         // Update user fields
