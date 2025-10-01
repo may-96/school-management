@@ -5,6 +5,13 @@
     </div>
 @endif
 
+@if (session('status'))
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        {{ session('status') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 @if (session('error'))
     <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
         {{ session('error') }}
@@ -46,8 +53,8 @@
                 alert.classList.remove("show");
                 setTimeout(() => {
                     alert.remove();
-                }, 500); 
-            }, 3000); 
+                }, 500);
+            }, 3000);
         });
     });
 </script>
