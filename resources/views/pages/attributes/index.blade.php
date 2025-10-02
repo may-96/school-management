@@ -318,23 +318,23 @@
      </div>
 
      {{-- Error Handling Script --}}
-     @if ($errors->has('class_name'))
+     {{-- @if ($errors->has('class_name'))
          <script>
              document.addEventListener("DOMContentLoaded", function() {
                  var modal = new bootstrap.Modal(document.getElementById('add-class-modal'));
                  modal.show();
              });
          </script>
-     @endif
+     @endif --}}
 
-     @if ($errors->has('section_name'))
+     {{-- @if ($errors->has('section_name'))
          <script>
              document.addEventListener("DOMContentLoaded", function() {
                  var modal = new bootstrap.Modal(document.getElementById('add-section-modal'));
                  modal.show();
              });
          </script>
-     @endif
+     @endif --}}
 
      <script>
          document.querySelectorAll('.modal').forEach(function(modalEl) {
