@@ -30,7 +30,7 @@
                             <div class="d-sm-flex align-items-center justify-content-between">
                                 <h5 class="mb-3 mb-sm-0">Employee list</h5>
                                 <div>
-                                    <a href="{{ route('employees.create') }}" class="btn btn-primary">Add Employee</a>
+                                    <a href="{{ route('employees.create') }}" class="btn btn-light-info">Add Employee</a>
                                 </div>
                             </div>
                         </div>

@@ -48,7 +48,7 @@
 
                                     @if ($eligibleStaffCount > 0)
                                         <a href="{{ route('payrolls.create') }}"
-                                            class="btn btn-primary d-inline-flex align-items-center">
+                                            class="btn btn-light-success d-inline-flex align-items-center">
                                             {{ $alreadyRun ? 'Run Payroll Register' : 'Run Payroll Register' }}
                                         </a>
                                     @else

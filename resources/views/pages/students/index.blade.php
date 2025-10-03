@@ -35,7 +35,7 @@
                                         <i class="ph-duotone ph-plus-circle me-1"></i>Create Fee Voucher
                                     </a>
 
-                                    <a href="{{ route('students.create') }}" class="btn btn-primary">Add Student</a>
+                                    <a href="{{ route('students.create') }}" class="btn btn-light-warning">Add Student</a>
                                 </div>
                             </div>
                         </div>
