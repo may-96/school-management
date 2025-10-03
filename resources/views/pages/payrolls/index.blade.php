@@ -237,9 +237,6 @@
         </div>
     </div>
 
-
-
-
     @push('scripts')
         {!! $dataTable->scripts() !!}
         {{-- tooltips --}}
@@ -261,7 +258,7 @@
         <script>
             // When the modal is opened via any Action button, inject that row's ID
             document.getElementById('add-payroll-modal').addEventListener('show.bs.modal', function(event) {
-                const trigger = event.relatedTarget; // the <a> that opened the modal
+                const trigger = event.relatedTarget;
                 if (!trigger) return;
                 const payrollId = trigger.getAttribute('data-id');
                 this.querySelector('#modal-payroll-id').value = payrollId;
@@ -304,7 +301,6 @@
                     var button = event.relatedTarget;
                     var payrollId = button.getAttribute("data-id");
 
-                    // Hidden input mein value set karo
                     payrollIdInput.value = payrollId;
                 });
             });

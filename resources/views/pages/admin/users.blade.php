@@ -229,7 +229,6 @@
                                                                 <button class="btn btn-primary">Update</button>
                                                             </div>
                                                         </form>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -332,7 +331,6 @@
                                 <button class="btn btn-primary">Submit</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

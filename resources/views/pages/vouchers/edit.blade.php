@@ -131,7 +131,7 @@
 
                                     <div class="col-sm-6 col-xl-12">
                                         <label class="form-label">Notes</label>
-                                        <textarea name="notes" class="form-control" rows="2">{{ $voucher->notes }}</textarea>
+                                        <textarea name="notes" class="form-control" rows="2" placeholder="Enter any notes here...">{{ $voucher->notes }}</textarea>
                                     </div>
 
                                     <div class="col-12">
@@ -264,7 +264,6 @@
                                     calculateTotal();
                                 });
                             </script>
-
                         </div>
                     </div>
                 </div>

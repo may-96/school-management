@@ -72,7 +72,7 @@
                                         @enderror
                                     </div>
 
-                                       {{-- Monthly Salary --}}
+                                    {{-- Monthly Salary --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Monthly Salary <span class="text-danger">*</span></label>
                                         <input type="number" name="monthly_salary" class="form-control"
@@ -146,8 +146,12 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
                                         <select name="status" class="form-select">
-                                            <option value="Active" {{ old('status', $employee->status ?? '') == 'Active' ? 'selected' : '' }}>Active</option>
-                                            <option value="Inactive" {{ old('status', $employee->status ?? '') == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                                            <option value="Active"
+                                                {{ old('status', $employee->status ?? '') == 'Active' ? 'selected' : '' }}>
+                                                Active</option>
+                                            <option value="Inactive"
+                                                {{ old('status', $employee->status ?? '') == 'Inactive' ? 'selected' : '' }}>
+                                                Inactive</option>
                                         </select>
                                         @error('status')
                                             <small class="text-danger">{{ $message }}</small>

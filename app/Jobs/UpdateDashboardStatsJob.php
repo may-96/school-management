@@ -21,16 +21,10 @@ class UpdateDashboardStatsJob implements ShouldQueue
 
     public function handle(): void
     {
-        /**
-         * Teachers / Students / Employees
-         */
         $this->saveStat('total_teachers', Teacher::count());
         $this->saveStat('total_students', Student::count());
         $this->saveStat('total_employees', Employee::count());
 
-        /**
-         * Payroll Section
-         */
         $this->saveStat('paid_data', Payroll::where('status', 'paid')->count());
         $this->saveStat('unpaid_data', Payroll::where('status', 'unpaid')->count());
 
@@ -47,9 +41,6 @@ class UpdateDashboardStatsJob implements ShouldQueue
         $this->saveStat('total_paid_amount_data', $totalPaidPayroll);
         $this->saveStat('total_unpaid_amount_data', $totalUnpaidPayroll);
 
-        /**
-         * Vouchers Section
-         */
         $voucherTotalPaid        = Voucher::where('status', 'paid')->count();
         $voucherTotalUnpaid      = Voucher::where('status', 'unpaid')->count();
         $voucherTotalPartialPaid = Voucher::where('status', 'partial paid')->count();
@@ -85,19 +76,12 @@ class UpdateDashboardStatsJob implements ShouldQueue
         $this->saveStat('voucher_total_unpaid', $voucherTotalUnpaid);
         $this->saveStat('voucher_total_unpaid_amount', $voucherTotalPendingAmount);
 
-        /**
-         * Fee Section (Fee Received / Pending)
-         * Matches your Blade IDs: total_paid, total_paid_amount, total_unpaid, total_pending_amount
-         */
         $this->saveStat('total_paid', $voucherTotalPaid);  // Fee Received Count
         $this->saveStat('total_paid_amount', $voucherTotalPaidAmount); // Fee Received Amount
 
         $this->saveStat('total_unpaid', $voucherTotalUnpaid + $voucherTotalPartialPaid); // Fee Pending Count
         $this->saveStat('total_pending_amount', $voucherTotalPendingAmount); // Fee Pending Amount
 
-        /**
-         * Last stats check time
-         */
         $this->saveStat('last_stats_checked_at', now());
     }
 

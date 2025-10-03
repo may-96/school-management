@@ -93,8 +93,6 @@ class PayrollDataTable extends DataTable
         <i class="ti ti-plus f-20"></i>
     </a>';
 
-
-
                 // View button
                 $viewButton = '<a href="' . route('payrolls.show', $payroll->id) . '"
                                     class="avtar avtar-xs btn-link-secondary"

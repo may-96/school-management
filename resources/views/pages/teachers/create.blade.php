@@ -81,8 +81,6 @@
                                         @enderror
                                     </div>
 
-
-
                                     {{-- Date of Birth --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Date of Birth <span class="text-danger">*</span></label>

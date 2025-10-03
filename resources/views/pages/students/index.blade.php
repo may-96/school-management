@@ -10,7 +10,6 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
                                 <li class="breadcrumb-item" aria-current="page">Students</li>
-                                {{-- <a href="javascript: void(0)">#</a> --}}
                             </ul>
                         </div>
                         <div class="col-md-12">
@@ -190,35 +189,6 @@
             });
         </script>
 
-        {{-- show error alert messages --}}
-        {{-- <script>
-            function showErrorAlert(messages) {
-                const container = document.getElementById("js-error-container");
-
-                if (container) {
-                    const items = Array.isArray(messages) ?
-                        messages.map(msg => `<li>${msg}</li>`).join('') :
-                        `<li>${messages}</li>`;
-
-                    container.innerHTML = `
-                <div id="auto-hide-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <ul class="mb-0">${items}</ul>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            `;
-
-                    // Auto-hide after 3 seconds
-                    setTimeout(() => {
-                        const alertEl = document.getElementById('auto-hide-alert');
-                        if (alertEl && typeof bootstrap !== 'undefined') {
-                            const alert = bootstrap.Alert.getOrCreateInstance(alertEl);
-                            alert.close();
-                        }
-                    }, 3000);
-                }
-            }
-        </script> --}}
-
         {{-- tooltips --}}
         <script>
             function initTooltips() {
@@ -235,5 +205,4 @@
             });
         </script>
     @endpush
-
 @endsection

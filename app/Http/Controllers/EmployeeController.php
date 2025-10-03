@@ -15,7 +15,6 @@ class EmployeeController extends Controller
         return $dataTable->render('pages.employees.index');
     }
 
-
     public function create()
     {
         return view('pages.employees.create');

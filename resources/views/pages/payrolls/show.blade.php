@@ -102,7 +102,6 @@
                                                     <span
                                                         class="f-w-600">{{ class_basename($payroll->employee_type) }}</span>
                                                 </p>
-
                                             </div>
                                             <div class="col-sm-6 text-sm-end">
                                                 <h6>Payroll Month:
@@ -123,7 +122,6 @@
                                                             <span class="badge bg-light-danger">Unpaid</span>
                                                         @endif
                                                     </span>
-
                                                 </h6>
                                             </div>
                                         </div>
@@ -176,8 +174,6 @@
                                                         {{ number_format($payroll->net_salary ?? $payroll->monthly_salary, 2) }}
                                                         PKR
                                                     </p>
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -191,7 +187,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> {{-- End printable area --}}
+                    </div> 
                 </div>
             </div>
         </div>

@@ -170,7 +170,6 @@
                                         @enderror
                                     </div>
 
-
                                     {{-- Status --}}
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
@@ -222,13 +221,11 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

@@ -34,9 +34,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-
                                 {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
-
                             </div>
                         </div>
                     </div>
@@ -45,7 +43,6 @@
         </div>
     </div>
 
-    
     @if ($errors->any())
         <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -518,7 +515,6 @@
                                         alertBox.remove());
                                 }, 3000);
                             }
-
 
                             // DataTable reload
                             $('#payment-slip-table').DataTable().ajax.reload(null, false);

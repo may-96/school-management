@@ -287,7 +287,6 @@
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -314,8 +313,7 @@
                 });
             });
         </script>
-    @endpush
-    @push('scripts')
+
         <script>
             setTimeout(function() {
                 const successAlert = document.getElementById('success-alert');
@@ -332,7 +330,7 @@
                 }
             }, 3000);
         </script>
-
+        {{-- Remember Active Tab on Page Reload --}}
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const activeTab = @json(session('active_tab'));

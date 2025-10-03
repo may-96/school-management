@@ -99,7 +99,7 @@
 
                                     <div class="col-sm-6 col-xl-12">
                                         <label class="form-label">Notes</label>
-                                        <textarea name="notes" class="form-control" rows="2"></textarea>
+                                        <textarea name="notes" class="form-control" rows="2" placeholder="Enter any notes here..."></textarea>
                                     </div>
 
                                     <div class="col-12">
@@ -219,10 +219,10 @@
         </td>
         <td class="text-center">
             ${tableBody.children.length === 0 ? '<span class="text-muted"></span>' : `
-                                                                                                                                                                                                                                                <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item">
-                                                                                                                                                                                                                                                    <i class="ti ti-trash f-20"></i>
-                                                                                                                                                                                                                                                </a>
-                                                                                                                                                                                                                                            `}
+                                                                                                                                                                                                                                                                            <a href="#" class="text-danger avtar avtar-s btn-link-danger btn-pc-default remove-item">
+                                                                                                                                                                                                                                                                                <i class="ti ti-trash f-20"></i>
+                                                                                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                                                                                        `}
         </td>
     `;
 
@@ -232,8 +232,6 @@
                                         calculateTotal();
                                         refreshAllSelectOptions();
                                     }
-
-
 
                                     addItemBtn.addEventListener("click", addFeeRow);
                                     addFeeRow(); // Add first row on load
@@ -286,7 +284,4 @@
             });
         </script>
     @endpush
-
-
-
 @endsection

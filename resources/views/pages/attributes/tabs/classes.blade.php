@@ -5,7 +5,6 @@
                 <h5>Class List</h5>
                 <a data-bs-toggle="modal" data-bs-target="#add-class-modal" href="#" class="btn btn-primary">Add
                     Class</a>
-
             </div>
             <div class="card-body table-card">
                 <div class="table-responsive">
@@ -34,7 +33,6 @@
                                             href="#" class="avtar avtar-xs btn-link-secondary" title="Edit">
                                             <i class="ti ti-edit f-20"></i>
                                         </a>
-
 
                                         {{-- Delete --}}
                                         <form id="delete-form-{{ $class->id }}" method="POST"

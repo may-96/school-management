@@ -54,12 +54,10 @@
                             id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">
                             <div class="row">
                                 <div class="col-lg-8 col-xxl-12">
-
                                     <div class="card">
                                         <div class="card-header">
                                             <h5>Personal Details</h5>
                                         </div>
-
                                         <div class="card-body">
                                             <div class="col-sm-12 text-start mb-3">
                                                 <div class="user-upload wid-75">
@@ -193,11 +191,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <div>
-                                                                        <!-- Class Name -->
                                                                         <div class="fw-semibold mb-1">
                                                                             {{ $assignment->class->name ?? 'N/A' }}</div>
-
-                                                                        <!-- Section + Head Master Badge -->
                                                                         <div
                                                                             class="text-muted small d-flex align-items-center gap-2">
                                                                             <span>{{ $assignment->section->name ?? 'N/A' }}</span>
@@ -214,7 +209,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </td>
-
                                                                 <td>
                                                                     <div class="fw-bold mb-1">
                                                                         {{ $assignment->subject->name ?? 'N/A' }}
@@ -230,9 +224,6 @@
                                                                         title="Edit">
                                                                         <i class="ti ti-pencil f-20"></i>
                                                                     </a>
-
-
-
                                                                     <form
                                                                         action="{{ route('teacher-assignment.destroy', $assignment->id) }}"
                                                                         method="POST" class="d-inline"
@@ -251,9 +242,7 @@
                                                                 </td>
                                                             </tr>
                                                         @endforeach
-
                                                 </table>
-
                                             </div>
                                         </div>
                                     </div>
@@ -377,7 +366,6 @@
             </div>
         </div>
     </div>
-
 
     {{-- teacher assign  --}}
     <script>
@@ -594,5 +582,4 @@
             });
         });
     </script>
-
 @endsection

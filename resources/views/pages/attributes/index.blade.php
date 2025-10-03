@@ -21,14 +21,7 @@
                  </div>
              </div>
 
-            <x-alerts />
-
-             {{-- @if (session('error'))
-                 <div class="alert alert-danger">
-                     {{ session('error') }}
-                 </div>
-             @endif --}}
-
+             <x-alerts />
 
              <div class="row">
                  <div class="col-sm-12">
@@ -106,7 +99,6 @@
                              id="profile-5" role="tabpanel" aria-labelledby="profile-tab-5">
                              @include('pages.attributes.tabs.paytypes')
                          </div>
-
 
                      </div>
                  </div>
@@ -316,25 +308,6 @@
              </div>
          </div>
      </div>
-
-     {{-- Error Handling Script --}}
-     {{-- @if ($errors->has('class_name'))
-         <script>
-             document.addEventListener("DOMContentLoaded", function() {
-                 var modal = new bootstrap.Modal(document.getElementById('add-class-modal'));
-                 modal.show();
-             });
-         </script>
-     @endif --}}
-
-     {{-- @if ($errors->has('section_name'))
-         <script>
-             document.addEventListener("DOMContentLoaded", function() {
-                 var modal = new bootstrap.Modal(document.getElementById('add-section-modal'));
-                 modal.show();
-             });
-         </script>
-     @endif --}}
 
      <script>
          document.querySelectorAll('.modal').forEach(function(modalEl) {

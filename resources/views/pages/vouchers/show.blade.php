@@ -70,7 +70,6 @@
                                         </a>
                                     @endif
                                 </li>
-
                                 <li class="list-inline-item align-bottom me-2">
                                     <a onclick="window.print()" href="#"
                                         class="avtar avtar-s btn-link-secondary d-print-none">
@@ -82,7 +81,6 @@
                     </div>
 
                     <div id="printable-area">
-
                         <div class="card mb-3 d-screen-none d-print-block">
                             <div class="card-body p-3">
                                 @if ($school)
@@ -218,8 +216,6 @@
                                         <label class="form-label">Notes :</label>
                                         <p class="text-light" readonly>{{ $voucher->notes }}</p>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

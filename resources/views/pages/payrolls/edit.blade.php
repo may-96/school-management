@@ -123,7 +123,7 @@
                                 {{-- Notes --}}
                                 <div class="col-12 mt-3">
                                     <label class="form-label">Notes</label>
-                                    <textarea name="notes" class="form-control" rows="2">{{ old('notes', $payroll->notes) }}</textarea>
+                                    <textarea name="notes" class="form-control" rows="2" placeholder="Enter notes">{{ old('notes', $payroll->notes) }}</textarea>
                                 </div>
 
                                 {{-- Submit --}}

@@ -122,7 +122,7 @@
                             <div class="mb-3 row">
                                 <label class="col-lg-4 col-form-label">Notes:</label>
                                 <div class="col-lg-8">
-                                    <textarea name="notes" id="edit_notes" class="form-control" rows="2"></textarea>
+                                    <textarea name="notes" id="edit_notes" class="form-control" rows="2" placeholder="Enter notes"></textarea>
                                 </div>
                             </div>
 

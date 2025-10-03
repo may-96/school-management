@@ -102,8 +102,6 @@
                         <span class="pc-mtext" data-i18n="Payments">Payments</span><span class="pc-arrow"></span>
                     </a>
                 </li>
-
-                {{-- class and sections --}}
                 <li class="pc-item pc-hasmenu">
                     <a href="{{ route('attributes.index') }}" class="pc-link">
                         <span class="pc-micon">

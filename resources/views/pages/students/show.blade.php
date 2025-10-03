@@ -144,7 +144,6 @@
                                                                      {{ $student->status }}
                                                                  </span>
                                                              </p>
-
                                                          </div>
                                                          <div class="col-md-6">
                                                              <p class="mb-1 text-muted">Secondary Mobile No</p>
@@ -660,7 +659,6 @@
                  });
              });
          </script>
-
 
          <script>
              document.addEventListener('DOMContentLoaded', function() {

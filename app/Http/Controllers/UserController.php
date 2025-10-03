@@ -76,7 +76,6 @@ class UserController extends Controller
         return back()->with('success', 'User updated successfully!');
     }
 
-
     public function destroy(User $user)
     {
         if ($user->role === 'admin') {

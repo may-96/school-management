@@ -17,8 +17,6 @@ class ClassesController extends Controller
             'sections.*' => 'exists:sections,id',
         ]);
 
-
-
         $class = ClassModel::create(['name' => $request->class_name]);
         $class->sections()->attach($request->input('sections', []));
 
@@ -44,8 +42,6 @@ class ClassesController extends Controller
 
         return redirect()->back()->with('success', 'Class updated successfully.');
     }
-
-
 
     // Delete a class
     public function destroy($id)

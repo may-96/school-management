@@ -41,7 +41,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="pt-0">
                                             @if ($school)
                                                 <h2 class="text-white text-break">
@@ -61,7 +60,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-6 text-center">
                                     <div class="img-welcome-banner position-relative">
                                         <img src="../assets/images/widget/welcome-banner.png" alt="img"
@@ -80,7 +78,6 @@
                                 <div class="flex-shrink-0">
                                     <div class="avtar bg-light-primary">
                                         <i class="ti ti-user f-24"></i>
-
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -92,7 +89,6 @@
                                             data-purecounter-duration="2" data-purecounter-separator=","
                                             id="total_teachers">
                                         </h4>
-
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +114,6 @@
                                             data-purecounter-duration="2" data-purecounter-separator=","
                                             id="total_students">
                                         </h4>
-
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +139,6 @@
                                             data-purecounter-duration="2" data-purecounter-separator=","
                                             id="total_employees">
                                         </h4>
-
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +165,6 @@
                                                 id="total_paid">
                                             </span>
                                         </span>
-
                                     </p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">
@@ -218,7 +211,6 @@
                                             </span>
                                             PKR
                                         </h4>
-
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +248,6 @@
                                             </span>
                                             PKR
                                         </h4>
-
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +285,6 @@
                                             </span>
                                             PKR
                                         </h4>
-
                                     </div>
                                 </div>
                             </div>

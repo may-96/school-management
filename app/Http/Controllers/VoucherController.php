@@ -129,7 +129,6 @@ class VoucherController extends Controller
 
     public function update(Request $request, $id)
     {
-
         // UpdateDashboardStatsJob::dispatch();
 
         $voucher = Voucher::findOrFail($id);

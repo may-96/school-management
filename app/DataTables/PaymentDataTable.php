@@ -34,7 +34,6 @@ class PaymentDataTable extends DataTable
     ';
             })
 
-
             ->addColumn('student_name', function ($payment) {
                 $student = optional($payment->voucher->student);
                 $img = $student && $student->profile_image ? asset('storage/students/' . $student->profile_image) : asset('assets/images/user/avatar-2.jpg');

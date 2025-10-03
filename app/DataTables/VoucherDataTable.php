@@ -37,7 +37,6 @@ class VoucherDataTable extends DataTable
     ';
             })
 
-
             ->addColumn('student_name', function ($voucher) {
                 $img = $voucher->student->profile_image ? asset('storage/students/' . $voucher->student->profile_image) : asset('assets/images/user/avatar-2.jpg');
 
