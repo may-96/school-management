@@ -87,9 +87,12 @@
                                     <p class="mb-1">Total Teachers</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         {{-- <h4 class="mb-0">{{ $totalTeachers }}</h4> --}}
-                                        <h4 class="mb-0" id="total_teachers">
-                                            {{ $stats['total_teachers'] ?? 0 }}
+                                        <h4 class="mb-0 purecounter" data-purecounter-start="0"
+                                            data-purecounter-end="{{ $stats['total_teachers'] ?? 0 }}"
+                                            data-purecounter-duration="2" data-purecounter-separator=","
+                                            id="total_teachers">
                                         </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -110,9 +113,12 @@
                                     <p class="mb-1">Total Students</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         {{-- <h4 class="mb-0">{{ $totalStudents }}</h4> --}}
-                                        <h4 class="mb-0" id="total_students">
-                                            {{ $stats['total_students'] ?? 0 }}
+                                        <h4 class="mb-0 purecounter" data-purecounter-start="0"
+                                            data-purecounter-end="{{ $stats['total_students'] ?? 0 }}"
+                                            data-purecounter-duration="2" data-purecounter-separator=","
+                                            id="total_students">
                                         </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -133,9 +139,12 @@
                                     <p class="mb-1">Total Employees</p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         {{-- <h4 class="mb-0">{{ $totalEmployees }}</h4> --}}
-                                        <h4 class="mb-0" id="total_employees">
-                                            {{ $stats['total_employees'] ?? 0 }}
+                                        <h4 class="mb-0 purecounter" data-purecounter-start="0"
+                                            data-purecounter-end="{{ $stats['total_employees'] ?? 0 }}"
+                                            data-purecounter-duration="2" data-purecounter-separator=","
+                                            id="total_employees">
                                         </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -156,13 +165,21 @@
                                     <p class="mb-1 d-flex align-items-center justify-content-between">
                                         Fee Received
                                         <span class="text-success fw-medium">
-                                            <span id="total_paid">{{ $stats['total_paid'] ?? 0 }}</span>
+                                            <span class="purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['total_paid'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                id="total_paid">
+                                            </span>
                                         </span>
+
                                     </p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">
-                                            <span
-                                                id="total_paid_amount">{{ number_format($stats['total_paid_amount'] ?? 0) }}</span>
+                                            <span data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['total_paid_amount'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                class="purecounter" id="total_paid_amount">
+                                            </span>
                                             PKR
                                         </h4>
                                     </div>
@@ -185,15 +202,23 @@
                                     <p class="mb-1 d-flex align-items-center justify-content-between">
                                         Fee Pending
                                         <span class="text-danger fw-medium">
-                                            <span id="total_unpaid">{{ $stats['total_unpaid'] ?? 0 }}</span>
+                                            <span class="purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['total_unpaid'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                id="total_unpaid">
+                                            </span>
                                         </span>
                                     </p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">
-                                            <span
-                                                id="total_pending_amount">{{ number_format($stats['total_pending_amount'] ?? 0) }}</span>
+                                            <span id="total_pending_amount" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['total_pending_amount'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                class="purecounter">
+                                            </span>
                                             PKR
                                         </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -214,15 +239,24 @@
                                     <p class="mb-1 d-flex align-items-center justify-content-between">
                                         Payroll Paid
                                         <span class="text-success fw-medium">
-                                            <span id="paid_data">{{ $stats['paid_data'] ?? 0 }}</span>
+                                            <span class="purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['paid_data'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                id="paid_data">
+                                            </span>
                                         </span>
+
                                     </p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">
-                                            <span
-                                                id="total_paid_amount_data">{{ number_format($stats['total_paid_amount_data'] ?? 0) }}</span>
+                                            <span class="purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['total_paid_amount_data'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                id="total_paid_amount_data">
+                                            </span>
                                             PKR
                                         </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -243,15 +277,24 @@
                                     <p class="mb-1 d-flex align-items-center justify-content-between">
                                         Payroll Unpaid
                                         <span class="text-danger fw-medium">
-                                            <span id="unpaid_data">{{ $stats['unpaid_data'] ?? 0 }}</span>
+                                            <span class="purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['unpaid_data'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                id="unpaid_data">
+                                            </span>
                                         </span>
+
                                     </p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h4 class="mb-0">
-                                            <span
-                                                id="total_unpaid_amount_data">{{ number_format($stats['total_unpaid_amount_data'] ?? 0) }}</span>
+                                            <span class="purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="{{ $stats['total_unpaid_amount_data'] ?? 0 }}"
+                                                data-purecounter-duration="2" data-purecounter-separator=","
+                                                id="total_unpaid_amount_data">
+                                            </span>
                                             PKR
                                         </h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -417,11 +460,13 @@
                             const el = document.getElementById(key);
                             if (el) {
                                 let value = data.stats[key];
-                                el.innerText = numberFormat(value);
+                                el.setAttribute("data-purecounter-end", value);
                             } else {
                                 console.warn(`Element with id "${key}" not found in DOM`);
                             }
                         }
+
+                        new PureCounter();
                     }
 
                     if (data.last_checked) {
@@ -438,6 +483,7 @@
                 .catch(err => console.error("Error refreshing stats:", err));
         }
 
+
         // Manual Refresh Button
         const refreshBtn = document.getElementById('refreshBtn');
         if (refreshBtn) {
@@ -450,5 +496,9 @@
         setInterval(() => refreshStats(false), 900000);
 
         // refreshStats(false);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+    <script>
+        new PureCounter();
     </script>
 @endsection
