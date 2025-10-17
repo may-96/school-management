@@ -413,6 +413,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
 
     {{-- Custom JS Stats auto & manual refresh --}}
     <script>

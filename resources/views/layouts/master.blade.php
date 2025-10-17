@@ -87,7 +87,6 @@
     @stack('scripts') {{-- this will load yajra datatable script --}}
 
     {{-- Stats Counter --}}
-    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
 
 </body>
 
