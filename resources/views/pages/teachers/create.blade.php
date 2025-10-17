@@ -9,7 +9,8 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Teachers</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/teachers') }}">Teachers</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Add</li>
                             </ul>
                         </div>
                         <div class="col-md-12">

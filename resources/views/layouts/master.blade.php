@@ -89,65 +89,6 @@
     {{-- Stats Counter --}}
     <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
 
-    {{-- Custom JS Stats auto & manual refresh --}}
-    <script>
-        new PureCounter();
-
-        function numberFormat(num) {
-            if (num === null || num === undefined || num === '') {
-                return 0;
-            }
-            let parsed = Number(num);
-            return isNaN(parsed) ? 0 : new Intl.NumberFormat().format(parsed);
-        }
-
-        function refreshStats(isManual = false) {
-            return fetch("{{ route('dashboard.refresh') }}")
-                .then(res => res.json())
-                .then(data => {
-                    if (data.stats) {
-                        for (const key in data.stats) {
-                            const el = document.getElementById(key);
-                            if (el) {
-                                let value = data.stats[key];
-                                el.setAttribute("data-purecounter-end", value);
-                            } else {
-                                console.warn(`Element with id "${key}" not found in DOM`);
-                            }
-                        }
-
-                        new PureCounter();
-                    }
-
-                    if (data.last_checked) {
-                        const lastCheckedEl = document.getElementById('lastChecked');
-                        if (lastCheckedEl) {
-                            lastCheckedEl.innerText = data.last_checked;
-                        }
-                    }
-
-                    if (isManual) {
-                        showSuccessMessage("Dashboard stats refreshed successfully!");
-                    }
-                })
-                .catch(err => console.error("Error refreshing stats:", err));
-        }
-
-
-        // Manual Refresh Button
-        const refreshBtn = document.getElementById('refreshBtn');
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', function() {
-                refreshStats(true);
-            });
-        }
-
-        // Auto Refresh Every 15 Minute
-        setInterval(() => refreshStats(false), 900000);
-
-        // refreshStats(false);
-    </script>
-
 </body>
 
 </html>
