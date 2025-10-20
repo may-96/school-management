@@ -128,7 +128,7 @@
 
                             {{-- Submit --}}
                             <div class="text-end mt-4">
-                                <button type="button" class="btn btn-outline-secondary"
+                                <button type="button" class="btn btn-outline-secondary me-2"
                                     data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </div>

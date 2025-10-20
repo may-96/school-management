@@ -102,6 +102,20 @@
                                                     <span
                                                         class="f-w-600">{{ class_basename($payroll->employee_type) }}</span>
                                                 </p>
+                                                @if ($payroll->status === 'paid')
+                                                    <p class="f-w-400 mb-1 text-start">
+                                                        Transaction ID:
+                                                        <span class="f-w-600">{{ $payroll->transaction_id }}</span>
+                                                    </p>
+
+                                                    <p class="f-w-400 mb-1 text-start">
+                                                        Payment Date:
+                                                        <span class="f-w-600">
+                                                            {{ \Carbon\Carbon::parse($payroll->payment_date)->format('d/m/Y') }}
+                                                        </span>
+                                                    </p>
+                                                @endif
+
                                             </div>
                                             <div class="col-sm-6 text-sm-end">
                                                 <h6>Payroll Month:
@@ -187,7 +201,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>

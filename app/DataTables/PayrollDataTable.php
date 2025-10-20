@@ -67,6 +67,25 @@ class PayrollDataTable extends DataTable
 
 
             ->addColumn('month', fn($payroll) => \Carbon\Carbon::parse($payroll->payroll_month)->format('F Y'))
+
+            ->addColumn('payment_info', function ($payroll) {
+                if ($payroll->status === 'paid') {
+                    $transactionId = $payroll->transaction_id ?? 'N/A';
+                    $paymentDate = $payroll->payment_date
+                        ? \Carbon\Carbon::parse($payroll->payment_date)->format('d/m/Y')
+                        : 'N/A';
+
+                    return '
+            <div class="text-start">
+                <p class="mb-0"><strong></strong> ' . e($transactionId) . '</p>
+                <small class="mb-0 text-truncate w-100 text-muted"><strong></strong> ' . e($paymentDate) . '</small>
+            </div>
+        ';
+                }
+
+                return '<span class="text-muted">N/A</span>';
+            })
+
             ->addColumn('status', function ($payroll) {
                 return strtolower($payroll->status) === 'paid'
                     ? '<span class="badge bg-light-success">Paid</span>'
@@ -126,7 +145,7 @@ class PayrollDataTable extends DataTable
 
                 return $payButton . $viewButton . $editButton . $deleteButton;
             })
-            ->rawColumns(['checkbox', 'status', 'action']);
+            ->rawColumns(['checkbox', 'status', 'action', 'payment_info']);
     }
 
     public function query(Payroll $model)
@@ -168,6 +187,8 @@ class PayrollDataTable extends DataTable
             ['data' => 'type', 'title' => 'Type'],
             ['data' => 'salary', 'title' => 'Salary'],
             ['data' => 'month', 'title' => 'Month'],
+            ['data' => 'payment_info', 'title' => 'Payment Details'],
+
             ['data' => 'status', 'title' => 'Status'],
             ['data' => 'action', 'title' => 'Action', 'orderable' => false, 'searchable' => false, 'className' => 'text-end'],
         ];
